@@ -1,3 +1,4 @@
+/*
 package com.trkj.system.manpower_java_system;
 
 import com.baomidou.mybatisplus.annotation.DbType;
@@ -16,11 +17,15 @@ public class MybatisPlusCode {
         //配置策略
         //1.全局配置
         GlobalConfig globalConfig = new GlobalConfig();
-        /*获取当前系统目录*/
+        */
+/*获取当前系统目录*//*
+
         String property = System.getProperty("user.dir");
         //代码输出目录
         globalConfig.setOutputDir(property + "/src/main/java/");
-        /*生成作者的信息*/
+        */
+/*生成作者的信息*//*
+
         globalConfig.setAuthor("谢海欧");
         //是否打开资源管理器
         globalConfig.setOpen(false);
@@ -89,3 +94,4 @@ public class MybatisPlusCode {
         autoGenerator.execute();
     }
 }
+*/
