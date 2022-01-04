@@ -4,6 +4,7 @@ import java.util.Date;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,7 +31,8 @@ public class RecruitmentPlanVo implements Serializable {
     private String deptName;
 
     @ApiModelProperty(value = "部门职位名称")
-    private String deptPostName;
+    @TableField("POST_NAME")
+    private String postName;
 
     @ApiModelProperty(value = "学历名称")
     private String educationName;
@@ -39,13 +41,21 @@ public class RecruitmentPlanVo implements Serializable {
     private Long recruitmentPlanNumber;
 
     @ApiModelProperty(value = "开始时间")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date recruitmentPlanStartTime;
 
     @ApiModelProperty(value = "结束时间")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date recruitmentPlanEndTime;
 
     @ApiModelProperty(value = "月薪范围")
-    private Long recruitmentPlanSalaryId;
+    private String recruitmentPlanSalary;
+
+    @ApiModelProperty(value = "月薪结束金额")
+    private Long monthlySalaryEnd;
+
+    @ApiModelProperty(value = "负责人编号（员工表/员工编号)")
+    private String staffName;
 
     @ApiModelProperty(value = "招聘计划状态: 0 招聘中，1 已结束")
     private Long recruitmentZt;
@@ -64,6 +74,8 @@ public class RecruitmentPlanVo implements Serializable {
 
     @ApiModelProperty(value = "招聘计划名称")
     private String recruitmentPlanName;
-
-
+    @TableField(exist = false)
+    private int currenPage;
+    @TableField(exist = false)
+    private int pagesize;
 }
