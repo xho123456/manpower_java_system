@@ -1,4 +1,4 @@
-package com.trkj.system.login.entity;
+package com.trkj.system.organizational_management.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
@@ -146,6 +146,8 @@ public class Staff implements Serializable {
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
+
+
 
 
 }
