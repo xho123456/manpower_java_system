@@ -50,15 +50,15 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
     IPage<StaffRewardEntity> findRewardStaff(Page<StaffRewardEntity> page);
 
     /**
-     * 根据ID查询获奖员工
+     * 根据ID查询员工
      * @param id
      * @return
      */
-//    @Select("<script> "+
-//            "SELECT g.GLORY_ID,g.GLORY_NAME,g.GLORY_UNITNAME,g.GLORY_REMARK,g.CREATED_TIME,s.STAFF_ID,s.STAFF_NAME FROM GLORY g,STAFF s WHERE\n" +
-//            " g.STAFF_ID=s.STAFF_ID and s.STAFF_ID = #{id} " +
-//            "</script>")
-//    List<StaffEntity> findCreatedById(Long id);
+    @Select(" SELECT s.STAFF_NAME,s.STAFF_ID,d.DEPT_NAME,dp.POST_NAME," +
+            "  s.STAFF_PHONE,s.STAFF_OUTLOOK,s.STAFF_HIREDATE" +
+            "  FROM  STAFF s  LEFT JOIN dept d on d.DEPT_ID=s.DEPT_ID LEFT JOIN DEPT_POST dp on dp.DEPT_ID=d.DEPT_ID"+
+            "  where s.IS_DELETED=0 and s.staff_id = #{id} ")
+    List<StaffEntity> findStaffById(Long id);
 
     /**
      * 根据名字查询获奖员工

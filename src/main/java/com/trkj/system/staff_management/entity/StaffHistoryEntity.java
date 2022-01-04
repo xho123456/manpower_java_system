@@ -96,10 +96,10 @@ public class StaffHistoryEntity {
 //    private Date WORKSTARETIME;
 //    /** 工作开始时间 */
 //
-    private Date FORMAL_QUIT_DATE;
+    private Date FORMALQUITDATE;
     /** 离职时间 */
 
-    private String QUIT_EXPLAIN;
+    private String QUITEXPLAIN;
     /** 离职原因 */
 //
 //    private String COMPANYNAME;
