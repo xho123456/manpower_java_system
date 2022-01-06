@@ -1,5 +1,7 @@
 package com.trkj.system.exception;
 
+
+//运行时异常
 public class CustomError extends RuntimeException {
     //异常错误编码
     private int code;

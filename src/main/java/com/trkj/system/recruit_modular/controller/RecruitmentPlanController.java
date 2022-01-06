@@ -1,19 +1,17 @@
 package com.trkj.system.recruit_modular.controller;
 
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.system.recruit_modular.entity.RecruitmentPlan;
 import com.trkj.system.recruit_modular.entity.RecruitmentPlanVo;
+import com.trkj.system.recruit_modular.entity.ResumeVo;
 import com.trkj.system.recruit_modular.service.RecruitmentPlanService;
+import com.trkj.system.recruit_modular.service.RecruitmentPlanServiceVo;
+import com.trkj.system.recruit_modular.service.ResumeServiceVo;
+import com.trkj.system.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  * <p>
@@ -25,19 +23,59 @@ import java.util.Map;
  */
 @RestController
 public class RecruitmentPlanController {
-
+    /**
+     * 招聘计划Vo、部门、职位表 VO视图
+     */
+    @Autowired
+    private RecruitmentPlanServiceVo recruitmentPlanServicevo;
+    /**
+     * 招聘计划
+     */
     @Autowired
     private RecruitmentPlanService recruitmentPlanService;
-
     /**
-     * 招聘计划分页查询
+     * 简历vo
      */
-    @GetMapping("/recruitment/selectAll")
-    public Object findselectAll(@RequestParam("currentPage") int currentPage,@RequestParam("pagesize") int pagesize){
+    @Autowired
+    private ResumeServiceVo resumeServiceVo;
 
-        Page<RecruitmentPlanVo> page = new Page<>(currentPage,pagesize);
-        return  recruitmentPlanService.selectAll(page);
+
+    //招聘计划分页查询
+    @PostMapping("/recruitment/selectAll")
+    public AjaxResponse findselectAll(@RequestBody RecruitmentPlanVo recruitmentPlanVo){
+          return AjaxResponse.success(recruitmentPlanServicevo.selectAll(recruitmentPlanVo));
     }
+
+    //关闭计划修改状态
+    @PostMapping("/recruitment/updaterecruitmentPlan")
+    public AjaxResponse updaterecruitmentPlan(@RequestBody RecruitmentPlan recruitmentPlan) {
+        AjaxResponse ajaxResponse = new AjaxResponse();
+        if (recruitmentPlanService.updateRecruitmentPlan(recruitmentPlan)>=1){
+            return AjaxResponse.success("成功");
+        }else{
+            return AjaxResponse.success("失败");
+        }
+    }
+
+    //删除招聘计划
+    @PostMapping("/recruitment/deleterecruitmentPlan")
+    public AjaxResponse deleterecruitmentPlan(@RequestBody ArrayList<Integer> id) {
+            for (int i=0;i<id.size();i++){
+                if(recruitmentPlanService.deleteRecruitmentPlan(id.get(i))>=1){
+                    return AjaxResponse.success("成功");
+                }
+            }
+            return AjaxResponse.success("失败");
+        }
+
+    //分页 ：通过招聘计划编号查询出该计划招聘的所有简历信息
+    @PostMapping("/recruitment/findByidjl")
+    public AjaxResponse findByidjl(@RequestBody ResumeVo resumeVo){
+        return AjaxResponse.success(resumeServiceVo.findByidresum(resumeVo));
+    }
+
+
+
 
 }
 

@@ -1,9 +1,7 @@
 package com.trkj.system.recruit_modular.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.trkj.system.recruit_modular.entity.RecruitmentPlanVo;
+import com.trkj.system.recruit_modular.entity.RecruitmentPlan;
 
 /**
  * <p>
@@ -11,11 +9,15 @@ import com.trkj.system.recruit_modular.entity.RecruitmentPlanVo;
  * </p>
  *
  * @author 鄧琪
- * @since 2021-12-28
+ * @since 2021-12-29
  */
-public interface RecruitmentPlanService {
+public interface RecruitmentPlanService extends IService<RecruitmentPlan> {
     /**
-     * 招聘计划分页查询
+     * 招聘计划: 关闭计划修改状态
      */
-    IPage<RecruitmentPlanVo> selectAll(Page<RecruitmentPlanVo> page);
+    int updateRecruitmentPlan(RecruitmentPlan RecruitmentPlan);
+    /**
+     * 招聘计划: 删除招聘计划
+     */
+    int deleteRecruitmentPlan(Integer id);
 }
