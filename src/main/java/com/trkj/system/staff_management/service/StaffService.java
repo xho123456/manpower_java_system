@@ -17,4 +17,7 @@ public interface StaffService {
    IPage<StaffEliteEntity> findEliteStaff(Page<StaffEliteEntity> page);
    IPage<StaffPunishmentEntity> findPunishmentStaff(Page<StaffPunishmentEntity> page);
    IPage<StaffRewardEntity> findRewardStaff(Page<StaffRewardEntity> page);
+   IPage<StaffInductionEntity> findInductionStaff(Page<StaffInductionEntity> page);
+   IPage<StaffGiveupInductionEntity> findgiveupInductionStaff(Page<StaffGiveupInductionEntity> page);
+
 }
