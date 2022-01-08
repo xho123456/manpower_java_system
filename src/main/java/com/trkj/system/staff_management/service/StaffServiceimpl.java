@@ -39,5 +39,15 @@ public class StaffServiceimpl implements StaffService {
         return mapper.findRewardStaff(page);
     }
 
+    @Override
+    public IPage<StaffInductionEntity> findInductionStaff(Page<StaffInductionEntity> page) {
+        return mapper.findInductionStaff(page);
+    }
+
+    @Override
+    public IPage<StaffGiveupInductionEntity> findgiveupInductionStaff(Page<StaffGiveupInductionEntity> page) {
+        return mapper.findgiveupInductionStaff(page);
+    }
+
 
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 public class StaffController {
@@ -40,6 +42,23 @@ public class StaffController {
     public AjaxResponse findRewardStaff(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
         Page<StaffRewardEntity> page1=new Page<>(currentPage,pagesize);
         return AjaxResponse.success(service.findRewardStaff(page1));
+    }
+    @GetMapping("/staff/induction")
+    public AjaxResponse findInductionStaff(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+        Page<StaffInductionEntity> page1=new Page<>(currentPage,pagesize);
+        return AjaxResponse.success(service.findInductionStaff(page1));
+    }
+    @GetMapping("/staff/giveupinduction")
+    public AjaxResponse findgiveupInductionStaff(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+        Page<StaffGiveupInductionEntity> page1=new Page<>(currentPage,pagesize);
+        return AjaxResponse.success(service.findgiveupInductionStaff(page1));
+    }
+
+
+
+    @GetMapping("/staff/get/{id}")
+    public List<StaffEntity> findStaffById(Long id){
+        return null;
     }
 
 }
