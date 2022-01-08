@@ -4,6 +4,7 @@ import java.util.Date;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -70,6 +71,7 @@ public class RecruitmentPlanVo implements Serializable {
     private Long revision;
 
     @ApiModelProperty(value = "逻辑删除;1表示删除，0 表示未删除")
+    @TableLogic
     private Long isDeleted;
 
     @ApiModelProperty(value = "招聘计划名称")
