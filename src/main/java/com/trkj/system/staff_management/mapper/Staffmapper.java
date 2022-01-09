@@ -17,9 +17,9 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
     /**
      * 查看所有员工
      * */
-    @Select(" SELECT s.STAFF_NAME,s.STAFF_ID,d.DEPT_NAME,dp.POST_NAME," +
-            "  s.STAFF_PHONE,s.STAFF_OUTLOOK,s.STAFF_HIREDATE" +
-            "  FROM  STAFF s  LEFT JOIN dept d on d.DEPT_ID=s.DEPT_ID LEFT JOIN DEPT_POST dp on dp.DEPT_ID=d.DEPT_ID"+
+    @Select(" SELECT s.STAFF_NAME,s.STAFF_ID,s.STAFF_SEX,s.STAFF_IDENTITY,d.DEPT_NAME,dp.POST_NAME," +
+            "  s.STAFF_PHONE,s.STAFF_OUTLOOK,s.STAFF_HIREDATE,s.STAFF_STATE " +
+            "  FROM  STAFF s  LEFT JOIN dept d on d.DEPT_ID=s.DEPT_ID LEFT JOIN DEPT_POST dp on dp.DEPT_POST_ID=s.DEPT_POST_ID"+
             "  where s.IS_DELETED=0 " )
     IPage<StaffEntity> findStaff(Page<StaffEntity> page);
 
@@ -38,7 +38,7 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
      */
     @Select("SELECT s.STAFF_ID,s.STAFF_NAME,s.STAFF_HIREDATE,s.STAFF_PHONE,s.STAFF_EMAIL,s.STAFF_OUTLOOK,s.STAFF_EDUCATION," +
             "s.STAFF_SCHOOL,d.DEPT_NAME,dp.POST_NAME FROM STAFF s LEFT JOIN DEPT d on s.DEPT_ID=d.DEPT_ID LEFT JOIN " +
-            "DEPT_POST dp on dp.DEPT_POST_ID=s.DEPT_POST_ID WHERE dp.POST_NAME='经理' ")
+            "DEPT_POST dp on dp.DEPT_POST_ID=s.DEPT_POST_ID WHERE dp.POST_NAME != '员工' ")
     IPage<StaffEliteEntity> findEliteStaff(Page<StaffEliteEntity> page);
 
     /**
@@ -62,22 +62,39 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
     /**
      * 查看所有待入职的员工
      */
-    @Select("SELECT et.EMPLOYMENT_STATE,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION,r.RESUME_PHONE,r.RESUME_MAILBOX," +
+    @Select("SELECT r.RESUME_ZT,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION,r.RESUME_PHONE,r.RESUME_MAILBOX," +
             "r.RESUME_BIRTHDAY,r.RESUME_RESIDENCE,r.RESUME_POLITICAL_OUTLOOK,d.DEPT_NAME,dp.POST_NAME " +
             "FROM EMPLOYMENT_TABLE et LEFT JOIN RESUME r on et.RESUME_ID=r.RESUME_ID LEFT JOIN RECRUITMENT_PLAN rp " +
             "on rp.RECRUITMENT_PLAN_ID=r.RECRUITMENT_PLAN_ID LEFT JOIN DEPT d on d.dept_id=rp.dept_id LEFT JOIN " +
-            "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where et.EMPLOYMENT_STATE=0")
+            "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where r.RESUME_ZT=6")
     IPage<StaffInductionEntity> findInductionStaff(Page<StaffInductionEntity> page);
 
     /**
      * 查看所有放弃入职的员工
      */
-    @Select("SELECT et.EMPLOYMENT_STATE,et.waive_reason,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION,r.RESUME_PHONE,r.RESUME_MAILBOX," +
+    @Select("SELECT r.RESUME_ZT,et.waive_reason,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION,r.RESUME_PHONE,r.RESUME_MAILBOX," +
             "r.RESUME_BIRTHDAY,r.RESUME_RESIDENCE,r.RESUME_POLITICAL_OUTLOOK,d.DEPT_NAME,dp.POST_NAME " +
             "FROM EMPLOYMENT_TABLE et LEFT JOIN RESUME r on et.RESUME_ID=r.RESUME_ID LEFT JOIN RECRUITMENT_PLAN rp " +
             "on rp.RECRUITMENT_PLAN_ID=r.RECRUITMENT_PLAN_ID LEFT JOIN DEPT d on d.dept_id=rp.dept_id LEFT JOIN " +
-            "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where et.EMPLOYMENT_STATE=2")
+            "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where r.RESUME_ZT=4")
     IPage<StaffGiveupInductionEntity> findgiveupInductionStaff(Page<StaffGiveupInductionEntity> page);
+
+    /**
+     * 查看所有待转正员工
+     * */
+    @Select(" SELECT s.STAFF_NAME,s.STAFF_ID,s.STAFF_SEX,s.STAFF_IDENTITY,d.DEPT_NAME,dp.POST_NAME," +
+            "  s.STAFF_PHONE,s.STAFF_OUTLOOK,s.STAFF_HIREDATE,s.STAFF_STATE " +
+            "  FROM  STAFF s  LEFT JOIN dept d on d.DEPT_ID=s.DEPT_ID LEFT JOIN DEPT_POST dp on dp.DEPT_POST_ID=s.DEPT_POST_ID"+
+            "  where s.IS_DELETED=0 and s.STAFF_STATE=0 " )
+    IPage<StaffEntity> findTurnrightStaff(Page<StaffEntity> page);
+
+    /**
+     * 查看调动记录
+     */
+    @Select("select t.TRANSFER_TYPE,t.CREATED_DEPT_NAME,t.TRANSFER_STATE,t.UPDATED_DEPT_NAME,t.transfer_rawpost_NAME," +
+            "t.transfer_afterpost_NAME,s.staff_id,s.staff_name from TRANSFER t left join staff s on t.staff_id=s.staff_id where s.is_deleted=0")
+    IPage<StaffTransferEntity> findTransferStaff(Page<StaffTransferEntity> page);
+
 
     /**
      * 根据ID查询员工
@@ -86,9 +103,9 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
      */
     @Select(" SELECT s.STAFF_NAME,s.STAFF_ID,d.DEPT_NAME,dp.POST_NAME," +
             "  s.STAFF_PHONE,s.STAFF_OUTLOOK,s.STAFF_HIREDATE" +
-            "  FROM  STAFF s  LEFT JOIN dept d on d.DEPT_ID=s.DEPT_ID LEFT JOIN DEPT_POST dp on dp.DEPT_ID=d.DEPT_ID"+
-            "  where s.IS_DELETED=0 and s.staff_id = ${id} ")
-    List<StaffEntity> findStaffById(@Param(Constants.WRAPPER) QueryWrapper<StaffEntity> queryWrapper);
+            "  FROM  STAFF s  LEFT JOIN dept d on d.DEPT_ID=s.DEPT_ID LEFT JOIN DEPT_POST dp on dp.DEPT_POST_ID=s.DEPT_POST_ID"+
+            "  ${ew.customSqlSegment} ")
+    IPage<StaffEntity> findStaffById(Page<StaffEntity> staffEntityPage,@Param(Constants.WRAPPER) QueryWrapper<StaffEntity> queryWrapper);
 
     /**
      * 根据名字查询员工
@@ -97,9 +114,9 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
      */
     @Select(" SELECT s.STAFF_NAME,s.STAFF_ID,d.DEPT_NAME,dp.POST_NAME," +
             "  s.STAFF_PHONE,s.STAFF_OUTLOOK,s.STAFF_HIREDATE" +
-            "  FROM  STAFF s  LEFT JOIN dept d on d.DEPT_ID=s.DEPT_ID LEFT JOIN DEPT_POST dp on dp.DEPT_ID=d.DEPT_ID"+
-            "  where s.IS_DELETED=0 and s.STAFF_NAME like #{name} ")
-    List<StaffEntity> findStaffLikeByName(String name);
+            "  FROM  STAFF s  LEFT JOIN dept d on d.DEPT_ID=s.DEPT_ID LEFT JOIN DEPT_POST dp on dp.DEPT_POST_ID=s.DEPT_POST_ID"+
+            "  ${ew.customSqlSegment} ")
+    IPage<StaffEntity> findStaffLikeByName(Page<StaffEntity> staffEntityPage,@Param(Constants.WRAPPER) QueryWrapper<StaffEntity> queryWrapper);
 
 
 

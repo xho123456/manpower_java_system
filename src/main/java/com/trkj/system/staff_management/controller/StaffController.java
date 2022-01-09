@@ -6,9 +6,7 @@ import com.trkj.system.staff_management.service.StaffService;
 import com.trkj.system.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -53,12 +51,26 @@ public class StaffController {
         Page<StaffGiveupInductionEntity> page1=new Page<>(currentPage,pagesize);
         return AjaxResponse.success(service.findgiveupInductionStaff(page1));
     }
+    @GetMapping("/staff/turnright")
+    public AjaxResponse findTurnrightStaff(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+        Page<StaffEntity> page1=new Page<>(currentPage,pagesize);
+        return AjaxResponse.success(service.findTurnrightStaff(page1));
+    }
+    @GetMapping("/staff/transfer")
+    public AjaxResponse findTransferStaff(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+        Page<StaffTransferEntity> page1=new Page<>(currentPage,pagesize);
+        return AjaxResponse.success(service.findTransferStaff(page1));
+    }
 
 
+    @PostMapping("/staff/getId")
+    public AjaxResponse findStaffById(@RequestBody StaffEntity staff){
+        return AjaxResponse.success(service.findStaffById(staff));
+    }
 
-    @GetMapping("/staff/get/{id}")
-    public List<StaffEntity> findStaffById(Long id){
-        return null;
+    @PostMapping("/staff/likename")
+    public AjaxResponse findStaffLikeByName(@RequestBody StaffEntity staff){
+        return AjaxResponse.success(service.findStaffLikeByName(staff));
     }
 
 }
