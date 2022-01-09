@@ -44,4 +44,17 @@ public interface ResumeMapperVo extends BaseMapper<ResumeVo> {
           "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID ${ew.customSqlSegment}")
   IPage<ResumeVo> selectAllnew(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
+  //简历列表分页查询：淘汰库
+  @Select("select  R.*,P.POST_NAME  from \n" +
+          "RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
+          "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID ${ew.customSqlSegment}")
+  IPage<ResumeVo> findAlleliminate(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
+
+  //简历列表分页查询：已邀约
+  @Select("select  R.*,P.POST_NAME  from \n" +
+          "RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
+          "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID ${ew.customSqlSegment}")
+  IPage<ResumeVo> findAlleInvite(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
+
+
 }
