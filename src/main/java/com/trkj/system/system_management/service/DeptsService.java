@@ -14,5 +14,9 @@ import java.util.List;
  * @since 2022-01-04
  */
 public interface DeptsService {
+    /**
+     * 对话框查询所有部门名称
+     * @return
+     */
     List<Depts> selectDepts();
 }

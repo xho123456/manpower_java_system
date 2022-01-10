@@ -21,7 +21,10 @@ import java.util.List;
 public class DeptsController {
     @Autowired
     private DeptsService deptsService;
-
+    /**
+     * 对话框查询所有部门名称
+     * @return
+     */
     @GetMapping("/depts/selectDepts")
     public AjaxResponse slectDepts(){
         return AjaxResponse.success(deptsService.selectDepts());

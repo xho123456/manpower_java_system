@@ -1,8 +1,12 @@
 package com.trkj.system.system_management.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.trkj.system.system_management.entity.Depts;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.trkj.system.system_management.entity.NoticeVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -17,6 +21,19 @@ import java.util.List;
  */
 @Mapper
 public interface DeptsMapper extends BaseMapper<Depts> {
-    @Select("select DEPT_NAME from DEPT")
-    List<Depts> selectDepts();
+    /**
+     * 对话框查询所有部门名称
+     * @return
+     * @param queryWrapper
+     */
+    @Select("select * from DEPT ${ew.customSqlSegment}")
+    List<Depts> selectDepts(@Param(Constants.WRAPPER) QueryWrapper<NoticeVo> queryWrapper);
+
+    /**
+     * 查询所有部门Id
+     * @param queryWrapper
+     * @return
+     */
+    @Select("select DEPT_ID from DEPT ${ew.customSqlSegment}")
+     Depts selectDepts1(@Param(Constants.WRAPPER) QueryWrapper<Depts> queryWrapper);
 }
