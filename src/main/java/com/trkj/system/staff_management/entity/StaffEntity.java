@@ -12,14 +12,15 @@ import java.util.Date;
 @AllArgsConstructor
 @Accessors(chain = true)  /** 链式写法 */
 public class StaffEntity {
+
     private Long staffId;
     /** 员工编号 */
 
     private String staffName;
     /** 员工姓名 */
 
-//    private String staffSex;
-//    /** 员工性别 */
+    private String staffSex;
+    /** 员工性别 */
 
     private Long staffPhone;
     /** 员工手机号码 */
@@ -51,8 +52,8 @@ public class StaffEntity {
 //    private long workerId;
 //    /** 转正编号 */
 //
-//    private String staffIdentity;
-//    /** 员工身份证 */
+    private String staffIdentity;
+    /** 员工身份证 */
 //
 //    private long deptId;
 //    /** 部门编号 */
@@ -101,9 +102,17 @@ public class StaffEntity {
 //
 //    private String COMPANYNAME;
 //    /** 公司名称 */
+    private Long STAFFSTATE;
+    /** 员工状态 */
 
     private String POSTNAME;
     /** 职位名称 */
+
+    private Long CurrentPage;
+
+    private Long Pagesize;
+
+
 //
 //    private Long EDUCATIONID;
 //    /** 教育经历编号 */

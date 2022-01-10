@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
  * @since 2021-12-28
  */
 @Service
-public class RecruitmentPlanServiceImplVo  implements RecruitmentPlanServiceVo {
+public class RecruitmentPlanServiceImplVo implements RecruitmentPlanServiceVo {
 
     @Autowired
     private RecruitmentPlanMapperVo recruitmentPlanMappervo;
