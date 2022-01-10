@@ -44,5 +44,8 @@ public class StaffInductionEntity {
 
     private Long RESUMEZT;
     /** 入职状态 */
-    
+
+    private Long CurrentPage;
+
+    private Long Pagesize;
 }

@@ -153,5 +153,7 @@ public class StaffEliteEntity {
 //    private Long ISDELETED;
 //    /** 逻辑删除 */
 
+    private Long CurrentPage;
 
+    private Long Pagesize;
 }

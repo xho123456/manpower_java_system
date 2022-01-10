@@ -39,4 +39,7 @@ public class StaffTransferEntity {
     private String TAKEEFFECTDATE;
     /** 生效日期 */
 
+    private Long CurrentPage;
+
+    private Long Pagesize;
 }

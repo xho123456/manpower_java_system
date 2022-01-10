@@ -28,4 +28,25 @@ public interface StaffService {
    IPage<StaffEntity> findStaffById(StaffEntity staff);
    IPage<StaffEntity> findStaffLikeByName(StaffEntity staff);
 
+   IPage<StaffHistoryEntity> findHistoryStaffById(StaffHistoryEntity staff);
+   IPage<StaffHistoryEntity> findHistoryStaffLikeByName(StaffHistoryEntity staff);
+
+   IPage<StaffPunishmentEntity> findPunishById(StaffPunishmentEntity staff);
+   IPage<StaffPunishmentEntity> findPunishLikeByName(StaffPunishmentEntity staff);
+
+   IPage<StaffEliteEntity> findEliteStaffById(StaffEliteEntity staff);
+   IPage<StaffEliteEntity> findEliteStaffLikeByName(StaffEliteEntity staff);
+
+   IPage<StaffRewardEntity> findRewardStaffById(StaffRewardEntity staff);
+   IPage<StaffRewardEntity> findRewardStaffLikeByName(StaffRewardEntity staff);
+
+   IPage<StaffInductionEntity> findInductionStaffLikeByName(StaffInductionEntity staff);
+
+   IPage<StaffGiveupInductionEntity> findgiveupInductionStaffLikeByName(StaffGiveupInductionEntity staff);
+
+   IPage<StaffEntity> findTurnrightStaffById(StaffEntity staff);
+   IPage<StaffEntity> findTurnrightStaffByName(StaffEntity staff);
+
+   IPage<StaffTransferEntity> findTransferStaffById(StaffTransferEntity staff);
+   IPage<StaffTransferEntity> findTransferStaffLikeByName(StaffTransferEntity staff);
 }
