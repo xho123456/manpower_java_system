@@ -49,7 +49,6 @@ public class RecruitmentPlanController {
     //关闭计划修改状态
     @PostMapping("/recruitment/updaterecruitmentPlan")
     public AjaxResponse updaterecruitmentPlan(@RequestBody RecruitmentPlan recruitmentPlan) {
-        AjaxResponse ajaxResponse = new AjaxResponse();
         if (recruitmentPlanService.updateRecruitmentPlan(recruitmentPlan)>=1){
             return AjaxResponse.success("成功");
         }else{
@@ -60,9 +59,10 @@ public class RecruitmentPlanController {
     //删除招聘计划
     @PostMapping("/recruitment/deleterecruitmentPlan")
     public AjaxResponse deleterecruitmentPlan(@RequestBody ArrayList<Integer> id) {
+           String s="成功";
             for (int i=0;i<id.size();i++){
                 if(recruitmentPlanService.deleteRecruitmentPlan(id.get(i))>=1){
-                    return AjaxResponse.success("成功");
+                    return AjaxResponse.success(s);
                 }
             }
             return AjaxResponse.success("失败");

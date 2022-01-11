@@ -9,17 +9,18 @@ import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration // 配置类
+@EnableTransactionManagement//事务管理器
 public class MyBatisPlusConfig {
     /**
      * 序列生成器
      */
     @Bean
-    public OracleKeyGenerator oracleKeyGenerator(){
+    public OracleKeyGenerator oracleKeyGenerator() {
         return new OracleKeyGenerator();
     }
-    //分页插件
     //注册我们的乐观锁插件
     @Bean
     public OptimisticLockerInterceptor optimisticLockerInterceptor() {

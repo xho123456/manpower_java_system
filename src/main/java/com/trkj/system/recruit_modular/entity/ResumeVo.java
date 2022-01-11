@@ -1,5 +1,6 @@
 package com.trkj.system.recruit_modular.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -98,6 +99,9 @@ public class ResumeVo implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date toujTime;
 
+    @ApiModelProperty(value = "简历备注")
+    private String remarks;
+
     @ApiModelProperty(value = "创建时间")
     private Date createdTime;
 
@@ -108,6 +112,7 @@ public class ResumeVo implements Serializable {
     private Long revision;
 
     @ApiModelProperty(value = "逻辑删除;1表示删除，0 表示未删除")
+    @TableLogic
     private Long isDeleted;
 
     @ApiModelProperty(value = "招聘计划名称")
