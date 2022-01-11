@@ -12,7 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 /**
  * <p>
- * 招聘计划表
+ * 招聘计划、职位、部门、员工Vo
  * </p>
  *
  * @author 鄧琪

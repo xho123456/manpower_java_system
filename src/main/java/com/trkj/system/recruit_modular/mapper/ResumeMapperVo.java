@@ -21,9 +21,10 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface ResumeMapperVo extends BaseMapper<ResumeVo> {
   //简历列表分页查询：全部简历
-  @Select("select  R.*,Z.RECRUITMENT_PLAN_NAME,P.POST_NAME  from \n" +
-          "RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
-          "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID ${ew.customSqlSegment}")
+  @Select("select  R.*,Z.RECRUITMENT_PLAN_NAME,P.POST_NAME,D.DEPT_NAME from\n" +
+          "          RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID\n" +
+          "          LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID LEFT JOIN DEPT D on\n" +
+          "\t\t\t\t\tZ.DEPT_ID = D.DEPT_ID ${ew.customSqlSegment}")
     IPage<ResumeVo> selectAllres(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
   //分页 ：通过招聘计划编号查询出该计划招聘的所有简历信息
@@ -33,21 +34,27 @@ public interface ResumeMapperVo extends BaseMapper<ResumeVo> {
 
 
   //简历列表分页查询：候选人
-  @Select("select  R.*,P.POST_NAME  from \n" +
-          "RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
-          "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID ${ew.customSqlSegment}")
+  @Select("\n" +
+          "select  R.*,Z.RECRUITMENT_PLAN_NAME,P.POST_NAME,D.DEPT_NAME  from\n" +
+          "          RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID\n" +
+          "          LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID LEFT JOIN DEPT D on\n" +
+          "\t\t\t\t\tZ.DEPT_ID = D.DEPT_ID ${ew.customSqlSegment}")
   IPage<ResumeVo> selectAllhxr(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
   //简历列表分页查询：新简历
-  @Select("select  R.*,P.POST_NAME  from \n" +
-          "RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
-          "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID ${ew.customSqlSegment}")
+  @Select("\n" +
+          "select  R.*,Z.RECRUITMENT_PLAN_NAME,P.POST_NAME,D.DEPT_NAME  from\n" +
+          "          RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID\n" +
+          "          LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID LEFT JOIN DEPT D on\n" +
+          "\t\t\t\t\tZ.DEPT_ID = D.DEPT_ID ${ew.customSqlSegment}")
   IPage<ResumeVo> selectAllnew(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
   //简历列表分页查询：淘汰库
-  @Select("select  R.*,P.POST_NAME  from \n" +
-          "RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
-          "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID ${ew.customSqlSegment}")
+  @Select("\n" +
+          "select  R.*,Z.RECRUITMENT_PLAN_NAME,P.POST_NAME,D.DEPT_NAME  from\n" +
+          "          RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID\n" +
+          "          LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID LEFT JOIN DEPT D on\n" +
+          "\t\t\t\t\tZ.DEPT_ID = D.DEPT_ID ${ew.customSqlSegment}")
   IPage<ResumeVo> findAlleliminate(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
   //简历列表分页查询：已邀约
@@ -55,6 +62,5 @@ public interface ResumeMapperVo extends BaseMapper<ResumeVo> {
           "RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
           "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID ${ew.customSqlSegment}")
   IPage<ResumeVo> findAlleInvite(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
-
 
 }

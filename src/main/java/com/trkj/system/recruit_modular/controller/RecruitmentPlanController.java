@@ -74,6 +74,11 @@ public class RecruitmentPlanController {
         return AjaxResponse.success(resumeServiceVo.findByidresum(resumeVo));
     }
 
+    //根据职位id和部门id查询所有招聘计划名称
+    @PostMapping("/recruitment/findByidplan")
+    public AjaxResponse findByidplan(@RequestBody RecruitmentPlan recruitmentPlan){
+        return AjaxResponse.success(recruitmentPlanService.findByidall(recruitmentPlan));
+    }
 
 
 

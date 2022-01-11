@@ -81,7 +81,7 @@ public class ResumeController {
         return AjaxResponse.success(s);
     }
 
-    //关闭计划修改状态
+    //简历信息添加备注
     @PostMapping("/resume/updatebz")
     public AjaxResponse updatebz(@RequestBody Resume resume) {
         if (service.updateremarks(resume)>=1){
@@ -90,5 +90,26 @@ public class ResumeController {
             return AjaxResponse.success("失败");
         }
     }
+
+    //简历信息转入淘汰库
+    @PostMapping("/resume/zeliminate")
+    public AjaxResponse zeliminate(@RequestBody Resume resume) {
+        if (service.updateeliminate(resume)>=1){
+            return AjaxResponse.success("成功");
+        }else{
+            return AjaxResponse.success("失败");
+        }
+    }
+
+    //修改: 设置候选人、备注信息
+    @PostMapping("/resume/updatehz")
+    public AjaxResponse updatehz(@RequestBody Resume resume) {
+        if (service.updatehb(resume)>=1){
+            return AjaxResponse.success("成功");
+        }else{
+            return AjaxResponse.success("失败");
+        }
+    }
+
 }
 
