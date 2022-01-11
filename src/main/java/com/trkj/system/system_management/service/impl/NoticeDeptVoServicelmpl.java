@@ -20,12 +20,29 @@ public class NoticeDeptVoServicelmpl implements NoticeDeptVoService {
     @Autowired
     private NoticeDeptVoMapper noticeDeptVoMapper;
 
+    /**
+     * 公告部门表查询公告部门名称
+     * @param noticeId
+     * @return
+     */
     @Override
     public List<NoticeDeptVo> selectDeptName(NoticeDeptVo noticeId) {
         QueryWrapper<NoticeDeptVo> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("NOTICE_ID",noticeId.getNoticeId());
         return noticeDeptVoMapper.selectDeptName(queryWrapper);
     }
+
+//    /**
+//     * 删除公告部门数据
+//     * @param id
+//     * @return
+//     */
+//    @Override
+//    public int deleteNoticeDept(int id) {
+//        QueryWrapper<NoticeDeptVo> queryWrapper=new QueryWrapper<>();
+//        queryWrapper.eq("NOTICE_ID",id);
+//        return noticeDeptVoMapper.deleteNoticeDept(queryWrapper);
+//    }
 }
 
 

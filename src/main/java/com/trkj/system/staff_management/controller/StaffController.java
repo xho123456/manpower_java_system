@@ -6,9 +6,7 @@ import com.trkj.system.staff_management.service.StaffService;
 import com.trkj.system.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -53,12 +51,97 @@ public class StaffController {
         Page<StaffGiveupInductionEntity> page1=new Page<>(currentPage,pagesize);
         return AjaxResponse.success(service.findgiveupInductionStaff(page1));
     }
-
-
-
-    @GetMapping("/staff/get/{id}")
-    public List<StaffEntity> findStaffById(Long id){
-        return null;
+    @GetMapping("/staff/turnright")
+    public AjaxResponse findTurnrightStaff(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+        Page<StaffEntity> page1=new Page<>(currentPage,pagesize);
+        return AjaxResponse.success(service.findTurnrightStaff(page1));
+    }
+    @GetMapping("/staff/transfer")
+    public AjaxResponse findTransferStaff(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+        Page<StaffTransferEntity> page1=new Page<>(currentPage,pagesize);
+        return AjaxResponse.success(service.findTransferStaff(page1));
     }
 
+        /** 条件查询：id  or   name   */
+
+    @PostMapping("/staff/getId")
+    public AjaxResponse findStaffById(@RequestBody StaffEntity staff){
+        return AjaxResponse.success(service.findStaffById(staff));
+    }
+
+    @PostMapping("/staff/likename")
+    public AjaxResponse findStaffLikeByName(@RequestBody StaffEntity staff){
+        return AjaxResponse.success(service.findStaffLikeByName(staff));
+    }
+
+    @PostMapping("/staff/history/getId")
+    public AjaxResponse findHistoryStaffById(@RequestBody StaffHistoryEntity staff){
+        return AjaxResponse.success(service.findHistoryStaffById(staff));
+    }
+
+    @PostMapping("/staff/history/likename")
+    public AjaxResponse findHistoryStaffLikeByName(@RequestBody StaffHistoryEntity staff){
+        return AjaxResponse.success(service.findHistoryStaffLikeByName(staff));
+    }
+
+    @PostMapping("/staff/punishment/getId")
+    public AjaxResponse findPunishById(@RequestBody StaffPunishmentEntity staff){
+        return AjaxResponse.success(service.findPunishById(staff));
+    }
+
+    @PostMapping("/staff/punishment/likename")
+    public AjaxResponse findPunishLikeByName(@RequestBody StaffPunishmentEntity staff){
+        return AjaxResponse.success(service.findPunishLikeByName(staff));
+    }
+
+    @PostMapping("/staff/elite/getId")
+    public AjaxResponse findRewardStaffById(@RequestBody StaffEliteEntity staff){
+        return AjaxResponse.success(service. findEliteStaffById(staff));
+    }
+
+    @PostMapping("/staff/elite/likename")
+    public AjaxResponse findRewardStaffLikeByName(@RequestBody StaffEliteEntity staff){
+        return AjaxResponse.success(service.findEliteStaffLikeByName(staff));
+    }
+
+    @PostMapping("/staff/reward/getId")
+    public AjaxResponse findRewardStaffById(@RequestBody StaffRewardEntity staff){
+        return AjaxResponse.success(service. findRewardStaffById(staff));
+    }
+
+    @PostMapping("/staff/reward/likename")
+    public AjaxResponse findRewardStaffLikeByName(@RequestBody StaffRewardEntity staff){
+        return AjaxResponse.success(service.findRewardStaffLikeByName(staff));
+    }
+
+    @PostMapping("/staff/induction/likename")
+    public AjaxResponse findInductionStaffLikeByName(@RequestBody StaffInductionEntity staff){
+        return AjaxResponse.success(service.findInductionStaffLikeByName(staff));
+    }
+
+    @PostMapping("/staff/giveupinduction/likename")
+    public AjaxResponse findgiveupInductionStaffLikeByName(@RequestBody StaffGiveupInductionEntity staff){
+        return AjaxResponse.success(service.findgiveupInductionStaffLikeByName(staff));
+    }
+
+
+    @PostMapping("/staff/turnright/getId")
+    public AjaxResponse findTurnrightStaffById(@RequestBody StaffEntity staff){
+        return AjaxResponse.success(service.findTurnrightStaffById(staff));
+    }
+
+    @PostMapping("/staff/turnright/likename")
+    public AjaxResponse findTurnrightStaffByName(@RequestBody StaffEntity staff){
+        return AjaxResponse.success(service.findTurnrightStaffByName(staff));
+    }
+
+    @PostMapping("/staff/transfer/getId")
+    public AjaxResponse findTransferStaffById(@RequestBody StaffTransferEntity staff){
+        return AjaxResponse.success(service.findTransferStaffById(staff));
+    }
+
+    @PostMapping("/staff/transfer/likename")
+    public AjaxResponse findTransferStaffLikeByName(@RequestBody StaffTransferEntity staff){
+        return AjaxResponse.success(service.findTransferStaffLikeByName(staff));
+    }
 }

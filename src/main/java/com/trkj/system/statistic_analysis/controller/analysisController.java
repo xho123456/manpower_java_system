@@ -75,8 +75,35 @@ public class analysisController {
     public List<Map<String, Object>> selectCount11(){
         return staffService.selectygzt();
     }
+  //查询员工年代
     @GetMapping("/chand")
     public List<Map<String, Object>> selectCount12(){
         return staffService.selectnd();
+    }
+
+    //查询员工离职人数
+    @GetMapping("/chayglz")
+    public List<Map<String, Object>> selectCount13(){
+        return staffService.selectyglz();
+    }
+    //查询单月员工离职人数
+    @GetMapping("/chadylz")
+    public List<Map<String, Object>> selectCount131(){
+        return staffService.selectdylz();
+    }
+    //查询单月员工离职人数
+    @GetMapping("/chasylz")
+    public List<Map<String, Object>> selectCount132(){
+        return staffService.selectsylz();
+    }
+    //查询员工离职状态
+    @GetMapping("/chaygzz")
+    public List<Map<String, Object>> selectCount14(){
+        return staffService.selectygzz();
+    }
+    //查询部门top榜
+    @GetMapping("/chadepttop")
+    public List<Map<String, Object>> selectCount15(){
+        return staffService.selectdepttop();
     }
 }

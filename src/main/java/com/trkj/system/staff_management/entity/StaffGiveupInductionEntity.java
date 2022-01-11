@@ -48,4 +48,7 @@ public class StaffGiveupInductionEntity {
     private String waivereason;
     /** 放弃原因 */
 
+    private Long CurrentPage;
+
+    private Long Pagesize;
 }

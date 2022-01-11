@@ -1,9 +1,6 @@
 package com.trkj.system.system_management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -14,10 +11,21 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@KeySequence(value = "NOTICE_ID", clazz = Integer.class)
 public class NoticeVo {
     private static final long serialVersionUID = 1L;
+
+   @TableId
     @ApiModelProperty(value = "公告编号")
     private Long noticeId;
+
+   @TableId
+    @ApiModelProperty(value = "公告部门编号")
+    private Long noticeDeptId;
+
+   @TableId
+    @ApiModelProperty(value = "部门编号")
+    private Long deptId;
 
     @ApiModelProperty(value = "员工编号")
     private Long staffId;
@@ -41,24 +49,33 @@ public class NoticeVo {
     @ApiModelProperty(value = "发布内容")
     private String noticeMatter;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @ApiModelProperty(value = "创建时间 精确到秒")
-    private Date createdTime;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @ApiModelProperty(value = "修改时间 精确到秒")
-    private Date updatedTime;
-
     private int currentPage;
     private int pagesize;
 
-    @Version
-    @ApiModelProperty(value = "乐观锁")
-    private Long revision;
 
-    @TableLogic
-    @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
-    private Long isDeleted;
 
+    @ApiModelProperty(value = "状态;0：启用  1：禁用")
+    private Long deptState;
+
+
+ @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+ @ApiModelProperty(value = "创建时间 精确到秒")
+ @TableField(value = "CREATED_TIME" , fill = FieldFill.INSERT)
+ private Date createdTime;
+
+ @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+ @ApiModelProperty(value = "修改时间 精确到秒")
+ @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
+ private Date updatedTime;
+
+ @Version
+ @ApiModelProperty(value = "乐观锁")
+ @TableField("REVISION")
+ private Long revision;
+
+ @TableLogic
+ @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
+ @TableField("IS_DELETED")
+ private Long isDeleted;
 
 }

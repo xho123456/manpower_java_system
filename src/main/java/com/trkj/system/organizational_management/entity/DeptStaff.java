@@ -1,7 +1,6 @@
 package com.trkj.system.organizational_management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,6 +9,8 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.util.Date;
 @Data
+@TableName("DEPT_POST")
+@KeySequence(value = "DEPT_POST_ID" ,clazz = Integer.class)
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class DeptStaff implements Serializable {
@@ -34,5 +35,27 @@ public class DeptStaff implements Serializable {
     @ApiModelProperty(value = "员工姓名")
     @TableField("STAFF_NAME")
     private String staffName;
+
+
+    @ApiModelProperty(value = "创建时间")
+    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
+    private Date createdTime;
+
+    @ApiModelProperty(value = "修改时间")
+    @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
+    private Date updatedTime;
+
+
+    @ApiModelProperty(value = "乐观锁")
+    @TableField("REVISION")
+    private Long revision;
+
+
+    @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
+    @TableField("IS_DELETED")
+    private Long isDeleted;
+
+    private int currentPage;
+    private int pageSize;
 
 }
