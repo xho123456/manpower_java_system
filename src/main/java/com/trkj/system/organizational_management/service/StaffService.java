@@ -31,4 +31,16 @@ public interface StaffService {
         List<Map<String, Object>> selectygzt();
         List<Map<String, Object>> selectnd();
         List<Map<String, Object>> selectrz();
+        List<Map<String, Object>> selectyglz();
+        List<Map<String, Object>> selectygzz();
+        List<Map<String, Object>> selectdepttop();
+        List<Map<String, Object>> selectdylz();
+        List<Map<String, Object>> selectsylz();
+        List<Map<String, Object>> selectbyrz();
+        List<Map<String, Object>> selectsyrz();
+        List<Map<String, Object>> selectbyygzz();
+        List<Map<String, Object>> selectsyygzz();
+        List<Map<String, Object>> selectygxj();
+
+        List<Map<String, Object>> selectyglz1();
 }
