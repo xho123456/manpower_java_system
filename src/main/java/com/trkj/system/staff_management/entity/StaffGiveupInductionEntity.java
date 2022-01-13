@@ -1,5 +1,6 @@
 package com.trkj.system.staff_management.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,9 @@ import java.util.Date;
 @AllArgsConstructor
 @Accessors(chain = true)  /** 链式写法 */
 public class StaffGiveupInductionEntity {
+    private Long RESUMEID;
+    /** 简历编号 */
+
     private String RESUMENAME;
     /** 员工姓名 */
 
@@ -42,8 +46,11 @@ public class StaffGiveupInductionEntity {
     private String POSTNAME;
     /** 职位名称 */
 
-    private Long EMPLOYMENTSTATE;
+    private Long RESUMEZT;
     /** 入职状态 */
+
+    private String RESUMEHY;
+    /** 婚姻状态 */
 
     private String waivereason;
     /** 放弃原因 */
