@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 简历表
+ * 简历表、部门表、招聘计划表、职位表Vo
  * </p>
  *
  * @author 鄧琪
@@ -35,6 +35,10 @@ public class ResumeVo implements Serializable {
     @ApiModelProperty(value = "部门职位名称")
     @TableField("POST_NAME")
     private String postName;
+
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
 
     @ApiModelProperty(value = "名字")
     private String resumeName;
@@ -96,7 +100,7 @@ public class ResumeVo implements Serializable {
     private String resumeZt;
 
     @ApiModelProperty(value = "投简时间")
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
     private Date toujTime;
 
     @ApiModelProperty(value = "简历备注")

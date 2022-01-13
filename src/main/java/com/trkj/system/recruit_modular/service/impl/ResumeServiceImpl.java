@@ -35,4 +35,15 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
     public int updateremarks(Resume resume) {
         return mapper.updateById(resume);
     }
+    //转入淘汰库
+    @Override
+    public int updateeliminate(Resume resume) {
+        return mapper.updateById(resume);
+    }
+
+    //修改: 设置候选人、备注信息
+    @Override
+    public int updatehb(Resume resume) {
+        return mapper.updateById(resume);
+    }
 }

@@ -56,8 +56,45 @@ public interface StaffMapper extends BaseMapper<Staff> {
 
 
     //人员数量分析页面
-    //员工入职人数
-    @Select("\n" +
-            "select to_char(STAFF_HIREDATE,'yyyy-MM') year,count(*) as rs from STAFF where to_char(STAFF_HIREDATE,'yyyy-MM') <= TO_CHAR(SYSDATE,'yyyy-MM') and to_char(STAFF_HIREDATE,'yyyy-MM') >= to_char(add_months(trunc(sysdate),-6),'yyyy-mm') group by to_char(STAFF_HIREDATE,'yyyy-MM') ORDER BY year")
+    //每月员工入职人数
+    @Select("select to_char(STAFF_HIREDATE,'yyyy-MM') year,count(*) as rs from STAFF where to_char(STAFF_HIREDATE,'yyyy-MM') <= TO_CHAR(SYSDATE,'yyyy-MM') and to_char(STAFF_HIREDATE,'yyyy-MM') >= to_char(add_months(trunc(sysdate),-6),'yyyy-mm') group by to_char(STAFF_HIREDATE,'yyyy-MM') ORDER BY year")
     List<Map<String, Object>> selectrz();
+    //本月员工入职人数
+    @Select("select to_char(STAFF_HIREDATE,'yyyy-MM') year,count(*) as rs from STAFF where to_char(STAFF_HIREDATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') group by to_char(STAFF_HIREDATE,'yyyy-MM') ORDER BY year")
+    List<Map<String, Object>> selectbyrz();
+    //上月员工入职人数
+    @Select("select to_char(STAFF_HIREDATE,'yyyy-MM') year,count(*) as rs from STAFF where to_char(STAFF_HIREDATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm') group by to_char(STAFF_HIREDATE,'yyyy-MM') ORDER BY year")
+    List<Map<String, Object>> selectsyrz();
+
+    //每月员工离职人数
+    @Select(" select to_char(FORMAL_QUIT_DATE,'yyyy-MM') year,count(STAFF_ID) as rs from QUIT where to_char(FORMAL_QUIT_DATE,'yyyy-MM') <= TO_CHAR(SYSDATE,'yyyy-MM')  and to_char(FORMAL_QUIT_DATE,'yyyy-MM') >= to_char(add_months(trunc(sysdate),-6),'yyyy-mm') and QUIT_STATE=1 group by to_char(FORMAL_QUIT_DATE,'yyyy-MM') ORDER BY year ")
+    List<Map<String, Object>> selectyglz();
+    //当月员工离职人数
+    @Select("  select to_char(FORMAL_QUIT_DATE,'yyyy-MM') year,count(STAFF_ID) as rs from QUIT where to_char(FORMAL_QUIT_DATE,'yyyy-MM') = TO_CHAR(SYSDATE,'yyyy-MM')  and QUIT_STATE=1 group by to_char(FORMAL_QUIT_DATE,'yyyy-MM')   ")
+    List<Map<String, Object>> selectdylz();
+
+    //上月员工离职人数
+    @Select(" select to_char(FORMAL_QUIT_DATE,'yyyy-MM') year,count(STAFF_ID) as rs from QUIT where    to_char(FORMAL_QUIT_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm') and QUIT_STATE=1 group by to_char(FORMAL_QUIT_DATE,'yyyy-MM')  ")
+    List<Map<String, Object>> selectsylz();
+
+    //每月员工转正人数
+    @Select(" select to_char(WORKER_DATE,'yyyy-MM') year,count(STAFF_ID) as rs from WORKER where to_char(WORKER_DATE,'yyyy-MM') <= TO_CHAR(SYSDATE,'yyyy-MM')  and to_char(WORKER_DATE,'yyyy-MM') >= to_char(add_months(trunc(sysdate),-6),'yyyy-mm') and WORKER_STATE=1 group by to_char(WORKER_DATE,'yyyy-MM') ORDER BY year  ")
+    List<Map<String, Object>> selectygzz();
+    //本月员工转正人数
+    @Select("select to_char(WORKER_DATE,'yyyy-MM') year,count(STAFF_ID) as rs from WORKER where  to_char(WORKER_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and WORKER_STATE=1 group by to_char(WORKER_DATE,'yyyy-MM') ORDER BY year  ")
+    List<Map<String, Object>> selectbyygzz();
+    //上月员工转正人数
+    @Select("select to_char(WORKER_DATE,'yyyy-MM') year,count(STAFF_ID) as rs from WORKER where  to_char(WORKER_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm') and WORKER_STATE=1 group by to_char(WORKER_DATE,'yyyy-MM') ORDER BY year  ")
+    List<Map<String, Object>> selectsyygzz();
+    //部门员工top榜
+    @Select(" SELECT  D.DEPT_NAME, COUNT(s.STAFF_ID) as rs FROM  staff s, DEPT D WHERE s.DEPT_ID = D.DEPT_ID  GROUP BY  d.DEPT_NAME ORDER BY   rs desc   ")
+    List<Map<String, Object>> selectbdepttop();
+
+
+    //员工新进律
+    @Select(" select MONEYPIGEONHOLE_ASKPERSON as rs,to_char(MONEYPIGEONHOLE_DATE,'yyyy-MM') year from MONEYPIGEONHOLE WHERE  to_char(MONEYPIGEONHOLE_DATE,'yyyy-MM') >=to_char(add_months(trunc(sysdate),-5),'yyyy-mm') ORDER BY year ")
+    List<Map<String, Object>> selectygxj();
+
+    @Select(" select to_char(FORMAL_QUIT_DATE,'yyyy-MM') year,count(STAFF_ID) as rs from QUIT where to_char(FORMAL_QUIT_DATE,'yyyy-MM') <= TO_CHAR(SYSDATE,'yyyy-MM')  and to_char(FORMAL_QUIT_DATE,'yyyy-MM') >= to_char(add_months(trunc(sysdate),-6),'yyyy-mm') and QUIT_STATE=1 group by to_char(FORMAL_QUIT_DATE,'yyyy-MM') ORDER BY year ")
+    List<Map<String, Object>> selectyglz1();
 }

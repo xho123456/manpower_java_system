@@ -1,36 +1,31 @@
 package com.trkj.system.organizational_management.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-
-import java.util.Date;
-import java.io.Serializable;
-import io.swagger.annotations.ApiModel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-/**
- * <p>
- * 部门表
- * </p>
- *
- * @author 谢海欧
- * @since 2021-12-28
- */
+import java.io.Serializable;
+import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("DEPT")
-@KeySequence(value = "DEPT_ID" ,clazz = Integer.class)
-@ApiModel(value="Dept对象", description="部门表")
-public class Dept implements Serializable {
-
+public class DeptDeptPost implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "职位编号")
+    @TableId("DEPT_POST_ID")
+    private Long deptPostId;
+
+    @ApiModelProperty(value = "职位名称")
+    @TableField("POST_NAME")
+    private String postName;
+
     @ApiModelProperty(value = "部门编号")
-    @TableId(value = "DEPT_ID",type = IdType.INPUT)
-    private Integer deptId;
+    @TableField("DEPT_Id")
+    private Long deptId;
 
     @ApiModelProperty(value = "状态;0：启用  1：禁用")
     @TableField("DEPT_STATE")
@@ -40,19 +35,17 @@ public class Dept implements Serializable {
     @TableField("DEPT_NAME")
     private String deptName;
 
-    @ApiModelProperty(value = "部门负责人;提供ID到员工表锁定具体的人")
-    @TableField("STAFF_ID")
-    private Long staffId;
-
     @ApiModelProperty(value = "创建时间")
     @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")
     @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
     private Date updatedTime;
 
-    @Version
+
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
@@ -62,6 +55,7 @@ public class Dept implements Serializable {
     @TableField("IS_DELETED")
     private Long isDeleted;
 
-
+    private int currentPage;
+    private int pageSize;
 
 }

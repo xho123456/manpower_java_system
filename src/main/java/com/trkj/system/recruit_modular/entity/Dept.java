@@ -1,8 +1,9 @@
-package com.trkj.system.organizational_management.entity;
+package com.trkj.system.recruit_modular.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,22 +16,21 @@ import lombok.experimental.Accessors;
  * 部门表
  * </p>
  *
- * @author 谢海欧
- * @since 2021-12-28
+ * @author 鄧琪
+ * @since 2022-01-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("DEPT")
-@KeySequence(value = "DEPT_ID" ,clazz = Integer.class)
 @ApiModel(value="Dept对象", description="部门表")
 public class Dept implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "部门编号")
-    @TableId(value = "DEPT_ID",type = IdType.INPUT)
-    private Integer deptId;
+    @TableId("DEPT_ID")
+    private Long deptId;
 
     @ApiModelProperty(value = "状态;0：启用  1：禁用")
     @TableField("DEPT_STATE")
@@ -45,23 +45,20 @@ public class Dept implements Serializable {
     private Long staffId;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
+    @TableField("CREATED_TIME")
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")
-    @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
+    @TableField("UPDATED_TIME")
     private Date updatedTime;
 
-    @Version
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
 
-    @TableLogic
     @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
-
 
 
 }
