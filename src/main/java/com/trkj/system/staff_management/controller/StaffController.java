@@ -144,4 +144,15 @@ public class StaffController {
     public AjaxResponse findTransferStaffLikeByName(@RequestBody StaffTransferEntity staff){
         return AjaxResponse.success(service.findTransferStaffLikeByName(staff));
     }
+
+    @PostMapping("/staff/giveinduction")
+    public AjaxResponse updateResume(@RequestBody StaffGiveupInductionEntity resume){
+        System.out.println(resume);
+        if (service.updateResume(resume)>0){
+            return AjaxResponse.success("放弃成功");
+        }else {
+            return AjaxResponse.success("放弃失败");
+        }
+    }
+
 }
