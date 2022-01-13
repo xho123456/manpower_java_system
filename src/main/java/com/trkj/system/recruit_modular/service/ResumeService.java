@@ -1,5 +1,6 @@
 package com.trkj.system.recruit_modular.service;
 
+import com.trkj.system.recruit_modular.entity.InterviewVo;
 import com.trkj.system.recruit_modular.entity.Resume;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -23,4 +24,8 @@ public interface ResumeService extends IService<Resume> {
 
     //修改: 设置候选人、备注信息
     int updatehb(Resume resume);
+
+    //添加简历
+    int addResume(Resume resume);
+
 }

@@ -9,52 +9,64 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 面试表
+ * 录用表
  * </p>
  *
  * @author 鄧琪
- * @since 2022-01-12
+ * @since 2022-01-13
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class InterviewVo implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("EMPLOYMENT_TABLE")
+@ApiModel(value="EmploymentTable对象", description="录用表")
+public class EmploymentTableVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "编号")
-    @TableId("INTERVIEW_ID")
-    private Long interviewId;
+    @TableId("EMPLOYMENT_ID")
+    private Long employmentId;
 
-    @ApiModelProperty(value = "简历表外键")
+    @ApiModelProperty(value = "简历编号")
     @TableField("RESUME_ID")
     private Long resumeId;
 
-    @ApiModelProperty(value = "面试日期")
-    @TableField("INTERVIEW_TIME")
-    private Date interviewTime;
+    @ApiModelProperty(value = "入职时间")
+    @TableField("HIREDATE")
+    private Date hiredate;
 
-    @ApiModelProperty(value = "面试评价")
-    @TableField("INTERVIEW_EVALUATE")
-    private String interviewEvaluate;
+    @ApiModelProperty(value = "试用期")
+    @TableField("PROBATION")
+    private String probation;
 
-    @ApiModelProperty(value = "负责人编号（员工表/员工编号)")
-    @TableField("STAFF_ID")
-    private Long staffId;
+    @ApiModelProperty(value = "试用期月薪")
+    @TableField("PROBATIONARY")
+    private Long probationary;
+
+    @ApiModelProperty(value = "转正月薪")
+    @TableField("POSITIVE_MONTHLY")
+    private Long positiveMonthly;
+
+    @ApiModelProperty(value = "薪酬备注")
+    @TableField("POSITIVE_REMARKS")
+    private String positiveRemarks;
+
+    @ApiModelProperty(value = "放弃原因")
+    @TableField("WAIVE_REASON")
+    private String waiveReason;
 
     @ApiModelProperty(value = "创建时间")
     @TableField("CREATED_TIME")
     private Date createdTime;
 
-    @ApiModelProperty(value = "最后修改时间")
+    @ApiModelProperty(value = "修改时间")
     @TableField("UPDATED_TIME")
     private Date updatedTime;
 
@@ -65,6 +77,7 @@ public class InterviewVo implements Serializable {
     @ApiModelProperty(value = "逻辑删除;1表示删除，0 表示未删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
+
 
 
     @ApiModelProperty(value = "部门职位名称")

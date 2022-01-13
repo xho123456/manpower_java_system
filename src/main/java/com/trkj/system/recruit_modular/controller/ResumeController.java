@@ -1,10 +1,7 @@
 package com.trkj.system.recruit_modular.controller;
 
 
-import com.trkj.system.recruit_modular.entity.RecruitmentPlan;
-import com.trkj.system.recruit_modular.entity.RecruitmentPlanVo;
-import com.trkj.system.recruit_modular.entity.Resume;
-import com.trkj.system.recruit_modular.entity.ResumeVo;
+import com.trkj.system.recruit_modular.entity.*;
 import com.trkj.system.recruit_modular.service.ResumeService;
 import com.trkj.system.recruit_modular.service.ResumeServiceVo;
 import com.trkj.system.vo.AjaxResponse;
@@ -53,12 +50,6 @@ public class ResumeController {
     @PostMapping("/resume/findselectAlltt")
     public AjaxResponse findselectAlltt(@RequestBody ResumeVo resumeVo){
         return AjaxResponse.success(resumeServiceVo.findAlltt(resumeVo));
-    }
-
-    //简历列表分页查询：淘汰库
-    @PostMapping("/resume/findselectAllyy")
-    public AjaxResponse findselectAllyy(@RequestBody ResumeVo resumeVo){
-        return AjaxResponse.success(resumeServiceVo.findAllInvite(resumeVo));
     }
 
     //招聘个人简历详情查询
@@ -110,6 +101,18 @@ public class ResumeController {
             return AjaxResponse.success("失败");
         }
     }
+
+    //添加简历
+    @PostMapping("/resume/addresumes")
+    public AjaxResponse addResumed(@RequestBody Resume resume){
+        if (service.addResume(resume)>=1){
+            return AjaxResponse.success("成功");
+        }else {
+            return AjaxResponse.success("失败");
+        }
+
+    }
+
 
 }
 
