@@ -45,4 +45,14 @@ public class FixedSalaryController {
     public AjaxResponse selectPage3(@RequestBody SalaryList salaryList){
         return AjaxResponse.success(fixedSalaryService.selectPaer3(salaryList));
     }
+    //修改固定工资
+    @PutMapping("/updateFixedSalary/fixedSalary")
+    public AjaxResponse updateFixedSalary(@RequestBody Fixedwage fixedwage){
+        System.out.println(fixedwage);
+        if (fixedSalaryService.updateFixedSalary(fixedwage)>0){
+            return  AjaxResponse.success("成功");
+        }else {
+            return AjaxResponse.success("失败");
+        }
+    }
 }
