@@ -10,15 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * <p>
- * 部门表 服务类
- * </p>
- *
- * @author 谢海欧
- * @since 2021-12-28
- */
 public interface DeptService {
 //    IPage<DeptStaff> selectpage(Page<DeptStaff> page);
    // int updateUser( int deptid);
