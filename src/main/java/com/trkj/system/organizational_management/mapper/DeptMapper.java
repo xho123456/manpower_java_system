@@ -33,11 +33,6 @@ public interface DeptMapper extends BaseMapper<DeptStaff> {
      */
     @Select("select  d.*, s.STAFF_NAME from  DEPT d left join STAFF s on d.STAFF_ID= s.STAFF_ID ${ew.customSqlSegment}")
     IPage<DeptStaff>selectPaer(Page<DeptStaff> deptStaff, @Param(Constants.WRAPPER)QueryWrapper<DeptStaff> queryWrapper);
-    /**
-     * 分页查询 部门职位
-     */
-    @Select("select p.*,d.dept_Name from DEPT_POST p  inner join DEPT  d on d.DEpt_ID=p.DEPT_ID ${ew.customSqlSegment}")
-    IPage<DeptStaff>selectPaer1(Page<DeptStaff> deptStaff, @Param(Constants.WRAPPER)QueryWrapper<DeptStaff> queryWrapper);
 
 
 

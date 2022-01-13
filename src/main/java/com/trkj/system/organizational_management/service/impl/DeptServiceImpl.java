@@ -18,12 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * <p>
- *  * 部门表 服务实现类
- *  * </p>
- *  * * @author 谢海欧
- * @since 2021-12-28 */
 @Service
 
 public class DeptServiceImpl implements DeptService {
@@ -66,8 +60,8 @@ public class DeptServiceImpl implements DeptService {
         Page<DeptDeptPost> page=new Page<>(deptDeptPost.getCurrentPage(),deptDeptPost.getPageSize());
         QueryWrapper<DeptDeptPost> queryWrapper=new QueryWrapper<>();
 
-        if(deptDeptPost.getDeptName() !=null && !deptDeptPost.getDeptName().equals("")){
-            queryWrapper.like("d.DEPT_NAME" ,deptDeptPost.getDeptName());
+        if(deptDeptPost.getPostName() !=null && !deptDeptPost.getPostName().equals("")){
+            queryWrapper.like("p.POST_NAME" ,deptDeptPost.getPostName());
         }
 
         queryWrapper.eq("p.IS_DELETED",0);
