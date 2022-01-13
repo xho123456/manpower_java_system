@@ -1,6 +1,8 @@
 package com.trkj.system.staff_management.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.system.staff_management.entity.*;
@@ -244,6 +246,17 @@ public class StaffServiceimpl implements StaffService {
     public int updateResume(StaffGiveupInductionEntity resume) {
         System.out.println("=======================================================");
         return mapper.updateResume(new QueryWrapper<StaffGiveupInductionEntity>().eq("RESUME_ID",resume.getRESUMEID()));
+    }
+
+    @Override
+    public int addwhy(StaffGiveupInductionEntity resume) {
+        UpdateWrapper<StaffGiveupInductionEntity> ew = new UpdateWrapper<>();
+        return mapper.addwhy(ew.set("waive_reason",resume.getWaivereason()).in("EMPLOYMENT_ID",resume.getEMPLOYMENTID()));
+    }
+
+    @Override
+    public int addStaff(StaffEntity staff) {
+        return mapper.insert(staff);
     }
 
 
