@@ -14,14 +14,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/**
- * <p>
- * 部门表 Mapper 接口
- * </p>
- *
- * @author 谢海欧
- * @since 2021-12-28
- */
+
 @Mapper
 public interface DeptPostMapper extends BaseMapper<DeptDeptPost> {
 

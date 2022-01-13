@@ -13,14 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <p>
- * 部门表 前端控制器
- * </p>
- *
- * @author 谢海欧
- * @since 2021-12-28
- */
+
 @RestController
 
 public class DeptController {
@@ -101,10 +94,10 @@ public class DeptController {
        }
        //职位添加
     @PostMapping("/addDeptPost")
-    public String addDeptPost(@RequestBody DeptPost deptPost) {
-        System.out.println(deptPost);
+    public String addDeptPost(@RequestBody DeptPostOne deptPostOne) {
+        System.out.println(deptPostOne);
         try {
-            if (deptPostSelectService.addDeptPost(deptPost) >= 1) {
+            if (deptPostSelectService.addDeptPost(deptPostOne) >= 1) {
                 return "成功";
             } else {
                 return "失败";
@@ -112,8 +105,16 @@ public class DeptController {
         } catch (Exception e) {
             return "失败";
         }
-
-
     }
+    @PutMapping("/updatePost/post")
+    public AjaxResponse updatePost(@RequestBody DeptPostOne deptPostOne){
+        System.out.println(deptPostOne);
+        if (deptPostSelectService.updatePost(deptPostOne)>0){
+            return  AjaxResponse.success("成功");
+        }else {
+            return AjaxResponse.success("失败");
+        }
+    }
+
 }
 

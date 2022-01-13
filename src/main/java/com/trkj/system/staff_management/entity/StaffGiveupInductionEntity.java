@@ -15,6 +15,8 @@ import java.util.Date;
 public class StaffGiveupInductionEntity {
     private Long RESUMEID;
     /** 简历编号 */
+    private Long EMPLOYMENTID;
+    /** 录用编号 */
 
     private String RESUMENAME;
     /** 员工姓名 */

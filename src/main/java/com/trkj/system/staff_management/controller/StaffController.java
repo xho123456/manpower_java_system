@@ -155,4 +155,23 @@ public class StaffController {
         }
     }
 
+    @PostMapping("/staff/givewhy")
+    public AjaxResponse addwhy(@RequestBody StaffGiveupInductionEntity resume){
+        System.out.println(resume);
+        if (service.addwhy(resume)>0){
+            return AjaxResponse.success("放弃成功");
+        }else {
+            return AjaxResponse.success("放弃失败");
+        }
+    }
+
+    @PostMapping("/staff/addStaff")
+    public AjaxResponse addStaff(@RequestBody StaffEntity staff){
+        if (service.addStaff(staff)>0){
+            return AjaxResponse.success("入职成功");
+        }else {
+            return AjaxResponse.success("入职失败");
+        }
+    }
+
 }

@@ -52,4 +52,7 @@ public interface StaffService {
 
    //int updateResume(StaffGiveupInductionEntity resume);
    int updateResume(StaffGiveupInductionEntity resume);
+   int addwhy(StaffGiveupInductionEntity resume);
+
+   int addStaff(StaffEntity staff);
 }

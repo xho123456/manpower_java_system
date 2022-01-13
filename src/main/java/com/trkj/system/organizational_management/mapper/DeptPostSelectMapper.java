@@ -23,6 +23,5 @@ import java.util.List;
  */
 @Mapper
 public interface DeptPostSelectMapper extends BaseMapper<DeptPost> {
-
 }
 
