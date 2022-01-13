@@ -1,15 +1,13 @@
 package com.trkj.system.staff_management.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.system.staff_management.entity.*;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 
 @Mapper
@@ -61,9 +59,8 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
     /**
      * 查看所有待入职的员工
      */
-    @Select("SELECT r.RESUME_ID,r.RESUME_PHOTO,r.RESUME_HY, r.RESUME_ZT,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION," +
-            "r.RESUME_PHONE,r.RESUME_MAILBOX," +
-            "r.RESUME_BIRTHDAY,r.RESUME_RESIDENCE,r.RESUME_POLITICAL_OUTLOOK,d.DEPT_NAME,dp.POST_NAME " +
+    @Select("SELECT et.EMPLOYMENT_ID,r.RESUME_ID,r.RESUME_PHOTO,r.RESUME_HY, r.RESUME_ZT,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION," +
+            "r.RESUME_PHONE,r.RESUME_MAILBOX,r.RESUME_BIRTHDAY,r.RESUME_RESIDENCE,r.RESUME_POLITICAL_OUTLOOK,d.DEPT_NAME,dp.POST_NAME " +
             "FROM EMPLOYMENT_TABLE et LEFT JOIN RESUME r on et.RESUME_ID=r.RESUME_ID LEFT JOIN RECRUITMENT_PLAN rp " +
             "on rp.RECRUITMENT_PLAN_ID=r.RECRUITMENT_PLAN_ID LEFT JOIN DEPT d on d.dept_id=rp.dept_id LEFT JOIN " +
             "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where r.RESUME_ZT=6")
@@ -158,7 +155,7 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
     /**
      * 根据条件查询待入职的员工
      */
-    @Select("SELECT r.RESUME_ID,r.RESUME_HY,r.RESUME_PHOTO,r.RESUME_ZT,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION,r.RESUME_PHONE,r.RESUME_MAILBOX," +
+    @Select("SELECT et.EMPLOYMENT_ID,r.RESUME_ID,r.RESUME_HY,r.RESUME_PHOTO,r.RESUME_ZT,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION,r.RESUME_PHONE,r.RESUME_MAILBOX," +
             "r.RESUME_BIRTHDAY,r.RESUME_RESIDENCE,r.RESUME_POLITICAL_OUTLOOK,d.DEPT_NAME,dp.POST_NAME " +
             "FROM EMPLOYMENT_TABLE et LEFT JOIN RESUME r on et.RESUME_ID=r.RESUME_ID LEFT JOIN RECRUITMENT_PLAN rp " +
             "on rp.RECRUITMENT_PLAN_ID=r.RECRUITMENT_PLAN_ID LEFT JOIN DEPT d on d.dept_id=rp.dept_id LEFT JOIN " +
@@ -201,4 +198,17 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
      */
     @Update("update RESUME set RESUME_ZT=4  ${ew.customSqlSegment}")
     int updateResume(@Param(Constants.WRAPPER) QueryWrapper<StaffGiveupInductionEntity> queryWrapper);
+
+    /**
+     * 员工放弃入职原因
+     */
+    @Update("update EMPLOYMENT_TABLE set ${ew.sqlSet}  ${ew.customSqlSegment}")
+    int addwhy(@Param(Constants.WRAPPER) UpdateWrapper<StaffGiveupInductionEntity> wrapper);
+
+//    @Insert("insert into STAFF(STAFF_ID,STAFF_NAME,STAFF_SEX,STAFF_PHONE,STAFF_EMAIL,STAFF_PICTURE," +
+//            "STAFF_BIRTHDAY,STAFF_OUTLOOK,STAFF_EDUCATION,POSITION_NAME,STAFF_PASS,STAFF_HIREDATE," +
+//            "STAFF_IDENTITY,DEPT_ID,CREATED_TIME,UPDATED_TIME)" +
+//            "values(2,'刘一','男',13874114336,'3405425732@qq.com','F:\\360downloads\\224716-16191892361adb.jpg',to_date( '2003-04-26','yyyy-mm-dd'),'群众','本科','员工','123456',to_date( '2018-07-17','yyyy-mm-dd'),'430224200204261836',1,SYSDATE,SYSDATE\n" +
+//            ")")
+//    int addStaff();
 }
