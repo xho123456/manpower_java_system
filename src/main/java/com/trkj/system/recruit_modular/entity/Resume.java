@@ -1,10 +1,8 @@
 package com.trkj.system.recruit_modular.entity;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,13 +23,14 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("RESUME")
 @ApiModel(value="Resume对象", description="简历表")
+@KeySequence(value = "RESUME_ID", clazz = Integer.class)
 public class Resume implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "编号")
     @TableId("RESUME_ID")
-    private Long resumeId;
+    private Integer resumeId;
 
     @ApiModelProperty(value = "名字")
     @TableField("RESUME_NAME")

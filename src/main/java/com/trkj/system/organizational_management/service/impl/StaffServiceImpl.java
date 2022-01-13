@@ -99,5 +99,64 @@ public class StaffServiceImpl  implements StaffService {
     public List<Map<String, Object>> selectrz() {
         return mapper.selectrz();
     }
+
+    //查询本月入职人数
+    @Override
+    public List<Map<String, Object>> selectbyrz() {
+        return mapper.selectbyrz();
+    }
+
+    //查询上月入职人数
+    @Override
+    public List<Map<String, Object>> selectsyrz() {
+        return mapper.selectsyrz();
+    }
+
+
+    //查询每月离职人数
+    @Override
+    public List<Map<String, Object>> selectyglz() {
+        return mapper.selectyglz();
+    }
+    //查询每月离职人数
+    @Override
+    public List<Map<String, Object>> selectyglz1() {
+        return mapper.selectyglz1();
+    }
+    //查询单月离职人数
+    @Override
+    public List<Map<String, Object>> selectdylz() {
+        return mapper.selectdylz();
+    }
+    //查询上月离职人数
+    @Override
+    public List<Map<String, Object>> selectsylz() {
+        return mapper.selectsylz();
+    }
+    //查询每月转正人数
+    @Override
+    public List<Map<String, Object>> selectygzz() {
+        return mapper.selectygzz();
+    }
+    //查询本月转正人数
+    @Override
+    public List<Map<String, Object>> selectbyygzz() {
+        return mapper.selectbyygzz();
+    }
+    //查询上月转正人数
+    @Override
+    public List<Map<String, Object>> selectsyygzz() {
+        return mapper.selectsyygzz();
+    }
+    //查询部门人数top榜
+    @Override
+    public List<Map<String, Object>> selectdepttop() {
+        return mapper.selectbdepttop();
+    }
+    //查询员工新进律
+    @Override
+    public List<Map<String, Object>> selectygxj() {
+        return mapper.selectygxj();
+    }
 }
 

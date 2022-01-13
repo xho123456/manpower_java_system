@@ -1,6 +1,5 @@
 package com.trkj.system.recruit_modular.entity;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -18,11 +17,11 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 面试表Vo
+ * 面试表
  * </p>
  *
  * @author 鄧琪
- * @since 2022-01-05
+ * @since 2022-01-12
  */
 @Data
 @AllArgsConstructor
@@ -65,12 +64,16 @@ public class InterviewVo implements Serializable {
 
     @ApiModelProperty(value = "逻辑删除;1表示删除，0 表示未删除")
     @TableField("IS_DELETED")
-    @TableLogic
     private Long isDeleted;
+
 
     @ApiModelProperty(value = "部门职位名称")
     @TableField("POST_NAME")
     private String postName;
+
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
 
     @ApiModelProperty(value = "名字")
     private String resumeName;
@@ -132,11 +135,14 @@ public class InterviewVo implements Serializable {
     private String resumeZt;
 
     @ApiModelProperty(value = "投简时间")
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
     private Date toujTime;
 
-    @ApiModelProperty(value = "招聘计划名称")
-    private String recruitmentPlanName;
+    @ApiModelProperty(value = "简历备注")
+    private String remarks;
+
+    @ApiModelProperty(value = "员工名称")
+    private String staffName;
 
     //分页
     @TableField(exist = false)
@@ -150,9 +156,6 @@ public class InterviewVo implements Serializable {
     //结束
     @TableField(exist = false)
     private Date endTime;
-
-
-
 
 
 }

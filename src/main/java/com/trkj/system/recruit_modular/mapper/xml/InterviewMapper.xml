@@ -9,7 +9,6 @@
         <result column="INTERVIEW_TIME" property="interviewTime" />
         <result column="INTERVIEW_EVALUATE" property="interviewEvaluate" />
         <result column="STAFF_ID" property="staffId" />
-        <result column="INTERVIEW_QIANDAO" property="interviewQiandao" />
         <result column="CREATED_TIME" property="createdTime" />
         <result column="UPDATED_TIME" property="updatedTime" />
         <result column="REVISION" property="revision" />
@@ -18,7 +17,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        INTERVIEW_ID, RESUME_ID, INTERVIEW_TIME, INTERVIEW_EVALUATE, STAFF_ID, INTERVIEW_QIANDAO, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+        INTERVIEW_ID, RESUME_ID, INTERVIEW_TIME, INTERVIEW_EVALUATE, STAFF_ID, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
     </sql>
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.trkj.system.staff_management.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,14 @@ import java.util.Date;
 @AllArgsConstructor
 @Accessors(chain = true)  /** 链式写法 */
 public class StaffInductionEntity {
+    private Long RESUMEID;
+    /** 简历编号 */
+
     private String RESUMENAME;
     /** 员工姓名 */
+
+    private String RESUMEPHOTO;
+    /** 照片 */
 
     private String RESUMESEX;
     /** 员工性别 */
@@ -45,7 +52,12 @@ public class StaffInductionEntity {
     private Long RESUMEZT;
     /** 入职状态 */
 
+    private String RESUMEHY;
+    /** 婚姻状态 */
+
     private Long CurrentPage;
 
     private Long Pagesize;
 }
+
+

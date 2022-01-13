@@ -3,9 +3,7 @@ package com.trkj.system.recruit_modular.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.system.recruit_modular.entity.RecruitmentPlanVo;
 import com.trkj.system.recruit_modular.entity.ResumeVo;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.trkj.system.recruit_modular.mapper.ResumeMapperVo;
 import com.trkj.system.recruit_modular.service.ResumeServiceVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @since 2021-12-31
  */
 @Service
-public class ResumeServiceImplVo extends ServiceImpl<ResumeMapperVo, ResumeVo> implements ResumeServiceVo {
+public class ResumeServiceImplVo implements ResumeServiceVo {
 
     @Autowired
     private ResumeMapperVo resumeMapperVo;
@@ -38,17 +36,15 @@ public class ResumeServiceImplVo extends ServiceImpl<ResumeMapperVo, ResumeVo> i
             //模糊查询简历中学历的数据
             wrapper.like("R.RESUME_EDUCATION", resumeVo.getResumeEducation());
         }
-        if (resumeVo.getStartTime() != null || resumeVo.getEndTime() != null) {
+        if (resumeVo.getStartTime()!=null && resumeVo.getEndTime()!= null) {
             //模糊查询投稿时间范围
             wrapper.between("R.TouJ_TIME", resumeVo.getStartTime(), resumeVo.getEndTime());
         }
-        if (resumeVo.getResumeName() != null || !resumeVo.getResumeName().equals("")) {
-            //模糊查询投简人简名称
-            wrapper.like("R.RESUME_NAME", resumeVo.getResumeName());
+        if (resumeVo.getResumeName()!=null && !resumeVo.getResumeName().equals("")){
+            wrapper.like("R.RESUME_NAME",resumeVo.getResumeName());
         }
-
         //逻辑删除查询
-        wrapper.like("R.IS_DELETED", 0);
+        wrapper.eq("R.IS_DELETED", 0).orderByDesc("RESUME_ID");
         return resumeMapperVo.selectAllres(page, wrapper);
     }
 
@@ -57,7 +53,7 @@ public class ResumeServiceImplVo extends ServiceImpl<ResumeMapperVo, ResumeVo> i
     public IPage<ResumeVo> findByidresum(ResumeVo resumeVo) {
         Page<ResumeVo> page1 = new Page<>(resumeVo.getCurrenPage(), resumeVo.getPagesize());
         QueryWrapper<ResumeVo> queryWrapper = new QueryWrapper<>();
-        if (resumeVo.getResumeName() != null || !resumeVo.getResumeName().equals("")) {
+        if (resumeVo.getResumeName() != null && !resumeVo.getResumeName().equals("")) {
             //模糊查询投简人简名称
             queryWrapper.like("R.RESUME_NAME", resumeVo.getResumeName());
         }
@@ -67,9 +63,10 @@ public class ResumeServiceImplVo extends ServiceImpl<ResumeMapperVo, ResumeVo> i
             queryWrapper.like("R.RESUME_EDUCATION", resumeVo.getResumeEducation());
         }
 
-        if (resumeVo.getResumeZt() != null || !resumeVo.getResumeZt().equals("")) {
+        if (resumeVo.getResumeZt() != null && !resumeVo.getResumeZt().equals("")) {
             queryWrapper.like("R.RESUME_ZT", resumeVo.getResumeZt());
         }
+
 
 
         queryWrapper.eq("R.RECRUITMENT_PLAN_ID", resumeVo.getRecruitmentPlanId());
@@ -83,7 +80,7 @@ public class ResumeServiceImplVo extends ServiceImpl<ResumeMapperVo, ResumeVo> i
     public IPage<ResumeVo> findAllhouxr(ResumeVo resumeVo) {
         Page<ResumeVo> page2 = new Page<>(resumeVo.getCurrenPage(), resumeVo.getPagesize());
         QueryWrapper<ResumeVo> wrapper1 = new QueryWrapper<>();
-        if (resumeVo.getStartTime() != null || resumeVo.getEndTime() != null) {
+        if (resumeVo.getStartTime() != null && resumeVo.getEndTime() != null) {
             //模糊查询投稿时间范围
             wrapper1.between("R.TouJ_TIME", resumeVo.getStartTime(), resumeVo.getEndTime());
         }
@@ -95,43 +92,33 @@ public class ResumeServiceImplVo extends ServiceImpl<ResumeMapperVo, ResumeVo> i
             //模糊查询简历中学历的数据
             wrapper1.like("R.RESUME_EDUCATION", resumeVo.getResumeEducation());
         }
-        if (resumeVo.getResumeName() != null || !resumeVo.getResumeName().equals("")) {
+        if (resumeVo.getResumeName() != null && !resumeVo.getResumeName().equals("")) {
             //模糊查询投简人简名称
             wrapper1.like("R.RESUME_NAME", resumeVo.getResumeName());
         }
-
+        if (resumeVo.getDeptName()!=null && resumeVo.getDeptName().equals("")){
+            wrapper1.like("D.DEPT_NAME",resumeVo.getDeptName());
+        }
         //状态：候选人查询
-        wrapper1.like("R.RESUME_ZT", 1);
+        wrapper1.eq("R.RESUME_ZT", 1);
         //逻辑删除查询
-        wrapper1.like("R.IS_DELETED", 0);
+        wrapper1.eq("R.IS_DELETED", 0).orderByDesc("RESUME_ID");
         return resumeMapperVo.selectAllhxr(page2, wrapper1);
     }
 
     //简历列表分页查询：新简历
     @Override
     public IPage<ResumeVo> findAllnew(ResumeVo resumeVo) {
-        Page<ResumeVo> pagenew = new Page<>(resumeVo.getCurrenPage(), resumeVo.getPagesize());
+        Page<ResumeVo> pagenew = new Page<>(resumeVo.getCurrenPage(),resumeVo.getPagesize());
         QueryWrapper<ResumeVo> wrappernew = new QueryWrapper<>();
-        if (resumeVo.getStartTime() != null || resumeVo.getEndTime() != null) {
-            //模糊查询投稿时间范围
-            wrappernew.between("R.TouJ_TIME", resumeVo.getStartTime(), resumeVo.getEndTime());
-        }
-        if (resumeVo.getPostName() != null && !resumeVo.getPostName().equals("")) {
-            //模糊查询简历中投递职位的数据
-            wrappernew.like("P.POST_NAME", resumeVo.getPostName());
-        }
-        if (resumeVo.getResumeEducation() != null && !resumeVo.getResumeEducation().equals("")) {
-            //模糊查询简历中学历的数据
-            wrappernew.like("R.RESUME_EDUCATION", resumeVo.getResumeEducation());
-        }
-        if (resumeVo.getResumeName() != null || !resumeVo.getResumeName().equals("")) {
+        if (resumeVo.getResumeName() != null && !resumeVo.getResumeName().equals("")) {
             //模糊查询投简人简名称
             wrappernew.like("R.RESUME_NAME", resumeVo.getResumeName());
         }
         //状态：新简历查询
-        wrappernew.like("R.RESUME_ZT", 0);
+        wrappernew.eq("R.RESUME_ZT", 0);
         //逻辑删除查询
-        wrappernew.like("R.IS_DELETED", 0);
+        wrappernew.eq("R.IS_DELETED", 0).orderByDesc("RESUME_ID");
         return resumeMapperVo.selectAllnew(pagenew, wrappernew);
 
     }
@@ -141,7 +128,7 @@ public class ResumeServiceImplVo extends ServiceImpl<ResumeMapperVo, ResumeVo> i
     public IPage<ResumeVo> findAlltt(ResumeVo resumeVo) {
         Page<ResumeVo> pagett = new Page<>(resumeVo.getCurrenPage(), resumeVo.getPagesize());
         QueryWrapper<ResumeVo> wrappertt = new QueryWrapper<>();
-        if (resumeVo.getStartTime() != null || resumeVo.getEndTime() != null) {
+        if (resumeVo.getStartTime() != null && resumeVo.getEndTime() != null) {
             //模糊查询投稿时间范围
             wrappertt.between("R.TouJ_TIME", resumeVo.getStartTime(), resumeVo.getEndTime());
         }
@@ -153,30 +140,22 @@ public class ResumeServiceImplVo extends ServiceImpl<ResumeMapperVo, ResumeVo> i
             //模糊查询简历中学历的数据
             wrappertt.like("R.RESUME_EDUCATION", resumeVo.getResumeEducation());
         }
-        if (resumeVo.getResumeName() != null || !resumeVo.getResumeName().equals("")) {
+        if (resumeVo.getResumeName()!=null && !resumeVo.getResumeName().equals("")) {
             //模糊查询投简人简名称
             wrappertt.like("R.RESUME_NAME", resumeVo.getResumeName());
         }
-
+        if (resumeVo.getDeptName()!=null && !resumeVo.getDeptName().equals("")){
+            wrappertt.like("D.DEPT_NAME",resumeVo.getDeptName());
+        }
         //状态：新简历查询
-        wrappertt.like("R.RESUME_ZT", 3);
+        wrappertt.eq("R.RESUME_ZT", 3);
         //逻辑删除查询
-        wrappertt.like("R.IS_DELETED", 0);
+        wrappertt.eq("R.IS_DELETED", 0).orderByDesc("RESUME_ID");
         return resumeMapperVo.findAlleliminate(pagett, wrappertt);
 
     }
 
-    //简历列表分页查询：邀约
-    @Override
-    public IPage<ResumeVo> findAllInvite(ResumeVo resumeVo) {
-        Page<ResumeVo> pageyy = new Page<>(resumeVo.getCurrenPage(), resumeVo.getPagesize());
-        QueryWrapper<ResumeVo> wrapperyy = new QueryWrapper<>();
-        //状态：邀约简历查询
-        wrapperyy.like("R.RESUME_ZT", 2);
-        //逻辑删除查询
-        wrapperyy.like("R.IS_DELETED", 0);
-        return resumeMapperVo.findAlleInvite(pageyy, wrapperyy);
-    }
+
 
 
 }

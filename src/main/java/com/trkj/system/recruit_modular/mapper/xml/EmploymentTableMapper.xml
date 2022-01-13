@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.system.recruit_modular.mapper.EmploymentTableMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.system.recruit_modular.entity.EmploymentTable">
+        <id column="EMPLOYMENT_ID" property="employmentId" />
+        <result column="RESUME_ID" property="resumeId" />
+        <result column="HIREDATE" property="hiredate" />
+        <result column="PROBATION" property="probation" />
+        <result column="PROBATIONARY" property="probationary" />
+        <result column="POSITIVE_MONTHLY" property="positiveMonthly" />
+        <result column="POSITIVE_REMARKS" property="positiveRemarks" />
+        <result column="WAIVE_REASON" property="waiveReason" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        EMPLOYMENT_ID, RESUME_ID, HIREDATE, PROBATION, PROBATIONARY, POSITIVE_MONTHLY, POSITIVE_REMARKS, WAIVE_REASON, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+    </sql>
+
+</mapper>

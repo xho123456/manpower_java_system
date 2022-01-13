@@ -29,7 +29,7 @@ public class Dept implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "部门编号")
-    @TableId("DEPT_ID")
+    @TableId(value = "DEPT_ID",type = IdType.INPUT)
     private Integer deptId;
 
     @ApiModelProperty(value = "状态;0：启用  1：禁用")
@@ -51,14 +51,17 @@ public class Dept implements Serializable {
     @ApiModelProperty(value = "修改时间")
     @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
+
     @Version
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
+
     @TableLogic
     @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
+
 
 
 }

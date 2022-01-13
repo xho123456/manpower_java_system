@@ -240,5 +240,11 @@ public class StaffServiceimpl implements StaffService {
         return mapper.findTransferStaffById(page,queryWrapper);
     }
 
+    @Override
+    public int updateResume(StaffGiveupInductionEntity resume) {
+        System.out.println("=======================================================");
+        return mapper.updateResume(new QueryWrapper<StaffGiveupInductionEntity>().eq("RESUME_ID",resume.getRESUMEID()));
+    }
+
 
 }

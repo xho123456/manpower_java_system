@@ -1,5 +1,6 @@
 package com.trkj.system.recruit_modular.service.impl;
 
+import com.trkj.system.recruit_modular.entity.InterviewVo;
 import com.trkj.system.recruit_modular.entity.Resume;
 import com.trkj.system.recruit_modular.mapper.ResumeMapper;
 import com.trkj.system.recruit_modular.service.ResumeService;
@@ -35,4 +36,22 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
     public int updateremarks(Resume resume) {
         return mapper.updateById(resume);
     }
+    //转入淘汰库
+    @Override
+    public int updateeliminate(Resume resume) {
+        return mapper.updateById(resume);
+    }
+
+    //修改: 设置候选人、备注信息
+    @Override
+    public int updatehb(Resume resume) {
+        return mapper.updateById(resume);
+    }
+
+    //添加简历
+    @Override
+    public int addResume(Resume resume) {
+        return mapper.insert(resume);
+    }
+
 }
