@@ -1,10 +1,7 @@
 package com.trkj.system.recruit_modular.controller;
 
 
-import com.trkj.system.recruit_modular.entity.RecruitmentPlan;
-import com.trkj.system.recruit_modular.entity.RecruitmentPlanVo;
-import com.trkj.system.recruit_modular.entity.Resume;
-import com.trkj.system.recruit_modular.entity.ResumeVo;
+import com.trkj.system.recruit_modular.entity.*;
 import com.trkj.system.recruit_modular.service.ResumeService;
 import com.trkj.system.recruit_modular.service.ResumeServiceVo;
 import com.trkj.system.vo.AjaxResponse;
@@ -55,12 +52,6 @@ public class ResumeController {
         return AjaxResponse.success(resumeServiceVo.findAlltt(resumeVo));
     }
 
-    //简历列表分页查询：淘汰库
-    @PostMapping("/resume/findselectAllyy")
-    public AjaxResponse findselectAllyy(@RequestBody ResumeVo resumeVo){
-        return AjaxResponse.success(resumeServiceVo.findAllInvite(resumeVo));
-    }
-
     //招聘个人简历详情查询
     @GetMapping("/resume/findByidAll")
     public AjaxResponse findByid(@RequestParam("id")Long id){
@@ -81,7 +72,7 @@ public class ResumeController {
         return AjaxResponse.success(s);
     }
 
-    //关闭计划修改状态
+    //简历信息添加备注
     @PostMapping("/resume/updatebz")
     public AjaxResponse updatebz(@RequestBody Resume resume) {
         if (service.updateremarks(resume)>=1){
@@ -90,5 +81,38 @@ public class ResumeController {
             return AjaxResponse.success("失败");
         }
     }
+
+    //简历信息转入淘汰库
+    @PostMapping("/resume/zeliminate")
+    public AjaxResponse zeliminate(@RequestBody Resume resume) {
+        if (service.updateeliminate(resume)>=1){
+            return AjaxResponse.success("成功");
+        }else{
+            return AjaxResponse.success("失败");
+        }
+    }
+
+    //修改: 设置候选人、备注信息
+    @PostMapping("/resume/updatehz")
+    public AjaxResponse updatehz(@RequestBody Resume resume) {
+        if (service.updatehb(resume)>=1){
+            return AjaxResponse.success("成功");
+        }else{
+            return AjaxResponse.success("失败");
+        }
+    }
+
+    //添加简历
+    @PostMapping("/resume/addresumes")
+    public AjaxResponse addResumed(@RequestBody Resume resume){
+        if (service.addResume(resume)>=1){
+            return AjaxResponse.success("成功");
+        }else {
+            return AjaxResponse.success("失败");
+        }
+
+    }
+
+
 }
 

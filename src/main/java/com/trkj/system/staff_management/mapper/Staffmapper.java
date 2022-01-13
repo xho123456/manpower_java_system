@@ -9,8 +9,8 @@ import com.trkj.system.staff_management.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
-import java.util.List;
 
 @Mapper
 public interface Staffmapper extends BaseMapper<StaffEntity> {
@@ -61,7 +61,8 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
     /**
      * 查看所有待入职的员工
      */
-    @Select("SELECT r.RESUME_ZT,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION,r.RESUME_PHONE,r.RESUME_MAILBOX," +
+    @Select("SELECT r.RESUME_ID,r.RESUME_PHOTO,r.RESUME_HY, r.RESUME_ZT,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION," +
+            "r.RESUME_PHONE,r.RESUME_MAILBOX," +
             "r.RESUME_BIRTHDAY,r.RESUME_RESIDENCE,r.RESUME_POLITICAL_OUTLOOK,d.DEPT_NAME,dp.POST_NAME " +
             "FROM EMPLOYMENT_TABLE et LEFT JOIN RESUME r on et.RESUME_ID=r.RESUME_ID LEFT JOIN RECRUITMENT_PLAN rp " +
             "on rp.RECRUITMENT_PLAN_ID=r.RECRUITMENT_PLAN_ID LEFT JOIN DEPT d on d.dept_id=rp.dept_id LEFT JOIN " +
@@ -157,7 +158,7 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
     /**
      * 根据条件查询待入职的员工
      */
-    @Select("SELECT r.RESUME_ZT,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION,r.RESUME_PHONE,r.RESUME_MAILBOX," +
+    @Select("SELECT r.RESUME_ID,r.RESUME_HY,r.RESUME_PHOTO,r.RESUME_ZT,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION,r.RESUME_PHONE,r.RESUME_MAILBOX," +
             "r.RESUME_BIRTHDAY,r.RESUME_RESIDENCE,r.RESUME_POLITICAL_OUTLOOK,d.DEPT_NAME,dp.POST_NAME " +
             "FROM EMPLOYMENT_TABLE et LEFT JOIN RESUME r on et.RESUME_ID=r.RESUME_ID LEFT JOIN RECRUITMENT_PLAN rp " +
             "on rp.RECRUITMENT_PLAN_ID=r.RECRUITMENT_PLAN_ID LEFT JOIN DEPT d on d.dept_id=rp.dept_id LEFT JOIN " +
@@ -190,9 +191,14 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
      */
     @Select("select t.TRANSFER_TYPE,t.CREATED_DEPT_NAME,t.TRANSFER_STATE,t.UPDATED_DEPT_NAME,t.transfer_rawpost_NAME," +
             "t.transfer_afterpost_NAME,s.staff_id,s.staff_name from TRANSFER t left join staff s on t.staff_id=s.staff_id" +
-            " ${ew.customSqlSegment")
+            " ${ew.customSqlSegment}")
 
     IPage<StaffTransferEntity> findTransferStaffById(Page<StaffTransferEntity> staffEntityPage,@Param(Constants.WRAPPER) QueryWrapper<StaffTransferEntity> queryWrapper);
 
 
+    /**
+     * 员工放弃入职
+     */
+    @Update("update RESUME set RESUME_ZT=4  ${ew.customSqlSegment}")
+    int updateResume(@Param(Constants.WRAPPER) QueryWrapper<StaffGiveupInductionEntity> queryWrapper);
 }
