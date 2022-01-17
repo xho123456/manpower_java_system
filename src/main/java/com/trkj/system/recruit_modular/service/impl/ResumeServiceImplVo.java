@@ -103,7 +103,7 @@ public class ResumeServiceImplVo implements ResumeServiceVo {
         wrapper1.eq("R.RESUME_ZT", 1);
         //逻辑删除查询
         wrapper1.eq("R.IS_DELETED", 0).orderByDesc("RESUME_ID");
-        return resumeMapperVo.selectAllhxr(page2, wrapper1);
+        return resumeMapperVo.selectAllres(page2, wrapper1);
     }
 
     //简历列表分页查询：新简历
@@ -119,7 +119,7 @@ public class ResumeServiceImplVo implements ResumeServiceVo {
         wrappernew.eq("R.RESUME_ZT", 0);
         //逻辑删除查询
         wrappernew.eq("R.IS_DELETED", 0).orderByDesc("RESUME_ID");
-        return resumeMapperVo.selectAllnew(pagenew, wrappernew);
+        return resumeMapperVo.selectAllres(pagenew, wrappernew);
 
     }
 
@@ -151,7 +151,7 @@ public class ResumeServiceImplVo implements ResumeServiceVo {
         wrappertt.eq("R.RESUME_ZT", 3);
         //逻辑删除查询
         wrappertt.eq("R.IS_DELETED", 0).orderByDesc("RESUME_ID");
-        return resumeMapperVo.findAlleliminate(pagett, wrappertt);
+        return resumeMapperVo.selectAllres(pagett, wrappertt);
 
     }
 

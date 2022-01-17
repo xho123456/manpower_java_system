@@ -54,4 +54,9 @@ public class RecruitmentPlanServiceImpl implements RecruitmentPlanService {
         wrappers.eq("IS_DELETED",0);
         return recruitmentPlanMapper.findByids(wrappers);
     }
+
+    @Override
+    public int addplan(RecruitmentPlan recruitmentPlan) {
+        return recruitmentPlanMapper.insert(recruitmentPlan);
+    }
 }

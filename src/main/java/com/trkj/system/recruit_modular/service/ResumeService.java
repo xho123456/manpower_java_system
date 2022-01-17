@@ -21,11 +21,12 @@ public interface ResumeService extends IService<Resume> {
     int updateremarks(Resume resume);
     //转入淘汰库
     int updateeliminate(Resume resume);
-
     //修改: 设置候选人、备注信息
     int updatehb(Resume resume);
-
     //添加简历
     int addResume(Resume resume);
+
+    //招聘计划：简历数量统计
+    int planhxr(Resume resume);
 
 }

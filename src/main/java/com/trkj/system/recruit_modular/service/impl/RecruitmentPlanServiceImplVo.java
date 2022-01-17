@@ -30,11 +30,6 @@ public class RecruitmentPlanServiceImplVo implements RecruitmentPlanServiceVo {
         Page<RecruitmentPlanVo> page = new Page<>(recruitmentPlanVo.getCurrenPage(),recruitmentPlanVo.getPagesize());
         QueryWrapper<RecruitmentPlanVo> queryWrapper = new QueryWrapper<>();
 
-        if (recruitmentPlanVo.getPostName()!=null && !recruitmentPlanVo.getPostName().equals("")){
-            //招聘计划投递职位模糊查询
-            queryWrapper.like("P.POST_NAME",recruitmentPlanVo.getPostName());
-        }
-
         if (recruitmentPlanVo.getRecruitmentZt()!=null && !recruitmentPlanVo.getRecruitmentZt().equals("")){
             //招聘计划状态模糊查询数据
             queryWrapper.like("R.RECRUITMENT_ZT",recruitmentPlanVo.getRecruitmentZt());
@@ -46,12 +41,10 @@ public class RecruitmentPlanServiceImplVo implements RecruitmentPlanServiceVo {
         }
 
         //逻辑删除查询
-        queryWrapper.eq("R.IS_DELETED",0);
+        queryWrapper.eq("R.IS_DELETED",0).orderByDesc("R.RECRUITMENT_PLAN_ID");
 
         return recruitmentPlanMappervo.selectAllRecruitment(page,queryWrapper);
 
     }
-
-
 
 }

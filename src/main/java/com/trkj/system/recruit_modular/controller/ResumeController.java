@@ -92,7 +92,7 @@ public class ResumeController {
         }
     }
 
-    //修改: 设置候选人、备注信息
+    //简历信息修改修改：通用
     @PostMapping("/resume/updatehz")
     public AjaxResponse updatehz(@RequestBody Resume resume) {
         if (service.updatehb(resume)>=1){
@@ -114,5 +114,11 @@ public class ResumeController {
     }
 
 
+    //招聘计划详情页面人数统计
+    @PostMapping("/plan/sxhxr")
+    public AjaxResponse selectplanhxr(@RequestBody Resume resume){
+      return AjaxResponse.success(service.planhxr(resume));
+
+    }
 }
 
