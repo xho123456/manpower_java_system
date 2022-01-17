@@ -167,7 +167,6 @@ public class NoticeVoController {
         Staffs staffs1=noticeVoService.selectStaffs(staffs);
             System.out.println("==================="+staffs1+"lkasdjflkasdjflkasd");
         if(staffs1.getStaffPass().equals(staffs.getStaffPass())){
-            System.out.println("77777777777777777777777777777777");
             return AjaxResponse.success("成功");
         }else {
             return AjaxResponse.success("失败");

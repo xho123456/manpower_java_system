@@ -12,7 +12,9 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface FixedSalaryMapper  extends BaseMapper<FixedSalary> {
-    @Select("select p.DEPT_POST_ID, d.DEPT_ID, s.STAFF_NAME,s.STAFF_HIREDATE,d.DEPT_NAME,p.POST_NAME,s.STAFF_STATE, f.* from FIXEDWAGE f INNER JOIN STAFF s on f.STAFF_ID=s.STAFF_ID INNER JOIN DEPT d on s.STAFF_ID=d.STAFF_id INNER JOIN DEPT_POST p on  d.DEPT_ID=p.DEPT_ID ${ew.customSqlSegment}")
+    @Select("select p.DEPT_POST_ID, d.DEPT_ID, s.STAFF_NAME,s.STAFF_HIREDATE,d.DEPT_NAME,p.POST_NAME,s.STAFF_STATE," +
+            " f.* from FIXEDWAGE f INNER JOIN STAFF s on f.STAFF_ID=s.STAFF_ID INNER JOIN DEPT d " +
+            "on s.STAFF_ID=d.STAFF_id INNER JOIN DEPT_POST p on  s.DEPT_POST_ID=p.DEPT_POST_ID ${ew.customSqlSegment}")
     IPage<FixedSalary>selectPaer2(Page<FixedSalary> fixedSalary, @Param(Constants.WRAPPER)QueryWrapper<FixedSalary>queryWrapper);
 
 }

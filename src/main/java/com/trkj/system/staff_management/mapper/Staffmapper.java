@@ -63,7 +63,7 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
             "r.RESUME_PHONE,r.RESUME_MAILBOX,r.RESUME_BIRTHDAY,r.RESUME_RESIDENCE,r.RESUME_POLITICAL_OUTLOOK,d.DEPT_NAME,dp.POST_NAME " +
             "FROM EMPLOYMENT_TABLE et LEFT JOIN RESUME r on et.RESUME_ID=r.RESUME_ID LEFT JOIN RECRUITMENT_PLAN rp " +
             "on rp.RECRUITMENT_PLAN_ID=r.RECRUITMENT_PLAN_ID LEFT JOIN DEPT d on d.dept_id=rp.dept_id LEFT JOIN " +
-            "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where r.RESUME_ZT=6")
+            "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where r.RESUME_ZT=8")
     IPage<StaffInductionEntity> findInductionStaff(Page<StaffInductionEntity> page);
 
     /**
@@ -73,7 +73,7 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
             "r.RESUME_BIRTHDAY,r.RESUME_RESIDENCE,r.RESUME_POLITICAL_OUTLOOK,d.DEPT_NAME,dp.POST_NAME " +
             "FROM EMPLOYMENT_TABLE et LEFT JOIN RESUME r on et.RESUME_ID=r.RESUME_ID LEFT JOIN RECRUITMENT_PLAN rp " +
             "on rp.RECRUITMENT_PLAN_ID=r.RECRUITMENT_PLAN_ID LEFT JOIN DEPT d on d.dept_id=rp.dept_id LEFT JOIN " +
-            "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where r.RESUME_ZT=4")
+            "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where r.RESUME_ZT=11")
     IPage<StaffGiveupInductionEntity> findgiveupInductionStaff(Page<StaffGiveupInductionEntity> page);
 
     /**
