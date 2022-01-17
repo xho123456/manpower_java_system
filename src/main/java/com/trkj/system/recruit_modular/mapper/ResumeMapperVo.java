@@ -32,30 +32,6 @@ public interface ResumeMapperVo extends BaseMapper<ResumeVo> {
           "on Z.DEPT_POST_ID = P.DEPT_POST_ID ${ew.customSqlSegment}")
   IPage<ResumeVo> findByidAll(Page<ResumeVo> page, @Param(Constants.WRAPPER)QueryWrapper queryWrapper);
 
-  //简历列表分页查询：候选人
-  @Select("\n" +
-          "select  R.*,Z.RECRUITMENT_PLAN_NAME,P.POST_NAME,D.DEPT_NAME  from\n" +
-          "          RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID\n" +
-          "          LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID LEFT JOIN DEPT D on\n" +
-          "\t\t\t\t\tZ.DEPT_ID = D.DEPT_ID ${ew.customSqlSegment}")
-  IPage<ResumeVo> selectAllhxr(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
-
-  //简历列表分页查询：新简历
-  @Select("\n" +
-          "select  R.*,Z.RECRUITMENT_PLAN_NAME,P.POST_NAME,D.DEPT_NAME  from\n" +
-          "          RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID\n" +
-          "          LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID LEFT JOIN DEPT D on\n" +
-          "\t\t\t\t\tZ.DEPT_ID = D.DEPT_ID ${ew.customSqlSegment}")
-  IPage<ResumeVo> selectAllnew(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
-
-  //简历列表分页查询：淘汰库
-  @Select("\n" +
-          "select  R.*,Z.RECRUITMENT_PLAN_NAME,P.POST_NAME,D.DEPT_NAME from\n" +
-          "          RESUME R LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID\n" +
-          "          LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID LEFT JOIN DEPT D on\n" +
-          "\t\t\t\t\tZ.DEPT_ID = D.DEPT_ID ${ew.customSqlSegment}")
-  IPage<ResumeVo> findAlleliminate(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
-
 
 
 }

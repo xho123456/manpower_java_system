@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/dept")
 public class DeptsumController {
-
+    
     @Autowired
     private DeptsumService service;
 

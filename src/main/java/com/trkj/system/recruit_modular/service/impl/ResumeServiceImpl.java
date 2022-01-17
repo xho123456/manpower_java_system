@@ -1,5 +1,6 @@
 package com.trkj.system.recruit_modular.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.trkj.system.recruit_modular.entity.InterviewVo;
 import com.trkj.system.recruit_modular.entity.Resume;
 import com.trkj.system.recruit_modular.mapper.ResumeMapper;
@@ -52,6 +53,15 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
     @Override
     public int addResume(Resume resume) {
         return mapper.insert(resume);
+    }
+
+    @Override
+    public int planhxr(Resume resume) {
+        QueryWrapper<Resume> planwrapper = new QueryWrapper<>();
+        planwrapper.eq("RECRUITMENT_PLAN_ID",resume.getRecruitmentPlanId());
+        planwrapper.eq("RESUME_ZT",resume.getResumeZt());
+        planwrapper.eq("IS_DELETED",0);
+        return mapper.planhxr(planwrapper);
     }
 
 }

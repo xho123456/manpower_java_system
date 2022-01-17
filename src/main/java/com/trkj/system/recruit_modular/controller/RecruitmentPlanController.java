@@ -3,6 +3,7 @@ package com.trkj.system.recruit_modular.controller;
 
 import com.trkj.system.recruit_modular.entity.RecruitmentPlan;
 import com.trkj.system.recruit_modular.entity.RecruitmentPlanVo;
+import com.trkj.system.recruit_modular.entity.Resume;
 import com.trkj.system.recruit_modular.entity.ResumeVo;
 import com.trkj.system.recruit_modular.service.RecruitmentPlanService;
 import com.trkj.system.recruit_modular.service.RecruitmentPlanServiceVo;
@@ -80,6 +81,19 @@ public class RecruitmentPlanController {
         return AjaxResponse.success(recruitmentPlanService.findByidall(recruitmentPlan));
     }
 
+    /**
+     * 新增招聘计划
+     */
+    //添加简历
+    @PostMapping("/recruitment/addplans")
+    public AjaxResponse addResumed(@RequestBody RecruitmentPlan recruitmentPlan){
+        if (recruitmentPlanService.addplan(recruitmentPlan)>=1){
+            return AjaxResponse.success("成功");
+        }else {
+            return AjaxResponse.success("失败");
+        }
+
+    }
 
 
 }
