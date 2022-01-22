@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class NoticeVoServicelmpl implements NoticeVoService {
@@ -123,9 +124,9 @@ public class NoticeVoServicelmpl implements NoticeVoService {
         int delete= noticeDeptVoMapper.deleteNoticeDept(new QueryWrapper<NoticeDeptVo>().eq("NOTICE_ID" ,id ));
         if(delete>0){
            int deletStaff=noticeStaffMapper.deleteNoticeStaff(new QueryWrapper<NoticeStaff>().eq("NOTICE_ID",id));
-           if(deletStaff>0){
-               noticeMapper.deleteById(id);
-           }
+               if(deletStaff>0){
+                   noticeMapper.deleteById(id);
+               }
         }
         return delete;
     }
@@ -162,4 +163,69 @@ public class NoticeVoServicelmpl implements NoticeVoService {
         }
         return notice;
     }
+
+
+    /**
+     * 根据公告id查询公告部门id
+     * @return
+     */
+    @Override
+    public List<NoticeDept> selectNoticeDeptID(NoticeDept noticeDept) {
+        QueryWrapper<NoticeDept> wrapper = new QueryWrapper<>();
+        wrapper.eq("NOTICE_ID",noticeDept.getNoticeId());
+        wrapper.eq("IS_DELETED",0);
+        System.out.println(noticeDept.getNoticeId()+"111111111111111111111111");
+        return noticeDeptMapper.selectNoticeDeptID1(wrapper);
+    }
+    /**
+     * 根据部门id查询部门名称
+     * @param
+     */
+    @Override
+    public List<Staffs> selectStaffId(Long deptId) {
+        QueryWrapper<Staffs> wrapper = new QueryWrapper<>();
+        wrapper.eq("DEPT_ID",deptId);
+        wrapper.eq("IS_DELETED",0);
+        return staffsMapper.selectStaffId(wrapper);
+    }
+    /**
+     * 通过员工id查询公告员工表已读
+     */
+    @Override
+    public List<NoticeStaff> selectNotice(Long staffId) {
+        QueryWrapper<NoticeStaff> wrapper=new QueryWrapper<>();
+        wrapper.eq("STAFF_ID",staffId);
+        wrapper.eq("NOTICE_STATE",0);
+        wrapper.eq("IS_DELETED",0);
+        return noticeStaffMapper.selectNotice(wrapper);
+    }
+
+    /**
+     * 通过员工查询员工数据
+     */
+    @Override
+    public List<Staffs> selectStaff(Long staffId) {
+        QueryWrapper<Staffs> wrapper=new QueryWrapper<>();
+        wrapper.eq("STAFF_ID",staffId);
+        wrapper.eq("IS_DELETED",0);
+        return staffsMapper.selectStaff(wrapper);
+    }
+
+    @Override
+    public List<NoticeStaff> selectUnread(Long staffId) {
+        QueryWrapper<NoticeStaff> wrapper=new QueryWrapper<>();
+        wrapper.eq("STAFF_ID",staffId);
+        wrapper.eq("NOTICE_STATE",1);
+        wrapper.eq("IS_DELETED",0);
+        return noticeStaffMapper.selectNotice(wrapper);
+    }
+
+    @Override
+    public Staffs selectStaffs(Staffs staffs) {
+        return  staffsMapper.selectStaffs(new QueryWrapper<Staffs>().eq("STAFF_PHONE",staffs.getStaffPhone()));
+    }
+
+
+
+
 }

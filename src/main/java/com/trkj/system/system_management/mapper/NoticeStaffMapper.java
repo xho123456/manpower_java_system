@@ -9,6 +9,7 @@ import com.trkj.system.system_management.entity.Staffs;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,5 +40,20 @@ public interface NoticeStaffMapper extends BaseMapper<NoticeStaff> {
     @Delete("DELETE FROM NOTICE_STAFF ${ew.customSqlSegment}")
     int deleteNoticeStaffList(@Param(Constants.WRAPPER) QueryWrapper<NoticeStaff> queryWrapper);
 
+    /**
+     * 通过员工id查询公告员工表已读
+     * @param queryWrapper
+     * @return
+     */
+    @Select("select * from NOTICE_STAFF  ${ew.customSqlSegment}")
+    List<NoticeStaff> selectNotice(@Param(Constants.WRAPPER) QueryWrapper<NoticeStaff> queryWrapper);
+
+    /**
+     * 通过员工id查询公告员工表未读
+     * @param queryWrapper
+     * @return
+     */
+    @Select("select * from NOTICE_STAFF  ${ew.customSqlSegment}")
+    List<NoticeStaff> selectUnread (@Param(Constants.WRAPPER) QueryWrapper<NoticeStaff> queryWrapper);
 
 }
