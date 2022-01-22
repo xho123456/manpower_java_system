@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.trkj.system.recruit_modular.entity.Dept;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -33,6 +35,17 @@ public class Depts implements Serializable {
     @ApiModelProperty(value = "部门编号")
     @TableId("DEPT_ID")
         private Long deptId;
+
+    @ApiModelProperty(value = "父级菜单")
+    @TableId("MENU_PID")
+    private Long menuPid;
+
+    @ApiModelProperty(value = "是否有叶子 0:有 1:没有")
+    @TableId("MENU_LEAF")
+    private Long menuLeaf;
+
+    @TableField(exist = false)
+    private List<Depts> deptlist;
 
     @ApiModelProperty(value = "状态;0：启用  1：禁用")
     @TableField("DEPT_STATE")
