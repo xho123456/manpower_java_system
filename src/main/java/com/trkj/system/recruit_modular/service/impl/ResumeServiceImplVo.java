@@ -75,7 +75,7 @@ public class ResumeServiceImplVo implements ResumeServiceVo {
         return resumeMapperVo.findByidAll(page1, queryWrapper);
     }
 
-    //候选人简历列表分页查询
+    //简历列表分页查询:候选人
     @Override
     public IPage<ResumeVo> findAllhouxr(ResumeVo resumeVo) {
         Page<ResumeVo> page2 = new Page<>(resumeVo.getCurrenPage(), resumeVo.getPagesize());
@@ -123,7 +123,7 @@ public class ResumeServiceImplVo implements ResumeServiceVo {
 
     }
 
-    //简历列表分页查询：淘汰库
+    //简历列表分页查询：储备人才
     @Override
     public IPage<ResumeVo> findAlltt(ResumeVo resumeVo) {
         Page<ResumeVo> pagett = new Page<>(resumeVo.getCurrenPage(), resumeVo.getPagesize());
