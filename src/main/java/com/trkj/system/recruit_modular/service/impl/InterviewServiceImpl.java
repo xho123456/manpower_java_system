@@ -3,7 +3,9 @@ package com.trkj.system.recruit_modular.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.system.recruit_modular.entity.Evaluate;
 import com.trkj.system.recruit_modular.entity.InterviewVo;
+import com.trkj.system.recruit_modular.mapper.EvaluateMapper;
 import com.trkj.system.recruit_modular.mapper.InterviewMapperVo;
 import com.trkj.system.recruit_modular.service.InterviewServiceVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class InterviewServiceImpl implements InterviewServiceVo {
 
     @Autowired
     private InterviewMapperVo mapperVo;
+
+    @Autowired
+    private EvaluateMapper evaluateMapper;
 
     /**
      * 简历列表分页查询：已邀约
@@ -88,7 +93,6 @@ public class InterviewServiceImpl implements InterviewServiceVo {
         wrapper.eq("R.IS_DELETED", 0).orderByDesc("INTERVIEW_ID");
         return mapperVo.findAlleInvite(page,wrapper);
     }
-
     /**
      * 分页查询复试中的所有应聘人员信息
      * @return
@@ -122,7 +126,6 @@ public class InterviewServiceImpl implements InterviewServiceVo {
         wrapperfs.eq("R.IS_DELETED", 0).orderByDesc("INTERVIEW_ID");
         return mapperVo.findAlleInvite(pagefs,wrapperfs);
     }
-
     /**
      * 分页查询面试通过的所有应聘人员信息
      * @return
@@ -155,6 +158,14 @@ public class InterviewServiceImpl implements InterviewServiceVo {
         //逻辑删除查询
         wrapperadopt.eq("R.IS_DELETED", 0).orderByDesc("INTERVIEW_ID");
         return mapperVo.findAlleInvite(pageadopt,wrapperadopt);
+    }
+
+    /**
+     * 面试评论添加
+     */
+    @Override
+    public int addmianspl(Evaluate evaluate) {
+        return evaluateMapper.insert(evaluate);
     }
 
 

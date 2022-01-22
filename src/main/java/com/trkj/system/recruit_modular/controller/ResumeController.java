@@ -112,8 +112,6 @@ public class ResumeController {
         }
 
     }
-
-
     //招聘计划详情页面人数统计
     @PostMapping("/plan/sxhxr")
     public AjaxResponse selectplanhxr(@RequestBody Resume resume){

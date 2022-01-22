@@ -49,47 +49,20 @@ public class EmploymentTableServiceImpl implements EmploymentTableServiceVo {
             wrapperjs.like("D.DEPT_NAME",employmentTableVo.getDeptName());
         }
 
-        wrapperjs.eq("R.RESUME_ZT",7);
+        wrapperjs.eq("R.RESUME_ZT",employmentTableVo.getResumeZt());
         wrapperjs.eq("E.IS_DELETED",0).orderByDesc("E.EMPLOYMENT_ID");
         return mapperVo.findAllemployment(pagejs,wrapperjs);
     }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 录用放弃原因
+     */
+    @Override
+    public int updatefq(EmploymentTableVo employmentTableVo) {
+        return mapperVo.updateById(employmentTableVo);
+    }
 
 
 }

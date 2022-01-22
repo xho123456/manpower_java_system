@@ -1,7 +1,9 @@
 package com.trkj.system.recruit_modular.controller;
 
 
+import com.trkj.system.recruit_modular.entity.Evaluate;
 import com.trkj.system.recruit_modular.entity.InterviewVo;
+import com.trkj.system.recruit_modular.entity.Resume;
 import com.trkj.system.recruit_modular.entity.ResumeVo;
 import com.trkj.system.recruit_modular.service.InterviewServiceVo;
 import com.trkj.system.vo.AjaxResponse;
@@ -43,7 +45,7 @@ public class InterviewController {
     }
 
     /**
-     * 分页查询出面试中的所有应聘人员信息
+     * 分页查询出面试中的所有淘汰/放弃的应聘人员信息
      * @return
      */
     @PostMapping("/interfus")
@@ -58,6 +60,21 @@ public class InterviewController {
     @PostMapping("/interadopt")
     public AjaxResponse interadopt(@RequestBody InterviewVo interviewVo){
         return AjaxResponse.success(interviewServiceVo.selectAlladopt(interviewVo));
+    }
+
+    /**
+     * 添加面试评论
+     * @param evaluate
+     * @return
+     */
+    @PostMapping("/Interview/addmianspl")
+    public AjaxResponse addMinaspl(@RequestBody Evaluate evaluate){
+        if (interviewServiceVo.addmianspl(evaluate)>=1){
+            return AjaxResponse.success("成功");
+        }else {
+            return AjaxResponse.success("失败");
+        }
+
     }
 
 }

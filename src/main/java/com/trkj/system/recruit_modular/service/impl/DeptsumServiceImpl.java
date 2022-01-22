@@ -58,7 +58,7 @@ public class DeptsumServiceImpl implements DeptsumService {
         }
         //递归
         for (Dept nav : childList) {
-            nav.setDeptlist(oo(Math.toIntExact(nav.getDeptId()), allMenu));
+            nav.setDeptlist(oo(Math.toIntExact(nav.getDeptId()),allMenu));
         }
         //如果节点下没有子节点，返回一个空List（递归退出）
         if (childList.size() == 0) {

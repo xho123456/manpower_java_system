@@ -42,10 +42,6 @@ public class InterviewVo implements Serializable {
     @TableField("INTERVIEW_TIME")
     private Date interviewTime;
 
-    @ApiModelProperty(value = "面试评价")
-    @TableField("INTERVIEW_EVALUATE")
-    private String interviewEvaluate;
-
     @ApiModelProperty(value = "负责人编号（员工表/员工编号)")
     @TableField("STAFF_ID")
     private Long staffId;
