@@ -8,8 +8,9 @@ import com.trkj.system.system_management.entity.NoticeDept;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Mapper
 public interface NoticeDeptMapper extends BaseMapper<NoticeDept> {
@@ -20,4 +21,12 @@ public interface NoticeDeptMapper extends BaseMapper<NoticeDept> {
      */
     @Delete("DELETE FROM NOTICE_DEPT ${ew.customSqlSegment}")
     int deleteNoticeDeptList(@Param(Constants.WRAPPER) QueryWrapper<NoticeDept> queryWrapper);
+
+    /**
+     * 根据公告id查询公告部门id
+     */
+    @Select("select DEPT_ID FROM  NOTICE_DEPT ${ew.customSqlSegment}")
+    List<NoticeDept> selectNoticeDeptID1(@Param(Constants.WRAPPER) QueryWrapper<NoticeDept> queryWrapper);
+
+
 }

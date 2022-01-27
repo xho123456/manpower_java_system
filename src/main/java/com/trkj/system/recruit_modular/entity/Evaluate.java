@@ -1,12 +1,11 @@
 package com.trkj.system.recruit_modular.entity;
 
+import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
-import java.util.List;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,53 +14,47 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 部门表
+ * 面试表
  * </p>
  *
  * @author 鄧琪
- * @since 2022-01-08
+ * @since 2022-01-20
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("DEPT")
-@ApiModel(value="Dept对象", description="部门表")
-public class Dept implements Serializable {
+@TableName("EVALUATE")
+@ApiModel(value="Evaluate对象", description="面试表")
+@KeySequence(value = "EVALUATE_ID", clazz = Integer.class)
+public class Evaluate implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "部门编号")
-    @TableId("DEPT_ID")
-    private Long deptId;
+    @ApiModelProperty(value = "面试评价编号")
+    @TableId("EVALUATE_ID")
+    private Integer evaluateId;
 
-    @ApiModelProperty(value = "父级菜单")
-    @TableId("MENU_PID")
-    private Long menuPid;
+    @ApiModelProperty(value = "面试表外键")
+    @TableField("INTERVIEW_ID")
+    private Long interviewId;
 
-    @ApiModelProperty(value = "是否有叶子 0:有 1:没有")
-    @TableId("MENU_LEAF")
-    private Long menuLeaf;
+    @ApiModelProperty(value = "面试评价时间")
+    @TableField("EVALUATE_TIME")
+    private Date evaluateTime;
 
-    @TableField(exist = false)
-    private List<Dept> deptlist;
-
-    @ApiModelProperty(value = "状态;0：启用  1：禁用")
-    @TableField("DEPT_STATE")
-    private Long deptState;
-
-    @ApiModelProperty(value = "部门名称")
-    @TableField("DEPT_NAME")
-    private String deptName;
-
-    @ApiModelProperty(value = "部门负责人;提供ID到员工表锁定具体的人")
+    @ApiModelProperty(value = "评价人编号")
     @TableField("STAFF_ID")
     private Long staffId;
+
+    @ApiModelProperty(value = "面试评价的内容")
+    @TableField("INTERVIEW_EVALUATE")
+    private String interviewEvaluate;
 
     @ApiModelProperty(value = "创建时间")
     @TableField("CREATED_TIME")
     private Date createdTime;
 
-    @ApiModelProperty(value = "修改时间")
+    @ApiModelProperty(value = "最后修改时间")
     @TableField("UPDATED_TIME")
     private Date updatedTime;
 
@@ -69,7 +62,7 @@ public class Dept implements Serializable {
     @TableField("REVISION")
     private Long revision;
 
-    @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
+    @ApiModelProperty(value = "逻辑删除;1表示删除，0 表示未删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
 

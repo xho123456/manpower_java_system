@@ -18,4 +18,24 @@ public interface StaffsMapper extends BaseMapper<Staffs> {
      */
     @Select("select STAFF_ID from staff ${ew.customSqlSegment}")
     List<Staffs> selectStaffDeptID(@Param(Constants.WRAPPER) QueryWrapper<Staffs> queryWrapper);
+
+    /**
+     *查询出部门下的所有员工
+     */
+    @Select("select * from staff ${ew.customSqlSegment}")
+    List<Staffs> selectStaffId(@Param(Constants.WRAPPER) QueryWrapper<Staffs> queryWrapper);
+
+    /**
+     * 通过员工查询员工数据
+     */
+    @Select("select * from staff ${ew.customSqlSegment}")
+    List<Staffs> selectStaff(@Param(Constants.WRAPPER) QueryWrapper<Staffs> queryWrapper);
+
+    /**
+     * 判断登录数据是否和数据库一致
+     * @param queryWrapper
+     * @return
+     */
+    @Select("select * from staff ${ew.customSqlSegment}")
+    Staffs selectStaffs(@Param(Constants.WRAPPER) QueryWrapper<Staffs> queryWrapper);
 }

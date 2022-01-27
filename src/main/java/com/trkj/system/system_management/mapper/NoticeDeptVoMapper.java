@@ -3,6 +3,7 @@ package com.trkj.system.system_management.mapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.trkj.system.system_management.entity.NoticeDept;
 import com.trkj.system.system_management.entity.NoticeDeptVo;
 
 import org.apache.ibatis.annotations.*;
@@ -27,9 +28,5 @@ public interface NoticeDeptVoMapper extends BaseMapper<NoticeDeptVo> {
      */
     @Delete("DELETE FROM NOTICE_DEPT ${ew.customSqlSegment}")
     int deleteNoticeDept(@Param(Constants.WRAPPER) QueryWrapper<NoticeDeptVo> queryWrapper);
-
-
-
-
 
 }

@@ -18,5 +18,10 @@ public interface EmploymentTableServiceVo {
      */
     IPage<EmploymentTableVo> findAllemployment(EmploymentTableVo employmentTableVo);
 
+    /**
+     * 录用放弃原因
+     */
+    int updatefq(EmploymentTableVo employmentTableVo);
+
 
 }
