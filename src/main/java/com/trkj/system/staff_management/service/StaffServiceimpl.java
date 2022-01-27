@@ -181,7 +181,7 @@ public class StaffServiceimpl implements StaffService {
 
         //分页查询条件
         queryWrapper.like("r.RESUME_NAME",staff.getRESUMENAME());
-        queryWrapper.eq(" r.RESUME_ZT",6);
+        queryWrapper.eq(" r.RESUME_ZT",8);
         return mapper.findInductionStaffById(page,queryWrapper);
     }
 
@@ -192,7 +192,7 @@ public class StaffServiceimpl implements StaffService {
 
         //分页查询条件
         queryWrapper.like("r.RESUME_NAME",staff.getRESUMENAME());
-        queryWrapper.eq("r.RESUME_ZT",4);
+        queryWrapper.eq("r.RESUME_ZT",11);
         return mapper.findgiveupInductionStaffById(page,queryWrapper);
     }
 
