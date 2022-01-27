@@ -75,7 +75,7 @@ public class NoticeVoController {
 
 
     /**
-     * 查询已看员工
+     * 查询未看员工
      * @param noticeDept
      * @return
      */
@@ -163,11 +163,9 @@ public class NoticeVoController {
      */
         @PostMapping("/staffs/login")
     public AjaxResponse selectStaffs(@RequestBody Staffs staffs){
-            System.out.println(staffs +"=================");
         Staffs staffs1=noticeVoService.selectStaffs(staffs);
-            System.out.println("==================="+staffs1+"lkasdjflkasdjflkasd");
         if(staffs1.getStaffPass().equals(staffs.getStaffPass())){
-            return AjaxResponse.success("成功");
+            return AjaxResponse.success(staffs1);
         }else {
             return AjaxResponse.success("失败");
         }
