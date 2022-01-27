@@ -158,5 +158,43 @@ public class StaffServiceImpl  implements StaffService {
     public List<Map<String, Object>> selectygxj() {
         return mapper.selectygxj();
     }
+//查询每月请假人数
+    @Override
+    public List<Map<String, Object>> selectqjrs() {
+        return mapper.selectqjrs();
+    }
+    //查询本月请假人数
+    @Override
+    public List<Map<String, Object>> selectdyqjrs() {
+        return mapper.selectdyqjrs();
+    }
+
+    //每月出差人数
+    @Override
+    public List<Map<String, Object>> selectccrs() {
+        return mapper.selectccrs();
+    }
+    //本月出差人数
+    @Override
+    public List<Map<String, Object>> selectdyccrs() {
+        return mapper.selectdyccrs();
+    }
+    //每月员工加班总小时
+    @Override
+    public List<Map<String, Object>> selectjbtime() {
+        return mapper.selectjbtime();
+    }
+    //本月月员工加班总小时
+    @Override
+    public List<Map<String, Object>> selectbyjbtime() {
+        return mapper.selectbyjbtime();
+    }
+
+
+    //人员总数
+    @Override
+    public  List<Map<String, Object>> selectStaffrs(){
+        return  mapper.selectStaffrs();
+    }
 }
 
