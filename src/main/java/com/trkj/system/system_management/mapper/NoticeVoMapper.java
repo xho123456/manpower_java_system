@@ -25,7 +25,4 @@ public interface NoticeVoMapper extends BaseMapper<NoticeVo> {
     IPage<NoticeVo> selectPaer(Page<NoticeVo> noticeVo,@Param(Constants.WRAPPER) QueryWrapper<NoticeVo> queryWrapper);
 
 
-
-//    @Update("update set NOTICE ${ew.customSqlSegment}")
-//    int updateNotice(@Param(Constants.WRAPPER) QueryWrapper<NoticeVo> queryWrapper);
 }

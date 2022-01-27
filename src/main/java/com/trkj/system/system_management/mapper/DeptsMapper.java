@@ -27,7 +27,7 @@ public interface DeptsMapper extends BaseMapper<Depts> {
      * @param queryWrapper
      */
     @Select("select * from DEPT ${ew.customSqlSegment}")
-    List<Depts> selectDepts(@Param(Constants.WRAPPER) QueryWrapper<NoticeVo> queryWrapper);
+    List<Depts> selectDepts(@Param(Constants.WRAPPER) QueryWrapper<Depts> queryWrapper);
 
     /**
      * 查询所有部门Id

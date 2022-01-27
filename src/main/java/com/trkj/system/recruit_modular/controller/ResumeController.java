@@ -5,6 +5,7 @@ import com.trkj.system.recruit_modular.entity.*;
 import com.trkj.system.recruit_modular.service.ResumeService;
 import com.trkj.system.recruit_modular.service.ResumeServiceVo;
 import com.trkj.system.vo.AjaxResponse;
+import oracle.ucp.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,12 +53,6 @@ public class ResumeController {
         return AjaxResponse.success(resumeServiceVo.findAlltt(resumeVo));
     }
 
-    //招聘个人简历详情查询
-    @GetMapping("/resume/findByidAll")
-    public AjaxResponse findByid(@RequestParam("id")Long id){
-        return AjaxResponse.success(service.findByidselect(id));
-    }
-
     //删除个人简历信息
     @PostMapping("/recruitment/deleteByidResumes")
     public AjaxResponse deleteByidResumes(@RequestBody ArrayList<Integer> id) {
@@ -92,7 +87,7 @@ public class ResumeController {
         }
     }
 
-    //修改: 设置候选人、备注信息
+    //简历信息修改修改：通用
     @PostMapping("/resume/updatehz")
     public AjaxResponse updatehz(@RequestBody Resume resume) {
         if (service.updatehb(resume)>=1){
@@ -113,6 +108,16 @@ public class ResumeController {
 
     }
 
+    //招聘计划详情页面人数统计
+    @PostMapping("/plan/sxhxr")
+    public AjaxResponse selectplanhxr(@RequestBody Resume resume){
+      return AjaxResponse.success(service.planhxr(resume));
+    }
 
+    //个人简历详情查询
+    @PostMapping("/resume/findByidAll")
+    public AjaxResponse findByid(@RequestBody ResumeVo resumeVo){
+        return AjaxResponse.success(resumeServiceVo.selectAllid(resumeVo));
+    }
 }
 

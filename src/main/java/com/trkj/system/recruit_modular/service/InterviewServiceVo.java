@@ -1,10 +1,8 @@
 package com.trkj.system.recruit_modular.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.trkj.system.recruit_modular.entity.Evaluate;
 import com.trkj.system.recruit_modular.entity.InterviewVo;
-import com.trkj.system.recruit_modular.entity.ResumeVo;
-
 import java.util.List;
 
 /**
@@ -38,5 +36,20 @@ public interface InterviewServiceVo {
      */
     IPage<InterviewVo> selectAlladopt(InterviewVo interviewVo);
 
-
+    /**
+     * 面试评论添加
+     */
+    int addmianspl(Evaluate evaluate);
+    /**
+     * 通过面试ID查询所有面试者的面试评论
+     */
+    List<Evaluate> findallpl(Evaluate evaluate);
+    /**
+     * 面试评论信息修改
+     */
+    int updatemapl(Evaluate evaluate);
+    /**
+     * 面试评论信息删除
+     */
+    int deletemapl(Integer id);
 }

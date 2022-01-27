@@ -100,6 +100,12 @@ public class EmploymentTableVo implements Serializable {
     @ApiModelProperty(value = "学历名称")
     private String resumeEducation;
 
+    @ApiModelProperty(value = "专业")
+    private String resxuel;
+
+    @ApiModelProperty(value = "最近公司")
+    private String zjgs;
+
     @ApiModelProperty(value = "毕业学校")
     private String resumeScoller;
 

@@ -1,10 +1,8 @@
 package com.trkj.system.recruit_modular.entity;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -26,18 +24,17 @@ import lombok.experimental.Accessors;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@AllArgsConstructor
-@NoArgsConstructor
 @Accessors(chain = true)
 @TableName("EDUCATIONSS")
 @ApiModel(value="Educationss对象", description="受教育经历表")
+@KeySequence(value = "EDUCATIONSS_ID", clazz = Integer.class)
 public class Educationss implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "编号")
     @TableId("EDUCATIONSS_ID")
-    private Long educationssId;
+    private Integer educationssId;
 
     @ApiModelProperty(value = "开始时间")
     @TableField("EDUCATION_START_TIME")

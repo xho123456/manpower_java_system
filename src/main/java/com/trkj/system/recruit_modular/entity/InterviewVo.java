@@ -42,10 +42,6 @@ public class InterviewVo implements Serializable {
     @TableField("INTERVIEW_TIME")
     private Date interviewTime;
 
-    @ApiModelProperty(value = "面试评价")
-    @TableField("INTERVIEW_EVALUATE")
-    private String interviewEvaluate;
-
     @ApiModelProperty(value = "负责人编号（员工表/员工编号)")
     @TableField("STAFF_ID")
     private Long staffId;
@@ -89,6 +85,14 @@ public class InterviewVo implements Serializable {
 
     @ApiModelProperty(value = "毕业学校")
     private String resumeScoller;
+
+
+    @ApiModelProperty(value = "专业")
+    private String resxuel;
+
+    @ApiModelProperty(value = "最近公司")
+    private String zjgs;
+
 
     @ApiModelProperty(value = "婚姻状况：已婚、未婚、离婚")
     private String resumeHy;

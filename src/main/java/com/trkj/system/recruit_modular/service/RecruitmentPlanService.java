@@ -30,4 +30,9 @@ public interface RecruitmentPlanService {
      */
     List<RecruitmentPlan> findByidall(RecruitmentPlan RecruitmentPlan);
 
+    /**
+     * 新增招聘计划
+     */
+    int addplan(RecruitmentPlan recruitmentPlan);
+
 }

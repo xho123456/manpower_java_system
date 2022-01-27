@@ -35,4 +35,15 @@ public class WorkExperiencessServiceImpl implements WorkExperiencessService {
         wrapper.eq("IS_DELETED",0);
         return mapper.findByidWork(wrapper);
     }
+    //新增工作经历
+    @Override
+    public int addWorkexper(WorkExperiencess workExperiencess) {
+        return mapper.insert(workExperiencess);
+    }
+
+    //删除工作经历信息
+    @Override
+    public int deletehomes(Integer id) {
+        return mapper.deleteById(id);
+    }
 }

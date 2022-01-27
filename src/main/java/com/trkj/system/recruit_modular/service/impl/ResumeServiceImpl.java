@@ -1,5 +1,6 @@
 package com.trkj.system.recruit_modular.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.trkj.system.recruit_modular.entity.InterviewVo;
 import com.trkj.system.recruit_modular.entity.Resume;
 import com.trkj.system.recruit_modular.mapper.ResumeMapper;
@@ -21,11 +22,7 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
 
     @Autowired
     private ResumeMapper mapper;
-    //查询简历详情页面个人信息
-    @Override
-    public Resume findByidselect(Long id) {
-        return mapper.selectById(id);
-    }
+
     //逻辑删除简历信息
     @Override
     public int deleteByidResume(Integer id) {
@@ -52,6 +49,16 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
     @Override
     public int addResume(Resume resume) {
         return mapper.insert(resume);
+    }
+
+    //招聘计划：简历数量统计
+    @Override
+    public int planhxr(Resume resume) {
+        QueryWrapper<Resume> planwrapper = new QueryWrapper<>();
+        planwrapper.eq("RECRUITMENT_PLAN_ID",resume.getRecruitmentPlanId());
+        planwrapper.eq("RESUME_ZT",resume.getResumeZt());
+        planwrapper.eq("IS_DELETED",0);
+        return mapper.planhxr(planwrapper);
     }
 
 }

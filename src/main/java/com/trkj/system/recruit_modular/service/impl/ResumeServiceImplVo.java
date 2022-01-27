@@ -9,6 +9,8 @@ import com.trkj.system.recruit_modular.service.ResumeServiceVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 简历表 服务实现类
@@ -75,7 +77,7 @@ public class ResumeServiceImplVo implements ResumeServiceVo {
         return resumeMapperVo.findByidAll(page1, queryWrapper);
     }
 
-    //候选人简历列表分页查询
+    //简历列表分页查询:候选人
     @Override
     public IPage<ResumeVo> findAllhouxr(ResumeVo resumeVo) {
         Page<ResumeVo> page2 = new Page<>(resumeVo.getCurrenPage(), resumeVo.getPagesize());
@@ -103,7 +105,7 @@ public class ResumeServiceImplVo implements ResumeServiceVo {
         wrapper1.eq("R.RESUME_ZT", 1);
         //逻辑删除查询
         wrapper1.eq("R.IS_DELETED", 0).orderByDesc("RESUME_ID");
-        return resumeMapperVo.selectAllhxr(page2, wrapper1);
+        return resumeMapperVo.selectAllres(page2, wrapper1);
     }
 
     //简历列表分页查询：新简历
@@ -119,11 +121,11 @@ public class ResumeServiceImplVo implements ResumeServiceVo {
         wrappernew.eq("R.RESUME_ZT", 0);
         //逻辑删除查询
         wrappernew.eq("R.IS_DELETED", 0).orderByDesc("RESUME_ID");
-        return resumeMapperVo.selectAllnew(pagenew, wrappernew);
+        return resumeMapperVo.selectAllres(pagenew, wrappernew);
 
     }
 
-    //简历列表分页查询：淘汰库
+    //简历列表分页查询：储备人才
     @Override
     public IPage<ResumeVo> findAlltt(ResumeVo resumeVo) {
         Page<ResumeVo> pagett = new Page<>(resumeVo.getCurrenPage(), resumeVo.getPagesize());
@@ -151,11 +153,19 @@ public class ResumeServiceImplVo implements ResumeServiceVo {
         wrappertt.eq("R.RESUME_ZT", 3);
         //逻辑删除查询
         wrappertt.eq("R.IS_DELETED", 0).orderByDesc("RESUME_ID");
-        return resumeMapperVo.findAlleliminate(pagett, wrappertt);
+        return resumeMapperVo.selectAllres(pagett, wrappertt);
 
     }
 
+    //简历信息详情页面查询
+    @Override
+    public ResumeVo selectAllid(ResumeVo resumeVo) {
+        QueryWrapper<ResumeVo> wrapper_1 = new QueryWrapper<>();
+        wrapper_1.eq("R.RESUME_ID",resumeVo.getResumeId());
+        wrapper_1.eq("R.IS_DELETED",0);
+        return resumeMapperVo.selectBisid(wrapper_1);
 
+    }
 
 
 }

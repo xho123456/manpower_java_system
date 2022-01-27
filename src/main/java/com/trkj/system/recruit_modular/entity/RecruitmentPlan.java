@@ -1,10 +1,8 @@
 package com.trkj.system.recruit_modular.entity;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -27,13 +25,14 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("RECRUITMENT_PLAN")
 @ApiModel(value="RecruitmentPlan对象", description="招聘计划表")
+@KeySequence(value = "RECRUITMENT_PLAN_ID", clazz = Integer.class)
 public class RecruitmentPlan implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "编号")
     @TableId("RECRUITMENT_PLAN_ID")
-    private Long recruitmentPlanId;
+    private Integer recruitmentPlanId;
 
     @TableField("RECRUITMENT_PLAN_NAME")
     private String recruitmentPlanName;
