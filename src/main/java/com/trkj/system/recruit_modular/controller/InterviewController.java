@@ -9,11 +9,7 @@ import com.trkj.system.recruit_modular.service.InterviewServiceVo;
 import com.trkj.system.vo.AjaxResponse;
 import oracle.ucp.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -64,8 +60,6 @@ public class InterviewController {
 
     /**
      * 添加面试评论
-     * @param evaluate
-     * @return
      */
     @PostMapping("/Interview/addmianspl")
     public AjaxResponse addMinaspl(@RequestBody Evaluate evaluate){
@@ -75,6 +69,33 @@ public class InterviewController {
             return AjaxResponse.success("失败");
         }
 
+    }
+
+    /**
+     * 查询面试评论
+     */
+    @PostMapping("/resumes/findbymspl")
+    public AjaxResponse findbymspl(@RequestBody Evaluate evaluate){
+        return AjaxResponse.success(interviewServiceVo.findallpl(evaluate));
+    }
+
+    //评论信息修改修改：通用
+    @PostMapping("/resume/updatemspl")
+    public AjaxResponse updatemspl(@RequestBody Evaluate evaluate) {
+        if (interviewServiceVo.updatemapl(evaluate)>=1){
+            return AjaxResponse.success("成功");
+        }else{
+            return AjaxResponse.success("失败");
+        }
+    }
+    //评论信息修改删除
+    @GetMapping("/resume/deletedmspl")
+    public AjaxResponse deletedmspl(@RequestParam("id") Integer id) {
+        if (interviewServiceVo.deletemapl(id)>=1){
+            return AjaxResponse.success("成功");
+        }else{
+            return AjaxResponse.success("失败");
+        }
     }
 
 }

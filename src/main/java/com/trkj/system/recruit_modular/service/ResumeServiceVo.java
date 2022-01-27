@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.trkj.system.recruit_modular.entity.RecruitmentPlanVo;
 import com.trkj.system.recruit_modular.entity.ResumeVo;
 
+import java.util.List;
+
 /**
  * <p>
  * 简历表Vo 服务类
@@ -26,6 +28,11 @@ public interface ResumeServiceVo {
    * 分页 ：通过招聘计划编号查询出该计划招聘的所有简历信息
    */
   IPage<ResumeVo> findByidresum(ResumeVo resumeVo);
+
+  //简历信息详情页面查询
+  ResumeVo selectAllid(ResumeVo resumeVo);
+
+
 
 
 

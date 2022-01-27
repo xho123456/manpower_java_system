@@ -30,4 +30,15 @@ public class EducationssServiceImpl implements EducationssService {
         wrapper.eq("IS_DELETED",0);
         return mapper.findByidEds(wrapper);
     }
+
+    //教育经历添加
+    @Override
+    public int addEducation(Educationss educationss) {
+        return mapper.insert(educationss);
+    }
+    //个人简历教育经历删除
+    @Override
+    public int deleteEducation(Integer id) {
+        return mapper.deleteById(id);
+    }
 }

@@ -86,6 +86,14 @@ public class InterviewVo implements Serializable {
     @ApiModelProperty(value = "毕业学校")
     private String resumeScoller;
 
+
+    @ApiModelProperty(value = "专业")
+    private String resxuel;
+
+    @ApiModelProperty(value = "最近公司")
+    private String zjgs;
+
+
     @ApiModelProperty(value = "婚姻状况：已婚、未婚、离婚")
     private String resumeHy;
 

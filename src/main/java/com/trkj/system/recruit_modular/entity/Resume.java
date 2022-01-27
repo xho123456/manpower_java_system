@@ -52,6 +52,14 @@ public class Resume implements Serializable {
     @TableField("RESUME_SCOLLER")
     private String resumeScoller;
 
+
+    @ApiModelProperty(value = "专业")
+    private String resxuel;
+
+    @ApiModelProperty(value = "最近公司")
+    private String zjgs;
+
+
     @ApiModelProperty(value = "婚姻状况：已婚、未婚、离婚")
     @TableField("RESUME_HY")
     private String resumeHy;

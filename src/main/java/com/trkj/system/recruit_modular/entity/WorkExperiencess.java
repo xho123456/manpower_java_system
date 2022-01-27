@@ -1,10 +1,8 @@
 package com.trkj.system.recruit_modular.entity;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -27,13 +25,14 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("WORK_EXPERIENCESS")
 @ApiModel(value="WorkExperiencess对象", description="工作经历表")
+@KeySequence(value = "WORK_EXPERIENCESS_ID", clazz = Integer.class)
 public class WorkExperiencess implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "编号")
     @TableId("WORK_EXPERIENCESS_ID")
-    private Long workExperiencessId;
+    private Integer workExperiencessId;
 
     @ApiModelProperty(value = "开始时间")
     @TableField("WORK_STARE_TIME")
@@ -83,7 +82,6 @@ public class WorkExperiencess implements Serializable {
 
     @ApiModelProperty(value = "逻辑删除;1表示删除，0 表示未删除")
     @TableField("IS_DELETED")
-    @TableLogic
     private Long isDeleted;
 
 

@@ -9,6 +9,8 @@ import com.trkj.system.recruit_modular.service.ResumeServiceVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 简历表 服务实现类
@@ -155,7 +157,15 @@ public class ResumeServiceImplVo implements ResumeServiceVo {
 
     }
 
+    //简历信息详情页面查询
+    @Override
+    public ResumeVo selectAllid(ResumeVo resumeVo) {
+        QueryWrapper<ResumeVo> wrapper_1 = new QueryWrapper<>();
+        wrapper_1.eq("R.RESUME_ID",resumeVo.getResumeId());
+        wrapper_1.eq("R.IS_DELETED",0);
+        return resumeMapperVo.selectBisid(wrapper_1);
 
+    }
 
 
 }

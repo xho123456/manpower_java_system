@@ -49,7 +49,7 @@ public class RecruitmentPlanServiceImpl implements RecruitmentPlanService {
             //职位编号
             wrappers.eq("DEPT_POST_ID",RecruitmentPlan.getDeptPostId());
 
-
+        wrappers.eq("RECRUITMENT_ZT",0);
         //逻辑删除
         wrappers.eq("IS_DELETED",0);
         return recruitmentPlanMapper.findByids(wrappers);

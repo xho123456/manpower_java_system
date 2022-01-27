@@ -22,11 +22,7 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
 
     @Autowired
     private ResumeMapper mapper;
-    //查询简历详情页面个人信息
-    @Override
-    public Resume findByidselect(Long id) {
-        return mapper.selectById(id);
-    }
+
     //逻辑删除简历信息
     @Override
     public int deleteByidResume(Integer id) {
@@ -55,6 +51,7 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
         return mapper.insert(resume);
     }
 
+    //招聘计划：简历数量统计
     @Override
     public int planhxr(Resume resume) {
         QueryWrapper<Resume> planwrapper = new QueryWrapper<>();

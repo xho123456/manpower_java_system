@@ -19,6 +19,10 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface ResumeMapper extends BaseMapper<Resume> {
 
+    ////招聘计划：简历数量统计
     @Select("select count(*) from RESUME ${ew.customSqlSegment}")
     int planhxr(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
+
+
+
 }

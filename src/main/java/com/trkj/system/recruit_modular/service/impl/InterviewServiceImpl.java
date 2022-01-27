@@ -11,6 +11,8 @@ import com.trkj.system.recruit_modular.service.InterviewServiceVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 面试表 服务实现类
@@ -166,6 +168,31 @@ public class InterviewServiceImpl implements InterviewServiceVo {
     @Override
     public int addmianspl(Evaluate evaluate) {
         return evaluateMapper.insert(evaluate);
+    }
+
+    /**
+     * 通过面试ID查询所有面试者的面试评论
+     */
+    @Override
+    public List<Evaluate> findallpl(Evaluate evaluate) {
+        QueryWrapper<Evaluate> wrapper_e = new QueryWrapper<>();
+        wrapper_e.eq("INTERVIEW_ID",evaluate.getInterviewId());
+        wrapper_e.eq("IS_DELETED",0);
+        return evaluateMapper.findallpl(wrapper_e);
+    }
+    /**
+     * 面试评论信息修改
+     */
+    @Override
+    public int updatemapl(Evaluate evaluate) {
+        return evaluateMapper.updateById(evaluate);
+    }
+    /**
+     * 面试评论信息删除
+     */
+    @Override
+    public int deletemapl(Integer id) {
+        return evaluateMapper.deleteById(id);
     }
 
 

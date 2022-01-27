@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * <p>
  * 简历表 Mapper 接口
@@ -32,6 +34,10 @@ public interface ResumeMapperVo extends BaseMapper<ResumeVo> {
           "on Z.DEPT_POST_ID = P.DEPT_POST_ID ${ew.customSqlSegment}")
   IPage<ResumeVo> findByidAll(Page<ResumeVo> page, @Param(Constants.WRAPPER)QueryWrapper queryWrapper);
 
-
+  //简历信息详情页面查询
+  @Select("\n" +
+          "select R.*,I.INTERVIEW_ID from RESUME R LEFT JOIN INTERVIEW I on R.RESUME_ID\n" +
+          " = I.RESUME_ID ${ew.customSqlSegment}")
+  ResumeVo selectBisid(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
 }
