@@ -60,7 +60,6 @@ public interface NoticeVoService{
      * @param
      * @return
      */
-    @Select("select * from NOTICE_STAFF  ${ew.customSqlSegment}")
     List<NoticeStaff> selectUnread (Long staffId);
 
     /**

@@ -46,7 +46,7 @@ public class DeptsumServiceImpl implements DeptsumService {
     }
 
     public List<Dept> oo(int id,List<Dept> allMenu){
-        //子菜单
+        /* &#x5B50;&#x83DC;&#x5355; */
         List<Dept> childList = new ArrayList<Dept>();
         for (Dept nav : allMenu) {
             // 遍历所有节点，将所有菜单的父id与传过来的根节点的id比较
