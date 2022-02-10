@@ -196,7 +196,7 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
     /**
      * 员工放弃入职
      */
-    @Update("update RESUME set RESUME_ZT=4  ${ew.customSqlSegment}")
+    @Update("update RESUME set RESUME_ZT=11  ${ew.customSqlSegment}")
     int updateResume(@Param(Constants.WRAPPER) QueryWrapper<StaffGiveupInductionEntity> queryWrapper);
 
     /**
