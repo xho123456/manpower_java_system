@@ -167,5 +167,13 @@ public class ResumeServiceImplVo implements ResumeServiceVo {
 
     }
 
+    //面试管理录用应聘者信息简历查询
+    @Override
+    public ResumeVo lufindbyid(ResumeVo resumeVo) {
+        QueryWrapper<ResumeVo> luwrapper = new QueryWrapper<>();
+        luwrapper.eq("R.RESUME_ID",resumeVo.getResumeId());
+        return resumeMapperVo.luselectbyid(luwrapper);
+    }
+
 
 }

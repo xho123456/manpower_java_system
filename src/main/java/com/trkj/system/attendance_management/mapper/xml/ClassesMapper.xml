@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.system.attendance_management.mapper.ClassesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.system.attendance_management.entity.Classes">
+        <id column="CLASSES_ID" property="classesId" />
+        <result column="CLASSES_NAME" property="classesName" />
+        <result column="CLASSES_SD" property="classesSd" />
+        <result column="CLASSES_TIMEONES" property="classesTimeones" />
+        <result column="CLASSES_TIMEONEX" property="classesTimeonex" />
+        <result column="CLASSES_TXTIMEONE" property="classesTxtimeone" />
+        <result column="CLASSES_TIMETWOS" property="classesTimetwos" />
+        <result column="CLASSES_TIMETWOX" property="classesTimetwox" />
+        <result column="CLASSES_TXTIMETWO" property="classesTxtimetwo" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="CLASSES_XXTIME_STATE" property="classesXxtimeState" />
+        <result column="CLASSES_XXTIME_END" property="classesXxtimeEnd" />
+        <result column="DK_STATE" property="dkState" />
+        <result column="DK_END" property="dkEnd" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        CLASSES_ID, CLASSES_NAME, CLASSES_SD, CLASSES_TIMEONES, CLASSES_TIMEONEX, CLASSES_TXTIMEONE, CLASSES_TIMETWOS, CLASSES_TIMETWOX, CLASSES_TXTIMETWO, REVISION, IS_DELETED, CREATED_TIME, UPDATED_TIME, CLASSES_XXTIME_STATE, CLASSES_XXTIME_END, DK_STATE, DK_END
+    </sql>
+
+</mapper>

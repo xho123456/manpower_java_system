@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.system.recruit_modular.entity.EmploymentTable;
 import com.trkj.system.recruit_modular.entity.EmploymentTableVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,7 +20,7 @@ import org.apache.ibatis.annotations.Select;
  * @since 2022-01-13
  */
 @Mapper
-public interface EmploymentTableMapperVo extends BaseMapper<EmploymentTableVo> {
+public interface EmploymentTableMapperVo extends BaseMapper<EmploymentTable> {
 
     /**
      * 查询所有录用信息
@@ -31,5 +32,9 @@ public interface EmploymentTableMapperVo extends BaseMapper<EmploymentTableVo> {
             "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID LEFT JOIN DEPT D on\n" +
             "Z.DEPT_ID = D.DEPT_ID ${ew.customSqlSegment}")
     IPage<EmploymentTableVo> findAllemployment(Page<EmploymentTableVo> page, @Param(Constants.WRAPPER) QueryWrapper queryWrapper);
-
+    /**
+     * 通过简历id查询录用表数据
+     */
+    @Select("select * from EMPLOYMENT_TABLE ${ew.customSqlSegment}")
+    EmploymentTable selectbyresumeid(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 }

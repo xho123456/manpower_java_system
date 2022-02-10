@@ -24,13 +24,13 @@ public interface ResumeServiceVo {
   IPage<ResumeVo> findAllnew(ResumeVo resumeVo);
   //简历列表分页查询：淘汰库
   IPage<ResumeVo> findAlltt(ResumeVo resumeVo);
-  /**
-   * 分页 ：通过招聘计划编号查询出该计划招聘的所有简历信息
-   */
+  //分页 ：通过招聘计划编号查询出该计划招聘的所有简历信息
   IPage<ResumeVo> findByidresum(ResumeVo resumeVo);
 
   //简历信息详情页面查询
   ResumeVo selectAllid(ResumeVo resumeVo);
+  //面试管理录用应聘者信息简历查询
+  ResumeVo lufindbyid(ResumeVo resumeVo);
 
 
 
