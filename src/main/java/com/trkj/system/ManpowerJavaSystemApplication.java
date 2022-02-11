@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @MapperScan("com.example.**.mapper")
 public class ManpowerJavaSystemApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(ManpowerJavaSystemApplication.class, args);
     }
