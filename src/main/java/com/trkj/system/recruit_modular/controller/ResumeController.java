@@ -119,5 +119,11 @@ public class ResumeController {
     public AjaxResponse findByid(@RequestBody ResumeVo resumeVo){
         return AjaxResponse.success(resumeServiceVo.selectAllid(resumeVo));
     }
+
+    //面试管理录用应聘者信息简历查询
+    @PostMapping("/resume/lufindByid")
+    public AjaxResponse lufindByid(@RequestBody ResumeVo resumeVo){
+        return AjaxResponse.success(resumeServiceVo.lufindbyid(resumeVo));
+    }
 }
 
