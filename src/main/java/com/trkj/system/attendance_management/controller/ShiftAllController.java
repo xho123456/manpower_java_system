@@ -2,7 +2,9 @@ package com.trkj.system.attendance_management.controller;
 
 
 import com.trkj.system.attendance_management.entity.Classes;
+import com.trkj.system.attendance_management.entity.ClassesVo;
 import com.trkj.system.attendance_management.service.ShiftAllService;
+import com.trkj.system.recruit_modular.entity.Evaluate;
 import com.trkj.system.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +42,30 @@ public class ShiftAllController {
         }
         return AjaxResponse.success(s);
     }
+    //班次添加
+    @PostMapping("/Classes/isaddclass")
+    public AjaxResponse isaddclass(@RequestBody ClassesVo classes){
+        if(server.addClases(classes)>=1) {
+            return AjaxResponse.success("成功");
+        }else{
+            return AjaxResponse.success("失败");
+        }
+    }
 
+    //通过id查询班次消息
+    @GetMapping("/Classes/isquerybyid")
+    public AjaxResponse isquerybyid(@RequestParam("id") Integer id){
+        return AjaxResponse.success(server.isfindByid(id));
+    }
+
+    //班次修改
+    @PostMapping("/Classes/isupdatebyentity")
+    public AjaxResponse isupdatebyentity(@RequestBody ClassesVo classesVo) {
+        if (server.isupdateClases(classesVo)>=1){
+            return AjaxResponse.success("成功");
+        }else{
+            return AjaxResponse.success("失败");
+        }
+    }
 }
 

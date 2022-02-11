@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.system.attendance_management.entity.Classes;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.trkj.system.attendance_management.entity.ClassesVo;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,7 +21,7 @@ import org.apache.ibatis.annotations.Select;
  * @since 2022-02-10
  */
 @Mapper
-public interface ClassesMapper extends BaseMapper<Classes> {
+public interface ClassesMapper extends BaseMapper<ClassesVo> {
 
     //查询所有班次
     @Select("select * from Classes ${ew.customSqlSegment}")

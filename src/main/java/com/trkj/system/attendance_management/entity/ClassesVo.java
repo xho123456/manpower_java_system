@@ -1,12 +1,9 @@
 package com.trkj.system.attendance_management.entity;
 
 import com.baomidou.mybatisplus.annotation.KeySequence;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,6 +11,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -29,7 +29,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @TableName("CLASSES")
 @ApiModel(value="Classes对象", description="班次方案表")
 @KeySequence(value = "CLASSES_ID", clazz = Integer.class)
-public class Classes implements Serializable {
+public class ClassesVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -46,13 +46,13 @@ public class Classes implements Serializable {
     private String classesSd;
 
     @ApiModelProperty(value = "工作时间范围一(上班) ")
-    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_TIMEONES")
     private Date classesTimeones;
 
     @ApiModelProperty(value = "工作时间范围一(下班) ")
-    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_TIMEONEX")
     private Date classesTimeonex;
@@ -62,13 +62,13 @@ public class Classes implements Serializable {
     private Integer classesTxtimeone;
 
     @ApiModelProperty(value = "工作时间范围二(上班) ")
-    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_TIMETWOS")
     private Date classesTimetwos;
 
     @ApiModelProperty(value = "工作时间范围二(下班) ")
-    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_TIMETWOX")
     private Date classesTimetwox;
@@ -94,24 +94,24 @@ public class Classes implements Serializable {
     private Date updatedTime;
 
     @ApiModelProperty(value = "休息开始时段")
-    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_XXTIME_STATE")
     private Date classesXxtimeState;
 
     @ApiModelProperty(value = "休息结束时段")
-    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_XXTIME_END")
     private Date classesXxtimeEnd;
 
     @TableField("DK_STATE")
-    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dkState;
 
     @TableField("DK_END")
-    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dkEnd;
 

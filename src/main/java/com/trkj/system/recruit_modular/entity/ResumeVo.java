@@ -110,7 +110,7 @@ public class ResumeVo implements Serializable {
     private String resumeZt;
 
     @ApiModelProperty(value = "投简时间")
-    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date toujTime;
 
     @ApiModelProperty(value = "简历备注")

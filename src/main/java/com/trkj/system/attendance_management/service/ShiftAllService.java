@@ -2,6 +2,7 @@ package com.trkj.system.attendance_management.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.trkj.system.attendance_management.entity.Classes;
+import com.trkj.system.attendance_management.entity.ClassesVo;
 
 /**
  * <p>
@@ -16,4 +17,10 @@ public interface ShiftAllService {
     IPage<Classes> selectAllPage(Classes classes);
     //通过id删除班次
     int isdeletedCl(Integer id);
+    //班次新增
+    int addClases(ClassesVo classes);
+    //通过id查询班次
+    ClassesVo isfindByid(Integer id);
+    //班次编辑
+    int isupdateClases(ClassesVo classesVo);
 }
