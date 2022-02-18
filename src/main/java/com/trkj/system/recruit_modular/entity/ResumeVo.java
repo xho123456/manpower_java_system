@@ -132,6 +132,9 @@ public class ResumeVo implements Serializable {
     @ApiModelProperty(value = "招聘计划名称")
     private String recruitmentPlanName;
 
+    @ApiModelProperty(value = "录用编号")
+    private Integer employmentId;
+
     //分页
     @TableField(exist = false)
     private int currenPage;

@@ -9,6 +9,7 @@ import com.trkj.system.recruit_modular.mapper.EmploymentTableMapperVo;
 import com.trkj.system.recruit_modular.service.EmploymentTableServiceVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -57,6 +58,7 @@ public class EmploymentTableServiceImpl implements EmploymentTableServiceVo {
     /**
      * 录用放弃原因
      */
+    @Transactional
     @Override
     public int updatefq(EmploymentTable employmentTable) {
         return mapperVo.updateById(employmentTable);
@@ -64,6 +66,7 @@ public class EmploymentTableServiceImpl implements EmploymentTableServiceVo {
     /**
      * 面试通过新增录用人员
      */
+    @Transactional
     @Override
     public int addEmploy(EmploymentTable employmentTable) {
         return mapperVo.insert(employmentTable);
