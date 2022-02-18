@@ -8,11 +8,11 @@ import com.trkj.system.system_management.service.NoticeVoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class NoticeVoServicelmpl implements NoticeVoService {
@@ -32,6 +32,8 @@ public class NoticeVoServicelmpl implements NoticeVoService {
     private StaffsMapper staffsMapper;
     @Autowired
     private NoticeMapper noticeMapper;
+    @Autowired
+    private NoticesMapper noticesMapper;
 
 
     /**
@@ -67,7 +69,7 @@ public class NoticeVoServicelmpl implements NoticeVoService {
      * @return
      */
     @Override
-    //@Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public int updateNotice(Notice notice)   {
         int a=0;
         int row=noticeMapper.update(notice,new QueryWrapper<Notice>().eq("NOTICE_ID",notice.getNoticeId())
@@ -120,6 +122,7 @@ public class NoticeVoServicelmpl implements NoticeVoService {
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int deleteNotice(Long id) {
         int delete= noticeDeptVoMapper.deleteNoticeDept(new QueryWrapper<NoticeDeptVo>().eq("NOTICE_ID" ,id ));
         if(delete>0){
@@ -138,6 +141,7 @@ public class NoticeVoServicelmpl implements NoticeVoService {
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int deleteNoticeDeptList(ArrayList<Integer> id) {
         int notice=0;
         for(int i=0;i<id.size();i++){
@@ -174,7 +178,6 @@ public class NoticeVoServicelmpl implements NoticeVoService {
         QueryWrapper<NoticeDept> wrapper = new QueryWrapper<>();
         wrapper.eq("NOTICE_ID",noticeDept.getNoticeId());
         wrapper.eq("IS_DELETED",0);
-        System.out.println(noticeDept.getNoticeId()+"111111111111111111111111");
         return noticeDeptMapper.selectNoticeDeptID1(wrapper);
     }
     /**
@@ -222,10 +225,52 @@ public class NoticeVoServicelmpl implements NoticeVoService {
 
     @Override
     public Staffs selectStaffs(Staffs staffs) {
-        return  staffsMapper.selectStaffs(new QueryWrapper<Staffs>().eq("STAFF_PHONE",staffs.getStaffPhone()));
+        return  staffsMapper.selectStaffs(new QueryWrapper<Staffs>().eq("t1.STAFF_PHONE",staffs.getStaffPhone()));
     }
 
+    /**
+     * 公告新增
+     * @param notices
+     * @return
+     */
+    @Override
+    public int insert(Notices notices) {
+        int a=0;
+        //添加公告表数据
+        Notices notices1=new Notices();
+        notices1.setNoticeTitle(notices.getNoticeTitle());
+        notices1.setNoticeState(notices.getNoticeState());
+        notices1.setNoticeType(notices.getNoticeType());
+        notices1.setNoticeMatter(notices.getNoticeMatter());
+        notices1.setStaffId(notices.getStaffId());
+        notices1.setNoticePost(notices.getNoticePost());
+        notices1.setNoticePeople(notices.getNoticePeople());
+        //判断
+        if(noticesMapper.insert(notices1)>0){
+            for(String name:notices.getDeptName()){
+                Depts depts= deptsMapper.selectDepts1(new QueryWrapper<Depts>().eq("DEPT_NAME",name).eq("IS_DELETED",0));
+                Notice notice=noticeMapper.selectNotice(new QueryWrapper<Notice>().eq("NOTICE_TITLE",notices.getNoticeTitle()).eq("IS_DELETED",0));
+                //添加公告部门表数据
+                NoticeDept noticeDept=new NoticeDept();
+                noticeDept.setNoticeId(notice.getNoticeId());
+                noticeDept.setDeptId(Math.toIntExact(depts.getDeptId()));
+                if(noticeDeptMapper.insert(noticeDept)>0){
+                    Notice notice1=noticeMapper.selectNotice(new QueryWrapper<Notice>().eq("NOTICE_TITLE",notices.getNoticeTitle()).eq("IS_DELETED",0));
+                    //查询员工id
+                    Staffs staffs=staffsMapper.selectStaffsID(new QueryWrapper<Staffs>().eq("DEPT_ID",depts.getDeptId()).eq("IS_DELETED",0));
+                    //添加员工信息
+                    NoticeStaff noticeStaff= new NoticeStaff();
+                    noticeStaff.setNoticeId(notice1.getNoticeId());
+                    noticeStaff.setStaffId(staffs.getStaffId());
+                    if(noticeStaffMapper.insert(noticeStaff)>0){
+                        a=1;
+                    }
+                }
+            }
 
+        }
+        return a;
+    }
 
 
 }

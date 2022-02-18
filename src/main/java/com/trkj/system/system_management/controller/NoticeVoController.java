@@ -164,6 +164,7 @@ public class NoticeVoController {
         @PostMapping("/staffs/login")
     public AjaxResponse selectStaffs(@RequestBody Staffs staffs){
         Staffs staffs1=noticeVoService.selectStaffs(staffs);
+            System.out.println(staffs1);
         if(staffs1.getStaffPass().equals(staffs.getStaffPass())){
             return AjaxResponse.success(staffs1);
         }else {
@@ -171,43 +172,20 @@ public class NoticeVoController {
         }
     }
 
+    /**
+     * 公告新增
+     */
+    @PostMapping("/notices/insert")
+    public AjaxResponse inserts(@RequestBody Notices notices){
+        if(noticeVoService.insert(notices)>0){
+            return AjaxResponse.success("新增成功");
+        }else {
+            return AjaxResponse.success("新增失败");
+        }
+
+    }
+
 }
 
 
 
-//    @PutMapping("/notice/noticeId")
-//    public int updataNotice(@RequestBody NoticeVo noticeVo){
-//        System.out.println("飞机哈警方哈克"+noticeVo);
-//        noticeVo.setNoticeTitle(noticeVo.getNoticeTitle());
-//        noticeVo.setNoticeType(noticeVo.getNoticeType());
-//        noticeVo.setNoticeState(noticeVo.getDeptState());
-//        noticeVo.setNoticeMatter(noticeVo.getNoticeMatter());
-//        int i = noticeVoService.updataNottce(noticeVo);
-//        if (i>=4){
-//            return 999;
-//        }else {
-//            return 666;
-//        }
-//    }
-
-
-
-
-//@GetMapping("/a/noticeObjectVoServicelmpl")
-//public AjaxResponse selePage(@RequestParam("currentPage") int page, @RequestParam("pagesize")int size,
-//@RequestParam(defaultValue = "0") int type,
-//@RequestParam(defaultValue = "''") String noticePeople,
-//@RequestParam(defaultValue = "") String notice) {
-//        System.out.println("type："+type+"\n"+"oticePeople："+noticePeople+"\n"+"notice："+notice);
-//        QueryWrapper<Notice> wrapper=new QueryWrapper<>();
-//        wrapper.like("notice_title",notice).or()
-//        .like("notice_type",type).or().
-//        like("notice_people",noticePeople);
-//
-////            wrapper.like("notice_type",type)
-////                    .or().
-////                    like("notice_title",notice).or().
-////                    like("notice_people",oticePeople);
-////        wrapper.eq("notice_title","重要公告");
-//        return AjaxResponse.success(noticeVoService.selectPaer(new Page<Notice>(page,size),wrapper));
-//        }
