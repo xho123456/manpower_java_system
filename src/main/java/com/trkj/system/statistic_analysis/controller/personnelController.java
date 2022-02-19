@@ -18,7 +18,7 @@ public class personnelController {
     }
 
 
-    //查询每月入职人数
+    //查询每月离职人数
     @GetMapping("/chalz1")
     public List<Map<String, Object>> selectCount11(){
         return staffService.selectyglz1();

@@ -1,12 +1,13 @@
 package com.trkj.system.staff_management.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.system.staff_management.entity.*;
+import com.trkj.system.staff_management.mapper.FixedwageStaffMapper;
 import com.trkj.system.staff_management.mapper.Staffmapper;
+import com.trkj.system.staff_management.mapper.StafftowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,10 @@ import java.util.List;
 public class StaffServiceimpl implements StaffService {
     @Autowired
     private Staffmapper mapper;
+
+    @Autowired
+    private StafftowMapper towMapper;
+
 
     @Override
     public IPage<StaffEntity> findStaff(Page<StaffEntity> page) {
@@ -255,9 +260,18 @@ public class StaffServiceimpl implements StaffService {
     }
 
     @Override
-    public int addStaff(StaffEntity staff) {
-        return mapper.insert(staff);
+    public int addStaff(StaffTowEntity staff) {
+        return towMapper.insert(staff);
     }
 
+    @Override
+    public List<StaffEntity> basicstaff(Long id) {
+        return mapper.staff(id);
+    }
+
+    @Override
+    public int positive(StaffEntity staff){
+        return mapper.positive(new QueryWrapper<StaffEntity>().eq("STAFF_STATE",staff.getSTAFFSTATE()));
+    }
 
 }

@@ -1,16 +1,11 @@
 package com.trkj.system.salary_management.controller;
 
 import com.trkj.system.organizational_management.entity.Dept;
-import com.trkj.system.organizational_management.entity.DeptPostOne;
-import com.trkj.system.salary_management.entity.FixedSalary;
-import com.trkj.system.salary_management.entity.Fixedwage;
-import com.trkj.system.salary_management.entity.Salary;
-import com.trkj.system.salary_management.entity.SalaryList;
-import com.trkj.system.salary_management.mapper.SalaryMapper;
+import com.trkj.system.salary_management.entity.*;
 import com.trkj.system.salary_management.service.FixedSalaryService;
+import com.trkj.system.salary_management.service.WorkschemeService;
 import com.trkj.system.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +14,8 @@ import java.util.List;
 public class FixedSalaryController {
     @Autowired
     private FixedSalaryService fixedSalaryService;
-
+    @Autowired
+    private WorkschemeService workschemeService;
     //查询员工 部门 固定工资 职位
       @PostMapping("FixedSalarySelect/DeptName")
     public AjaxResponse selectPage2(@RequestBody FixedSalary fixedSalary){
@@ -55,4 +51,11 @@ public class FixedSalaryController {
             return AjaxResponse.success("失败");
         }
     }
+    //////////以下为加班工资方案
+    //加班工资方案查询
+    @PostMapping("jbgz/a")
+    public AjaxResponse selectPage1(@RequestBody Workscheme workscheme){
+        return AjaxResponse.success(workschemeService.selectPaer1(workscheme));
+    }
+
 }
