@@ -5,5 +5,5 @@ import com.trkj.system.salary_management.entity.Salary;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface SalaryMapper extends BaseMapper<Salary> {
+public interface SalaryyMapper extends BaseMapper<Salary> {
 }

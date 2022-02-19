@@ -1,15 +1,11 @@
 package com.trkj.system.salary_management.controller;
 
 import com.trkj.system.organizational_management.entity.Dept;
-import com.trkj.system.organizational_management.entity.DeptDeptPost;
-import com.trkj.system.organizational_management.entity.DeptPostOne;
 import com.trkj.system.salary_management.entity.*;
-import com.trkj.system.salary_management.mapper.SalaryMapper;
 import com.trkj.system.salary_management.service.FixedSalaryService;
 import com.trkj.system.salary_management.service.WorkschemeService;
 import com.trkj.system.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
