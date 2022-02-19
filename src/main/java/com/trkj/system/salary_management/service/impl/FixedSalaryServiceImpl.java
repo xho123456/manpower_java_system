@@ -4,13 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.system.organizational_management.entity.Dept;
-import com.trkj.system.organizational_management.entity.DeptPostOne;
 import com.trkj.system.organizational_management.mapper.DeptOneMapper;
 import com.trkj.system.salary_management.entity.*;
 import com.trkj.system.salary_management.mapper.*;
 import com.trkj.system.salary_management.service.FixedSalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +23,7 @@ public class FixedSalaryServiceImpl implements FixedSalaryService {
       @Autowired
       private FixedwageMapper fixedwageMapper;
       @Autowired
-      private SalaryMapper salaryMapper;
+      private SalaryyMapper salaryMapper;
       @Autowired
       private FixedwegeSalaryMapper fixedwegeSalaryMapper;
       @Autowired

@@ -196,5 +196,108 @@ public class StaffServiceImpl  implements StaffService {
     public  List<Map<String, Object>> selectStaffrs(){
         return  mapper.selectStaffrs();
     }
+    //每月计薪人数
+    @Override
+    public  List<Map<String, Object>> selectjxrs(){
+        return  mapper.selectjxrs();
+    }
+    //本月计薪人数
+    @Override
+    public  List<Map<String, Object>> selectbyjxrs(){
+        return  mapper.selectbyjxrs();
+    }
+
+    //每月人力成本
+    @Override
+    public  List<Map<String, Object>> selectrlcb(){
+        return  mapper.selectrlcb();
+    }
+    //本月人力成本
+    @Override
+    public  List<Map<String, Object>> selectbyrlcb(){
+        return  mapper.selectbyrlcb();
+    }
+
+    //每月参保人数
+    @Override
+    public  List<Map<String, Object>> selectbxrs(){
+        return  mapper.selectbxrs();
+    }
+    //本月参保人数
+    @Override
+    public  List<Map<String, Object>> selectbybxrs(){
+        return  mapper.selectbybxrs();
+    }
+    //每月员工社保金额
+    @Override
+    public  List<Map<String, Object>> selectygsbje(){
+        return  mapper.selectygsbje();
+    }
+
+    //本月月员工社保金额
+    @Override
+    public  List<Map<String, Object>> selectbyygsbje(){
+        return  mapper.selectbyygsbje();
+    }
+    //每月公司社保金额
+    @Override
+    public  List<Map<String, Object>> selectgssbje(){
+        return  mapper.selectgssbje();
+    }
+    //本月公司社保金额
+    @Override
+    public  List<Map<String, Object>> selectbygssbje(){
+        return  mapper.selectbygssbje();
+    }
+    //本月试用基本工资
+    @Override
+    public  List<Map<String, Object>> selectbysyjbgz(){
+        return  mapper.selectbysyjbgz();
+    }
+    //本月正式基本工资
+    @Override
+    public  List<Map<String, Object>> selectbyzsjbgz(){
+        return  mapper.selectbyzsjbgz();
+    }
+    //本月基本工资
+    @Override
+    public List<Map<String, Object>> selectbyzsjbgzz() {
+        return  mapper.selectbyzsjbgzz();
+    }
+    //本月个人缴公积金
+    @Override
+    public List<Map<String, Object>> selectbygrgjj() {
+        return  mapper.selectbygrgjj();
+    }
+    //本月 个人缴社保
+    @Override
+    public List<Map<String, Object>> selectbygrsb() {
+        return  mapper.selectbygrsb();
+    }
+    //本月公司缴社保
+    @Override
+    public List<Map<String, Object>> selectbygssb() {
+        return  mapper.selectbygssb();
+    }
+    //本月公司缴公积金
+    @Override
+    public List<Map<String, Object>> selectbygsgjj() {
+        return  mapper.selectbygsgjj();
+    }
+    //部门工资top榜
+    @Override
+    public List<Map<String, Object>> selectbmgztop() {
+        return  mapper.selectbmgztop();
+    }
+
+    @Override
+    public List<Map<String, Object>> selectbmgzpj() {
+        return  mapper.selectbmgzpj();
+    }
+
+    @Override
+    public List<Map<String, Object>> selectyglz11() {
+        return  mapper.selectyglz11();
+    }
 }
 
