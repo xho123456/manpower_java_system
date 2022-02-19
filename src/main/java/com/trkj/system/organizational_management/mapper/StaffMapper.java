@@ -94,9 +94,11 @@ public interface StaffMapper extends BaseMapper<Staff> {
     //员工新进律
     @Select(" select MONEYPIGEONHOLE_ASKPERSON as rs,to_char(MONEYPIGEONHOLE_DATE,'yyyy-MM') year from MONEYPIGEONHOLE WHERE  to_char(MONEYPIGEONHOLE_DATE,'yyyy-MM') >=to_char(add_months(trunc(sysdate),-5),'yyyy-mm') ORDER BY year ")
     List<Map<String, Object>> selectygxj();
-
+    //每月员工离职
     @Select(" select to_char(FORMAL_QUIT_DATE,'yyyy-MM') year,count(STAFF_ID) as rs from QUIT where to_char(FORMAL_QUIT_DATE,'yyyy-MM') <= TO_CHAR(SYSDATE,'yyyy-MM')  and to_char(FORMAL_QUIT_DATE,'yyyy-MM') >= to_char(add_months(trunc(sysdate),-6),'yyyy-mm') and QUIT_STATE=1 group by to_char(FORMAL_QUIT_DATE,'yyyy-MM') ORDER BY year ")
     List<Map<String, Object>> selectyglz1();
+    @Select(" select to_char(FORMAL_QUIT_DATE,'yyyy-MM') year,count(STAFF_ID) as rs from QUIT where to_char(FORMAL_QUIT_DATE,'yyyy-MM') <= TO_CHAR(SYSDATE,'yyyy-MM')  and to_char(FORMAL_QUIT_DATE,'yyyy-MM') >= to_char(add_months(trunc(sysdate),0),'yyyy-mm') and QUIT_STATE=1 group by to_char(FORMAL_QUIT_DATE,'yyyy-MM') ORDER BY year ")
+    List<Map<String, Object>> selectyglz11();
     //每月请假人数
 @Select("SELECT case when to_char(LEAVE_S_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') then  to_char(add_months(trunc(sysdate),0),'yyyy-mm') when to_char(LEAVE_S_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm')  then to_char(add_months(trunc(sysdate),-1),'yyyy-mm')  when to_char(LEAVE_S_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-2),'yyyy-mm') then to_char(add_months(trunc(sysdate),-2),'yyyy-mm') when to_char(LEAVE_S_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-3),'yyyy-mm') then to_char(add_months(trunc(sysdate),-3),'yyyy-mm') when to_char(LEAVE_S_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-4),'yyyy-mm') then to_char(add_months(trunc(sysdate),-4),'yyyy-mm') when to_char(LEAVE_S_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-5),'yyyy-mm') then to_char(add_months(trunc(sysdate),-5),'yyyy-mm') end as zt,count(*) as rs  FROM LEAVE  WHERE LEAVE_STATE=1 GROUP BY  case when  to_char(LEAVE_S_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm')   then  to_char(add_months(trunc(sysdate),0),'yyyy-mm') when to_char(LEAVE_S_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm') then to_char(add_months(trunc(sysdate),-1),'yyyy-mm') when to_char(LEAVE_S_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-2),'yyyy-mm') then to_char(add_months(trunc(sysdate),-2),'yyyy-mm') when to_char(LEAVE_S_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-3),'yyyy-mm') then to_char(add_months(trunc(sysdate),-3),'yyyy-mm') when to_char(LEAVE_S_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-4),'yyyy-mm') then to_char(add_months(trunc(sysdate),-4),'yyyy-mm')  when to_char(LEAVE_S_DATE,'yyyy-MM') = to_char(add_months(trunc(sysdate),-5),'yyyy-mm') then to_char(add_months(trunc(sysdate),-5),'yyyy-mm') end   ")
     List<Map<String, Object>> selectqjrs();
@@ -119,8 +121,77 @@ public interface StaffMapper extends BaseMapper<Staff> {
     List<Map<String, Object>> selectbyjbtime();
 
 
+
+
     //员工总数
     @Select("select count(*) as rs from staff ")
     List<Map<String, Object>> selectStaffrs();
+
+
+    @Select("   SELECT case when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') then  to_char(add_months(trunc(sysdate),0),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm')  then to_char(add_months(trunc(sysdate),-1),'yyyy-mm')  when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-2),'yyyy-mm') then to_char(add_months(trunc(sysdate),-2),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-3),'yyyy-mm') then to_char(add_months(trunc(sysdate),-3),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-4),'yyyy-mm') then to_char(add_months(trunc(sysdate),-4),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-5),'yyyy-mm') then to_char(add_months(trunc(sysdate),-5),'yyyy-mm') end as time,SUM(moneypigeonhole_askperson)AS RS FROM MONEYPIGEONHOLE  WHERE IS_DELETED=0 GROUP BY  case when  to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm')   then  to_char(add_months(trunc(sysdate),0),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm') then to_char(add_months(trunc(sysdate),-1),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-2),'yyyy-mm') then to_char(add_months(trunc(sysdate),-2),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-3),'yyyy-mm') then to_char(add_months(trunc(sysdate),-3),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-4),'yyyy-mm') then to_char(add_months(trunc(sysdate),-4),'yyyy-mm')  when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-5),'yyyy-mm') then to_char(add_months(trunc(sysdate),-5),'yyyy-mm') end ")
+    List<Map<String, Object>> selectjxrs();
+    //每月计薪人数
+
+
+    //本月计薪人数
+    @Select("select to_char(CREATED_TIME,'yyyy-MM') year,count(moneypigeonhole_askperson) as time from MONEYPIGEONHOLE where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and moneypigeonhole_state=1  group by to_char(CREATED_TIME,'yyyy-MM') ORDER BY year ")
+    List<Map<String, Object>> selectbyjxrs();
+
+    //每月人力成本
+    @Select("  SELECT case when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') then  to_char(add_months(trunc(sysdate),0),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm')  then to_char(add_months(trunc(sysdate),-1),'yyyy-mm')  when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-2),'yyyy-mm') then to_char(add_months(trunc(sysdate),-2),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-3),'yyyy-mm') then to_char(add_months(trunc(sysdate),-3),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-4),'yyyy-mm') then to_char(add_months(trunc(sysdate),-4),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-5),'yyyy-mm') then to_char(add_months(trunc(sysdate),-5),'yyyy-mm') end as time,SUM(moneypigeonhole_staffcost)AS RS FROM MONEYPIGEONHOLE  WHERE IS_DELETED=0 GROUP BY  case when  to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm')   then  to_char(add_months(trunc(sysdate),0),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm') then to_char(add_months(trunc(sysdate),-1),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-2),'yyyy-mm') then to_char(add_months(trunc(sysdate),-2),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-3),'yyyy-mm') then to_char(add_months(trunc(sysdate),-3),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-4),'yyyy-mm') then to_char(add_months(trunc(sysdate),-4),'yyyy-mm')  when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-5),'yyyy-mm') then to_char(add_months(trunc(sysdate),-5),'yyyy-mm') end ")
+    List<Map<String, Object>> selectrlcb();
+    //本月人力成本
+    @Select("select to_char(CREATED_TIME,'yyyy-MM') year,SUM(moneypigeonhole_staffcost) as time from MONEYPIGEONHOLE where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and moneypigeonhole_state=1  group by to_char(CREATED_TIME,'yyyy-MM') ORDER BY year  ")
+    List<Map<String, Object>> selectbyrlcb();
+
+    //每月参保人数
+    @Select(" SELECT case when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') then  to_char(add_months(trunc(sysdate),0),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm')  then to_char(add_months(trunc(sysdate),-1),'yyyy-mm')  when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-2),'yyyy-mm') then to_char(add_months(trunc(sysdate),-2),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-3),'yyyy-mm') then to_char(add_months(trunc(sysdate),-3),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-4),'yyyy-mm') then to_char(add_months(trunc(sysdate),-4),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-5),'yyyy-mm') then to_char(add_months(trunc(sysdate),-5),'yyyy-mm') end as time,count(STAFF_ID)AS RS FROM INSURED_PAYMENT  WHERE IS_DELETED=0 GROUP BY  case when  to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm')   then  to_char(add_months(trunc(sysdate),0),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm') then to_char(add_months(trunc(sysdate),-1),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-2),'yyyy-mm') then to_char(add_months(trunc(sysdate),-2),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-3),'yyyy-mm') then to_char(add_months(trunc(sysdate),-3),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-4),'yyyy-mm') then to_char(add_months(trunc(sysdate),-4),'yyyy-mm')  when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-5),'yyyy-mm') then to_char(add_months(trunc(sysdate),-5),'yyyy-mm') end ")
+    List<Map<String, Object>> selectbxrs();
+    //本月参保人数
+    @Select(" select to_char(CREATED_TIME,'yyyy-MM') year,count(STAFF_ID) as rs from INSURED_PAYMENT where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and IS_DELETED=0  group by to_char(CREATED_TIME,'yyyy-MM') ORDER BY year ")
+    List<Map<String, Object>> selectbybxrs();
+//每月员工社保金额
+    @Select(" SELECT case when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') then  to_char(add_months(trunc(sysdate),0),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm')  then to_char(add_months(trunc(sysdate),-1),'yyyy-mm')  when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-2),'yyyy-mm') then to_char(add_months(trunc(sysdate),-2),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-3),'yyyy-mm') then to_char(add_months(trunc(sysdate),-3),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-4),'yyyy-mm') then to_char(add_months(trunc(sysdate),-4),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-5),'yyyy-mm') then to_char(add_months(trunc(sysdate),-5),'yyyy-mm') end as time,sum(INS_ARCHIVE_SOCIAL_PERSON_PAY)AS rmb FROM  INSURED_ARCHIVE  WHERE IS_DELETED=0 GROUP BY  case when  to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm')   then  to_char(add_months(trunc(sysdate),0),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm') then to_char(add_months(trunc(sysdate),-1),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-2),'yyyy-mm') then to_char(add_months(trunc(sysdate),-2),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-3),'yyyy-mm') then to_char(add_months(trunc(sysdate),-3),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-4),'yyyy-mm') then to_char(add_months(trunc(sysdate),-4),'yyyy-mm')  when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-5),'yyyy-mm') then to_char(add_months(trunc(sysdate),-5),'yyyy-mm') end ")
+    List<Map<String, Object>> selectygsbje();
+    //本月员工社保金额
+    @Select("  select to_char(CREATED_TIME,'yyyy-MM') year,sum(INS_ARCHIVE_SOCIAL_PERSON_PAY) as rmb from INSURED_ARCHIVE where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and IS_DELETED=0  group by to_char(CREATED_TIME,'yyyy-MM') ORDER BY year ")
+    List<Map<String, Object>> selectbyygsbje();
+
+    //每月公司社保金额
+    @Select("  SELECT case when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') then  to_char(add_months(trunc(sysdate),0),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm')  then to_char(add_months(trunc(sysdate),-1),'yyyy-mm')  when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-2),'yyyy-mm') then to_char(add_months(trunc(sysdate),-2),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-3),'yyyy-mm') then to_char(add_months(trunc(sysdate),-3),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-4),'yyyy-mm') then to_char(add_months(trunc(sysdate),-4),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-5),'yyyy-mm') then to_char(add_months(trunc(sysdate),-5),'yyyy-mm') end as time,sum(INS_ARCHIVE_SOCIAL_FIRM_PAY)AS rmb FROM  INSURED_ARCHIVE  WHERE IS_DELETED=0 GROUP BY  case when  to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm')   then  to_char(add_months(trunc(sysdate),0),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-1),'yyyy-mm') then to_char(add_months(trunc(sysdate),-1),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-2),'yyyy-mm') then to_char(add_months(trunc(sysdate),-2),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-3),'yyyy-mm') then to_char(add_months(trunc(sysdate),-3),'yyyy-mm') when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-4),'yyyy-mm') then to_char(add_months(trunc(sysdate),-4),'yyyy-mm')  when to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),-5),'yyyy-mm') then to_char(add_months(trunc(sysdate),-5),'yyyy-mm') end  ")
+    List<Map<String, Object>> selectgssbje();
+    //本月月公司社保金额
+    @Select(" select to_char(CREATED_TIME,'yyyy-MM') year,sum(INS_ARCHIVE_SOCIAL_FIRM_PAY) as rs from INSURED_ARCHIVE where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and IS_DELETED=0  group by to_char(CREATED_TIME,'yyyy-MM') ORDER BY year")
+    List<Map<String, Object>> selectbygssbje();
+
+    //本月试用基本工资
+    @Select(" select to_char(CREATED_TIME,'yyyy-MM') year,sum(FIXEDWAGE_PERIODMONEY) as rmb from  FIXEDWAGE where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and IS_DELETED=0  group by to_char(CREATED_TIME,'yyyy-MM') ORDER BY year")
+    List<Map<String, Object>> selectbysyjbgz();
+
+    //本月正式基本工资
+    @Select("  select to_char(CREATED_TIME,'yyyy-MM') year,sum(FIXEDWAGE_OFFICIALMONEY) as rmb from  FIXEDWAGE where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and IS_DELETED=0  group by to_char(CREATED_TIME,'yyyy-MM') ORDER BY year")
+    List<Map<String, Object>> selectbyzsjbgz();
+    //本月基本工资
+    @Select("  select to_char(CREATED_TIME,'yyyy-MM') year,sum(moneypigeonhole_basepay) as rmb from  MONEYPIGEONHOLE where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and IS_DELETED=0  group by to_char(CREATED_TIME,'yyyy-MM') ORDER BY year")
+    List<Map<String, Object>> selectbyzsjbgzz();
+    //本月个人缴公积金
+    @Select(" select to_char(CREATED_TIME,'yyyy-MM') year,sum(PERSONAGE_ACCUMULATION) as rmb from  MONEYPIGEONHOLE where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and IS_DELETED=0  group by to_char(CREATED_TIME,'yyyy-MM') ORDER BY year")
+    List<Map<String, Object>> selectbygrgjj();
+    //本月个人缴社保
+    @Select("select to_char(CREATED_TIME,'yyyy-MM') year,sum(PERSONAGE_SOCIAL) as rmb from  MONEYPIGEONHOLE where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and IS_DELETED=0  group by to_char(CREATED_TIME,'yyyy-MM') ORDER BY year")
+    List<Map<String, Object>> selectbygrsb();
+    //本月 公司缴社保
+    @Select("select to_char(CREATED_TIME,'yyyy-MM') year,sum(COMPANY_SOCIAL) as rmb from  MONEYPIGEONHOLE where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and IS_DELETED=0  group by to_char(CREATED_TIME,'yyyy-MM') ORDER BY year")
+    List<Map<String, Object>> selectbygssb();
+    //本月 公司缴公积金
+    @Select("select to_char(CREATED_TIME,'yyyy-MM') year,sum( COMPANY_ACCUMULATION) as rmb from  MONEYPIGEONHOLE where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm') and IS_DELETED=0  group by to_char(CREATED_TIME,'yyyy-MM') ORDER BY year")
+    List<Map<String, Object>> selectbygsgjj();
+    //部门工资top榜
+    @Select("SELECT  D.DEPT_NAME, sum(FIXEDWAGE_OFFICIALMONEY) as rmb FROM  staff s, DEPT D ,WAG w ,FIXEDWAGE f WHERE w.STAFF_ID=s.STAFF_ID AND w.DEPT_ID=d.DEPT_ID   AND w.FIXEDWAGE_ID=f.FIXEDWAGE_ID GROUP BY  d.DEPT_NAME ORDER BY   rmb desc  ")
+    List<Map<String, Object>> selectbmgztop();
+    //部门工资平均榜
+    @Select(" SELECT  D.DEPT_NAME, sum(FIXEDWAGE_OFFICIALMONEY) as rmb ,count(s.STAFF_ID) as rs FROM  staff s, DEPT D ,WAG w ,FIXEDWAGE f WHERE w.STAFF_ID=s.STAFF_ID AND w.DEPT_ID=d.DEPT_ID   AND w.FIXEDWAGE_ID=f.FIXEDWAGE_ID GROUP BY  d.DEPT_NAME ORDER BY   rmb desc  ")
+    List<Map<String, Object>> selectbmgzpj();
+
 
 }
