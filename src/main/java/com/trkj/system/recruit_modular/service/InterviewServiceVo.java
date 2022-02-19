@@ -2,7 +2,10 @@ package com.trkj.system.recruit_modular.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.trkj.system.recruit_modular.entity.Evaluate;
+import com.trkj.system.recruit_modular.entity.Interview;
 import com.trkj.system.recruit_modular.entity.InterviewVo;
+import com.trkj.system.recruit_modular.entity.Staffrs;
+
 import java.util.List;
 
 /**
@@ -20,22 +23,16 @@ public interface InterviewServiceVo {
     IPage<InterviewVo> findAllInvite(InterviewVo interviewVo);
     /**
      * 分页查询出面试中的所有应聘人员信息
-     * @return
      */
     IPage<InterviewVo> findall(InterviewVo interviewVo);
-
     /**
      * 分页查询出复试中的所有应聘人员信息
-     * @return
      */
     IPage<InterviewVo> findallfs(InterviewVo interviewVo);
-
     /**
      * 分页查询出复面试通过的所有应聘人员信息
-     * @return
      */
     IPage<InterviewVo> selectAlladopt(InterviewVo interviewVo);
-
     /**
      * 面试评论添加
      */
@@ -52,4 +49,21 @@ public interface InterviewServiceVo {
      * 面试评论信息删除
      */
     int deletemapl(Integer id);
+    /**
+     * 面试表记录添加
+     */
+    int addinterview(Interview interview);
+    /**
+     * 查询所有员工
+     */
+    IPage<Staffrs> queryallstaff(Staffrs staffrs);
+    /**
+     * 通过简历编号查询面试表消息
+     */
+    Interview findinterbyid(Interview interview);
+    /**
+     * 面试消息修改
+     */
+    int updateByid(Interview interview);
+
 }

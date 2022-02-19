@@ -49,4 +49,24 @@ public interface StaffService {
         List<Map<String, Object>> selectjbtime();
         List<Map<String, Object>> selectStaffrs();
         List<Map<String, Object>> selectbyjbtime();
+        List<Map<String, Object>> selectjxrs();
+        List<Map<String, Object>> selectbyjxrs();
+        List<Map<String, Object>> selectrlcb();
+        List<Map<String, Object>> selectbyrlcb();
+        List<Map<String, Object>> selectbxrs();
+        List<Map<String, Object>> selectbybxrs();
+        List<Map<String, Object>> selectygsbje();
+        List<Map<String, Object>> selectbyygsbje();
+        List<Map<String, Object>> selectgssbje();
+        List<Map<String, Object>> selectbygssbje();
+        List<Map<String, Object>> selectbysyjbgz();
+        List<Map<String, Object>> selectbyzsjbgz();
+        List<Map<String, Object>> selectbyzsjbgzz();
+        List<Map<String, Object>> selectbygrgjj();
+        List<Map<String, Object>> selectbygrsb();
+        List<Map<String, Object>> selectbygssb();
+        List<Map<String, Object>> selectbygsgjj();
+        List<Map<String, Object>> selectbmgztop();
+        List<Map<String, Object>> selectbmgzpj();
+        List<Map<String, Object>>selectyglz11();
 }

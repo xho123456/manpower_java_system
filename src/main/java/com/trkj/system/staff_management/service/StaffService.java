@@ -50,9 +50,12 @@ public interface StaffService {
    IPage<StaffTransferEntity> findTransferStaffById(StaffTransferEntity staff);
    IPage<StaffTransferEntity> findTransferStaffLikeByName(StaffTransferEntity staff);
 
-   //int updateResume(StaffGiveupInductionEntity resume);
    int updateResume(StaffGiveupInductionEntity resume);
    int addwhy(StaffGiveupInductionEntity resume);
 
-   int addStaff(StaffEntity staff);
+   int addStaff(StaffTowEntity staff);
+
+   List<StaffEntity> basicstaff(Long id);
+
+   int positive(StaffEntity staff);
 }

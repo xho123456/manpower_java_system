@@ -145,8 +145,6 @@ public class InterviewVo implements Serializable {
     @ApiModelProperty(value = "简历备注")
     private String remarks;
 
-    @ApiModelProperty(value = "员工名称")
-    private String staffName;
 
     //分页
     @TableField(exist = false)

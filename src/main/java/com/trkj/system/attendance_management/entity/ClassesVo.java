@@ -77,6 +77,10 @@ public class ClassesVo implements Serializable {
     @TableField("CLASSES_TXTIMETWO")
     private Integer classesTxtimetwo;
 
+    @ApiModelProperty(value = "班次状态（0：启用，1：禁用）")
+    @TableField("CLASSESSTATE")
+    private Long classesstate;
+
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;

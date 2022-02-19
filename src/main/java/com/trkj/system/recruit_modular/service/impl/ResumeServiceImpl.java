@@ -8,6 +8,7 @@ import com.trkj.system.recruit_modular.service.ResumeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -24,28 +25,33 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
     private ResumeMapper mapper;
 
     //逻辑删除简历信息
+    @Transactional
     @Override
     public int deleteByidResume(Integer id) {
         return mapper.deleteById(id);
     }
     //修改：添加简历备注信息
+    @Transactional
     @Override
     public int updateremarks(Resume resume) {
         return mapper.updateById(resume);
     }
     //转入淘汰库
+    @Transactional
     @Override
     public int updateeliminate(Resume resume) {
         return mapper.updateById(resume);
     }
 
     //修改: 设置候选人、备注信息
+    @Transactional
     @Override
     public int updatehb(Resume resume) {
         return mapper.updateById(resume);
     }
 
     //添加简历
+    @Transactional
     @Override
     public int addResume(Resume resume) {
         return mapper.insert(resume);

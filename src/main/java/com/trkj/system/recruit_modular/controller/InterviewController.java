@@ -1,10 +1,7 @@
 package com.trkj.system.recruit_modular.controller;
 
 
-import com.trkj.system.recruit_modular.entity.Evaluate;
-import com.trkj.system.recruit_modular.entity.InterviewVo;
-import com.trkj.system.recruit_modular.entity.Resume;
-import com.trkj.system.recruit_modular.entity.ResumeVo;
+import com.trkj.system.recruit_modular.entity.*;
 import com.trkj.system.recruit_modular.service.InterviewServiceVo;
 import com.trkj.system.vo.AjaxResponse;
 import oracle.ucp.proxy.annotation.Post;
@@ -68,7 +65,6 @@ public class InterviewController {
         }else {
             return AjaxResponse.success("失败");
         }
-
     }
 
     /**
@@ -97,6 +93,43 @@ public class InterviewController {
             return AjaxResponse.success("失败");
         }
     }
+
+    /**
+     * 添加面试消息
+     */
+    @PostMapping("/Interview/addInsterv")
+    public AjaxResponse addInsterv(@RequestBody Interview interview){
+        if (interviewServiceVo.addinterview(interview)>=1){
+            return AjaxResponse.success("成功");
+        }else {
+            return AjaxResponse.success("失败");
+        }
+    }
+    /**
+     * 查询所有员工
+     */
+    @PostMapping("/Interview/queryallstaffs")
+    public AjaxResponse queryallstaffs(@RequestBody Staffrs staffrs){
+        return AjaxResponse.success(interviewServiceVo.queryallstaff(staffrs));
+    }
+    /**
+     * 通过简历id查询面试数据
+     */
+    @PostMapping("/Interview/findinsterbyid")
+    public AjaxResponse findinsterbyid(@RequestBody Interview interview){
+        return AjaxResponse.success(interviewServiceVo.findinterbyid(interview));
+    }
+
+    //面试信息修改修改
+    @PostMapping("/resume/updatemsbyid")
+    public AjaxResponse updatemsbyid(@RequestBody Interview interview) {
+        if (interviewServiceVo.updateByid(interview)>=1){
+            return AjaxResponse.success("成功");
+        }else{
+            return AjaxResponse.success("失败");
+        }
+    }
+
 
 }
 

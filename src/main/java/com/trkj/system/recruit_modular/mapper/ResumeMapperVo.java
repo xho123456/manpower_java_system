@@ -41,9 +41,11 @@ public interface ResumeMapperVo extends BaseMapper<ResumeVo> {
   ResumeVo selectBisid(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
   //面试管理录用应聘者信息简历查询
-  @Select("select R.*,Z.RECRUITMENT_PLAN_NAME,D.DEPT_NAME,P.POST_NAME from RESUME R LEFT JOIN RECRUITMENT_PLAN Z on\n" +
-          "R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID LEFT JOIN DEPT D on Z.DEPT_ID = D.DEPT_ID\n" +
-          "LEFT JOIN DEPT_POST P on Z.DEPT_POST_ID = P.DEPT_POST_ID ${ew.customSqlSegment}")
+  @Select("select R.*,Z.RECRUITMENT_PLAN_NAME,D.DEPT_NAME,P.POST_NAME,E.EMPLOYMENT_ID from \n" +
+          "RESUME R LEFT JOIN RECRUITMENT_PLAN Z on R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID LEFT JOIN \n" +
+          "DEPT D on Z.DEPT_ID = D.DEPT_ID LEFT JOIN \n" +
+          "DEPT_POST P on Z.DEPT_POST_ID = P.DEPT_POST_ID LEFT JOIN\n" +
+          "EMPLOYMENT_TABLE E on R.RESUME_ID = E.RESUME_ID ${ew.customSqlSegment}")
   ResumeVo luselectbyid(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
 }

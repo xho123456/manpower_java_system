@@ -7,6 +7,7 @@ import com.trkj.system.recruit_modular.service.EducationssService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class EducationssServiceImpl implements EducationssService {
     @Autowired
     private EducationssMapper mapper;
 
+    //分页查询受教育经历数据
     @Override
     public List<Educationss> selectByidEd(Educationss educationss) {
         QueryWrapper<Educationss> wrapper = new QueryWrapper<>();
@@ -33,11 +35,13 @@ public class EducationssServiceImpl implements EducationssService {
 
     //教育经历添加
     @Override
+    @Transactional
     public int addEducation(Educationss educationss) {
         return mapper.insert(educationss);
     }
     //个人简历教育经历删除
     @Override
+    @Transactional
     public int deleteEducation(Integer id) {
         return mapper.deleteById(id);
     }

@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Mapper
 public interface workRecruitmentPlanMapper extends BaseMapper<workRecruitmentPlan> {
-    //招聘计划
+    //招聘计划:在招职位
     @Select("select count(*) from RECRUITMENT_PLAN ${ew.customSqlSegment}")
     int selecnumber(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
     //简历

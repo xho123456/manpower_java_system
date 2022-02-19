@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.system.attendance_management.mapper.LeaveMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.system.attendance_management.entity.Leave">
+        <id column="LEAVE_ID" property="leaveId" />
+        <result column="AUDITFLOW_ID" property="auditflowId" />
+        <result column="STAFF_ID" property="staffId" />
+        <result column="STAFF_NAME" property="staffName" />
+        <result column="DEPT_ID" property="deptId" />
+        <result column="LEAVE_TYPE" property="leaveType" />
+        <result column="LEAVE_MATTER" property="leaveMatter" />
+        <result column="LEAVE_REMARKS" property="leaveRemarks" />
+        <result column="LEAVE_S_DATE" property="leaveSDate" />
+        <result column="LEAVE_E_DATE" property="leaveEDate" />
+        <result column="LEAVE_TOTAL_DATE" property="leaveTotalDate" />
+        <result column="LEAVE_STATE" property="leaveState" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        LEAVE_ID, AUDITFLOW_ID, STAFF_ID, STAFF_NAME, DEPT_ID, LEAVE_TYPE, LEAVE_MATTER, LEAVE_REMARKS, LEAVE_S_DATE, LEAVE_E_DATE, LEAVE_TOTAL_DATE, LEAVE_STATE, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+    </sql>
+
+</mapper>

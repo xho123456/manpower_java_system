@@ -10,6 +10,7 @@ import com.trkj.system.attendance_management.service.ShiftAllService;
 import com.trkj.system.recruit_modular.entity.InterviewVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -39,12 +40,14 @@ public class ShiftAllServiceImpl implements ShiftAllService {
 
     //通过id删除班次
     @Override
+    @Transactional
     public int isdeletedCl(Integer id) {
         return mapper.deleteById(id);
     }
 
     //班次新增
     @Override
+    @Transactional
     public int addClases(ClassesVo classes) {
         return mapper.insert(classes);
     }
@@ -56,6 +59,7 @@ public class ShiftAllServiceImpl implements ShiftAllService {
     }
     //班次编辑
     @Override
+    @Transactional
     public int isupdateClases(ClassesVo classesVo) {
         return mapper.updateById(classesVo);
     }

@@ -106,4 +106,110 @@ public class analysisController {
     public List<Map<String, Object>> selectCount15(){
         return staffService.selectdepttop();
     }
+
+    //查询每月计薪人数
+    @GetMapping("/chajxrs")
+    public List<Map<String, Object>> selectCount16(){
+        return staffService.selectjxrs();
+    }
+    //查询本月计薪人数
+    @GetMapping("/chabyjxrs")
+    public List<Map<String, Object>> selectCount18(){
+        return staffService.selectbyjxrs();
+    }
+
+    //查询每月人力成本
+    @GetMapping("/charlcb")
+    public List<Map<String, Object>> selectCount17(){
+        return staffService.selectrlcb();
+    }
+    //查询每月人力成本
+    @GetMapping("/chabyrlcb")
+    public List<Map<String, Object>> selectCount19(){
+        return staffService.selectbyrlcb();
+    }
+    //查询每月参保人数
+    @GetMapping("/chabxrs")
+    public List<Map<String, Object>> selectCount20(){
+        return staffService.selectbxrs();
+    }
+    //查询本月参保人数
+    @GetMapping("/chabybxrs")
+    public List<Map<String, Object>> selectCount21(){
+        return staffService.selectbybxrs();
+    }
+
+    //查询每月员工参保金额
+    @GetMapping("/chaygsbje")
+    public List<Map<String, Object>> selectCount22(){
+        return staffService.selectygsbje();
+    }
+    //查询本月员工参保金额
+    @GetMapping("/chabyygsbje")
+    public List<Map<String, Object>> selectCount23(){
+        return staffService.selectbyygsbje();
+    }
+    //查询每月公司参保金额
+    @GetMapping("/chagssbje")
+    public List<Map<String, Object>> selectCount24(){
+        return staffService.selectgssbje();
+    }
+    //查询本月公司参保金额
+    @GetMapping("/chabygssbje")
+    public List<Map<String, Object>> selectCount25(){
+        return staffService.selectbygssbje();
+    }
+    //查询本月试用基本工资
+    @GetMapping("/chabysyjbgz")
+    public List<Map<String, Object>> selectCount26(){
+        return staffService.selectbysyjbgz();
+    }
+    //查询本月正式基本工资
+    @GetMapping("/chabyzsjbgz")
+    public List<Map<String, Object>> selectCount27(){
+        return staffService.selectbyzsjbgz();
+    }
+    //查询本月基本工资
+    @GetMapping("/chabyzsjbgzz")
+    public List<Map<String, Object>> selectCount28(){
+        return staffService.selectbyzsjbgzz();
+    }
+    //查询本月个人缴公积金
+    @GetMapping("/chabygrgjj")
+    public List<Map<String, Object>> selectCount29(){
+        return staffService.selectbygrgjj();
+    }
+    //查询本月个人缴社保
+    @GetMapping("/chabygrsb")
+    public List<Map<String, Object>> selectCount30(){
+        return staffService.selectbygrsb();
+    }
+    //查询本月公司缴社保
+    @GetMapping("/chabygssb")
+    public List<Map<String, Object>> selectCount31(){
+        return staffService.selectbygssb();
+    }
+    //查询本月公司缴公积金
+    @GetMapping("/chabygsgjj")
+    public List<Map<String, Object>> selectCount32(){
+        return staffService.selectbygsgjj();
+    }
+
+    //部门工资top榜
+    @GetMapping("/chabmgztop")
+    public List<Map<String, Object>> selectCount33(){
+        return staffService.selectbmgztop();
+    }
+
+    //部门工资top榜
+    @GetMapping("/chabmgzpj")
+    public List<Map<String, Object>> selectCount34(){
+        return staffService.selectbmgzpj();
+    }
+    //本月员工离职人数
+    @GetMapping("/chayglz11")
+    public List<Map<String, Object>> selectCount35(){
+        return staffService.selectyglz11();
+    }
+
 }
