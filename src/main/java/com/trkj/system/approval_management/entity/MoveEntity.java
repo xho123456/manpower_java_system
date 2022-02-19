@@ -23,6 +23,8 @@ public class MoveEntity {
 
     private Long AUDITFLOWDETAILID;
 
+    private Long AUDITFLOWDETAISTATE;
+
     private Date AUDITFLOWDETAIDATE;
 
     private String STAFFNAME1;

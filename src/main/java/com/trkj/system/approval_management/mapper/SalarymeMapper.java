@@ -3,13 +3,12 @@ package com.trkj.system.approval_management.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.system.approval_management.entity.MoveEntity;
 import com.trkj.system.approval_management.entity.SalaryincreaseEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
-public interface SalaryMapper extends BaseMapper<SalaryincreaseEntity> {
+public interface SalarymeMapper extends BaseMapper<SalaryincreaseEntity> {
     /**
      * 查看所有调薪待办审批
      * @param page
