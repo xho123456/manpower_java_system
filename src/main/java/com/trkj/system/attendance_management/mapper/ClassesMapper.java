@@ -7,10 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.system.attendance_management.entity.Classes;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.trkj.system.attendance_management.entity.ClassesVo;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 /**
  * <p>
@@ -26,5 +23,10 @@ public interface ClassesMapper extends BaseMapper<ClassesVo> {
     //查询所有班次
     @Select("select * from Classes ${ew.customSqlSegment}")
     IPage<Classes> selectAllPage(Page<Classes> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
+
+    //禁用所有班次
+    @Update("update CLASSES set CLASSESSTATE = 0")
+    int updateclasesall();
+
 
 }
