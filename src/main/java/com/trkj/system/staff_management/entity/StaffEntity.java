@@ -25,26 +25,26 @@ public class StaffEntity {
     private Long staffPhone;
     /** 员工手机号码 */
 
-//    private String staffEmail;
-//    /** 员工邮箱 */
-//
-//    private String staffPicture;
-//    /** 员工照片 */
-//
-//    private Date staffBirthday;
-//    /** 员工生日 */
+    private String staffEmail;
+    /** 员工邮箱 */
+
+    private String staffPicture;
+    /** 员工照片 */
+
+    private Date staffBirthday;
+    /** 员工生日 */
 
     private String staffOutlook;
     /** 政治面貌 */
 
-//    private String staffEducation;
-//    /** 学历 */
-//
+    private String staffEducation;
+    /** 学历 */
+
 //    private String DEPTPOSTID;
 //    /** 职位编号 */
 
-//    private String staffPass;
-//    /** 密码 */
+    private String staffPass;
+    /** 密码 */
 
     private Date staffHIREDATE;
     /** 入职日期 */
@@ -61,36 +61,36 @@ public class StaffEntity {
     private String deptName;
     /** 部门名称 */
 
-//    private String staffMajor;
-//    /** 员工专业 */
-//
-//    private long staffEmergency;
-//    /** 紧急联系人 */
-//
-//    private String staffWechat;
-//    /** 微信 */
-//
-//    private String staffCredit;
-//    /** 银行卡号 */
-//
-//    private String staffBlood;
-//    /** 血型 */
-//
-//    private String staffSign;
-//    /** 星座 */
-//
-//    private String staffMarital;
-//    /** 婚姻状态 */
-//
-//    private String staffRegistered;
-//    /** 户口所在地 */
-//
-//    private String staffSchool;
-//    /** 毕业学校 */
-//
-//    private String staffAddress;
-//    /** 现住地址 */
-//
+    private String staffMajor;
+    /** 员工专业 */
+
+    private long staffEmergency;
+    /** 紧急联系人 */
+
+    private String staffWechat;
+    /** 微信 */
+
+    private String staffCredit;
+    /** 银行卡号 */
+
+    private String staffBlood;
+    /** 血型 */
+
+    private String staffSign;
+    /** 星座 */
+
+    private String staffMarital;
+    /** 婚姻状态 */
+
+    private String staffRegistered;
+    /** 户口所在地 */
+
+    private String staffSchool;
+    /** 毕业学校 */
+
+    private String staffAddress;
+    /** 现住地址 */
+
 //    private Long WORKEXPERIENCEID;
 //    /** 工作经历编号 */
 
@@ -102,6 +102,7 @@ public class StaffEntity {
 //
 //    private String COMPANYNAME;
 //    /** 公司名称 */
+
     private Long STAFFSTATE;
     /** 员工状态 */
 
