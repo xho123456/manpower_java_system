@@ -6,6 +6,8 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,7 +16,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 面试表
+ * 面试评价表
  * </p>
  *
  * @author 鄧琪
@@ -40,11 +42,12 @@ public class Evaluate implements Serializable {
 
     @ApiModelProperty(value = "面试评价时间")
     @TableField("EVALUATE_TIME")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date evaluateTime;
 
-    @ApiModelProperty(value = "评价人编号")
-    @TableField("STAFF_ID")
-    private Long staffId;
+    @ApiModelProperty(value = "评价人:当前登录用户的名称")
+    @TableField("STAFF_NAME")
+    private String staffName;
 
     @ApiModelProperty(value = "面试评价的内容")
     @TableField("INTERVIEW_EVALUATE")

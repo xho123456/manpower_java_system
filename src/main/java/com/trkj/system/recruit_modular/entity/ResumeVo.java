@@ -32,6 +32,10 @@ public class ResumeVo implements Serializable {
     @ApiModelProperty(value = "编号")
     private Long resumeId;
 
+    @ApiModelProperty(value = "编号")
+    @TableId("INTERVIEW_ID")
+    private Long interviewId;
+
     @ApiModelProperty(value = "部门职位名称")
     @TableField("POST_NAME")
     private String postName;
@@ -73,6 +77,12 @@ public class ResumeVo implements Serializable {
     @ApiModelProperty(value = "最近职位")
     private String resumeZjzw;
 
+    @ApiModelProperty(value = "专业")
+    private String resxuel;
+
+    @ApiModelProperty(value = "最近公司")
+    private String zjgs;
+
     @ApiModelProperty(value = "邮箱")
     private String resumeMailbox;
 
@@ -100,7 +110,7 @@ public class ResumeVo implements Serializable {
     private String resumeZt;
 
     @ApiModelProperty(value = "投简时间")
-    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date toujTime;
 
     @ApiModelProperty(value = "简历备注")
@@ -121,6 +131,9 @@ public class ResumeVo implements Serializable {
 
     @ApiModelProperty(value = "招聘计划名称")
     private String recruitmentPlanName;
+
+    @ApiModelProperty(value = "录用编号")
+    private Integer employmentId;
 
     //分页
     @TableField(exist = false)

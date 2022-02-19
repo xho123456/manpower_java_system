@@ -3,13 +3,15 @@ package com.trkj.system.recruit_modular.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.system.recruit_modular.entity.Evaluate;
-import com.trkj.system.recruit_modular.entity.InterviewVo;
+import com.trkj.system.recruit_modular.entity.*;
 import com.trkj.system.recruit_modular.mapper.EvaluateMapper;
 import com.trkj.system.recruit_modular.mapper.InterviewMapperVo;
 import com.trkj.system.recruit_modular.service.InterviewServiceVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * <p>
@@ -163,9 +165,73 @@ public class InterviewServiceImpl implements InterviewServiceVo {
     /**
      * 面试评论添加
      */
+    @Transactional
     @Override
     public int addmianspl(Evaluate evaluate) {
         return evaluateMapper.insert(evaluate);
+    }
+    /**
+     * 通过面试ID查询所有面试者的面试评论
+     */
+    @Override
+    public List<Evaluate> findallpl(Evaluate evaluate) {
+        QueryWrapper<Evaluate> wrapper_e = new QueryWrapper<>();
+        wrapper_e.eq("INTERVIEW_ID",evaluate.getInterviewId());
+        wrapper_e.eq("IS_DELETED",0);
+        return evaluateMapper.findallpl(wrapper_e);
+    }
+    /**
+     * 面试评论信息修改
+     */
+    @Transactional
+    @Override
+    public int updatemapl(Evaluate evaluate) {
+        return evaluateMapper.updateById(evaluate);
+    }
+    /**
+     * 面试评论信息删除
+     */
+    @Transactional
+    @Override
+    public int deletemapl(Integer id) {
+        return evaluateMapper.deleteById(id);
+    }
+    /**
+     * 添加面试消息
+     */
+    @Transactional
+    @Override
+    public int addinterview(Interview interview) {
+        return mapperVo.insert(interview);
+    }
+    /**
+     * 查询所有员工
+     */
+    @Override
+    public IPage<Staffrs> queryallstaff(Staffrs staffrs) {
+        Page<Staffrs> pagestaff = new Page<>(staffrs.getCurrenPage(), staffrs.getPagesize());
+        QueryWrapper<InterviewVo> wrapperstaff = new QueryWrapper<>();
+        wrapperstaff.eq("S.IS_DELETED",0);
+        return mapperVo.findallstaff(pagestaff,wrapperstaff);
+    }
+
+    /**
+     *通过简历编号查询面试表消息
+     */
+    @Override
+    public Interview findinterbyid(Interview interview) {
+        QueryWrapper<Interview> lywrapper = new QueryWrapper<>();
+        lywrapper.eq("RESUME_ID",interview.getResumeId());
+        lywrapper.eq("IS_DELETED",0);
+        return mapperVo.findInterByid(lywrapper);
+    }
+    /**
+     * 面试消息修改
+     */
+    @Transactional
+    @Override
+    public int updateByid(Interview interview) {
+        return mapperVo.updateById(interview);
     }
 
 

@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.system.staff_management.entity.*;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 
 @Mapper
 public interface Staffmapper extends BaseMapper<StaffEntity> {
@@ -59,11 +61,10 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
     /**
      * 查看所有待入职的员工
      */
-    @Select("SELECT et.EMPLOYMENT_ID,r.RESUME_ID,r.RESUME_PHOTO,r.RESUME_HY, r.RESUME_ZT,r.RESUME_NAME,r.RESUME_SEX,r.RESUME_EDUCATION," +
-            "r.RESUME_PHONE,r.RESUME_MAILBOX,r.RESUME_BIRTHDAY,r.RESUME_RESIDENCE,r.RESUME_POLITICAL_OUTLOOK,d.DEPT_NAME,dp.POST_NAME " +
-            "FROM EMPLOYMENT_TABLE et LEFT JOIN RESUME r on et.RESUME_ID=r.RESUME_ID LEFT JOIN RECRUITMENT_PLAN rp " +
+    @Select("SELECT * " +
+            "FROM EMPLOYMENT_TABLE et LEFT JOIN RESUME r on et.RESUME_ID=r.RESUME_ID  LEFT JOIN RECRUITMENT_PLAN rp " +
             "on rp.RECRUITMENT_PLAN_ID=r.RECRUITMENT_PLAN_ID LEFT JOIN DEPT d on d.dept_id=rp.dept_id LEFT JOIN " +
-            "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where r.RESUME_ZT=8")
+            "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where r.RESUME_ZT=6")
     IPage<StaffInductionEntity> findInductionStaff(Page<StaffInductionEntity> page);
 
     /**
@@ -73,7 +74,7 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
             "r.RESUME_BIRTHDAY,r.RESUME_RESIDENCE,r.RESUME_POLITICAL_OUTLOOK,d.DEPT_NAME,dp.POST_NAME " +
             "FROM EMPLOYMENT_TABLE et LEFT JOIN RESUME r on et.RESUME_ID=r.RESUME_ID LEFT JOIN RECRUITMENT_PLAN rp " +
             "on rp.RECRUITMENT_PLAN_ID=r.RECRUITMENT_PLAN_ID LEFT JOIN DEPT d on d.dept_id=rp.dept_id LEFT JOIN " +
-            "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where r.RESUME_ZT=11")
+            "DEPT_POST dp on dp.DEPT_POST_ID=rp.DEPT_POST_ID where r.RESUME_ZT=12")
     IPage<StaffGiveupInductionEntity> findgiveupInductionStaff(Page<StaffGiveupInductionEntity> page);
 
     /**
@@ -196,7 +197,7 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
     /**
      * 员工放弃入职
      */
-    @Update("update RESUME set RESUME_ZT=4  ${ew.customSqlSegment}")
+    @Update("update RESUME set RESUME_ZT=11  ${ew.customSqlSegment}")
     int updateResume(@Param(Constants.WRAPPER) QueryWrapper<StaffGiveupInductionEntity> queryWrapper);
 
     /**
@@ -205,10 +206,19 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
     @Update("update EMPLOYMENT_TABLE set ${ew.sqlSet}  ${ew.customSqlSegment}")
     int addwhy(@Param(Constants.WRAPPER) UpdateWrapper<StaffGiveupInductionEntity> wrapper);
 
-//    @Insert("insert into STAFF(STAFF_ID,STAFF_NAME,STAFF_SEX,STAFF_PHONE,STAFF_EMAIL,STAFF_PICTURE," +
-//            "STAFF_BIRTHDAY,STAFF_OUTLOOK,STAFF_EDUCATION,POSITION_NAME,STAFF_PASS,STAFF_HIREDATE," +
-//            "STAFF_IDENTITY,DEPT_ID,CREATED_TIME,UPDATED_TIME)" +
-//            "values(2,'刘一','男',13874114336,'3405425732@qq.com','F:\\360downloads\\224716-16191892361adb.jpg',to_date( '2003-04-26','yyyy-mm-dd'),'群众','本科','员工','123456',to_date( '2018-07-17','yyyy-mm-dd'),'430224200204261836',1,SYSDATE,SYSDATE\n" +
-//            ")")
-//    int addStaff();
+
+    /**
+     * 员工基本信息
+     */
+    @Select("select * from staff s left join dept d on s.DEPT_ID=d.DEPT_ID LEFT JOIN dept_post dp on " +
+            "s.DEPT_POST_ID=dp.DEPT_POST_ID where s.staff_id#{id}")
+    List<StaffEntity> staff(Long id);
+
+    /**
+     * 员工转正
+     */
+    @Update("update staff set STAFF_STATE=1  ")
+    int positive(@Param(Constants.WRAPPER) QueryWrapper<StaffEntity> wrapper);
+
+
 }

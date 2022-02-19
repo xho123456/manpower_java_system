@@ -7,6 +7,7 @@ import com.trkj.system.recruit_modular.service.RecruitmentPlanService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class RecruitmentPlanServiceImpl implements RecruitmentPlanService {
     /**
      * 招聘计划: 关闭计划修改状态
      */
+    @Transactional
     @Override
     public int updateRecruitmentPlan(RecruitmentPlan recruitmentPlan) {
         return recruitmentPlanMapper.updateById(recruitmentPlan);
@@ -33,6 +35,7 @@ public class RecruitmentPlanServiceImpl implements RecruitmentPlanService {
     /**
      * 招聘计划: 删除招聘计划
      */
+    @Transactional
     @Override
     public int deleteRecruitmentPlan(Integer id) {
         return recruitmentPlanMapper.deleteById(id);
@@ -49,12 +52,16 @@ public class RecruitmentPlanServiceImpl implements RecruitmentPlanService {
             //职位编号
             wrappers.eq("DEPT_POST_ID",RecruitmentPlan.getDeptPostId());
 
-
+        wrappers.eq("RECRUITMENT_ZT",0);
         //逻辑删除
         wrappers.eq("IS_DELETED",0);
         return recruitmentPlanMapper.findByids(wrappers);
     }
 
+    /**
+     * 新增招聘计划
+     */
+    @Transactional
     @Override
     public int addplan(RecruitmentPlan recruitmentPlan) {
         return recruitmentPlanMapper.insert(recruitmentPlan);

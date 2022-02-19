@@ -166,7 +166,7 @@ public class StaffController {
     }
 
     @PostMapping("/staff/addStaff")
-    public AjaxResponse addStaff(@RequestBody StaffEntity staff){
+    public AjaxResponse addStaff(@RequestBody StaffTowEntity staff){
         if (service.addStaff(staff)>0){
             return AjaxResponse.success("入职成功");
         }else {
@@ -174,4 +174,18 @@ public class StaffController {
         }
     }
 
+    @PostMapping("/staff/basic")
+    public AjaxResponse staff(@RequestBody StaffEntity staff){
+        return AjaxResponse.success(service.basicstaff(staff.getStaffId()));
+    }
+
+    @PostMapping("/staff/positive")
+    public AjaxResponse positive(@RequestBody StaffEntity staff){
+        System.out.println(staff);
+        if (service.positive(staff)>0){
+            return AjaxResponse.success("转正成功");
+        }else {
+            return AjaxResponse.success("转正失败");
+        }
+    }
 }

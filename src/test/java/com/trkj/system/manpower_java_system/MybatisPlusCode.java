@@ -58,7 +58,7 @@
 //        //模块名
 ////        packageConfig.setModuleName("manpower_java_system");
 //        //放在哪一个包下
-//        packageConfig.setParent("com.trkj.system.recruit_modular");
+//        packageConfig.setParent("com.trkj.system.attendance_management");
 //        //实体类的名字
 //        packageConfig.setEntity("entity");
 //        //Mapper的名字
@@ -74,7 +74,7 @@
 //        //4、策略配置
 //        StrategyConfig strategyConfig = new StrategyConfig();
 //        //数据库表名
-//        strategyConfig.setInclude("DEPT");
+//        strategyConfig.setInclude("LEAVE");
 //        //包的命名规则
 //        strategyConfig.setNaming(NamingStrategy.underline_to_camel);
 //        //列的名字

@@ -13,8 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-01-05
  */
 public interface ResumeService extends IService<Resume> {
-    //查询简历详情页面个人信息
-    Resume findByidselect(Long id);
     //逻辑删除简历信息
     int deleteByidResume(Integer id);
     //修改：添加简历备注信息
@@ -25,7 +23,6 @@ public interface ResumeService extends IService<Resume> {
     int updatehb(Resume resume);
     //添加简历
     int addResume(Resume resume);
-
     //招聘计划：简历数量统计
     int planhxr(Resume resume);
 

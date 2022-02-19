@@ -7,6 +7,7 @@ import com.trkj.system.recruit_modular.service.WorkExperiencessService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -34,5 +35,18 @@ public class WorkExperiencessServiceImpl implements WorkExperiencessService {
         //逻辑删除
         wrapper.eq("IS_DELETED",0);
         return mapper.findByidWork(wrapper);
+    }
+    //新增工作经历
+    @Transactional
+    @Override
+    public int addWorkexper(WorkExperiencess workExperiencess) {
+        return mapper.insert(workExperiencess);
+    }
+
+    //删除工作经历信息
+    @Transactional
+    @Override
+    public int deletehomes(Integer id) {
+        return mapper.deleteById(id);
     }
 }

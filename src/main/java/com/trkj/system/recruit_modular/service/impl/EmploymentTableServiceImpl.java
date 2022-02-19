@@ -3,11 +3,13 @@ package com.trkj.system.recruit_modular.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.system.recruit_modular.entity.EmploymentTable;
 import com.trkj.system.recruit_modular.entity.EmploymentTableVo;
 import com.trkj.system.recruit_modular.mapper.EmploymentTableMapperVo;
 import com.trkj.system.recruit_modular.service.EmploymentTableServiceVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -53,15 +55,31 @@ public class EmploymentTableServiceImpl implements EmploymentTableServiceVo {
         wrapperjs.eq("E.IS_DELETED",0).orderByDesc("E.EMPLOYMENT_ID");
         return mapperVo.findAllemployment(pagejs,wrapperjs);
     }
-
-
-
     /**
      * 录用放弃原因
      */
+    @Transactional
     @Override
-    public int updatefq(EmploymentTableVo employmentTableVo) {
-        return mapperVo.updateById(employmentTableVo);
+    public int updatefq(EmploymentTable employmentTable) {
+        return mapperVo.updateById(employmentTable);
+    }
+    /**
+     * 面试通过新增录用人员
+     */
+    @Transactional
+    @Override
+    public int addEmploy(EmploymentTable employmentTable) {
+        return mapperVo.insert(employmentTable);
+    }
+    /**
+     * 通过简历id查询录用表数据
+     */
+    @Override
+    public EmploymentTable findbyresumeid(EmploymentTable employmentTable) {
+        QueryWrapper<EmploymentTable> lywrapper = new QueryWrapper<>();
+        lywrapper.eq("RESUME_ID",employmentTable.getResumeId());
+        lywrapper.eq("IS_DELETED",0);
+        return mapperVo.selectbyresumeid(lywrapper);
     }
 
 
