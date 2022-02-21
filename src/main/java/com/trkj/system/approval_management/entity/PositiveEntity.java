@@ -12,6 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Accessors(chain = true)  /** 链式写法 */
 public class PositiveEntity {
+    //转正
     public Long AUDITFLOWID;
 
     public String AUDITFLOWTITLE;
