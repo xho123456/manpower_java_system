@@ -37,5 +37,6 @@ public class workRecruitmentPlanController {
         return AjaxResponse.success(service.selecnumber(workResume));
     }
 
+
 }
 

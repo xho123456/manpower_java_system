@@ -17,9 +17,6 @@ public interface LeaveService {
     //查询所有员工的打卡记录
     IPage<ClockRecord> selectAll(ClockRecord clockRecord);
 
-
-
-
     //根据当前登录用户查询请假信息
     IPage<Leave> selectAllqj(Leave leave);
 

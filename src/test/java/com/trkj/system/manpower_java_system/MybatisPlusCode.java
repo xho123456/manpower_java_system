@@ -58,7 +58,7 @@
 //        //模块名
 ////        packageConfig.setModuleName("manpower_java_system");
 //        //放在哪一个包下
-//        packageConfig.setParent("com.trkj.system.attendance_management");
+//        packageConfig.setParent("com.trkj.system.workbench");
 //        //实体类的名字
 //        packageConfig.setEntity("entity");
 //        //Mapper的名字
