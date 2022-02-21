@@ -3,12 +3,15 @@ package com.trkj.system.workbench.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.trkj.system.recruit_modular.entity.Resume;
 import com.trkj.system.workbench.entity.workRecruitmentPlan;
 import com.trkj.system.workbench.entity.workResume;
 import com.trkj.system.workbench.mapper.workRecruitmentPlanMapper;
 import com.trkj.system.workbench.service.workRecruitmentPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -42,4 +45,7 @@ public class workRecruitmentPlanServiceImpl implements workRecruitmentPlanServic
         wrapper.eq("IS_DELETED",0);
         return recruitmentPlanMapper.selectnum(wrapper);
     }
+
+
+
 }

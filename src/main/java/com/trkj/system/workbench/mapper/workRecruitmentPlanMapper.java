@@ -3,6 +3,7 @@ package com.trkj.system.workbench.mapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.trkj.system.recruit_modular.entity.Resume;
 import com.trkj.system.workbench.entity.workRecruitmentPlan;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,6 +24,7 @@ public interface workRecruitmentPlanMapper extends BaseMapper<workRecruitmentPla
     //招聘计划:在招职位
     @Select("select count(*) from RECRUITMENT_PLAN ${ew.customSqlSegment}")
     int selecnumber(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
+
     //简历
     @Select("select count(*) from RESUME ${ew.customSqlSegment}")
     int selectnum(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);

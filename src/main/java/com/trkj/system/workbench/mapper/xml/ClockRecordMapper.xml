@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.system.workbench.mapper.ClockRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.system.workbench.entity.ClockRecord">
+        <id column="CLOCK_RECORD_ID" property="clockRecordId" />
+        <result column="DAY_DATE" property="dayDate" />
+        <result column="SMORN_CLOCK" property="smornClock" />
+        <result column="SMORN_RESULT" property="smornResult" />
+        <result column="XAFTERNOON_CLOCK" property="xafternoonClock" />
+        <result column="XAFTERNOON_RESULT" property="xafternoonResult" />
+        <result column="ATS_SHOULD" property="atsShould" />
+        <result column="AT_SHOULD" property="atShould" />
+        <result column="CHE_LATE" property="cheLate" />
+        <result column="CHES_LATE" property="chesLate" />
+        <result column="ZHAI_LATE" property="zhaiLate" />
+        <result column="ZHAIS_LATE" property="zhaisLate" />
+        <result column="KANG_LATE" property="kangLate" />
+        <result column="KANGS_LATE" property="kangsLate" />
+        <result column="WORK_YING" property="workYing" />
+        <result column="WORKS_YING" property="worksYing" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        CLOCK_RECORD_ID, DAY_DATE, SMORN_CLOCK, SMORN_RESULT, XAFTERNOON_CLOCK, XAFTERNOON_RESULT, ATS_SHOULD, AT_SHOULD, CHE_LATE, CHES_LATE, ZHAI_LATE, ZHAIS_LATE, KANG_LATE, KANGS_LATE, WORK_YING, WORKS_YING, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+    </sql>
+
+</mapper>

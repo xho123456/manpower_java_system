@@ -1,4 +1,4 @@
-package com.trkj.system.attendance_management.entity;
+package com.trkj.system.workbench.entity;
 
 import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -29,7 +29,7 @@ import java.util.Date;
 @TableName("CLASSES")
 @ApiModel(value="Classes对象", description="班次方案表")
 @KeySequence(value = "CLASSES_ID", clazz = Integer.class)
-public class ClassesVo implements Serializable {
+public class Gclasses implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -46,33 +46,35 @@ public class ClassesVo implements Serializable {
     private String classesSd;
 
     @ApiModelProperty(value = "工作时间范围一(上班) ")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_TIMEONES")
     private Date classesTimeones;
 
     @ApiModelProperty(value = "工作时间范围一(下班) ")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_TIMEONEX")
     private Date classesTimeonex;
 
 
     @ApiModelProperty(value = "工作时间范围二(上班) ")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_TIMETWOS")
     private Date classesTimetwos;
 
     @ApiModelProperty(value = "工作时间范围二(下班) ")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_TIMETWOX")
     private Date classesTimetwox;
 
+
     @ApiModelProperty(value = "班次状态（0：启用，1：禁用）")
     @TableField("CLASSESSTATE")
     private Long classesstate;
+
 
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
@@ -91,24 +93,24 @@ public class ClassesVo implements Serializable {
     private Date updatedTime;
 
     @ApiModelProperty(value = "休息开始时段")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_XXTIME_STATE")
     private Date classesXxtimeState;
 
     @ApiModelProperty(value = "休息结束时段")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_XXTIME_END")
     private Date classesXxtimeEnd;
 
     @TableField("DK_STATE")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dkState;
 
     @TableField("DK_END")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "HH:mm",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dkEnd;
 
