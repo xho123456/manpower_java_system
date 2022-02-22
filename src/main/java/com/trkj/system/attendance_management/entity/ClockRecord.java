@@ -95,7 +95,7 @@ public class ClockRecord implements Serializable {
 
     @ApiModelProperty(value = "迟到时长(小时)")
     @TableField("CHES_LATE")
-    private Long chesLate;
+    private Double chesLate;
 
     @ApiModelProperty(value = "早退次数（次数）")
     @TableField("ZHAI_LATE")
@@ -103,7 +103,7 @@ public class ClockRecord implements Serializable {
 
     @ApiModelProperty(value = "早退时长（小时）")
     @TableField("ZHAIS_LATE")
-    private Long zhaisLate;
+    private Double zhaisLate;
 
     @ApiModelProperty(value = "旷工次数（次数）")
     @TableField("KANG_LATE")
@@ -111,7 +111,7 @@ public class ClockRecord implements Serializable {
 
     @ApiModelProperty(value = "旷工时长（小时）")
     @TableField("KANGS_LATE")
-    private Long kangsLate;
+    private Double kangsLate;
 
     @ApiModelProperty(value = "应工作时长")
     @TableField("WORK_YING")
@@ -119,7 +119,7 @@ public class ClockRecord implements Serializable {
 
     @ApiModelProperty(value = "实际工作时长")
     @TableField("WORKS_YING")
-    private Long worksYing;
+    private Double worksYing;
 
 
 
@@ -165,4 +165,7 @@ public class ClockRecord implements Serializable {
     private int currenPage;
     @TableField(exist = false)
     private int pagesize;
+
+    @TableField(exist = false)
+    private String dates;
 }
