@@ -11,8 +11,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)  /** 链式写法 */
-public class DepartureEntity {
-    //离职
+public class LeaveEntity {
+    //请假
     private Long AUDITFLOWID;
 
     private String AUDITFLOWTITLE;
@@ -33,19 +33,24 @@ public class DepartureEntity {
     private String STAFFNAME2;
     /** 当前审批人名称 */
 
-    private Long QUITID;
+    private Long LEAVEID;
 
-    private String QUITTYPE;
+    private String LEAVETYPE;
 
-    private String QUITEXPLAIN;
+    private String LEAVEMATTER;
 
-    private Long QUITSTATE;
+    private String LEAVEREMARKS;
 
-    private Date APPLY_QUIT_DATE;
+    private Date LEAVESDATE;
 
-    private Date FORMALQUITDATE;
+    private Date LEAVEEDATE;
+
+    private Long LEAVETOTALDATE;
+
+    private Long LEAVESTATE;
 
     private Date UPDATEDTIME;
 
     private Date CREATEDTIME;
+
 }

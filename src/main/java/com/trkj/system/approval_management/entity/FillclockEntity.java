@@ -11,8 +11,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)  /** 链式写法 */
-public class DepartureEntity {
-    //离职
+public class FillclockEntity {
+    //补打卡
     private Long AUDITFLOWID;
 
     private String AUDITFLOWTITLE;
@@ -33,17 +33,15 @@ public class DepartureEntity {
     private String STAFFNAME2;
     /** 当前审批人名称 */
 
-    private Long QUITID;
+    private Long CARDID;
 
-    private String QUITTYPE;
+    private String CARDTYPE;
 
-    private String QUITEXPLAIN;
+    private Date CARDDATE;
 
-    private Long QUITSTATE;
+    private String CARDREMARKS;
 
-    private Date APPLY_QUIT_DATE;
-
-    private Date FORMALQUITDATE;
+    private Long CARDSTATE;
 
     private Date UPDATEDTIME;
 

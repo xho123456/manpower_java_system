@@ -11,8 +11,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)  /** 链式写法 */
-public class DepartureEntity {
-    //离职
+public class WorkovertimeEntity {
+    //加班
     private Long AUDITFLOWID;
 
     private String AUDITFLOWTITLE;
@@ -33,19 +33,24 @@ public class DepartureEntity {
     private String STAFFNAME2;
     /** 当前审批人名称 */
 
-    private Long QUITID;
+    private Long OVERTIMEASKID;
 
-    private String QUITTYPE;
+    private String OVERTIMEASKTYPE;
 
-    private String QUITEXPLAIN;
+    private String OVERTIMEASKMATTER;
 
-    private Long QUITSTATE;
+    private String OVERTIMEASKREMARKS;
 
-    private Date APPLY_QUIT_DATE;
+    private Date OVERTIMEASKSDATE;
 
-    private Date FORMALQUITDATE;
+    private Date OVERTIMEASKEDATE;
+
+    private Long OVERTIMEASKTOTALDATE;
+
+    private Long OVERTIMEASKSTATE;
 
     private Date UPDATEDTIME;
 
     private Date CREATEDTIME;
+
 }

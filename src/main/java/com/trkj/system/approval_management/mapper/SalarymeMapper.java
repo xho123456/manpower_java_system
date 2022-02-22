@@ -15,7 +15,7 @@ public interface SalarymeMapper extends BaseMapper<SalaryincreaseEntity> {
      * @return
      */
     @Select("SELECT sa.AUDITFLOW_ID,sa.FRONT_SALARY,sa.AFTER_SALARY,sa.SALARY_STATE,sa.TAKE_EFFECT_DATE," +
-            "sa.SALARY_REMARKS,au.AUDITFLOW_TYPE," +
+            "sa.SALARY_REMARKS,sa.CREATED_TIME,au.AUDITFLOW_TYPE," +
             "s.STAFF_NAME as STAFFNAME1,ae.STAFF_NAME as STAFFNAME2,ae.AUDITFLOWDETAI_DATE,ae.AUDITFLOWDETAI_STATE" +
             " FROM SALARY sa LEFT JOIN AUDITFLOW au on sa.AUDITFLOW_ID=au.AUDITFLOW_ID LEFT JOIN STAFF s on au.STAFF_ID=s.STAFF_ID" +
             " LEFT JOIN AUDITFLOWDETAIL ae on ae.AUDITFLOW_ID=au.AUDITFLOW_ID where ae.AUDITFLOWDETAI_STATE=1 ")
@@ -27,7 +27,7 @@ public interface SalarymeMapper extends BaseMapper<SalaryincreaseEntity> {
      * @return
      */
     @Select("SELECT sa.AUDITFLOW_ID,sa.FRONT_SALARY,sa.AFTER_SALARY,sa.SALARY_STATE,sa.TAKE_EFFECT_DATE," +
-            "sa.SALARY_REMARKS,au.AUDITFLOW_TYPE," +
+            "sa.SALARY_REMARKS,sa.CREATED_TIME,au.AUDITFLOW_TYPE," +
             "s.STAFF_NAME as STAFFNAME1,ae.STAFF_NAME as STAFFNAME2,ae.AUDITFLOWDETAI_DATE,ae.AUDITFLOWDETAI_STATE" +
             " FROM SALARY sa LEFT JOIN AUDITFLOW au on sa.AUDITFLOW_ID=au.AUDITFLOW_ID LEFT JOIN STAFF s on au.STAFF_ID=s.STAFF_ID" +
             " LEFT JOIN AUDITFLOWDETAIL ae on ae.AUDITFLOW_ID=au.AUDITFLOW_ID where ae.AUDITFLOWDETAI_STATE=2 ")
