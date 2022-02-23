@@ -45,5 +45,5 @@ public interface StaffsMapper extends BaseMapper<Staffs> {
      * @return
      */
     @Select("select STAFF_ID from staff ${ew.customSqlSegment}")
-    Staffs selectStaffsID(@Param(Constants.WRAPPER) QueryWrapper<Staffs> queryWrapper);
+    List<Staffs> selectStaffsID(@Param(Constants.WRAPPER) QueryWrapper<Staffs> queryWrapper);
 }

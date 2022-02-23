@@ -14,36 +14,50 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 默认参保方案表
+ * 参保方案表
  * </p>
  *
- * @author 鄧琪
- * @since 2022-02-19
+ * @author 谢海欧
+ * @since 2022-02-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("DEF_INSURED")
-@ApiModel(value="DefInsured对象", description="默认参保方案表")
-public class DefInsured implements Serializable {
+@TableName("INSURED_PAYMENT")
+@ApiModel(value="InsuredPayment对象", description="参保缴纳表")
+@KeySequence(value = "INSURED_PAYMENT_ID", clazz = Integer.class)
+public class InsuredPayment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "默认参保方案编号")
-    @TableId("DEF_INSURED_ID")
-    private Long defInsuredId;
+    @ApiModelProperty(value = "参保缴纳编号")
+    @TableId("INSURED_PAYMENT_ID")
+    private Long insuredPaymentId;
 
-    @ApiModelProperty(value = "默认参保方案名称")
-    @TableField("DEF_INSURED_NAME")
-    private String defInsuredName;
+    @ApiModelProperty(value = "员工编号")
+    @TableField("STAFF_ID")
+    private Long staffId;
 
-    @ApiModelProperty(value = "默认参保方案状态 0:启用 1:禁用")
-    @TableField("DEF_INSURED_STATE")
-    private Long defInsuredState;
+    @ApiModelProperty(value = "参保方案编号")
+    @TableField("INSURED_SCHEME_ID")
+    private Long insuredSchemeId;
 
-    @ApiModelProperty(value = "默认参保方案数量")
-    @TableField("DEF_INSURED_NUMBER")
-    private Long defInsuredNumber;
+    @ApiModelProperty(value = "参保明细编号")
+    @TableField("INS_DETAIL_ID")
+    private Long insDetailId;
+
+    @ApiModelProperty(value = "缴纳基数")
+    @TableField("INSURED_PAYMENT_NUMBER")
+    private Long insuredPaymentNumber;
+
+    @ApiModelProperty(value = "参保月份 精确到年月")
+    @TableField("INSURED_PAYMENT_INSURED_MONTH")
+    private Date insuredPaymentInsuredMonth;
+
+    @ApiModelProperty(value = "计薪月份 精确到年月")
+    @TableField("INSURED_PAYMENT_SALARY_MONTH")
+    private Date insuredPaymentSalaryMonth;
+
 
     @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
     @ApiModelProperty(value = "创建时间 精确到秒")
@@ -64,10 +78,6 @@ public class DefInsured implements Serializable {
     @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
     @TableField("IS_DELETED")
     private Long isDeleted;
-
-
-    private int currentPage;
-    private int pagesize;
 
 
 }

@@ -257,14 +257,17 @@ public class NoticeVoServicelmpl implements NoticeVoService {
                 if(noticeDeptMapper.insert(noticeDept)>0){
                     Notice notice1=noticeMapper.selectNotice(new QueryWrapper<Notice>().eq("NOTICE_TITLE",notices.getNoticeTitle()).eq("IS_DELETED",0));
                     //查询员工id
-                    Staffs staffs=staffsMapper.selectStaffsID(new QueryWrapper<Staffs>().eq("DEPT_ID",depts.getDeptId()).eq("IS_DELETED",0));
-                    //添加员工信息
-                    NoticeStaff noticeStaff= new NoticeStaff();
-                    noticeStaff.setNoticeId(notice1.getNoticeId());
-                    noticeStaff.setStaffId(staffs.getStaffId());
-                    if(noticeStaffMapper.insert(noticeStaff)>0){
-                        a=1;
+                    List<Staffs> staffs=staffsMapper.selectStaffsID(new QueryWrapper<Staffs>().eq("DEPT_ID",depts.getDeptId()).eq("IS_DELETED",0));
+                    for(int i=0; i<staffs.size();i++){
+                        //添加员工信息
+                        NoticeStaff noticeStaff= new NoticeStaff();
+                        noticeStaff.setNoticeId(notice1.getNoticeId());
+                        noticeStaff.setStaffId(staffs.get(i).getStaffId());
+                        if(noticeStaffMapper.insert(noticeStaff)>0){
+                            a=1;
+                        }
                     }
+
                 }
             }
 
