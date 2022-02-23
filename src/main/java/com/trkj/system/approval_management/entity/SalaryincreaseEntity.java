@@ -25,6 +25,8 @@ public class SalaryincreaseEntity {
 
     private Date AUDITFLOWDETAIDATE;
 
+    private Long AUDITFLOWDETAISTATE;
+
     private String STAFFNAME1;
     /** 申请人名称 */
 

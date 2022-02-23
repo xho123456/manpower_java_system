@@ -21,7 +21,7 @@
 //        //代码输出目录
 //        globalConfig.setOutputDir(property + "/src/main/java/");
 //        /*生成作者的信息*/
-//        globalConfig.setAuthor("谢海欧");
+//        globalConfig.setAuthor("鄧琪");
 //        //是否打开资源管理器
 //        globalConfig.setOpen(false);
 //        //是否覆盖原来生成的文件
@@ -58,7 +58,7 @@
 //        //模块名
 ////        packageConfig.setModuleName("manpower_java_system");
 //        //放在哪一个包下
-//        packageConfig.setParent("com.trkj.system.insurance_management");
+//        packageConfig.setParent("com.trkj.system.attendance_management");
 //        //实体类的名字
 //        packageConfig.setEntity("entity");
 //        //Mapper的名字
@@ -73,8 +73,8 @@
 //
 //        //4、策略配置
 //        StrategyConfig strategyConfig = new StrategyConfig();
-//        //数据库表名STAFF
-//        strategyConfig.setInclude("DEPT_POST");
+//        //数据库表名
+//        strategyConfig.setInclude("CLOCK_RECORD");
 //        //包的命名规则
 //        strategyConfig.setNaming(NamingStrategy.underline_to_camel);
 //        //列的名字
