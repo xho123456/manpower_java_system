@@ -4,10 +4,12 @@ package com.trkj.system.attendance_management.controller;
 import com.trkj.system.attendance_management.entity.ClockRecord;
 import com.trkj.system.attendance_management.entity.Leave;
 import com.trkj.system.attendance_management.entity.Overtimeask;
+import com.trkj.system.attendance_management.entity.StaffVo;
 import com.trkj.system.attendance_management.service.LeaveService;
 import com.trkj.system.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -94,5 +96,12 @@ public class LeaveController {
     public AjaxResponse querykgnumbers(@RequestBody ClockRecord clockRecord){
         return AjaxResponse.success(service.selkuangnumber(clockRecord));
     }
+
+    //考勤月统计
+    @PostMapping("/leave/queryallsmothday")
+    public AjaxResponse queryallsmothday(@RequestBody StaffVo staffVo){
+        return AjaxResponse.success(service.selectAllmothday(staffVo));
+    }
+
 }
 

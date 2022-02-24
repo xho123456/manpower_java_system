@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.trkj.system.attendance_management.entity.ClockRecord;
 import com.trkj.system.attendance_management.entity.Leave;
 import com.trkj.system.attendance_management.entity.Overtimeask;
+import com.trkj.system.attendance_management.entity.StaffVo;
+import com.trkj.system.vo.AjaxResponse;
 
 /**
  * <p>
@@ -47,10 +49,8 @@ public interface LeaveService {
     //统计旷工次数
     int selkuangnumber(ClockRecord clockRecord);
 
-
-
-
-
+    //考勤月统计
+    IPage<StaffVo> selectAllmothday(StaffVo staffVo);
 
 
 }

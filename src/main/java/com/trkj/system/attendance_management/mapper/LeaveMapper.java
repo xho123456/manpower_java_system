@@ -8,6 +8,7 @@ import com.trkj.system.attendance_management.entity.ClockRecord;
 import com.trkj.system.attendance_management.entity.Leave;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.trkj.system.attendance_management.entity.Overtimeask;
+import com.trkj.system.attendance_management.entity.StaffVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -87,6 +88,8 @@ public interface LeaveMapper extends BaseMapper<Leave> {
     //统计旷工次数
     @Select("select count(*) from CLOCK_RECORD ${ew.customSqlSegment} AND TO_CHAR(DAY_DATE,'yyyy-MM') = #{dates} AND  SMORN_RESULT='旷工' OR XAFTERNOON_RESULT = '旷工'")
     int kuangtnumber(@Param(Constants.WRAPPER) QueryWrapper queryWrapper,@Param("dates") String dates);
+
+
 
 
 
