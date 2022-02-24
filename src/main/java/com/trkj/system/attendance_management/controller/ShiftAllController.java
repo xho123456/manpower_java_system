@@ -67,5 +67,16 @@ public class ShiftAllController {
             return AjaxResponse.success("失败");
         }
     }
+
+    //禁用所有班次
+    @PostMapping("/Classes/upclasesall")
+    public AjaxResponse upclasesall(){
+        if (server.updateclasesall()>=1){
+            return AjaxResponse.success("成功");
+        }else{
+            return AjaxResponse.success("失败");
+        }
+    }
+
 }
 

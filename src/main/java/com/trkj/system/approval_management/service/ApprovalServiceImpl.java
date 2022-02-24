@@ -7,7 +7,7 @@ import com.trkj.system.approval_management.entity.PositiveEntity;
 import com.trkj.system.approval_management.entity.SalaryincreaseEntity;
 import com.trkj.system.approval_management.mapper.AuditflowMapper;
 import com.trkj.system.approval_management.mapper.MoveMapper;
-import com.trkj.system.approval_management.mapper.SalaryMapper;
+import com.trkj.system.approval_management.mapper.SalarymeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class ApprovalServiceImpl implements ApprovalService {
     private MoveMapper moveMapper;
 
     @Autowired
-    private SalaryMapper salaryMapper;
+    private SalarymeMapper salarymeMapper;
 
     @Override
     public IPage<PositiveEntity> positveme(Page<PositiveEntity> page) {
@@ -44,11 +44,11 @@ public class ApprovalServiceImpl implements ApprovalService {
 
     @Override
     public IPage<SalaryincreaseEntity> Salaryme(Page<SalaryincreaseEntity> page) {
-        return salaryMapper.Salaryme(page);
+        return salarymeMapper.Salaryme(page);
     }
 
     @Override
     public IPage<SalaryincreaseEntity> Salaryed(Page<SalaryincreaseEntity> page) {
-        return salaryMapper.Salaryed(page);
+        return salarymeMapper.Salaryed(page);
     }
 }

@@ -3,9 +3,9 @@ package com.trkj.system.workbench.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.system.recruit_modular.entity.ResumeVo;
-import com.trkj.system.workbench.entity.workNotice;
-import com.trkj.system.workbench.entity.workNoticeStaff;
+import com.trkj.system.workbench.entity.*;
+import com.trkj.system.workbench.mapper.AdattendanceSheetMapper;
+import com.trkj.system.workbench.mapper.AdclockRecordMapper;
 import com.trkj.system.workbench.mapper.workNoticeMapper;
 import com.trkj.system.workbench.service.workNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,16 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class workNoticeServiceImpl implements workNoticeService {
+    //公告mapper
     @Autowired
     private workNoticeMapper mapper;
+    //考勤mapper
+    @Autowired
+    private AdattendanceSheetMapper mappershee;
+    //打卡记录mapper
+    @Autowired
+    private AdclockRecordMapper mapperrecord;
+
     //查询工作台公告
     @Override
     public IPage<workNotice> findallno(workNotice workNotice) {
@@ -34,10 +42,49 @@ public class workNoticeServiceImpl implements workNoticeService {
         return mapper.selectAllNo(page,queryWrapper);
     }
 
-    //修改员工公告状态
+    //查看公告后公告状态该为已读
     @Override
     @Transactional
     public int updategg(workNoticeStaff workNoticeStaff) {
         return mapper.updateById(workNoticeStaff);
+    }
+
+    //判断当前用户当天是否有打卡记录
+    @Override
+    public GclockRecord dakwork(Integer id) {
+        return mapper.demodagowork(id);
+    }
+
+    //查询当前启用班次
+    @Override
+    @Transactional
+    public Gclasses queryClasses() {
+        return mapper.queryallclasses();
+    }
+
+    //打卡记录表数据新增：员工打卡
+    @Override
+    public int addClock(AdclockRecord adclockRecord) {
+        return mapperrecord.insert(adclockRecord);
+    }
+
+    //考勤表数据新增：员工打卡
+    @Override
+    @Transactional
+    public int addSheet(AdattendanceSheet adattendanceSheet) {
+        return mappershee.insert(adattendanceSheet);
+    }
+
+    //查询当前用户当天的打卡记录
+    @Override
+    public AdclockRecord querybyiddays(Integer id) {
+        return mapperrecord.querybyidday(id);
+    }
+
+    //打卡记录表数据修改
+    @Transactional
+    @Override
+    public int updatedk(AdclockRecord adclockRecord) {
+        return mapperrecord.updateById(adclockRecord);
     }
 }

@@ -23,4 +23,7 @@ public interface ShiftAllService {
     ClassesVo isfindByid(Integer id);
     //班次编辑
     int isupdateClases(ClassesVo classesVo);
+
+    //禁用所有班次
+    int updateclasesall();
 }

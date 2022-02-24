@@ -63,4 +63,10 @@ public class ShiftAllServiceImpl implements ShiftAllService {
     public int isupdateClases(ClassesVo classesVo) {
         return mapper.updateById(classesVo);
     }
+
+    //禁用所有班次
+    @Override
+    public int updateclasesall() {
+        return mapper.updateclasesall();
+    }
 }

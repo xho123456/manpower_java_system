@@ -57,9 +57,6 @@ public class ClassesVo implements Serializable {
     @TableField("CLASSES_TIMEONEX")
     private Date classesTimeonex;
 
-    @ApiModelProperty(value = "上班打卡提醒(0:是、1:否)")
-    @TableField("CLASSES_TXTIMEONE")
-    private Integer classesTxtimeone;
 
     @ApiModelProperty(value = "工作时间范围二(上班) ")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -72,10 +69,6 @@ public class ClassesVo implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("CLASSES_TIMETWOX")
     private Date classesTimetwox;
-
-    @ApiModelProperty(value = "上班打卡提醒(0:是、1:否)")
-    @TableField("CLASSES_TXTIMETWO")
-    private Integer classesTxtimetwo;
 
     @ApiModelProperty(value = "班次状态（0：启用，1：禁用）")
     @TableField("CLASSESSTATE")
