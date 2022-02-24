@@ -24,6 +24,8 @@ public interface DefSchemeMapper extends BaseMapper<DefScheme> {
      * 根据默认参保方案表id查询
      * 默认参保方案名称数据
      * 参保方案表数据
+     *
+     * 和根据默认参保方案表id查询对应的参保方案数据
      */
      @Select("select * from DEF_SCHEME ${ew.customSqlSegment}")
     List<DefScheme> selectDefScheme(@Param(Constants.WRAPPER)QueryWrapper<DefScheme> queryWrapper);
@@ -33,5 +35,7 @@ public interface DefSchemeMapper extends BaseMapper<DefScheme> {
      */
     @Select("select DEF_SCHEME_ID from DEF_SCHEME ${ew.customSqlSegment}")
     List<DefScheme> selectDefSchemeID(@Param(Constants.WRAPPER)QueryWrapper<DefScheme> queryWrapper);
+
+
 
 }

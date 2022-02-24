@@ -38,8 +38,6 @@ public class MenuPowerController {
 //        }
 //        return Result.success(navigations);
 //    }
-
-
     @GetMapping("/list/phone")
     public AjaxResponse list(@RequestParam(defaultValue = "15526008044") String phone){
         System.out.println(phone);

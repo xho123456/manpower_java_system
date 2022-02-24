@@ -32,7 +32,7 @@ public class InsuredDetail implements Serializable {
 
     @ApiModelProperty(value = "参保明细编号")
     @TableId("INS_DETAIL_ID")
-    private Long insDetailId;
+    private Integer insDetailId;
 
     @ApiModelProperty(value = "员工名称")
     @TableField("INS_DETAIL_STAFF_NAME")
@@ -81,10 +81,7 @@ public class InsuredDetail implements Serializable {
     @TableField("REVISION")
     private Long revision;
 
-    @TableLogic
-    @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
-    @TableField("IS_DELETED")
-    private Long isDeleted;
+
 
 
 }

@@ -65,7 +65,7 @@ public interface NoticeVoService{
     /**
      * 判断登录数据是否和数据库一致
      */
-    Staffs selectStaffs(Staffs staffs);
+    Staffs longs(Staffs staffs);
 
     /**
      * 添加公告
