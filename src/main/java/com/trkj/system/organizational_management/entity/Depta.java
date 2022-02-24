@@ -1,31 +1,43 @@
 package com.trkj.system.organizational_management.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.io.Serializable;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import java.util.Date;
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class DeptDeptPost implements Serializable {
+@TableName("DEPT")
+@KeySequence(value = "DEPT_ID" ,clazz = Integer.class)
+@ApiModel(value="Dept对象", description="部门表")
+public class Depta implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "职位编号")
-    @TableId("DEPT_POST_ID")
-    private Long deptPostId;
-
-    @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName;
-
     @ApiModelProperty(value = "部门编号")
-    @TableField("DEPT_Id")
+    @TableId(value = "DEPT_ID",type = IdType.INPUT)
     private Long deptId;
+
+    @ApiModelProperty(value = "父级菜单")
+    @TableField("MENU_PID")
+    private Long menuPid;
+    @ApiModelProperty(value = "是否有叶子")
+    @TableField("MENU_LEAF")
+    private Long menuLeaf;
+    @ApiModelProperty(value = "部门负责人")
+    @TableField("STAFF_NAME")
+    private String staffName;
 
     @ApiModelProperty(value = "状态;0：启用  1：禁用")
     @TableField("DEPT_STATE")
@@ -35,17 +47,19 @@ public class DeptDeptPost implements Serializable {
     @TableField("DEPT_NAME")
     private String deptName;
 
+    @ApiModelProperty(value = "部门负责人;提供ID到员工表锁定具体的人")
+    @TableField("STAFF_ID")
+    private Long staffId;
+    @JsonFormat(pattern="yyyy-MM-dd ")
     @ApiModelProperty(value = "创建时间")
     @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
-    @JsonFormat(pattern="yyyy-MM-dd ")
     private Date createdTime;
-
+    @JsonFormat(pattern="yyyy-MM-dd ")
     @ApiModelProperty(value = "修改时间")
     @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
-    @JsonFormat(pattern="yyyy-MM-dd ")
     private Date updatedTime;
 
-
+    @Version
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
@@ -54,8 +68,6 @@ public class DeptDeptPost implements Serializable {
     @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
-
-    private int currentPage;
-    private int pageSize;
-
+    @TableField(exist = false)
+    private List<Depta> children =new ArrayList<>();
 }

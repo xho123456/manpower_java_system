@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 public interface DeptService {
 //    IPage<DeptStaff> selectpage(Page<DeptStaff> page);
-   // int updateUser( int deptid);
+    // int updateUser( int deptid);
 
 
     @Transactional
@@ -23,7 +23,7 @@ public interface DeptService {
 
     IPage<DeptDeptPost> selectPaer1(DeptDeptPost deptDeptPost);
     List<Staff> findAll();
-
+    List<Dept> findAll11();
     int addDept(Dept dept);
 
     Integer deleteList( List id );

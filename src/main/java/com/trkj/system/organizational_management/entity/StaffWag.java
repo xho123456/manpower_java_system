@@ -1,43 +1,44 @@
 package com.trkj.system.organizational_management.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import java.util.Date;
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class DeptPost implements Serializable {
+@TableName("STAFFWAG")
+@KeySequence(value = "STAFFWAG_ID" ,clazz = Integer.class)
+@ApiModel(value="STAFFWAG对象", description="员工工资表")
+public class StaffWag implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "职位编号")
-    @TableId(value = "DEPT_POST_ID",type = IdType.INPUT)
-    private int deptPostId;
+    @ApiModelProperty(value = "员工工资编号")
+    @TableId(value = "STAFFWAG_ID",type = IdType.INPUT)
+    private Integer staffwagID;
 
-    @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName;
+    @ApiModelProperty(value = "员工编号")
+    @TableField("STAFF_ID")
+    private Integer staffId;
 
-    @ApiModelProperty(value = "部门编号")
-    @TableField("DEPT_Id")
-    private Long deptId;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
-    @JsonFormat(pattern="yyyy-MM-dd ")
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")
     @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
-    @JsonFormat(pattern="yyyy-MM-dd ")
     private Date updatedTime;
 
-
+    @Version
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
@@ -47,7 +48,6 @@ public class DeptPost implements Serializable {
     @TableField("IS_DELETED")
     private Long isDeleted;
 
-    private int currentPage;
-    private int pageSize;
+
 
 }
