@@ -1,8 +1,7 @@
-package com.trkj.system.system_management.entity;
+package com.trkj.system.insurance_management.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -18,8 +17,8 @@ import lombok.experimental.Accessors;
  * 员工表
  * </p>
  *
- * @author 鄧琪
- * @since 2021-12-29
+ * @author 谢海欧
+ * @since 2022-02-23
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -27,15 +26,13 @@ import lombok.experimental.Accessors;
 @TableName("STAFF")
 @ApiModel(value="Staff对象", description="员工表")
 @KeySequence(value = "STAFF_ID", clazz = Integer.class)
-
-public class Staffs implements Serializable {
+public class Staffss implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "获奖人编号")
     @TableId("STAFF_ID")
     private Long staffId;
-
 
     @ApiModelProperty(value = "员工姓名")
     @TableField("STAFF_NAME")
@@ -73,10 +70,6 @@ public class Staffs implements Serializable {
     @TableField("DEPT_POST_ID")
     private Long deptPostId;
 
-    @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName;
-
     @ApiModelProperty(value = "密码")
     @TableField("STAFF_PASS")
     private String staffPass;
@@ -84,10 +77,6 @@ public class Staffs implements Serializable {
     @ApiModelProperty(value = "入职日期")
     @TableField("STAFF_HIREDATE")
     private Date staffHiredate;
-
-    @ApiModelProperty(value = "转正编号")
-    @TableField("WORKER_ID")
-    private Long workerId;
 
     @ApiModelProperty(value = "身份证")
     @TableField("STAFF_IDENTITY")
@@ -139,6 +128,9 @@ public class Staffs implements Serializable {
     @ApiModelProperty(value = "现住地址")
     @TableField("STAFF_ADDRESS")
     private String staffAddress;
+
+    @TableField("STAFF_STATE")
+    private Long staffState;
 
     @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
     @ApiModelProperty(value = "创建时间 精确到秒")

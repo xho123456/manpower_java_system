@@ -29,7 +29,12 @@
 
     <dependencies>
 
-
+        <!-- Map转实体类 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.54</version>
+        </dependency>
         <!--SpringBoot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

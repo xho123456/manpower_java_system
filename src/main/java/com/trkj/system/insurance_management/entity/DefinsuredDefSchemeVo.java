@@ -1,41 +1,27 @@
-package com.trkj.system.system_management.entity;
+package com.trkj.system.insurance_management.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
+import com.trkj.system.system_management.entity.Depts;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.NoArgsConstructor;
 
-/**
- * <p>
- * 员工表
- * </p>
- *
- * @author 鄧琪
- * @since 2021-12-29
- */
+import java.util.Date;
+import java.util.List;
+
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@TableName("STAFF")
-@ApiModel(value="Staff对象", description="员工表")
-@KeySequence(value = "STAFF_ID", clazz = Integer.class)
-
-public class Staffs implements Serializable {
-
+@AllArgsConstructor
+@NoArgsConstructor
+@KeySequence(value = "NOTICE_ID", clazz = Integer.class)
+public class DefinsuredDefSchemeVo {
+    //员工表
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "获奖人编号")
     @TableId("STAFF_ID")
     private Long staffId;
-
 
     @ApiModelProperty(value = "员工姓名")
     @TableField("STAFF_NAME")
@@ -73,10 +59,6 @@ public class Staffs implements Serializable {
     @TableField("DEPT_POST_ID")
     private Long deptPostId;
 
-    @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName;
-
     @ApiModelProperty(value = "密码")
     @TableField("STAFF_PASS")
     private String staffPass;
@@ -84,10 +66,6 @@ public class Staffs implements Serializable {
     @ApiModelProperty(value = "入职日期")
     @TableField("STAFF_HIREDATE")
     private Date staffHiredate;
-
-    @ApiModelProperty(value = "转正编号")
-    @TableField("WORKER_ID")
-    private Long workerId;
 
     @ApiModelProperty(value = "身份证")
     @TableField("STAFF_IDENTITY")
@@ -140,6 +118,55 @@ public class Staffs implements Serializable {
     @TableField("STAFF_ADDRESS")
     private String staffAddress;
 
+    @TableField("STAFF_STATE")
+    private Long staffState;
+
+    //部门表
+
+    @ApiModelProperty(value = "父级菜单")
+    @TableId("MENU_PID")
+    private Long menuPid;
+
+    @ApiModelProperty(value = "是否有叶子 0:有 1:没有")
+    @TableId("MENU_LEAF")
+    private Long menuLeaf;
+
+    @TableField(exist = false)
+    private List<Depts> deptlist;
+
+    @ApiModelProperty(value = "状态;0：启用  1：禁用")
+    @TableField("DEPT_STATE")
+    private Long deptState;
+
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
+
+    //转正表
+    @ApiModelProperty(value = "转正编号")
+    @TableId("WORKER_ID")
+    private Long workerId;
+
+    @ApiModelProperty(value = "审批编号")
+    @TableField("AUDITFLOW_ID")
+    private Long auditflowId;
+
+
+    @ApiModelProperty(value = "转正类型")
+    @TableField("WORKER_TYPE")
+    private String workerType;
+
+    //职位表
+
+
+    @ApiModelProperty(value = "职位名称")
+    @TableField("POST_NAME")
+    private String postName;
+
+    @ApiModelProperty(value = "职位工资")
+    @TableField("DEPT_POST_MONEY")
+    private Long deptPostMoney;
+
     @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
     @ApiModelProperty(value = "创建时间 精确到秒")
     @TableField(value = "CREATED_TIME" , fill = FieldFill.INSERT)
@@ -159,6 +186,5 @@ public class Staffs implements Serializable {
     @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
     @TableField("IS_DELETED")
     private Long isDeleted;
-
 
 }

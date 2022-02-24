@@ -1,8 +1,7 @@
-package com.trkj.system.system_management.entity;
+package com.trkj.system.insurance_management.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -15,58 +14,50 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 公告表
+ * 参保方案表
  * </p>
  *
- * @author 鄧琪
- * @since 2021-12-29
+ * @author 谢海欧
+ * @since 2022-02-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("NOTICE")
-@ApiModel(value="Notice对象", description="公告表")
-@KeySequence(value = "NOTICE_ID", clazz = Integer.class)
-public class Notice implements Serializable {
+@TableName("INSURED_PAYMENT")
+@ApiModel(value="InsuredPayment对象", description="参保缴纳表")
+@KeySequence(value = "INSURED_PAYMENT_ID", clazz = Integer.class)
+public class InsuredPayment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "公告编号")
-    @TableId("NOTICE_ID")
-    private Long noticeId;
+    @ApiModelProperty(value = "参保缴纳编号")
+    @TableId("INSURED_PAYMENT_ID")
+    private Long insuredPaymentId;
 
     @ApiModelProperty(value = "员工编号")
     @TableField("STAFF_ID")
     private Long staffId;
 
-    @ApiModelProperty(value = "公告类型 0:要事性 1:政策性 2:任免性")
-    @TableField("NOTICE_TYPE")
-    private Long noticeType;
+    @ApiModelProperty(value = "参保方案编号")
+    @TableField("INSURED_SCHEME_ID")
+    private Long insuredSchemeId;
 
-    @ApiModelProperty(value = "公告标题")
-    @TableField("NOTICE_TITLE")
-    private String noticeTitle;
+    @ApiModelProperty(value = "参保明细编号")
+    @TableField("INS_DETAIL_ID")
+    private Long insDetailId;
 
-    @ApiModelProperty(value = "公告状态 0:启用 1:禁用")
-    @TableField("NOTICE_STATE")
-    private Long noticeState;
+    @ApiModelProperty(value = "缴纳基数")
+    @TableField("INSURED_PAYMENT_NUMBER")
+    private Long insuredPaymentNumber;
 
-    @ApiModelProperty(value = "发布人")
-    @TableField("NOTICE_PEOPLE")
-    private String noticePeople;
+    @ApiModelProperty(value = "参保月份 精确到年月")
+    @TableField("INSURED_PAYMENT_INSURED_MONTH")
+    private Date insuredPaymentInsuredMonth;
 
-    @ApiModelProperty(value = "职位")
-    @TableField("NOTICE_POST")
-    private String noticePost;
+    @ApiModelProperty(value = "计薪月份 精确到年月")
+    @TableField("INSURED_PAYMENT_SALARY_MONTH")
+    private Date insuredPaymentSalaryMonth;
 
-    @ApiModelProperty(value = "部门名称")
-    @TableField(exist = false)
-    private ArrayList<String> deptName;
-
-
-    @ApiModelProperty(value = "发布内容")
-    @TableField("NOTICE_MATTER")
-    private String noticeMatter;
 
     @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
     @ApiModelProperty(value = "创建时间 精确到秒")

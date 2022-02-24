@@ -27,13 +27,13 @@ import lombok.experimental.Accessors;
 @TableName("NOTICE")
 @ApiModel(value="Notice对象", description="公告表")
 @KeySequence(value = "NOTICE_ID", clazz = Integer.class)
-public class Notice implements Serializable {
+public class Notices implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "公告编号")
     @TableId("NOTICE_ID")
-    private Long noticeId;
+    private Integer noticeId;
 
     @ApiModelProperty(value = "员工编号")
     @TableField("STAFF_ID")
@@ -59,10 +59,6 @@ public class Notice implements Serializable {
     @TableField("NOTICE_POST")
     private String noticePost;
 
-    @ApiModelProperty(value = "部门名称")
-    @TableField(exist = false)
-    private ArrayList<String> deptName;
-
 
     @ApiModelProperty(value = "发布内容")
     @TableField("NOTICE_MATTER")
@@ -87,6 +83,10 @@ public class Notice implements Serializable {
     @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
     @TableField("IS_DELETED")
     private Long isDeleted;
+
+    @ApiModelProperty(value = "部门名称")
+    @TableField(exist = false)
+    private ArrayList<String> deptName;
 
 
 }
