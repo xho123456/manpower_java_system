@@ -46,4 +46,8 @@ public class FillclockEntity {
     private Date UPDATEDTIME;
 
     private Date CREATEDTIME;
+
+    private Long CurrentPage;
+
+    private Long Pagesize;
 }
