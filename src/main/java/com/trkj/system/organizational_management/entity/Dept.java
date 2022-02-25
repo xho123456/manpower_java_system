@@ -36,6 +36,12 @@ public class Dept implements Serializable {
     @ApiModelProperty(value = "部门负责人;提供ID到员工表锁定具体的人")
     @TableField("STAFF_ID")
     private Long staffId;
+    @ApiModelProperty(value = "父级菜单")
+    @TableField("MENU_PID")
+    private Long menuPid;
+    @ApiModelProperty(value = "是否有叶子")
+    @TableField("MENU_LEAF")
+    private Long menuLeaf;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)

@@ -29,12 +29,12 @@ public class DeptPost implements Serializable {
 
     @ApiModelProperty(value = "创建时间")
     @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
-    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd ")
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")
     @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
-    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd ")
     private Date updatedTime;
 
 

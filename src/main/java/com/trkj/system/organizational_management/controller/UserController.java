@@ -24,11 +24,12 @@ public class UserController {
     public AjaxResponse deleteUser(@RequestBody ArrayList<Integer> id) {
         for (int i=0;i<id.size();i++){
             if (userService.deleteId(id.get(i)) > 0) {
-                return AjaxResponse.success("删除成功");
+                return AjaxResponse.success("成功");
             }
         }
-        return AjaxResponse.success("删除失败");
+        return AjaxResponse.success("失败");
     }
+    //修改部门
     @PutMapping("/updateDept/dept")
     public AjaxResponse updateDept(@RequestBody Dept dept){
         System.out.println(dept+"-----------------------");
@@ -42,6 +43,7 @@ public class UserController {
             return AjaxResponse.success("失败");
         }
     }
+
 
 
 }

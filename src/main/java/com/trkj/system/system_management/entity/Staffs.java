@@ -73,6 +73,10 @@ public class Staffs implements Serializable {
     @TableField("DEPT_POST_ID")
     private Long deptPostId;
 
+    @ApiModelProperty(value = "职位名称")
+    @TableField("POST_NAME")
+    private String postName;
+
     @ApiModelProperty(value = "密码")
     @TableField("STAFF_PASS")
     private String staffPass;

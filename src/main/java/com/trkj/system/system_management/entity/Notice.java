@@ -35,8 +35,6 @@ public class Notice implements Serializable {
     @TableId("NOTICE_ID")
     private Long noticeId;
 
-
-
     @ApiModelProperty(value = "员工编号")
     @TableField("STAFF_ID")
     private Long staffId;

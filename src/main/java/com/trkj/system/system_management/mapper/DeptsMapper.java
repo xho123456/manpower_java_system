@@ -36,4 +36,5 @@ public interface DeptsMapper extends BaseMapper<Depts> {
      */
     @Select("select DEPT_ID from DEPT ${ew.customSqlSegment}")
      Depts selectDepts1(@Param(Constants.WRAPPER) QueryWrapper<Depts> queryWrapper);
+
 }
