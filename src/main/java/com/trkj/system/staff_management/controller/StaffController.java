@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -166,12 +168,12 @@ public class StaffController {
     }
 
     @PostMapping("/staff/addStaff")
-    public AjaxResponse addStaff(@RequestBody StaffTowEntity staff){
-        if (service.addStaff(staff)>0){
-            return AjaxResponse.success("入职成功");
-        }else {
-            return AjaxResponse.success("入职失败");
-        }
+    public Map<String, Object> addStaff(@RequestBody StaffInductionEntity staff){
+        System.out.println("1111:  "+staff);
+        Map<String, Object> map1 = new HashMap<>(2);
+        map1.put("state", 200);
+        map1.put("info", service.addStaff(staff));
+        return map1;
     }
 
     @PostMapping("/staff/basic")

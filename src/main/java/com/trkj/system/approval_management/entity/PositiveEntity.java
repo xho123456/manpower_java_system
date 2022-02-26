@@ -13,45 +13,49 @@ import java.util.Date;
 @Accessors(chain = true)  /** 链式写法 */
 public class PositiveEntity {
     //转正
-    public Long AUDITFLOWID;
+    public Long auditflowid;
 
-    public String AUDITFLOWTITLE;
+    public String auditflowtitle;
 
-    private Long AUDITFLOWSTATE;
+    private Long auditflowstate;
 
-    public String AUDITFLOWTYPE;
+    public String auditflowtype;
 
-    private Long AUDITFLOWDETAILID;
+    private Long auditflowdetailid;
 
-//    public Long STAFFID;
-//    /** 申请人编号 */
+    public Long staffid;
+    /** 申请人编号 */
 
-    private String STAFFNAME1;
+    private String staffname1;
     /** 申请人名称 */
 
-    private String STAFFNAME2;
+    private String staffname2;
     /** 当前审批人名称 */
 
-    public String AUDITFLOWDETAIREMARKS;
+    public String auditflowdetairemarks;
 
-    public Date AUDITFLOWDETAIDATE;
+    public Date auditflowdetaidate;
 
-    public Long AUDITFLOWDETAISTATE;
+    public Long auditflowdetaistate;
 
-    private Long WORKERID;
+    private Long workerid;
 
-//    public Long DEPTID;
+    public Long deptid;
 
-    public String WORKERTYPE;
+    public String workertype;
 
-    public String WORKERREMARKS;
+    public String workerremarks;
 
-    public Long WORKERSTATE;
+    public Long workerstate;
 
-    public Date WORKERDATE;
+    public Date workerdate;
 
-    private Date UPDATEDTIME;
+    private Date updatedtime;
 
-    private Date CREATEDTIME;
+    private Date createdtime;
+
+    private Long currentPage;
+
+    private Long pagesize;
 
 }

@@ -54,4 +54,8 @@ public class ErectionEntity {
 
     private Date CREATEDTIME;
 
+    private Long CurrentPage;
+
+    private Long Pagesize;
+
 }

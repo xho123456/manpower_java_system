@@ -6,11 +6,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.system.staff_management.entity.*;
 import com.trkj.system.staff_management.mapper.FixedwageStaffMapper;
+import com.trkj.system.staff_management.mapper.ResumeStaffMapper;
 import com.trkj.system.staff_management.mapper.Staffmapper;
 import com.trkj.system.staff_management.mapper.StafftowMapper;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +23,12 @@ public class StaffServiceimpl implements StaffService {
 
     @Autowired
     private StafftowMapper towMapper;
+
+    @Autowired
+    private ResumeStaffMapper resumeStaffMapper;
+
+    @Autowired
+    private FixedwageStaffMapper fixedwageStaffMapper;
 
 
     @Override
@@ -185,7 +194,7 @@ public class StaffServiceimpl implements StaffService {
         QueryWrapper<StaffInductionEntity> queryWrapper=new QueryWrapper<>();
 
         //分页查询条件
-        queryWrapper.like("r.RESUME_NAME",staff.getRESUMENAME());
+        queryWrapper.like("r.RESUME_NAME",staff.getResumeName());
         queryWrapper.eq(" r.RESUME_ZT",8);
         return mapper.findInductionStaffById(page,queryWrapper);
     }
@@ -260,18 +269,59 @@ public class StaffServiceimpl implements StaffService {
     }
 
     @Override
-    public int addStaff(StaffTowEntity staff) {
-        return towMapper.insert(staff);
+    public int addStaff(StaffInductionEntity staff) throws ArithmeticException {
+        StaffEntity staff1 = new StaffEntity();
+        staff1.setStaffBirthday(staff.getResumeBirthday());
+        staff1.setStaffName(staff.getResumeName());
+        staff1.setDeptId(staff.getDeptId());
+        staff1.setDeptPostId(staff.getDeptPostId());
+        staff1.setStaffPhone(staff.getResumePhone());
+        staff1.setStaffOutlook(staff.getResumePoliticalOutlook());
+        staff1.setStaffMajor(staff.getResumeHy());
+        staff1.setStaffSex(staff.getResumeSex());
+        staff1.setStaffEducation(staff.getResumeEducation());
+        staff1.setStaffRegistered(staff.getResumeResidence());
+        staff1.setStaffEmail(staff.getResumeMailbox());
+        staff1.setStaffPicture(staff.getResumePhoto());
+        staff1.setStaffHiredate(new Date());
+        staff1.setCreatedTime(new Date());
+        staff1.setUpdatedTime(new Date());
+        final var i =mapper.insert(staff1);
+        if (i==1){
+            FixedwageEntity fixedwage = new FixedwageEntity();
+            fixedwage.setFixedwagePeriodmoney(staff.getProbationary());
+            fixedwage.setFixedwageOfficialmoney(staff.getPositiveMonthly());
+            fixedwage.setStaffId(staff1.getStaffId());
+            fixedwage.setUpdatedTime(new Date());
+            fixedwage.setCreatedTime(new Date());
+
+            final var a =fixedwageStaffMapper.insert(fixedwage);
+            if (a==1){
+                ResumeEntity resumeEntity =new ResumeEntity();
+                resumeEntity.setResumeId(staff.getResumeId());
+                resumeEntity.setResumeZt(9L);
+                final var b = resumeStaffMapper.updateById(resumeEntity);
+                if (b==1){
+                    return 1111;
+                }else {
+                    throw new ArithmeticException("0");
+                }
+            }else {
+                throw new ArithmeticException("0");
+            }
+        }else {
+            throw new ArithmeticException("0");
+        }
     }
 
     @Override
-    public List<StaffEntity> basicstaff(Long id) {
+    public List<StaffEntity> basicstaff(Integer id) {
         return mapper.staff(id);
     }
 
     @Override
     public int positive(StaffEntity staff){
-        return mapper.positive(new QueryWrapper<StaffEntity>().eq("STAFF_STATE",staff.getSTAFFSTATE()));
+        return mapper.positive(new QueryWrapper<StaffEntity>().eq("STAFF_STATE",staff.getStaffState()));
     }
 
 }

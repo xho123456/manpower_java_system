@@ -53,4 +53,8 @@ public class LeaveEntity {
 
     private Date CREATEDTIME;
 
+    private Long CurrentPage;
+
+    private Long Pagesize;
+
 }

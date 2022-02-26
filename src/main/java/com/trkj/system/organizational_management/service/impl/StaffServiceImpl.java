@@ -9,14 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <p>
- * 员工表 服务实现类
- * </p>
- *
- * @author 谢海欧
- * @since 2021-12-24
- */
+
 @Service
 public class StaffServiceImpl  implements StaffService {
     @Autowired

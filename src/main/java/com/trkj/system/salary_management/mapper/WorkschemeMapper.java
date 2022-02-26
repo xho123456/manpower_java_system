@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.system.organizational_management.entity.DeptDeptPost;
 import com.trkj.system.salary_management.entity.Workscheme;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

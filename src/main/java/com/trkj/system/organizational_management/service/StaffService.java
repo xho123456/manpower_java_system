@@ -4,16 +4,6 @@ import com.trkj.system.organizational_management.entity.Staff;
 
 import java.util.List;
 import java.util.Map;
-
-/**
- * <p>
- * 员工表 服务类
- * </p>
- *
- * @author 谢海欧
- * @since 2021-12-24
- */
-
 public interface StaffService {
         Staff selectstaff(Long id);
 

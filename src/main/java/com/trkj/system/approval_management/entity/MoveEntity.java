@@ -53,4 +53,8 @@ public class MoveEntity {
 
     private Date CREATEDTIME;
 
+    private Long CurrentPage;
+
+    private Long Pagesize;
+
 }

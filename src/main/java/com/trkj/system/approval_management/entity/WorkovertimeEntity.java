@@ -53,4 +53,8 @@ public class WorkovertimeEntity {
 
     private Date CREATEDTIME;
 
+    private Long CurrentPage;
+
+    private Long Pagesize;
+
 }

@@ -47,4 +47,8 @@ public class SalaryincreaseEntity {
 
     private Date CREATEDTIME;
 
+    private Long CurrentPage;
+
+    private Long Pagesize;
+
 }
