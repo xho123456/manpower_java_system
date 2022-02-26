@@ -52,11 +52,9 @@ public class Approvalonecontroller {
      */
     @PostMapping("/worker/add")
     public Map<String, Object> addpositve3(@RequestBody WorkerVo workerVo){
-        System.out.println("controller:  "+workerVo);
         Map<String, Object> map1 = new HashMap<>(2);
         map1.put("state", 200);
         map1.put("info", service.addpositve(workerVo));
-        System.out.println("controller2:  "+map1);
         return map1;
     }
 

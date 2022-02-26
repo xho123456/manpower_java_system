@@ -81,7 +81,6 @@ public class ApprovalServiceImpl implements ApprovalService {
 
     @Override
     public int addpositve(WorkerVo workerVo) {
-        System.out.println("service:  "+workerVo);
         // 添加审批主表
         Auditflow auditflow = new Auditflow();
         //审批主表-标题
@@ -104,20 +103,15 @@ public class ApprovalServiceImpl implements ApprovalService {
 
             // 添加审批明细表1
             Auditflowdetail auditflowdetail1 = new Auditflowdetail();
-
             // 审批明细表1-审批编号
             auditflowdetail1.setAuditflowId(auditflow1.getAuditFlowId());
-
             // 审批明细表1-审批人
             auditflowdetail1.setStaffName(workerVo.getStaffName1());
-
             // 审批明细表1-审核状态-待我审批
             auditflowdetail1.setAuditflowdetaiState(1);
             //审批明细表1-审核时间
             auditflowdetail1.setAuditflowdetaiDate(new Date());
-
             final var i1 = towMapper.insert(auditflowdetail1);
-            System.out.println("service2auditflowdetail5:  "+auditflowdetail1);
 
             // 添加审批明细表2
             Auditflowdetail auditflowdetail2 = new Auditflowdetail();

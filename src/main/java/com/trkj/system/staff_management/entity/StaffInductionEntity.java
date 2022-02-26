@@ -13,51 +13,51 @@ import java.util.Date;
 @AllArgsConstructor
 @Accessors(chain = true)  /** 链式写法 */
 public class StaffInductionEntity {
-    private Long RESUMEID;
+    private Integer resumeId;
     /** 简历编号 */
-    private Long EMPLOYMENTID;
+    private Integer employmentId;
     /** 录用编号 */
 
     private Long probationary;
     /** 试用期工资 */
 
-    private Long positivemonthly;
+    private Long positiveMonthly;
     /** 转正工资 */
 
-    private String RESUMENAME;
+    private String resumeName;
     /** 员工姓名 */
 
-    private String RESUMEPHOTO;
+    private String resumePhoto;
     /** 照片 */
 
-    private String RESUMESEX;
+    private String resumeSex;
     /** 员工性别 */
 
-    private Long RESUMEPHONE;
+    private Long resumePhone;
     /** 员工手机号码 */
 
-    private String RESUMEMAILBOX;
+    private String resumeMailbox;
     /** 员工邮箱 */
 
-    private Date RESUMEBIRTHDAY;
+    private Date resumeBirthday;
     /** 员工生日 */
 
-    private String RESUMEPOLITICALOUTLOOK;
+    private String resumePoliticalOutlook;
     /** 政治面貌 */
 
-    private String RESUMEEDUCATION;
+    private String resumeEducation;
     /** 学历 */
 
-    private String DEPTPOSTID;
+    private Integer deptPostId;
     /** 职位编号 */
 
-    private Date staffHIREDATE;
+    private Date staffHiredate;
     /** 入职日期 */
 
     private String staffIdentity;
     /** 员工身份证 */
 
-    private long deptId;
+    private Integer deptId;
     /** 部门编号 */
 
     private String staffMajor;
@@ -69,7 +69,7 @@ public class StaffInductionEntity {
     private String staffWechat;
     /** 微信 */
 
-    private String staffQQ;
+    private String staffQq;
     /** qq */
 
     private String staffCredit;
@@ -84,13 +84,13 @@ public class StaffInductionEntity {
     private String deptName;
     /** 部门名称 */
 
-    private String RESUMERESIDENCE;
+    private String resumeResidence;
     /** 户口所在地 */
 
-    private String POSTNAME;
+    private String postName;
     /** 职位名称 */
 
-    private Long RESUMEZT;
+    private Long resumeZt;
     /** 入职状态 */
 
     private String staffSchool;
@@ -99,12 +99,12 @@ public class StaffInductionEntity {
     private String staffAddress;
     /** 现住地址 */
 
-    private String RESUMEHY;
+    private String resumeHy;
     /** 婚姻状态 */
 
-    private Long CurrentPage;
+    private Long currentPage;
 
-    private Long Pagesize;
+    private Long pagesize;
 }
 
 

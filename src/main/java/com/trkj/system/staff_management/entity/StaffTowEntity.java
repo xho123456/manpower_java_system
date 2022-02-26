@@ -1,8 +1,6 @@
 package com.trkj.system.staff_management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +16,7 @@ import java.util.Date;
 public class StaffTowEntity {
     private static final long serialVersionUID = 1L;
 
-    private Long staffId;
+    private Integer staffId;
     /** 员工编号 */
 
     private String staffName;
@@ -45,13 +43,13 @@ public class StaffTowEntity {
     private String staffEducation;
     /** 学历 */
 
-    private String DEPTPOSTID;
+    private String deptPostId;
     /** 职位编号 */
 
     private String staffPass;
     /** 密码 */
 
-    private Date staffHIREDATE;
+    private Date staffHiredate;
     /** 入职日期 */
 
     private String staffIdentity;
@@ -69,7 +67,7 @@ public class StaffTowEntity {
     private String staffWechat;
     /** 微信 */
 
-    private String staffQQ;
+    private String staffQq;
     /** qq */
 
     private String staffCredit;
@@ -93,35 +91,77 @@ public class StaffTowEntity {
     private String staffAddress;
     /** 现住地址 */
 
-    private Long STAFFSTATE;
+    private Long staffState;
     /** 员工状态 */
 
-    private Date CREATEDTIME;
+    private Date createdTime;
     /** 创建时间 */
 
-    private Date UPDATEDTIME;
+    private Date updatedTime;
     /** 修改时间 */
 
-    private Long FixedwageId;
+    private Long fixedWageid;
     /** 固定工资编号 */
 
-    private Long FIXEDWAGEPERIODMONEY;
+    private Long fixedwageperiodmoney;
     /** 试用期基本工资 */
 
-    private Long FIXEDWAGEOFFICIALMONEY;
+    private Long fixedWageofficialmoney;
     /** 正式期基本工资 */
 
-    private String FIXEDWAGEREMARK;
+    private String fixedWageremark;
     /** 备注 */
+
+    private Integer FixedwageId;
+    /** 固定工资编号 */
+
+    private Long fixedwagePeriodmoney;
+    /** 试用期基本工资 */
+
+    private Long fixedwageOfficialmoney;
+    /** 正式期基本工资 */
+
+    private Long fixedwagepPeriodpostmoney;
+    /** 试用期岗位工资 */
+
+    private Long fixedwageOfflcialpostmoney;
+    /** 正式期岗位工资 */
+
+    private String resumeName;
+    /** 员工姓名 */
+
+    private String resumeSex;
+    /** 员工性别 */
+
+    private Long resumePhone;
+    /** 员工手机号码 */
+
+    private String resumeEducation;
+    /** 学历 */
+
+    private String resumemMailbox;
+    /** 员工邮箱 */
+
+    private Date resumeBirthday;
+    /** 员工生日 */
+
+    private String resumePoliticaloOutlook;
+    /** 政治面貌 */
+
+    private String resumeResidence;
+    /** 户口所在地 */
+
+    private String resumeHy;
+    /** 婚姻状态 */
 
     @TableLogic
     @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
     @TableField("IS_DELETED")
-    private Long ISDELETED;
+    private Long isDeleted;
     /** 逻辑删除 */
 
     @Version
     @TableField("REVISION")
-    private Long REVISION;
+    private Long revision;
     /** 乐观锁 */
 }
