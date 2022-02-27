@@ -117,5 +117,7 @@ public class Overtimeask implements Serializable {
     @TableField(exist = false)
     private int pagesize;
 
+    @TableField(exist = false)
+    private String dates;
 
 }

@@ -117,4 +117,12 @@ public class Leave implements Serializable {
     @TableField(exist = false)
     private int pagesize;
 
+    //请假天数
+    @TableField(exist = false)
+    private Double qidays;
+
+    //请假总时长
+    @TableField(exist = false)
+    private Double qjtimes;
+
 }
