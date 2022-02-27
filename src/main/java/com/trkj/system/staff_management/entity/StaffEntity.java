@@ -1,5 +1,8 @@
 package com.trkj.system.staff_management.entity;
 
+import com.baomidou.mybatisplus.annotation.KeySequence;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +13,13 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@TableName("STAFF")
 @Accessors(chain = true)  /** 链式写法 */
+@KeySequence(value = "STAFF_ID",clazz = Integer.class)
 public class StaffEntity {
 
-    private Long staffId;
+    @TableId("STAFF_Id")
+    private Integer staffId;
     /** 员工编号 */
 
     private String staffName;
@@ -40,13 +46,13 @@ public class StaffEntity {
     private String staffEducation;
     /** 学历 */
 
-//    private String DEPTPOSTID;
-//    /** 职位编号 */
+    private Integer deptPostId;
+    /** 职位编号 */
 
     private String staffPass;
     /** 密码 */
 
-    private Date staffHIREDATE;
+    private Date staffHiredate;
     /** 入职日期 */
 
 //    private long workerId;
@@ -55,8 +61,8 @@ public class StaffEntity {
     private String staffIdentity;
     /** 员工身份证 */
 //
-//    private long deptId;
-//    /** 部门编号 */
+    private Integer deptId;
+    /** 部门编号 */
 
     private String deptName;
     /** 部门名称 */
@@ -103,15 +109,21 @@ public class StaffEntity {
 //    private String COMPANYNAME;
 //    /** 公司名称 */
 
-    private Long STAFFSTATE;
+    private Long staffState;
     /** 员工状态 */
 
-    private String POSTNAME;
+    private String postName;
     /** 职位名称 */
 
     private Long CurrentPage;
 
     private Long Pagesize;
+
+    private Date createdTime;
+    /** 创建时间 */
+
+    private Date updatedTime;
+    /** 修改时间 */
 
 
 //
@@ -154,11 +166,7 @@ public class StaffEntity {
 //    private Long ISREVOCATION;
 //    /** 是否撤销 */
 //
-//    private Date CREATEDTIME;
-//    /** 创建时间 */
-//
-//    private Date UPDATEDTIME;
-//    /** 修改时间 */
+
 //
 //    private Long ISDELETED;
 //    /** 逻辑删除 */

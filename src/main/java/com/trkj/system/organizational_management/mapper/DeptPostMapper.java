@@ -19,7 +19,7 @@ import java.util.List;
 public interface DeptPostMapper extends BaseMapper<DeptDeptPost> {
 
     /**
-    /**
+     /**
      * 分页查询 部门职位
      */
     @Select("select p.*,d.dept_Name from DEPT_POST p  inner join DEPT  d on d.DEpt_ID=p.DEPT_ID   ${ew.customSqlSegment}")

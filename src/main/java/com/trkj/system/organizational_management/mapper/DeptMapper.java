@@ -13,14 +13,6 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/**
- * <p>
- * 部门表 Mapper 接口
- * </p>
- *
- * @author 谢海欧
- * @since 2021-12-28
- */
 @Mapper
 public interface DeptMapper extends BaseMapper<DeptStaff> {
     //查询部门详情
@@ -34,7 +26,8 @@ public interface DeptMapper extends BaseMapper<DeptStaff> {
     @Select("select  d.*, s.STAFF_NAME from  DEPT d left join STAFF s on d.STAFF_ID= s.STAFF_ID ${ew.customSqlSegment}")
     IPage<DeptStaff>selectPaer(Page<DeptStaff> deptStaff, @Param(Constants.WRAPPER)QueryWrapper<DeptStaff> queryWrapper);
 
-
+    @Select("select * from dept")
+    List<Dept> selectList();
 
 
 }

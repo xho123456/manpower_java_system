@@ -32,11 +32,9 @@ public class RegisterLogServiceVoImpl implements RegisterLogServiceVo {
     public IPage<RegisterLogVO> selectPage(RegisterLogVO registerLogVO) {
         Page<RegisterLogVO> page=new Page<>(registerLogVO.getCurrentPage(),registerLogVO.getPagesize());
         QueryWrapper<RegisterLogVO> queryWrapper = new QueryWrapper<>();
-        System.out.println("327846728364872");
         //IP地址查询
         if(registerLogVO.getRegisterLogIp()!=null && !registerLogVO.getRegisterLogIp().equals("")){
             queryWrapper.like("t1.REGISTER_LOG_IP",registerLogVO.getRegisterLogIp());
-            System.out.println("eurioqweuior");
         }
         //员工名称查询
         if(registerLogVO.getStaffId()!=null&& !registerLogVO.getStaffName().equals("")){

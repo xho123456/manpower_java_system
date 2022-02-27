@@ -10,16 +10,13 @@ import com.trkj.system.insurance_management.mapper.DefInsuredMapper;
 import com.trkj.system.insurance_management.mapper.DefInsuredsMapper;
 import com.trkj.system.insurance_management.mapper.DefSchemeMapper;
 import com.trkj.system.insurance_management.service.DefInsuredService;
-import com.trkj.system.system_management.entity.Depts;
 import com.trkj.system.vo.AjaxResponse;
-import jdk.nashorn.internal.ir.CallNode;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -144,7 +141,9 @@ public class DefInsuredServiceImpl implements DefInsuredService {
         DefInsureds defInsureds=defInsuredsMapper.selectDefInsuredname(new QueryWrapper<DefInsureds>().eq("DEF_INSURED_ID",defInsured.getDefInsuredId())
                 .and(i->i.eq("IS_DELETED",0)));
 
-        List<DefScheme> defSchemeList=defSchemeMapper.selectDefScheme(new QueryWrapper<DefScheme>().eq("DEF_INSURED_ID",defInsured.getDefInsuredId()).eq("IS_DELETED",0));
+        List<DefScheme> defSchemeList=defSchemeMapper.selectDefScheme(new QueryWrapper<DefScheme>()
+                .eq("DEF_INSURED_ID",defInsured.getDefInsuredId())
+                .eq("IS_DELETED",0));
         defSchemeList.forEach(e->{
             if (defInsureds.getDefInsuredId()==e.getDefInsuredId()){
                 defInsureds.getDefSchemes().add(e);
@@ -281,9 +280,9 @@ public class DefInsuredServiceImpl implements DefInsuredService {
         queryWrapper.eq("DEF_INSURED_STATE",0).eq("IS_DELETED",0);
         List<DefInsureds> list = defInsuredsMapper.selectName(queryWrapper);
 
-        for(int i=0;i< list.size();i++){
-            System.out.println("++++++++"+list.get(i).getDefInsuredName());
-        }
+//        for(int i=0;i< list.size();i++){
+//            System.out.println("++++++++"+list.get(i).getDefInsuredName());
+//        }
         return list;
     }
 

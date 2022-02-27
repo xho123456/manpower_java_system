@@ -23,8 +23,8 @@ import java.util.List;
 public class DeptServiceImpl implements DeptService {
     @Autowired
     private DeptMapper deptMapper;
-     @Autowired
-     private DeptOneMapper deptOneMapper;
+    @Autowired
+    private DeptOneMapper deptOneMapper;
     @Autowired
     private StaffMapper staffMapper;
     @Autowired
@@ -46,7 +46,7 @@ public class DeptServiceImpl implements DeptService {
         QueryWrapper<DeptStaff> queryWrapper=new QueryWrapper<>();
 
         if(deptstaff.getDeptName() !=null && !deptstaff.getDeptName().equals("")){
-                queryWrapper.like("d.DEPT_NAME" ,deptstaff.getDeptName());
+            queryWrapper.like("d.DEPT_NAME" ,deptstaff.getDeptName());
         }
         if(deptstaff.getDeptName() !=null && !deptstaff.getDeptName().equals("")){
             queryWrapper.like("d.DEPT_NAME" ,deptstaff.getDeptName());
@@ -73,6 +73,13 @@ public class DeptServiceImpl implements DeptService {
     @Transactional
     public List<Staff> findAll() {
         return staffMapper.selectList();
+    }
+
+//查询部门有那些
+    @Override
+    @Transactional
+    public List<Dept> findAll11() {
+        return deptMapper.selectList();
     }
     //删除部门、、逻辑删除
     @Override

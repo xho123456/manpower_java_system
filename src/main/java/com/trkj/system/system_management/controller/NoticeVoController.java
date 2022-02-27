@@ -163,9 +163,9 @@ public class NoticeVoController {
      */
         @PostMapping("/staffs/login")
     public AjaxResponse selectStaffs(@RequestBody Staffs staffs){
-        Staffs staffs1=noticeVoService.selectStaffs(staffs);
-            System.out.println(staffs1);
-        if(staffs1.getStaffPass().equals(staffs.getStaffPass())){
+        Staffs staffs1=noticeVoService.longs(staffs);
+
+        if(staffs1.getStaffPass().equals(staffs.getStaffPass())&& staffs1.getStaffPhone().equals(staffs.getStaffPhone())){
             return AjaxResponse.success(staffs1);
         }else {
             return AjaxResponse.success("失败");

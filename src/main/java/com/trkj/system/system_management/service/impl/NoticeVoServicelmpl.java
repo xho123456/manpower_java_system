@@ -213,7 +213,11 @@ public class NoticeVoServicelmpl implements NoticeVoService {
         wrapper.eq("IS_DELETED",0);
         return staffsMapper.selectStaff(wrapper);
     }
-
+    /**
+     * 通过员工id查询公告员工表未读
+     * @param
+     * @return
+     */
     @Override
     public List<NoticeStaff> selectUnread(Long staffId) {
         QueryWrapper<NoticeStaff> wrapper=new QueryWrapper<>();
@@ -223,9 +227,16 @@ public class NoticeVoServicelmpl implements NoticeVoService {
         return noticeStaffMapper.selectNotice(wrapper);
     }
 
+    /**
+     * 登录
+     * @param staffs
+     * @return
+     */
     @Override
-    public Staffs selectStaffs(Staffs staffs) {
-        return  staffsMapper.selectStaffs(new QueryWrapper<Staffs>().eq("t1.STAFF_PHONE",staffs.getStaffPhone()));
+    public Staffs longs(Staffs staffs) {
+        return  staffsMapper.selectStaffs(new QueryWrapper<Staffs>()
+                .eq("STAFF_PHONE",staffs.getStaffPhone())
+                .eq("STAFF_PASS",staffs.getStaffPass()));
     }
 
     /**

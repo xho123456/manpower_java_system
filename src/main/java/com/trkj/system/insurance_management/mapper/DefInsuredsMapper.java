@@ -30,4 +30,10 @@ public interface DefInsuredsMapper extends BaseMapper<DefInsureds> {
     @Select("select * from DEF_INSURED ${ew.customSqlSegment}")
     List<DefInsureds> selectName(@Param(Constants.WRAPPER) QueryWrapper<DefInsureds> queryWrapper);
 
+    /**
+     * 添加明细表查询方案名称
+     */
+    @Select("select * from DEF_INSURED ${ew.customSqlSegment}")
+    DefInsureds selectNames(@Param(Constants.WRAPPER) QueryWrapper<DefInsureds> queryWrapper);
+
 }
