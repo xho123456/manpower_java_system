@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
+
 
 @Service
 public class ApprovalServiceImpl implements ApprovalService {
@@ -32,6 +32,21 @@ public class ApprovalServiceImpl implements ApprovalService {
 
     @Autowired
     private SalarymeMapper salarymeMapper;
+
+    @Autowired
+    private DepartureMapper departureMapper;
+
+    @Autowired
+    private WorkovertimeMapper workovertimeMapper;
+
+    @Autowired
+    private FillclockMapper fillclockMapper;
+
+    @Autowired
+    private ErectionMapper erectionMapper;
+
+    @Autowired
+    private LeaveMapper leaveMapper;
 
     @Override
     public IPage<PositiveEntity> positveme(Page<PositiveEntity> page) {
@@ -140,7 +155,7 @@ public class ApprovalServiceImpl implements ApprovalService {
                 // 转正表-员工名称
                 worker.setStaffName(workerVo.getStaffName());
                 // 转正表-部门名称
-                worker.setDeptname(workerVo.getDeptname());
+                worker.setDeptId(workerVo.getDeptId());
                 // 转正表-转正备注
                 worker.setWorkerRemarks(workerVo.getAuditflowdetaiRemarks());
                 // 转正表-转正类型
@@ -182,8 +197,120 @@ public class ApprovalServiceImpl implements ApprovalService {
         return salarymeMapper.Salaryed(page);
     }
 
+    @Override
+    public IPage<DepartureEntity> departureMe(DepartureEntity departure) {
+        Page<DepartureEntity> page =new Page<>(departure.getCurrentPage(),departure.getPageSize());
+        QueryWrapper<DepartureEntity> queryWrapper=new QueryWrapper<>();
 
+        //分页查询条件
+        queryWrapper.eq("ae.STAFF_NAME",departure.getStaffName());
+        queryWrapper.eq("ae.AUDITFLOWDETAI_STATE",departure.getAuditflowdetaiState());
+        return departureMapper.DepartureMe(page,queryWrapper);
+    }
 
+    @Override
+    public IPage<DepartureEntity> departureLikeName(DepartureEntity departure) {
+        Page<DepartureEntity> page =new Page<>(departure.getCurrentPage(),departure.getPageSize());
+        QueryWrapper<DepartureEntity> queryWrapper=new QueryWrapper<>();
+
+        //分页查询条件
+        queryWrapper.like("s.STAFF_NAME",departure.getStaffName1());
+        queryWrapper.eq("ae.STAFF_NAME",departure.getStaffName());
+        queryWrapper.eq("ae.AUDITFLOWDETAI_STATE",departure.getAuditflowdetaiState());
+        return departureMapper.DepartureMe(page,queryWrapper);
+    }
+
+    @Override
+    public IPage<WorkovertimeEntity> workoverMe(WorkovertimeEntity workovertime) {
+        Page<WorkovertimeEntity> page =new Page<>(workovertime.getCurrentPage(),workovertime.getPageSize());
+        QueryWrapper<WorkovertimeEntity> queryWrapper=new QueryWrapper<>();
+
+        //分页查询条件
+        queryWrapper.eq("ae.STAFF_NAME",workovertime.getStaffName());
+        queryWrapper.eq("ae.AUDITFLOWDETAI_STATE",workovertime.getAuditflowdetaiState());
+        return workovertimeMapper.workoverMe(page,queryWrapper);
+    }
+
+    @Override
+    public IPage<WorkovertimeEntity> workoverLikeName(WorkovertimeEntity workovertime) {
+        Page<WorkovertimeEntity> page =new Page<>(workovertime.getCurrentPage(),workovertime.getPageSize());
+        QueryWrapper<WorkovertimeEntity> queryWrapper=new QueryWrapper<>();
+
+        //分页查询条件
+        queryWrapper.like("s.STAFF_NAME",workovertime.getStaffName1());
+        queryWrapper.eq("ae.STAFF_NAME",workovertime.getStaffName());
+        queryWrapper.eq("ae.AUDITFLOWDETAI_STATE",workovertime.getAuditflowdetaiState());
+        return workovertimeMapper.workoverMe(page,queryWrapper);
+    }
+
+    @Override
+    public IPage<FillclockEntity> fillclockMe(FillclockEntity fillclock) {
+        Page<FillclockEntity> page =new Page<>(fillclock.getCurrentPage(),fillclock.getPageSize());
+        QueryWrapper<FillclockEntity> queryWrapper=new QueryWrapper<>();
+
+        //分页查询条件
+        queryWrapper.eq("ae.STAFF_NAME",fillclock.getStaffName());
+        queryWrapper.eq("ae.AUDITFLOWDETAI_STATE",fillclock.getAuditflowdetaiState());
+        return fillclockMapper.fillclockMe(page,queryWrapper);
+    }
+
+    @Override
+    public IPage<FillclockEntity> fillclockLikeName(FillclockEntity fillclock) {
+        Page<FillclockEntity> page =new Page<>(fillclock.getCurrentPage(),fillclock.getPageSize());
+        QueryWrapper<FillclockEntity> queryWrapper=new QueryWrapper<>();
+
+        //分页查询条件
+        queryWrapper.like("s.STAFF_NAME",fillclock.getStaffName1());
+        queryWrapper.eq("ae.STAFF_NAME",fillclock.getStaffName());
+        queryWrapper.eq("ae.AUDITFLOWDETAI_STATE",fillclock.getAuditflowdetaiState());
+        return fillclockMapper.fillclockMe(page,queryWrapper);
+    }
+
+    @Override
+    public IPage<ErectionEntity> erectionMe(ErectionEntity erection) {
+        Page<ErectionEntity> page =new Page<>(erection.getCurrentPage(),erection.getPageSize());
+        QueryWrapper<ErectionEntity> queryWrapper=new QueryWrapper<>();
+
+        //分页查询条件
+        queryWrapper.eq("ae.STAFF_NAME",erection.getStaffName());
+        queryWrapper.eq("ae.AUDITFLOWDETAI_STATE",erection.getAuditflowdetaiState());
+        return erectionMapper.erectionMe(page,queryWrapper);
+    }
+
+    @Override
+    public IPage<ErectionEntity> erectionLikeName(ErectionEntity erection) {
+        Page<ErectionEntity> page =new Page<>(erection.getCurrentPage(),erection.getPageSize());
+        QueryWrapper<ErectionEntity> queryWrapper=new QueryWrapper<>();
+
+        //分页查询条件
+        queryWrapper.like("s.STAFF_NAME",erection.getStaffName1());
+        queryWrapper.eq("ae.STAFF_NAME",erection.getStaffName());
+        queryWrapper.eq("ae.AUDITFLOWDETAI_STATE",erection.getAuditflowdetaiState());
+        return erectionMapper.erectionMe(page,queryWrapper);
+    }
+
+    @Override
+    public IPage<LeaveEntity> leaverMe(LeaveEntity leave) {
+        Page<LeaveEntity> page =new Page<>(leave.getCurrentPage(),leave.getPageSize());
+        QueryWrapper<LeaveEntity> queryWrapper=new QueryWrapper<>();
+
+        //分页查询条件
+        queryWrapper.eq("ae.STAFF_NAME",leave.getStaffName());
+        queryWrapper.eq("ae.AUDITFLOWDETAI_STATE",leave.getAuditflowdetaiState());
+        return leaveMapper.leaverMe(page,queryWrapper);
+    }
+
+    @Override
+    public IPage<LeaveEntity> leaverLikeName(LeaveEntity leave) {
+        Page<LeaveEntity> page =new Page<>(leave.getCurrentPage(),leave.getPageSize());
+        QueryWrapper<LeaveEntity> queryWrapper=new QueryWrapper<>();
+
+        //分页查询条件
+        queryWrapper.like("s.STAFF_NAME",leave.getStaffName1());
+        queryWrapper.eq("ae.STAFF_NAME",leave.getStaffName());
+        queryWrapper.eq("ae.AUDITFLOWDETAI_STATE",leave.getAuditflowdetaiState());
+        return leaveMapper.leaverMe(page,queryWrapper);
+    }
 
 
 }

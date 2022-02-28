@@ -324,4 +324,9 @@ public class StaffServiceimpl implements StaffService {
         return mapper.positive(new QueryWrapper<StaffEntity>().eq("STAFF_STATE",staff.getStaffState()));
     }
 
+    @Override
+    public StaffEntity postName(Integer id) {
+        return mapper.postName(id);
+    }
+
 }

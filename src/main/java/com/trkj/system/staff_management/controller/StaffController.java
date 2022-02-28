@@ -190,4 +190,10 @@ public class StaffController {
             return AjaxResponse.success("转正失败");
         }
     }
+
+    @PostMapping("/staff/postName")
+    public AjaxResponse postName(@RequestBody StaffEntity staff){
+        System.out.println("aaaa:  "+staff.getStaffId());
+        return AjaxResponse.success(service.postName(staff.getStaffId()));
+    }
 }
