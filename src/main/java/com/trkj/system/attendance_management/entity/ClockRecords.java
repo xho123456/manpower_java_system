@@ -124,4 +124,22 @@ public class ClockRecords implements Serializable {
     @ApiModelProperty(value = "年月")
     @TableField(exist = false)
     private String moth;
+
+    @TableField(exist = false)
+    private Double S1;
+    @TableField(exist = false)
+    private Double S2;
+    @TableField(exist = false)
+    private Double S3;
+    @TableField(exist = false)
+    private Double S4;
+    @TableField(exist = false)
+    private Double S5;
+    @TableField(exist = false)
+    private Double S6;
+    @TableField(exist = false)
+    private Double S7;
+    @TableField(exist = false)
+    private Double S8;
+
 }

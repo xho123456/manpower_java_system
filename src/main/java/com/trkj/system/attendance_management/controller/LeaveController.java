@@ -97,6 +97,12 @@ public class LeaveController {
         return AjaxResponse.success(service.selkuangnumber(clockRecord));
     }
 
+    //统计加班次数
+    @PostMapping("/clock/queryjabnumbers")
+    public AjaxResponse queryjabnumbers(@RequestBody Overtimeask overtimeask){
+        return AjaxResponse.success(service.jabsnumber(overtimeask));
+    }
+
     //考勤月统计
     @PostMapping("/leave/queryallsmothday")
     public AjaxResponse queryallsmothday(@RequestBody StaffVo staffVo){

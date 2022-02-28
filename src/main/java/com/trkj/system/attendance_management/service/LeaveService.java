@@ -31,6 +31,9 @@ public interface LeaveService {
     //根据当前登录用户查询加班信息
     IPage<Overtimeask> selectAlljb(Overtimeask overtimeask);
 
+    //统计加班次数
+    int jabsnumber(Overtimeask overtimeask);
+
     //根据当前登录用户查询迟到信息
     IPage<ClockRecord> selectByAllchid(ClockRecord clockRecord);
 

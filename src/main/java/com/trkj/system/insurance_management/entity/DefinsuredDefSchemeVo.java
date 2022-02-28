@@ -65,6 +65,7 @@ public class DefinsuredDefSchemeVo {
 
     @ApiModelProperty(value = "入职日期")
     @TableField("STAFF_HIREDATE")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date staffHiredate;
 
     @ApiModelProperty(value = "身份证")
@@ -123,6 +124,7 @@ public class DefinsuredDefSchemeVo {
 
     //部门表
 
+
     @ApiModelProperty(value = "父级菜单")
     @TableId("MENU_PID")
     private Long menuPid;
@@ -142,22 +144,24 @@ public class DefinsuredDefSchemeVo {
     @TableField("DEPT_NAME")
     private String deptName;
 
+
+
     //转正表
     @ApiModelProperty(value = "转正编号")
     @TableId("WORKER_ID")
     private Long workerId;
 
-    @ApiModelProperty(value = "审批编号")
-    @TableField("AUDITFLOW_ID")
-    private Long auditflowId;
-
-
     @ApiModelProperty(value = "转正类型")
+
     @TableField("WORKER_TYPE")
     private String workerType;
 
-    //职位表
 
+    @TableField("WORKER_DATE")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    private Date workerDate;
+
+    //职位表
 
     @ApiModelProperty(value = "职位名称")
     @TableField("POST_NAME")
@@ -186,5 +190,124 @@ public class DefinsuredDefSchemeVo {
     @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
     @TableField("IS_DELETED")
     private Long isDeleted;
+
+    //默认参保方案表
+
+    @ApiModelProperty(value = "默认参保方案编号")
+    @TableId("DEF_INSURED_ID")
+    private Integer defInsuredId;
+
+    @ApiModelProperty(value = "默认参保方案名称")
+    @TableField("DEF_INSURED_NAME")
+    private String defInsuredName;
+
+    @ApiModelProperty(value = "默认参保方案状态 0:启用 1:禁用")
+    @TableField("DEF_INSURED_STATE")
+    private Integer defInsuredState;
+
+    @ApiModelProperty(value = "默认参保方案数量")
+    @TableField("DEF_INSURED_NUMBER")
+    private Long defInsuredNumber;
+
+    //参保缴纳表
+
+    @ApiModelProperty(value = "参保缴纳编号")
+    @TableId("INSURED_PAYMENT_ID")
+    private Long insuredPaymentId;
+
+    @ApiModelProperty(value = "参保明细编号")
+    @TableField("INS_DETAIL_ID")
+    private Long insDetailId;
+
+    @ApiModelProperty(value = "缴纳基数")
+    @TableField("INSURED_PAYMENT_NUMBER")
+    private Long insuredPaymentNumber;
+
+    @ApiModelProperty(value = "公积金缴纳基数")
+    @TableField("INSURED_PAYMENT_FUND")
+    private Long insuredPaymentFund;
+
+    //默认方案表
+
+    @ApiModelProperty(value = "默认方案表编号")
+    @TableId("DEF_SCHEME_ID")
+    private Integer defSchemeId;
+
+    @ApiModelProperty(value = "最少基数")
+    @TableField("DEF_SCHEME_MIN")
+    private Long defSchemeMin;
+
+    @ApiModelProperty(value = "最多基数")
+    @TableField("DEF_SCHEME_MAX")
+    private Long defSchemeMax;
+
+    @ApiModelProperty(value = "基数上限")
+    @TableField("DEF_SCHEME_UPPER")
+    private Long defSchemeUpper;
+
+    @ApiModelProperty(value = "基数下限")
+    @TableField("DEF_SCHEME_FLOOR")
+    private Long defSchemeFloor;
+
+    @ApiModelProperty(value = "个人缴纳比例")
+    @TableField("DEF_SCHEME_PERSON_PROP")
+    private Double defSchemePersonProp;
+
+    @ApiModelProperty(value = "个人固定缴纳")
+    @TableField("DEF_SCHEME_PERSON_SUM")
+    private Double defSchemePersonSum;
+
+    @ApiModelProperty(value = "企业缴纳比例")
+    @TableField("DEF_SCHEME_FIRM_PROP")
+    private Double defSchemeFirmProp;
+
+    @ApiModelProperty(value = "企业固定缴纳")
+    @TableField("DEF_SCHEME_FIRM_SUM")
+    private Double defSchemeFirmSum;
+
+    @ApiModelProperty(value = "参保类型")
+    @TableField("DEF_SCHEME_TYPE")
+    private String defSchemeType;
+
+    //缴纳明细表
+
+
+    @ApiModelProperty(value = "员工名称")
+    @TableField("INS_DETAIL_STAFF_NAME")
+    private String insDetailStaffName;
+
+    @ApiModelProperty(value = "参保方案名称")
+    @TableField("INS_DETAIL_INSURED_NAME")
+    private String insDetailInsuredName;
+
+    @ApiModelProperty(value = "参保月份 精确到年月")
+    @TableField("INS_DETAIL_INSURED_MONTH")
+    @JsonFormat(pattern="yyyy-MM",timezone="GMT+8")
+    private Date insDetailInsuredMonth;
+
+    @ApiModelProperty(value = "计薪月份 精确到年月")
+    @TableField("INS_DETAIL_SALARY_MONTH")
+    private Date insDetailSalaryMonth;
+
+    @ApiModelProperty(value = "社保个人缴费")
+    @TableField("INS_DETAIL_SOCIAL_PERSON_PAY")
+    private Double insDetailSocialPersonPay;
+
+    @ApiModelProperty(value = "社保公司缴费")
+    @TableField("INS_DETAIL_SOCIAL_FIRM_PAY")
+    private Double insDetailSocialFirmPay;
+
+    @ApiModelProperty(value = "积金个人缴费")
+    @TableField("INS_DETAIL_FUND_PERSON_PAY")
+    private Double insDetailFundPersonPay;
+
+    @ApiModelProperty(value = "积金公司缴费")
+    @TableField("INS_DETAIL_FUND_FIRM_PAY")
+    private Double insDetailFundFirmPay;
+
+
+    private int currentPage;
+
+    private int pagesize;
 
 }
