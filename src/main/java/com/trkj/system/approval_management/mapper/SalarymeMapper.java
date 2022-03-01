@@ -26,4 +26,9 @@ public interface SalarymeMapper extends BaseMapper<SalaryincreaseEntity> {
             "LEFT JOIN AUDITFLOWDETAIL ae on ae.AUDITFLOW_ID=au.AUDITFLOW_ID ${ew.customSqlSegment} ")
     IPage<SalaryincreaseEntity> Moveapperme(Page<SalaryincreaseEntity> salaryincreaseEntityPage, @Param(Constants.WRAPPER) QueryWrapper<SalaryincreaseEntity> queryWrapper);
 
+    /**
+     * 查看当前用户的原有工资
+     */
+    @Select("select f.FIXEDWAGE_OFFICIALMONEY from staff s left join FIXEDWAGE f on s.STAFF_ID = f.STAFF_ID where s.staff_id = #{id}")
+    SalaryincreaseEntity salaryFixed (Integer id);
 }

@@ -11,6 +11,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface MoveMapper extends BaseMapper<MoveEntity> {
 
@@ -26,4 +28,15 @@ public interface MoveMapper extends BaseMapper<MoveEntity> {
             " LEFT JOIN AUDITFLOWDETAIL ae on ae.AUDITFLOW_ID=au.AUDITFLOW_ID ${ew.customSqlSegment} ")
     IPage<MoveEntity> Moveapperme(Page<MoveEntity> moveEntityPage, @Param(Constants.WRAPPER) QueryWrapper<MoveEntity> queryWrapper);
 
+    /**
+     * 查看当前用户的部门名称
+     */
+    @Select("select d.dept_name from staff s left join dept d on s.dept_id = d.dept_id where s.staff_id = #{id}")
+    MoveEntity MoveDeptName (Integer id);
+
+    /**
+     * 查看所有部门名称
+     */
+    @Select("select dept_id,dept_name from dept")
+    List<MoveEntity> allDeptName ();
 }

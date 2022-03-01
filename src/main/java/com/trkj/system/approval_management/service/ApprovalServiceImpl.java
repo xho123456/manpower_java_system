@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -324,6 +325,16 @@ public class ApprovalServiceImpl implements ApprovalService {
     }
 
     @Override
+    public MoveEntity MoveDeptName(Integer id) {
+        return moveMapper.MoveDeptName(id);
+    }
+
+    @Override
+    public List<MoveEntity> allDeptName() {
+        return moveMapper.allDeptName();
+    }
+
+    @Override
     public IPage<SalaryincreaseEntity> Salaryme(SalaryincreaseEntity salaryincrease) {
         Page<SalaryincreaseEntity> page =new Page<>(salaryincrease.getCurrentPage(),salaryincrease.getPageSize());
         QueryWrapper<SalaryincreaseEntity> queryWrapper=new QueryWrapper<>();
@@ -445,6 +456,11 @@ public class ApprovalServiceImpl implements ApprovalService {
         } else {
             throw new ArithmeticException("0");
         }
+    }
+
+    @Override
+    public SalaryincreaseEntity salaryFixed(Integer id) {
+        return salarymeMapper.salaryFixed(id);
     }
 
 

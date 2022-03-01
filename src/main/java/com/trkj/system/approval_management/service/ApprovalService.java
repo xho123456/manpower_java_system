@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.system.approval_management.entity.*;
 
+import java.util.List;
+
 
 public interface ApprovalService {
     IPage<PositiveEntity> positveme(Page<PositiveEntity> page);
@@ -19,11 +21,14 @@ public interface ApprovalService {
     IPage<MoveEntity> Moveappered(MoveEntity move);
     IPage<MoveEntity> Moveappermy(MoveEntity move);
     int addmove(MoveEntity move);
+    MoveEntity MoveDeptName (Integer id);
+    List<MoveEntity> allDeptName ();
 
     IPage<SalaryincreaseEntity> Salaryme(SalaryincreaseEntity salaryincrease);
     IPage<SalaryincreaseEntity> Salaryed(SalaryincreaseEntity salaryincrease);
     IPage<SalaryincreaseEntity> Salarymy(SalaryincreaseEntity salaryincrease);
     int addsalary(SalaryincreaseEntity salaryincrease);
+    SalaryincreaseEntity salaryFixed (Integer id);
 
     IPage<DepartureEntity> departureMe(DepartureEntity departure);
     IPage<DepartureEntity> departureLikeName(DepartureEntity departure);

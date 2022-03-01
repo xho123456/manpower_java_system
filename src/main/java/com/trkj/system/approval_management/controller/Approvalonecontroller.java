@@ -3,6 +3,7 @@ package com.trkj.system.approval_management.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.system.approval_management.entity.*;
 import com.trkj.system.approval_management.service.ApprovalService;
+import com.trkj.system.staff_management.entity.StaffEntity;
 import com.trkj.system.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -81,6 +82,17 @@ public class Approvalonecontroller {
         return map1;
     }
 
+    @PostMapping("/move/deptName")
+    public AjaxResponse MoveDeptName(@RequestBody MoveEntity MoveEntity){
+        return AjaxResponse.success(service.MoveDeptName(MoveEntity.getStaffId()));
+    }
+
+    @GetMapping("/move/alldeptName")
+    public AjaxResponse allDeptName(){
+        return AjaxResponse.success(service.allDeptName());
+    }
+
+
     @PostMapping("/salary")
     public AjaxResponse salary(@RequestBody SalaryincreaseEntity salaryincrease){
         System.out.println(salaryincrease);
@@ -105,6 +117,11 @@ public class Approvalonecontroller {
         map1.put("state", 200);
         map1.put("info", service.addsalary(salaryincrease));
         return map1;
+    }
+
+    @PostMapping("/salary/fixed")
+    public AjaxResponse postName(@RequestBody SalaryincreaseEntity salaryincrease){
+        return AjaxResponse.success(service.salaryFixed(salaryincrease.getStaffId()));
     }
 
     @PostMapping("/quit/departureMe")
