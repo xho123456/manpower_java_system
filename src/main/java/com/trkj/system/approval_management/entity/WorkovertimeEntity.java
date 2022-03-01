@@ -13,48 +13,56 @@ import java.util.Date;
 @Accessors(chain = true)  /** 链式写法 */
 public class WorkovertimeEntity {
     //加班
-    private Long AUDITFLOWID;
+    private Integer auditflowId;
 
-    private String AUDITFLOWTITLE;
+    private String auditflowTitle;
 
-    private Long AUDITFLOWSTATE;
+    private Long auditflowState;
 
-    private String AUDITFLOWTYPE;
+    private String auditflowType;
 
-    private Long AUDITFLOWDETAILID;
+    private Long auditflowdetailId;
 
-    private Date AUDITFLOWDETAIDATE;
+    private Date auditflowdetaiDate;
 
-    private Long AUDITFLOWDETAISTATE;
+    private Long auditflowdetaiState;
 
-    private String STAFFNAME1;
+    private String staffName;
     /** 申请人名称 */
 
-    private String STAFFNAME2;
-    /** 当前审批人名称 */
+    private String staffName1;
+    /** 当前审批人名称1 */
 
-    private Long OVERTIMEASKID;
+    private String staffName2;
+    /** 当前审批人名称2 */
 
-    private String OVERTIMEASKTYPE;
+    private String staffName3;
+    /** 当前审批人名称3 */
 
-    private String OVERTIMEASKMATTER;
+    private Long overtimeaskId;
 
-    private String OVERTIMEASKREMARKS;
+    private String overtimeaskType;
 
-    private Date OVERTIMEASKSDATE;
+    private Long deptId;
 
-    private Date OVERTIMEASKEDATE;
+    private String overtimeaskMatter;
 
-    private Long OVERTIMEASKTOTALDATE;
+    private String overtimeaskRemarks;
 
-    private Long OVERTIMEASKSTATE;
+    private Date overtimeaskSdate;
 
-    private Date UPDATEDTIME;
+    private Date overtimeaskEdate;
 
-    private Date CREATEDTIME;
+    private Long overtimeaskTotaldate;
 
-    private Long CurrentPage;
+    private Long overtimeaskState;
 
-    private Long Pagesize;
+    private Date updatedTime;
+
+    private Date createdTime;
+
+    private Long currentPage;
+
+    private Long pageSize;
 
 }

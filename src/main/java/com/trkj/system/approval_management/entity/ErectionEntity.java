@@ -14,48 +14,54 @@ import java.util.Date;
 @Accessors(chain = true)  /** 链式写法 */
 public class ErectionEntity {
     //出差
-    private Long AUDITFLOWID;
+    private Integer auditflowId;
 
-    private String AUDITFLOWTITLE;
+    private String auditflowTitle;
 
-    private Long AUDITFLOWSTATE;
+    private Long auditflowState;
 
-    private String AUDITFLOWTYPE;
+    private String auditflowType;
 
-    private Long AUDITFLOWDETAILID;
+    private Integer auditflowdetailId;
 
-    private Date AUDITFLOWDETAIDATE;
+    private Date auditflowdetaiDate;
 
-    private Long AUDITFLOWDETAISTATE;
+    private Long auditflowdetaiState;
 
-    private String STAFFNAME1;
+    private String staffName;
     /** 申请人名称 */
 
-    private String STAFFNAME2;
-    /** 当前审批人名称 */
+    private String staffName1;
+    /** 当前审批人名称1 */
 
-    private Long LEAVEID;
+    private String staffName2;
+    /** 当前审批人名称2 */
 
-    private String LEAVETYPE;
+    private String staffName3;
+    /** 当前审批人名称3 */
 
-    private String LEAVEMATTER;
+    private Integer travelId;
 
-    private String LEAVEREMARKS;
+    private Long deptId;
 
-    private Date LEAVESDATE;
+    private String travelPlace;
 
-    private Date LEAVEEDATE;
+    private String travelMatter;
 
-    private Long LEAVETOTALDATE;
+    private Date travelSDate;
 
-    private Long LEAVESTATE;
+    private Date travelEDate;
 
-    private Date UPDATEDTIME;
+    private Long travelTotalDate;
 
-    private Date CREATEDTIME;
+    private Long travelState;
 
-    private Long CurrentPage;
+    private Date updatedTime;
 
-    private Long Pagesize;
+    private Date createdTime;
+
+    private Long currentPage;
+
+    private Long pageSize;
 
 }

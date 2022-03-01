@@ -211,7 +211,7 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
      * 员工基本信息
      */
     @Select("select * from staff s left join dept d on s.DEPT_ID=d.DEPT_ID LEFT JOIN dept_post dp on " +
-            "s.DEPT_POST_ID=dp.DEPT_POST_ID where s.staff_id#{id}")
+            "s.DEPT_POST_ID=dp.DEPT_POST_ID where s.staff_id = #{id}")
     List<StaffEntity> staff(Integer id);
 
     /**
@@ -219,6 +219,12 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
      */
     @Update("update staff set STAFF_STATE=1  ")
     int positive(@Param(Constants.WRAPPER) QueryWrapper<StaffEntity> wrapper);
+
+    /**
+     * 查看当前登录用户的职位
+     */
+    @Select("select dp.post_name from staff s left join dept_post dp on s.DEPT_POST_ID=dp.DEPT_POST_ID where s.staff_id = #{id}")
+    StaffEntity postName(Integer id);
 
 
 }

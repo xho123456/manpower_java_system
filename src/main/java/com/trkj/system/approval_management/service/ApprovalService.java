@@ -2,10 +2,7 @@ package com.trkj.system.approval_management.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.system.approval_management.entity.MoveEntity;
-import com.trkj.system.approval_management.entity.PositiveEntity;
-import com.trkj.system.approval_management.entity.SalaryincreaseEntity;
-import com.trkj.system.approval_management.entity.WorkerVo;
+import com.trkj.system.approval_management.entity.*;
 
 
 public interface ApprovalService {
@@ -24,5 +21,20 @@ public interface ApprovalService {
 
     IPage<SalaryincreaseEntity> Salaryme(Page<SalaryincreaseEntity> page);
     IPage<SalaryincreaseEntity> Salaryed(Page<SalaryincreaseEntity> page);
+
+    IPage<DepartureEntity> departureMe(DepartureEntity departure);
+    IPage<DepartureEntity> departureLikeName(DepartureEntity departure);
+
+    IPage<WorkovertimeEntity> workoverMe(WorkovertimeEntity workovertime);
+    IPage<WorkovertimeEntity> workoverLikeName(WorkovertimeEntity workovertime);
+
+    IPage<FillclockEntity> fillclockMe(FillclockEntity fillclock);
+    IPage<FillclockEntity> fillclockLikeName(FillclockEntity fillclock);
+
+    IPage<ErectionEntity> erectionMe(ErectionEntity erection);
+    IPage<ErectionEntity> erectionLikeName(ErectionEntity erection);
+
+    IPage<LeaveEntity> leaverMe(LeaveEntity leave);
+    IPage<LeaveEntity> leaverLikeName(LeaveEntity leave);
 
 }

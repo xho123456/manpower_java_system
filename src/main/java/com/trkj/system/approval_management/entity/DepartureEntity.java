@@ -13,43 +13,51 @@ import java.util.Date;
 @Accessors(chain = true)  /** 链式写法 */
 public class DepartureEntity {
     //离职
-    private Long AUDITFLOWID;
+    private Integer auditflowId;
 
-    private String AUDITFLOWTITLE;
+    private String auditflowTitle;
 
-    private Long AUDITFLOWSTATE;
+    private Long auditflowState;
 
-    private String AUDITFLOWTYPE;
+    private String auditflowType;
 
-    private Long AUDITFLOWDETAILID;
+    private Integer auditflowdetailId;
 
-    private Date AUDITFLOWDETAIDATE;
+    private Date auditflowdetaiDate;
 
-    private Long AUDITFLOWDETAISTATE;
+    private Long auditflowdetaiState;
 
-    private String STAFFNAME1;
+    private String staffName;
     /** 申请人名称 */
 
-    private String STAFFNAME2;
-    /** 当前审批人名称 */
+    private String staffName1;
+    /** 当前审批人名称1 */
 
-    private Long QUITID;
+    private String staffName2;
+    /** 当前审批人名称2 */
 
-    private String QUITTYPE;
+    private String staffName3;
+    /** 当前审批人名称3 */
 
-    private String QUITEXPLAIN;
+    private Integer quitId;
 
-    private Long QUITSTATE;
+    private String quitType;
 
-    private Date APPLY_QUIT_DATE;
+    private String quitExplain;
 
-    private Date FORMALQUITDATE;
+    private Long quitState;
 
-    private Date UPDATEDTIME;
+    private Long deptId;
 
-    private Date CREATEDTIME;
+    private Date applyQuitDate;
 
-    private Long CurrentPage;
+    private Date formalquitDate;
 
-    private Long Pagesize;
+    private Date updatedTime;
+
+    private Date createdTime;
+
+    private Long currentPage;
+
+    private Long pageSize;
 }
