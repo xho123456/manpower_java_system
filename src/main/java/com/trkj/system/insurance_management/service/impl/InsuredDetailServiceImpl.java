@@ -9,6 +9,10 @@ import com.trkj.system.insurance_management.service.InsuredDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,17 +39,28 @@ public class InsuredDetailServiceImpl implements InsuredDetailService {
         QueryWrapper<DefinsuredDefSchemeVo> queryWrapper = new QueryWrapper<>();
         if(definsuredDefSchemeVo.getDeptId() != null && !definsuredDefSchemeVo.getDeptId().equals("")){
             //公告标题模糊查询
-            queryWrapper.like("t2.DEPT_ID",definsuredDefSchemeVo.getDeptId());
+            queryWrapper.like("t1.DEPT_ID",definsuredDefSchemeVo.getDeptId());
         }
         if(definsuredDefSchemeVo.getStaffName() != null && !definsuredDefSchemeVo.getStaffName().equals("")){
-            queryWrapper.like("t2.STAFF_NAME",definsuredDefSchemeVo.getStaffName());
+            queryWrapper.like("t1.STAFF_NAME",definsuredDefSchemeVo.getStaffName());
         }
         if(definsuredDefSchemeVo.getStaffState()!= null  && !definsuredDefSchemeVo.getStaffState().equals("")){
-            queryWrapper.like("t2.STAFF_STATE",definsuredDefSchemeVo.getStaffState());
+            queryWrapper.like("t1.STAFF_STATE",definsuredDefSchemeVo.getStaffState());
         }
+
+        // 当前日期转格式
+        Date now = new Date();
+        LocalDate localDate = now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Date newDate = java.sql.Date.valueOf(localDate);
+        // 再转成string型
+        java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+        String date = formatter.format(newDate);
+
         //分页查询条件
-        queryWrapper.eq("t5.DEF_INSURED_STATE",0);
-        queryWrapper.eq("t5.IS_DELETED",0);
+
+        queryWrapper.isNotNull("t5.INSURED_PAYMENT_ID");
+        queryWrapper.apply("TO_CHAR(t5.INSURED_PAYMENT_INSURED_MONTH,'yyyy-MM') like {0}", date);
+
         return definsuredDefSchemeVoMapper.selectPaer(page,queryWrapper);
 
     }
@@ -56,8 +71,17 @@ public class InsuredDetailServiceImpl implements InsuredDetailService {
     @Override
     public List<DefinsuredDefSchemeVo> selectPaerzsj(DefinsuredDefSchemeVo definsuredDefSchemeVo) {
         QueryWrapper<DefinsuredDefSchemeVo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("t5.DEF_INSURED_STATE",0);
-        queryWrapper.eq("t5.IS_DELETED",0);
+        // 当前日期转格式
+        Date now = new Date();
+        LocalDate localDate = now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Date newDate = java.sql.Date.valueOf(localDate);
+        // 再转成string型
+        java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+        String date = formatter.format(newDate);
+
+        //分页查询条件
+        queryWrapper.isNotNull("t5.INSURED_PAYMENT_ID");
+        queryWrapper.apply("TO_CHAR(t5.INSURED_PAYMENT_INSURED_MONTH,'yyyy-MM') like {0}", date);
         return definsuredDefSchemeVoMapper.selectPaerzsj(queryWrapper);
 
     }

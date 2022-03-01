@@ -12,6 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -52,14 +56,22 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
             QueryWrapper<DefinsuredDefSchemeVo> queryWrapper = new QueryWrapper<>();
             if(definsuredDefSchemeVo.getDeptId() != null && !definsuredDefSchemeVo.getDeptId().equals("")){
                 //公告标题模糊查询
-                queryWrapper.eq("t1.DEPT_ID",definsuredDefSchemeVo.getDeptId());
+                queryWrapper.eq("DEPT_ID",definsuredDefSchemeVo.getDeptId());
             }
             if(definsuredDefSchemeVo.getStaffName() != null && !definsuredDefSchemeVo.getStaffName().equals("")){
-                queryWrapper.like("t1.STAFF_NAME",definsuredDefSchemeVo.getStaffName());
+                queryWrapper.like("STAFF_NAME",definsuredDefSchemeVo.getStaffName());
             }
 
+//        // 当前日期转格式
+//        Date now = new Date();
+//        LocalDate localDate = now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        Date newDate = java.sql.Date.valueOf(localDate);
+////      再转成string型
+//        java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        String date = formatter.format(newDate);
             //分页查询条件
-            queryWrapper.isNull("t5.INSURED_PAYMENT_ID");
+//            queryWrapper.isNull("t5.INSURED_PAYMENT_ID");
+
             return definsuredDefSchemeVoMapper.selectPaerss(page,queryWrapper);
 
     }
