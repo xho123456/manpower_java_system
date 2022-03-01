@@ -24,7 +24,7 @@ import java.util.List;
 @Service
 public class LeaveServiceImpl implements LeaveService {
     @Autowired
-    private LeaveMapper mapper;
+    private LeavesMapper mapper;
 
     @Autowired
     private StaffVoMapper staffMapper;
