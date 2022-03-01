@@ -321,7 +321,7 @@ public class StaffServiceimpl implements StaffService {
 
     @Override
     public int positive(StaffEntity staff){
-        return mapper.positive(new QueryWrapper<StaffEntity>().eq("STAFF_STATE",staff.getStaffState()));
+        return mapper.positive(new QueryWrapper<StaffEntity>().eq("STAFF_ID",staff.getStaffId()));
     }
 
     @Override

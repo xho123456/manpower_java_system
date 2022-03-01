@@ -42,7 +42,7 @@ public class Departure {
 
     private Date applyQuitDate;
 
-    private Date formalquitDate;
+    private Date formalQuitDate;
 
     private Date updatedTime;
 

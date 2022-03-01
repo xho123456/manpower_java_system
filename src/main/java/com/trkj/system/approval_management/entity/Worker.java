@@ -43,7 +43,7 @@ public class Worker implements Serializable {
     @TableField("DEPT_ID")
     private Long deptId;
 
-    private Long staffId;
+    private Integer staffId;
 
     @ApiModelProperty(value = "部门名称")
     @TableField("DEPT_NAME")

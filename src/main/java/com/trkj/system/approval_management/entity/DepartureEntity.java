@@ -30,6 +30,8 @@ public class DepartureEntity {
     private String staffName;
     /** 申请人名称 */
 
+    private Integer staffId;
+
     private String staffName1;
     /** 当前审批人名称1 */
 
@@ -51,7 +53,7 @@ public class DepartureEntity {
 
     private Date applyQuitDate;
 
-    private Date formalquitDate;
+    private Date formalQuitDate;
 
     private Date updatedTime;
 

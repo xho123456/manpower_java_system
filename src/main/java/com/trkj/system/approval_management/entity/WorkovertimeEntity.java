@@ -30,6 +30,8 @@ public class WorkovertimeEntity {
     private String staffName;
     /** 申请人名称 */
 
+    private Integer staffId;
+
     private String staffName1;
     /** 当前审批人名称1 */
 
@@ -49,11 +51,11 @@ public class WorkovertimeEntity {
 
     private String overtimeaskRemarks;
 
-    private Date overtimeaskSdate;
+    private Date overtimeaskSDate;
 
-    private Date overtimeaskEdate;
+    private Date overtimeaskEDate;
 
-    private Long overtimeaskTotaldate;
+    private Long overtimeaskTotalDate;
 
     private Long overtimeaskState;
 
