@@ -52,6 +52,10 @@ public interface LeaveMapper extends BaseMapper<Leave> {
     @Select("select L.* ,A.AUDITFLOW_STATE as auditflowStaff,D.DEPT_NAME,S.STAFF_NAME as staffName1 from OVERTIMEASK L LEFT JOIN AUDITFLOW A on L.AUDITFLOW_ID = A.AUDITFLOW_ID LEFT JOIN DEPT D on D.DEPT_ID = L.DEPT_ID LEFT JOIN STAFF S ON S.STAFF_ID = A.STAFF_ID ${ew.customSqlSegment}")
     IPage<Overtimeask> queryalljb(Page<Overtimeask> page, @Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
+    //统计加班次数
+    @Select("select count(*) from OVERTIMEASK L LEFT JOIN AUDITFLOW A on L.AUDITFLOW_ID = A.AUDITFLOW_ID LEFT JOIN DEPT D on D.DEPT_ID = L.DEPT_ID LEFT JOIN STAFF S ON S.STAFF_ID = A.STAFF_ID  ${ew.customSqlSegment} AND TO_CHAR(L.CREATED_TIME,'yyyy-MM') = #{dates}")
+    int jabnumber(@Param(Constants.WRAPPER) QueryWrapper queryWrapper,@Param("dates") String dates);
+
 
     //根据当前登录用户查询迟到信息
     @Select("SELECT S.STAFF_NAME,D.DEPT_NAME,L.CLASSES_TIMEONES,L.CLASSES_TIMEONEX,L.CLASSES_TIMETWOS,L.CLASSES_TIMETWOX,C.* \n" +
@@ -91,6 +95,9 @@ public interface LeaveMapper extends BaseMapper<Leave> {
 
 
 
+    //当前登录用户考勤次数查询
+    @Select("select count(*) from CLOCK_RECORD ${ew.customSqlSegment} AND TO_CHAR(DAY_DATE,'yyyy-MM') = #{dates}")
+    int countquerys(@Param(Constants.WRAPPER) QueryWrapper queryWrapper,@Param("dates") String dates);
 
 
 }

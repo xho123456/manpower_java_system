@@ -117,5 +117,11 @@ public class Overtimeask implements Serializable {
     @TableField(exist = false)
     private int pagesize;
 
+    @TableField(exist = false)
+    private String dates;
+
+    //加班总时长
+    @TableField(exist = false)
+    private Double jbtimes;
 
 }

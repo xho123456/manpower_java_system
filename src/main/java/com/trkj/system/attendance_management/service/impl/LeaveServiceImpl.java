@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -92,6 +91,14 @@ public class LeaveServiceImpl implements LeaveService {
         return mapper.queryalljb(pagejb,wrapperjb);
     }
 
+    @Override
+    public int jabsnumber(Overtimeask overtimeask) {
+        QueryWrapper<Overtimeask> wrapperjab = new QueryWrapper<>();
+        wrapperjab.eq("A.STAFF_ID",overtimeask.getStaffId());
+        wrapperjab.eq("A.IS_DELETED",0);
+        return mapper.jabnumber(wrapperjab,overtimeask.getDates());
+    }
+
     //根据当前登录用户查询迟到信息
     @Override
     public IPage<ClockRecord> selectByAllchid(ClockRecord clockRecord) {
@@ -157,25 +164,24 @@ public class LeaveServiceImpl implements LeaveService {
         return mapper.kuangtnumber(wrapperztnumber,clockRecord.getDates());
     }
 
-    //考勤月统计123123
+    //考勤月统计
     @Override
     public IPage<StaffVo> selectAllmothday(StaffVo staffVo) {
         Page<StaffVo> pagemothday = new Page<>(staffVo.getCurrenPage(), staffVo.getPagesize());
         QueryWrapper<StaffVo> wrappers = new QueryWrapper<>();
-        IPage<StaffVo> staffVoIPage = staffMapper.selectPage(pagemothday, null);
+        if(staffVo.getStaffName()!=null && !staffVo.getStaffName().equals("")){
+            wrappers.like("STAFF_NAME",staffVo.getStaffName());
+        }
+        IPage<StaffVo> staffVoIPage = staffMapper.selectPage(pagemothday, wrappers);
         for (int i = 0; i <staffVoIPage.getRecords().size() ; i++) {
             QueryWrapper<ClockRecords> queryWrapper = new QueryWrapper<>();
             queryWrapper.isNull("CLOCK_RECORD_ID").or();
-            Date date = new Date();
-            int year = date.getYear()+1900;
-            int month  = date.getMonth()+1;
-            queryWrapper.eq("TO_CHAR(DAY_DATE,'yyyy-MM')",month>9?year+"-"+month:year+"-"+"0"+month);
-//            queryWrapper.eq("TO_CHAR(DAY_DATE,'yyyy-MM')",staffVoIPage.getRecords().get(i).getDates());
+            queryWrapper.eq("TO_CHAR(DAY_DATE,'yyyy-MM')",staffVo.getYears());
             queryWrapper.eq("STAFF_ID",staffVoIPage.getRecords().get(i).getStaffId());
             Deptattent dept = deptmapper.selectById(staffVoIPage.getRecords().get(i).getDeptId());
             List<ClockRecords> list = clocksMapper.selectList(queryWrapper);
             staffVoIPage.getRecords().get(i).setClockRsList(list);
-            staffVoIPage.getRecords().get(i).setDept(dept);
+            staffVoIPage.getRecords().get(i).setDepts(dept);
         }
         // 获取当前年月
         Calendar cal = Calendar.getInstance();
@@ -193,7 +199,7 @@ public class LeaveServiceImpl implements LeaveService {
         int maxDate = cal.get(Calendar.DATE);
         // 获取当前年月
         List list1 = new ArrayList();
-        for (int i = 0; i < maxDate-1; i++) {
+        for (int p = 0; p < maxDate-1; p++) {
             cal.add(Calendar.DATE, 1);//在第一天的基础上加1
             int week = cal.get(Calendar.DAY_OF_WEEK);
             if (week == Calendar.SATURDAY || week == Calendar.SUNDAY) {// 1代表周日，7代表周六 判断这是一个星期的第几天从而判断是否是周末
@@ -212,18 +218,48 @@ public class LeaveServiceImpl implements LeaveService {
                         clockRecord =staffVoIPage.getRecords().get(j).getClockRsList().get(k);
                     }
                 }
+
                 if (clockRecord==null){
+                    Calendar date=Calendar.getInstance();
+                    // 当前日期的天数
+                    int day = date.get(Calendar.DATE);
                     clockRecord= new ClockRecords();
-                    clockRecord.setMoth(month+ "-" + i);
-                    clockRecord.setSmornResult("");
-                    clockRecord.setXafternoonResult("");
+                    boolean op = true;
+                    for (int k = 0; k <list1.size() ; k++) {
+                        int pm = Integer.valueOf(list1.get(k).toString().substring(list1.get(k).toString().lastIndexOf("-")+1));
+                        if (pm==i && i<=day){
+                            clockRecord.setMoth(month + "/" + i);
+                            clockRecord.setSmornResult("休息");
+                            clockRecord.setXafternoonResult("休息");
+                            op=false;
+                        }
+                    }
+                    if (i<=day && op==true){
+                        clockRecord.setMoth(month + "/" + i);
+                        clockRecord.setSmornResult("");
+                        clockRecord.setXafternoonResult("");
+                    }else if ( op==true){
+                        clockRecord.setMoth(month+ "/" + i);
+                        clockRecord.setSmornResult("");
+                        clockRecord.setXafternoonResult("");
+                    }
                 }
+
                 list.add(clockRecord);
             }
             staffVoIPage.getRecords().get(j).setClockRsList(list);
         }
 
         return staffVoIPage;
+    }
+
+    //当前登录用户考勤次数查询
+    @Override
+    public int countquerys(ClockRecord clockRecord) {
+        QueryWrapper<ClockRecord> wrappercount = new QueryWrapper<>();
+        wrappercount.eq("STAFF_ID",clockRecord.getStaffId());
+        wrappercount.eq("IS_DELETED",0);
+        return mapper.countquerys(wrappercount,clockRecord.getDates());
     }
 
 

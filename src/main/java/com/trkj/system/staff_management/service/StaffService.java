@@ -58,4 +58,6 @@ public interface StaffService {
    List<StaffEntity> basicstaff(Integer id);
 
    int positive(StaffEntity staff);
+
+   StaffEntity postName (Integer id);
 }

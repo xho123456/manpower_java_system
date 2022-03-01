@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.system.attendance_management.mapper.CheckfilesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.system.attendance_management.entity.Checkfiles">
+        <id column="CHECKFILES_ID" property="checkfilesId" />
+        <result column="STAFF_NAME" property="staffName" />
+        <result column="YEARS" property="years" />
+        <result column="ATTENDANCE_TIME" property="attendanceTime" />
+        <result column="ACTUALATTENDANCE_TIME" property="actualattendanceTime" />
+        <result column="LATE_TIMES" property="lateTimes" />
+        <result column="HOURS_LATE" property="hoursLate" />
+        <result column="EARLY_LEAVE" property="earlyLeave" />
+        <result column="EARLY_HOURS" property="earlyHours" />
+        <result column="ABSENTEEISM" property="absenteeism" />
+        <result column="ABSENTEEISM_HOURS" property="absenteeismHours" />
+        <result column="OVERTIME_HOURS" property="overtimeHours" />
+        <result column="NUMBEROF_LEAVE" property="numberofLeave" />
+        <result column="LENGTHOF_LEAVE" property="lengthofLeave" />
+        <result column="TRAVEL_DAYS" property="travelDays" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        CHECKFILES_ID, STAFF_ID, YEARS, ATTENDANCE_TIME, ACTUALATTENDANCE_TIME, LATE_TIMES, HOURS_LATE, EARLY_LEAVE, EARLY_HOURS, ABSENTEEISM, ABSENTEEISM_HOURS, OVERTIME_DAYS, OVERTIME_HOURS, NUMBEROF_LEAVE, LENGTHOF_LEAVE, TRAVEL_DAYS, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+    </sql>
+
+</mapper>

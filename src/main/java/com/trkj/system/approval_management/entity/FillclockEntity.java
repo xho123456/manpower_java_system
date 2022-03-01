@@ -13,41 +13,49 @@ import java.util.Date;
 @Accessors(chain = true)  /** 链式写法 */
 public class FillclockEntity {
     //补打卡
-    private Long AUDITFLOWID;
+    private Integer auditflowId;
 
-    private String AUDITFLOWTITLE;
+    private String auditflowTitle;
 
-    private Long AUDITFLOWSTATE;
+    private Long auditflowState;
 
-    private String AUDITFLOWTYPE;
+    private String auditflowType;
 
-    private Long AUDITFLOWDETAILID;
+    private Integer auditflowdetailId;
 
-    private Date AUDITFLOWDETAIDATE;
+    private Date auditflowdetaiDate;
 
-    private Long AUDITFLOWDETAISTATE;
+    private Long auditflowdetaiState;
 
-    private String STAFFNAME1;
+    private String staffName;
     /** 申请人名称 */
 
-    private String STAFFNAME2;
-    /** 当前审批人名称 */
+    private String staffName1;
+    /** 当前审批人名称1 */
 
-    private Long CARDID;
+    private String staffName2;
+    /** 当前审批人名称2 */
 
-    private String CARDTYPE;
+    private String staffName3;
+    /** 当前审批人名称3 */
 
-    private Date CARDDATE;
+    private Long cardId;
 
-    private String CARDREMARKS;
+    private Long deptId;
 
-    private Long CARDSTATE;
+    private String cardType;
 
-    private Date UPDATEDTIME;
+    private Date cardDate;
 
-    private Date CREATEDTIME;
+    private String cardRemarks;
 
-    private Long CurrentPage;
+    private Long cardState;
 
-    private Long Pagesize;
+    private Date updatedTime;
+
+    private Date createdTime;
+
+    private Long currentPage;
+
+    private Long pageSize;
 }

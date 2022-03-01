@@ -15,7 +15,6 @@ import lombok.experimental.Accessors;
 /**
  * 转正
  *
- * @author suki
  * @since 2021-12-29
  */
 @Data

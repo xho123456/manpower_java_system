@@ -1,10 +1,7 @@
 package com.trkj.system.approval_management.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.system.approval_management.entity.MoveEntity;
-import com.trkj.system.approval_management.entity.PositiveEntity;
-import com.trkj.system.approval_management.entity.SalaryincreaseEntity;
-import com.trkj.system.approval_management.entity.WorkerVo;
+import com.trkj.system.approval_management.entity.*;
 import com.trkj.system.approval_management.service.ApprovalService;
 import com.trkj.system.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,4 +79,58 @@ public class Approvalonecontroller {
         Page<SalaryincreaseEntity> page1=new Page<>(currentPage,pagesize);
         return AjaxResponse.success(service.Salaryed(page1));
     }
+
+    @PostMapping("/quit/departureMe")
+    public AjaxResponse DepartureMe(@RequestBody DepartureEntity departure){
+        return AjaxResponse.success(service.departureMe(departure));
+    }
+
+    @PostMapping("/quit/departureLikeName")
+    public AjaxResponse DepartureLikeName(@RequestBody DepartureEntity departure){
+        return AjaxResponse.success(service.departureLikeName(departure));
+    }
+
+    @PostMapping("/workover/workoverMe")
+    public AjaxResponse workoverMe(@RequestBody WorkovertimeEntity workovertime){
+        return AjaxResponse.success(service.workoverMe(workovertime));
+    }
+
+    @PostMapping("/workover/LikeName")
+    public AjaxResponse  workoverLikeName(@RequestBody WorkovertimeEntity workovertime){
+        return AjaxResponse.success(service. workoverLikeName(workovertime));
+    }
+
+    @PostMapping("/fillclock/fillclockMe")
+    public AjaxResponse fillclockMe(@RequestBody FillclockEntity fillclock){
+        return AjaxResponse.success(service.fillclockMe(fillclock));
+    }
+
+    @PostMapping("/fillclock/LikeName")
+    public AjaxResponse  fillclockLikeName(@RequestBody FillclockEntity fillclock){
+        return AjaxResponse.success(service. fillclockLikeName(fillclock));
+    }
+
+    @PostMapping("/erection/erectionMe")
+    public AjaxResponse erectionMe(@RequestBody ErectionEntity erection){
+        return AjaxResponse.success(service.erectionMe(erection));
+    }
+
+    @PostMapping("/erection/LikeName")
+    public AjaxResponse  erectionLikeName(@RequestBody ErectionEntity erection){
+        return AjaxResponse.success(service. erectionLikeName(erection));
+    }
+
+
+
+    @PostMapping("/leaver/leaverMe")
+    public AjaxResponse leaverMe(@RequestBody LeaveEntity leave){
+        return AjaxResponse.success(service.leaverMe(leave));
+    }
+
+    @PostMapping("/leaver/LikeName")
+    public AjaxResponse  leaverLikeName(@RequestBody LeaveEntity leave){
+        return AjaxResponse.success(service. leaverLikeName(leave));
+    }
+
+
 }
