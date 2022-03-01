@@ -1,11 +1,14 @@
 package com.trkj.system.attendance_management.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.trkj.system.attendance_management.entity.ClockRecord;
 import com.trkj.system.attendance_management.entity.Leave;
 import com.trkj.system.attendance_management.entity.Overtimeask;
 import com.trkj.system.attendance_management.entity.StaffVo;
 import com.trkj.system.vo.AjaxResponse;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -55,5 +58,7 @@ public interface LeaveService {
     //考勤月统计
     IPage<StaffVo> selectAllmothday(StaffVo staffVo);
 
+    //当前登录用户考勤次数查询
+    int countquerys(ClockRecord clockRecord);
 
 }

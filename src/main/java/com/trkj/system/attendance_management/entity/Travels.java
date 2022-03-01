@@ -69,7 +69,7 @@ public class Travels {
 
     //出差天数
     @TableField(exist = false)
-    private Double ccday;
+    private Long ccday;
 
     //出差总时长
     @TableField(exist = false)

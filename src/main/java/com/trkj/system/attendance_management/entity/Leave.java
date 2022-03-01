@@ -119,7 +119,7 @@ public class Leave implements Serializable {
 
     //请假天数
     @TableField(exist = false)
-    private Double qidays;
+    private Long qidays;
 
     //请假总时长
     @TableField(exist = false)

@@ -8,13 +8,9 @@ import com.trkj.system.attendance_management.entity.ClockRecord;
 import com.trkj.system.attendance_management.entity.Leave;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.trkj.system.attendance_management.entity.Overtimeask;
-import com.trkj.system.attendance_management.entity.StaffVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-
-import javax.xml.crypto.Data;
-import java.util.Date;
 
 /**
  * <p>
@@ -25,7 +21,7 @@ import java.util.Date;
  * @since 2022-02-18
  */
 @Mapper
-public interface LeaveMapper extends BaseMapper<Leave> {
+public interface LeavesMapper extends BaseMapper<Leave> {
     //查询所有员工打卡记录
     @Select("select S.STAFF_NAME,D.DEPT_NAME, R.*,C.CLASSES_TIMEONES,C.CLASSES_TIMEONEX,C.CLASSES_TIMETWOS,C.CLASSES_TIMETWOX\n" +
             "FROM CLOCK_RECORD R LEFT JOIN ATTENDANCE_SHEET A  ON R.CLOCK_RECORD_ID = A.CLOCK_RECORD_ID\n" +
@@ -95,6 +91,9 @@ public interface LeaveMapper extends BaseMapper<Leave> {
 
 
 
+    //当前登录用户考勤次数查询
+    @Select("select count(*) from CLOCK_RECORD ${ew.customSqlSegment} AND TO_CHAR(DAY_DATE,'yyyy-MM') = #{dates}")
+    int countquerys(@Param(Constants.WRAPPER) QueryWrapper queryWrapper,@Param("dates") String dates);
 
 
 }

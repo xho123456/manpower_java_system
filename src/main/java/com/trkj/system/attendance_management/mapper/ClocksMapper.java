@@ -3,10 +3,7 @@ package com.trkj.system.attendance_management.mapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.trkj.system.attendance_management.entity.ClockRecord;
-import com.trkj.system.attendance_management.entity.ClockRecords;
-import com.trkj.system.attendance_management.entity.Leave;
-import com.trkj.system.attendance_management.entity.Travels;
+import com.trkj.system.attendance_management.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -47,12 +44,18 @@ public interface ClocksMapper extends BaseMapper<ClockRecords> {
             "LEFT JOIN AUDITFLOW a on l.AUDITFLOW_ID = a.AUDITFLOW_ID ${ew.customSqlSegment} and a.AUDITFLOW_STATE = 1")
     Leave queryqingia(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
-    //请假数据汇总
+    //出差数据汇总
     @Select("SELECT  distinct(T.STAFF_ID),\n" +
             "    SUM(T.TRAVEL_TOTAL_DATE) OVER (PARTITION BY T.STAFF_ID ORDER BY T.STAFF_ID)/24 ccday,\n" +
             "    SUM(T.TRAVEL_TOTAL_DATE) OVER (PARTITION BY T.STAFF_ID ORDER BY T.STAFF_ID) cctiams\n" +
             "FROM TRAVEL T " +
             "LEFT JOIN AUDITFLOW a on T.AUDITFLOW_ID = a.AUDITFLOW_ID ${ew.customSqlSegment} and a.AUDITFLOW_STATE = 1")
     Travels querycc(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
+
+    //出差数据汇总
+    @Select("SELECT  distinct(O.STAFF_NAME),\n" +
+            "SUM(O.OVERTIMEASK_TOTAL_DATE) OVER (PARTITION BY O.STAFF_NAME ORDER BY O.STAFF_NAME) JBTIMES\n" +
+            "FROM OVERTIMEASK O LEFT JOIN AUDITFLOW a on O.AUDITFLOW_ID = a.AUDITFLOW_ID ${ew.customSqlSegment} and a.AUDITFLOW_STATE = 1")
+    Overtimeask queryjb(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
 }

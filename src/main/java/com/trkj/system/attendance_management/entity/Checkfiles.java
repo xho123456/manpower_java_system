@@ -1,5 +1,6 @@
 package com.trkj.system.attendance_management.entity;
 
+import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -27,17 +28,22 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Accessors(chain = true)
 @TableName("CHECKFILES")
 @ApiModel(value="Checkfiles对象", description="")
+@KeySequence(value = "CHECKFILES_ID", clazz = Integer.class)
 public class Checkfiles implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     //考勤归档编号
     @TableId("CHECKFILES_ID")
-    private Long checkfilesId;
+    private Integer checkfilesId;
 
-    //员工编号
-    @TableField("STAFF_ID")
-    private Long staffId;
+    //员工名称
+    @TableField("STAFF_NAME")
+    private String staffName;
+
+    //部门名称
+    @TableField("DEPT_NAME")
+    private String deptName;
 
     //所属年月
     @TableField("YEARS")
@@ -77,10 +83,6 @@ public class Checkfiles implements Serializable {
     @TableField("ABSENTEEISM_HOURS")
     private Double absenteeismHours;
 
-    //加班天数
-    @TableField("OVERTIME_DAYS")
-    private Long overtimeDays;
-
     //加班总时长
     @TableField("OVERTIME_HOURS")
     private Double overtimeHours;
@@ -112,5 +114,16 @@ public class Checkfiles implements Serializable {
     //逻辑删除
     @TableField("IS_DELETED")
     private Long isDeleted;
+
+    //分页
+    @TableField(exist = false)
+    private int currenPage;
+    @TableField(exist = false)
+    private int pagesize;
+
+    @TableField(exist = false)
+    private String datesgd;
+
+
 
 }
