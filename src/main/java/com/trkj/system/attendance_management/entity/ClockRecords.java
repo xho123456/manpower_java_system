@@ -126,20 +126,20 @@ public class ClockRecords implements Serializable {
     private String moth;
 
     @TableField(exist = false)
-    private Double S1;
+    private Long S1;
     @TableField(exist = false)
-    private Double S2;
+    private Long S2;
     @TableField(exist = false)
     private Double S3;
     @TableField(exist = false)
-    private Double S4;
+    private Long S4;
     @TableField(exist = false)
     private Double S5;
     @TableField(exist = false)
-    private Double S6;
+    private Long S6;
     @TableField(exist = false)
     private Double S7;
     @TableField(exist = false)
-    private Double S8;
+    private Long S8;
 
 }

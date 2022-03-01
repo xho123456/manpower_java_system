@@ -95,6 +95,9 @@ public interface LeaveMapper extends BaseMapper<Leave> {
 
 
 
+    //当前登录用户考勤次数查询
+    @Select("select count(*) from CLOCK_RECORD ${ew.customSqlSegment} AND TO_CHAR(DAY_DATE,'yyyy-MM') = #{dates}")
+    int countquerys(@Param(Constants.WRAPPER) QueryWrapper queryWrapper,@Param("dates") String dates);
 
 
 }

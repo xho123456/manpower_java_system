@@ -253,5 +253,14 @@ public class LeaveServiceImpl implements LeaveService {
         return staffVoIPage;
     }
 
+    //当前登录用户考勤次数查询
+    @Override
+    public int countquerys(ClockRecord clockRecord) {
+        QueryWrapper<ClockRecord> wrappercount = new QueryWrapper<>();
+        wrappercount.eq("STAFF_ID",clockRecord.getStaffId());
+        wrappercount.eq("IS_DELETED",0);
+        return mapper.countquerys(wrappercount,clockRecord.getDates());
+    }
+
 
 }

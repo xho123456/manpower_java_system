@@ -5,7 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.trkj.system.attendance_management.entity.Checkfiles">
         <id column="CHECKFILES_ID" property="checkfilesId" />
-        <result column="STAFF_ID" property="staffId" />
+        <result column="STAFF_NAME" property="staffName" />
         <result column="YEARS" property="years" />
         <result column="ATTENDANCE_TIME" property="attendanceTime" />
         <result column="ACTUALATTENDANCE_TIME" property="actualattendanceTime" />
@@ -15,7 +15,6 @@
         <result column="EARLY_HOURS" property="earlyHours" />
         <result column="ABSENTEEISM" property="absenteeism" />
         <result column="ABSENTEEISM_HOURS" property="absenteeismHours" />
-        <result column="OVERTIME_DAYS" property="overtimeDays" />
         <result column="OVERTIME_HOURS" property="overtimeHours" />
         <result column="NUMBEROF_LEAVE" property="numberofLeave" />
         <result column="LENGTHOF_LEAVE" property="lengthofLeave" />

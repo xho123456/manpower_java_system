@@ -106,4 +106,8 @@ public class StaffVo implements Serializable {
     @TableField(exist = false)
     private Travels travels;
 
+    //加班表对象
+    @TableField(exist = false)
+    private Overtimeask overtimeask;
+
 }

@@ -109,5 +109,11 @@ public class LeaveController {
         return AjaxResponse.success(service.selectAllmothday(staffVo));
     }
 
+    //考勤月统计
+    @PostMapping("/leave/querydkcounts")
+    public AjaxResponse querydkcounts(@RequestBody ClockRecord clockRecord){
+        return AjaxResponse.success(service.countquerys(clockRecord));
+    }
+
 }
 
