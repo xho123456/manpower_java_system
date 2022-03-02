@@ -39,6 +39,7 @@ public class InterviewVo implements Serializable {
     private Long resumeId;
 
     @ApiModelProperty(value = "面试日期")
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
     @TableField("INTERVIEW_TIME")
     private Date interviewTime;
 
