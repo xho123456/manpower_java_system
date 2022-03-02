@@ -1,10 +1,7 @@
 package com.trkj.system.attendance_management.controller;
 
 
-import com.trkj.system.attendance_management.entity.ClockRecord;
-import com.trkj.system.attendance_management.entity.Leave;
-import com.trkj.system.attendance_management.entity.Overtimeask;
-import com.trkj.system.attendance_management.entity.StaffVo;
+import com.trkj.system.attendance_management.entity.*;
 import com.trkj.system.attendance_management.service.LeaveService;
 import com.trkj.system.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -115,5 +112,16 @@ public class LeaveController {
         return AjaxResponse.success(service.countquerys(clockRecord));
     }
 
+    //根据当前登录用户查询补打卡信息
+    @PostMapping("/clock/querybudk")
+    public AjaxResponse querybudk(@RequestBody Card card){
+        return AjaxResponse.success(service.selectBudk(card));
+    }
+
+    //根据当前登录用户查询补打卡数量
+    @PostMapping("/clock/querybudks")
+    public AjaxResponse querybudkcounts(@RequestBody Card card){
+        return AjaxResponse.success(service.selectbudkcounts(card));
+    }
 }
 

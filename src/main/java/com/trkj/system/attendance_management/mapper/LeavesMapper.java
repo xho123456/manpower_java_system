@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.system.attendance_management.entity.Card;
 import com.trkj.system.attendance_management.entity.ClockRecord;
 import com.trkj.system.attendance_management.entity.Leave;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -52,7 +53,6 @@ public interface LeavesMapper extends BaseMapper<Leave> {
     @Select("select count(*) from OVERTIMEASK L LEFT JOIN AUDITFLOW A on L.AUDITFLOW_ID = A.AUDITFLOW_ID LEFT JOIN DEPT D on D.DEPT_ID = L.DEPT_ID LEFT JOIN STAFF S ON S.STAFF_ID = A.STAFF_ID  ${ew.customSqlSegment} AND TO_CHAR(L.CREATED_TIME,'yyyy-MM') = #{dates}")
     int jabnumber(@Param(Constants.WRAPPER) QueryWrapper queryWrapper,@Param("dates") String dates);
 
-
     //根据当前登录用户查询迟到信息
     @Select("SELECT S.STAFF_NAME,D.DEPT_NAME,L.CLASSES_TIMEONES,L.CLASSES_TIMEONEX,L.CLASSES_TIMETWOS,L.CLASSES_TIMETWOX,C.* \n" +
             "FROM ATTENDANCE_SHEET A LEFT JOIN STAFF S ON A.STAFF_ID = S.STAFF_ID\n" +
@@ -89,11 +89,19 @@ public interface LeavesMapper extends BaseMapper<Leave> {
     @Select("select count(*) from CLOCK_RECORD ${ew.customSqlSegment} AND TO_CHAR(DAY_DATE,'yyyy-MM') = #{dates} AND  SMORN_RESULT='旷工' OR XAFTERNOON_RESULT = '旷工'")
     int kuangtnumber(@Param(Constants.WRAPPER) QueryWrapper queryWrapper,@Param("dates") String dates);
 
-
-
     //当前登录用户考勤次数查询
     @Select("select count(*) from CLOCK_RECORD ${ew.customSqlSegment} AND TO_CHAR(DAY_DATE,'yyyy-MM') = #{dates}")
     int countquerys(@Param(Constants.WRAPPER) QueryWrapper queryWrapper,@Param("dates") String dates);
+
+
+    @Select("select S.STAFF_NAME,D.DEPT_NAME,C.* \n" +
+            "FROM CARD C LEFT JOIN STAFF S ON C.STAFF_ID = S.STAFF_ID \n" +
+            "LEFT JOIN DEPT D ON S.DEPT_ID = D.DEPT_ID LEFT JOIN AUDITFLOW A on C.AUDITFLOW_ID = A.AUDITFLOW_ID ${ew.customSqlSegment} AND TO_CHAR(C.CREATED_TIME,'yyyy-MM') = #{dates}")
+    IPage<Card> queryBudk(Page<Card> page, @Param(Constants.WRAPPER) QueryWrapper queryWrapper, @Param("dates") String dates);
+
+    //统计漏签次数
+    @Select("select count(*) from CARD C LEFT JOIN AUDITFLOW A on C.AUDITFLOW_ID = a.AUDITFLOW_ID ${ew.customSqlSegment} AND TO_CHAR(C.CREATED_TIME,'yyyy-MM') = #{dates}")
+    int budkcounts(@Param(Constants.WRAPPER) QueryWrapper queryWrapper,@Param("dates") String dates);
 
 
 }
