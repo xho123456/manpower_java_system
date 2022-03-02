@@ -55,4 +55,12 @@ public interface ApprovalService {
     IPage<LeaveEntity> leaverMy(LeaveEntity leave);
     int addleaver(LeaveEntity leave);
 
+    int undo (Auditflow auditflow);
+
+    int updataAuddetail(Auditflowdetail auditflowdetail);
+
+    int updataAuddetailend(Auditflowdetail auditflowdetail);
+
+    int rejected(Auditflowdetail auditflowdetail);
+
 }
