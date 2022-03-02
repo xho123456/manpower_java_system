@@ -1,10 +1,12 @@
 package com.trkj.system.approval_management.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.system.approval_management.entity.*;
 import com.trkj.system.approval_management.mapper.*;
+import com.trkj.system.staff_management.entity.StaffEntity;
 import lombok.val;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -296,9 +298,8 @@ public class ApprovalServiceImpl implements ApprovalService {
                 // 调动表-审批编号
                 move1.setAuditflowId(auditflow1.getAuditFlowId());
                 // 调动表-员工名称
-                move1.setStaffName(move.getStaffName());
-                // 调动表-部门名称
-                move1.setDeptId(move.getDeptId());
+                move1.setStaffId(move.getStaffId());
+
                 // 调动表-调动类型
                 move1.setTransferType(move.getTransferType());
                 // 调动前部门名称
@@ -1081,6 +1082,76 @@ public class ApprovalServiceImpl implements ApprovalService {
                 throw new ArithmeticException("0");
             }
         } else {
+            throw new ArithmeticException("0");
+        }
+    }
+
+    @Override
+    public int undo(Auditflow auditflow) {
+        Auditflow auditflow1 = new Auditflow();
+        auditflow1.setAuditFlowId(auditflow.getAuditFlowId());
+        auditflow1.setAuditFlowState(3L);
+
+        final val i =  oneMapper.updateById(auditflow);
+        if (i == 1) {
+            return 1111;
+        } else {
+            throw new ArithmeticException("0");
+        }
+    }
+
+    @Override
+    public int updataAuddetail(Auditflowdetail auditflowdetail) {
+        UpdateWrapper<Auditflowdetail> ew = new UpdateWrapper<>();
+
+        final val i =  towMapper.positive(ew.set("AUDITFLOWDETAI_STATE",2).in("AUDITFLOWDETAIL_ID",auditflowdetail.getAuditflowdetailId()));
+        if (i == 1) {
+            UpdateWrapper<Auditflowdetail> ew1 = new UpdateWrapper<>();
+            final val i2 =  towMapper.positive(ew1.set("AUDITFLOWDETAI_STATE",1).in("AUDITFLOWDETAIL_ID",auditflowdetail.getAuditflowdetailId()+1));
+            if (i2 == 1) {
+                return 1111;
+            }else {
+                throw new ArithmeticException("0");
+            }
+        } else {
+            throw new ArithmeticException("0");
+        }
+    }
+
+    @Override
+    public int updataAuddetailend(Auditflowdetail auditflowdetail) {
+        UpdateWrapper<Auditflowdetail> ew = new UpdateWrapper<>();
+
+        final val i =  towMapper.positive(ew.set("AUDITFLOWDETAI_STATE",2).in("AUDITFLOWDETAIL_ID",auditflowdetail.getAuditflowdetailId()));
+
+        if(i==1){
+            UpdateWrapper<Auditflow> au = new UpdateWrapper<>();
+            final val i2 = oneMapper.positive(au.set("AUDITFLOW_STATE",1).in("AUDITFLOW_ID",auditflowdetail.getAuditflowId()));
+            if (i2==1){
+                return 1111;
+            }else {
+                throw new ArithmeticException("0");
+            }
+        }else {
+            throw new ArithmeticException("0");
+        }
+    }
+
+    @Override
+    public int rejected(Auditflowdetail auditflowdetail) {
+        UpdateWrapper<Auditflowdetail> ew = new UpdateWrapper<>();
+
+        final val i =  towMapper.positive(ew.set("AUDITFLOWDETAI_STATE",3).in("AUDITFLOWDETAIL_ID",auditflowdetail.getAuditflowdetailId()));
+
+        if(i==1){
+            UpdateWrapper<Auditflow> au = new UpdateWrapper<>();
+            final val i2 = oneMapper.positive(au.set("AUDITFLOW_STATE",2).in("AUDITFLOW_ID",auditflowdetail.getAuditflowId()));
+            if (i2==1){
+                return 1111;
+            }else {
+                throw new ArithmeticException("0");
+            }
+        }else {
             throw new ArithmeticException("0");
         }
     }

@@ -40,4 +40,5 @@ public interface InsuredDetailService  {
     List<DefinsuredDefSchemeVo> selectScheme(DefinsuredDefSchemeVo definsuredDefSchemeVo);
 
 
+
 }

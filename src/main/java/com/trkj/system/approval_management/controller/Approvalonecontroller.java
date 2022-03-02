@@ -243,4 +243,37 @@ public class Approvalonecontroller {
         return map1;
     }
 
+    @PostMapping("/undo")
+    public Map<String, Object> undo(@RequestBody Auditflow auditflow){
+        Map<String, Object> map1 = new HashMap<>(2);
+        map1.put("state", 200);
+        map1.put("info", service.undo(auditflow));
+        return map1;
+    }
+
+    @PostMapping("/auditflow/positive")
+    public Map<String, Object> updataAuddetail(@RequestBody Auditflowdetail auditflow){
+        Map<String, Object> map1 = new HashMap<>(2);
+        map1.put("state", 200);
+        map1.put("info", service.updataAuddetail(auditflow));
+        return map1;
+    }
+
+    @PostMapping("/auditflow/positiveend")
+    public Map<String, Object> updataAuddetailend(@RequestBody Auditflowdetail auditflow){
+        Map<String, Object> map1 = new HashMap<>(2);
+        map1.put("state", 200);
+        map1.put("info", service.updataAuddetailend(auditflow));
+        return map1;
+    }
+
+    @PostMapping("/auditflow/rejected")
+    public Map<String, Object> rejected(@RequestBody Auditflowdetail auditflow){
+        Map<String, Object> map1 = new HashMap<>(2);
+        map1.put("state", 200);
+        map1.put("info", service.rejected(auditflow));
+        return map1;
+    }
+
+
 }

@@ -25,13 +25,10 @@ public class Move {
     @TableField("AUDITFLOW_ID")
     private Integer auditflowId;
 
-    @ApiModelProperty(value = "员工名称")
-    @TableField("STAFF_NAME")
-    private String staffName;
+    @ApiModelProperty(value = "员工编号")
+    @TableField("STAFF_ID")
+    private Integer staffId;
 
-    @ApiModelProperty(value = "部门编号")
-    @TableField("DEPT_ID")
-    private Long deptId;
 
     private String transferType;
 
