@@ -31,6 +31,8 @@ public class ErectionEntity {
     private String staffName;
     /** 申请人名称 */
 
+    private Integer staffId;
+
     private String staffName1;
     /** 当前审批人名称1 */
 

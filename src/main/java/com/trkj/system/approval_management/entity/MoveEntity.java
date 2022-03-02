@@ -13,48 +13,60 @@ import java.util.Date;
 @Accessors(chain = true)  /** 链式写法 */
 public class MoveEntity {
     //异动
-    private Long AUDITFLOWID;
+    private Integer auditflowId;
 
-    private String AUDITFLOWTITLE;
+    private String auditflowTitle;
 
-    private Long AUDITFLOWSTATE;
+    private Long auditflowState;
 
-    private String AUDITFLOWTYPE;
+    private String auditflowType;
 
-    private Long AUDITFLOWDETAILID;
+    private Integer auditflowdetailId;
 
-    private Long AUDITFLOWDETAISTATE;
+    private Date auditflowdetaiDate;
 
-    private Date AUDITFLOWDETAIDATE;
+    private Long auditflowdetaiState;
 
-    private String STAFFNAME1;
+    private String staffName;
     /** 申请人名称 */
 
-    private String STAFFNAME2;
-    /** 当前审批人名称 */
+    private Integer staffId;
 
-    private Long TRANSFERID;
+    private String staffName1;
+    /** 当前审批人名称1 */
 
-    private String TRANSFERTYPE;
+    private String staffName2;
+    /** 当前审批人名称2 */
 
-    private String CREATEDDEPTNAME;
+    private String staffName3;
+    /** 当前审批人名称3 */
 
-    private Long TRANSFERSTATE;
+    private Integer transferId;
 
-    private String UPDATEDDEPTNAME;
+    private Long deptId;
 
-    private String transferrawpostNAME;
+    private String deptName;
 
-    private String transferafterpostNAME;
+    private String transferType;
 
-    private Date TAKEEFFECTDATE;
+    private String createdDeptName;
 
-    private Date UPDATEDTIME;
+    private Long transferState;
 
-    private Date CREATEDTIME;
+    private String updatedDeptName;
 
-    private Long CurrentPage;
+    private String transferRawpostName;
 
-    private Long Pagesize;
+    private String transferAfterpostName;
+
+    private Date takeefFectDate;
+
+    private Date updatedTime;
+
+    private Date createdtime;
+
+    private Long currentPage;
+
+    private Long pageSize;
 
 }

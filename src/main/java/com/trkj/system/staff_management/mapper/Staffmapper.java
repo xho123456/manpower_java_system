@@ -217,7 +217,7 @@ public interface Staffmapper extends BaseMapper<StaffEntity> {
     /**
      * 员工转正
      */
-    @Update("update staff set STAFF_STATE=1  ")
+    @Update("update staff set STAFF_STATE=1 ${ew.customSqlSegment} ")
     int positive(@Param(Constants.WRAPPER) QueryWrapper<StaffEntity> wrapper);
 
     /**

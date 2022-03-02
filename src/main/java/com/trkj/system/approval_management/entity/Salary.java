@@ -1,6 +1,5 @@
 package com.trkj.system.approval_management.entity;
 
-
 import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -12,17 +11,16 @@ import lombok.experimental.Accessors;
 
 import java.util.Date;
 
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("OVERTIMEASK")
-@KeySequence(value = "OVERTIMEASK_ID",clazz = Integer.class)
-public class Workovertime {
+@TableName("SALARY")
+@KeySequence(value = "SALARY_ID",clazz = Integer.class)
+public class Salary {
 
-    @TableId("OVERTIMEASK_ID")
-    private Long overtimeaskId;
-
-    private String overtimeaskType;
+    @TableId("SALARY_ID")
+    private Integer salaryId;
 
     @ApiModelProperty(value = "审批编号")
     @TableField("AUDITFLOW_ID")
@@ -36,17 +34,15 @@ public class Workovertime {
     @TableField("DEPT_ID")
     private Long deptId;
 
-    private String overtimeaskMatter;
+    private Long frontSalary;
 
-    private String overtimeaskRemarks;
+    private String salaryRemarks;
 
-    private Date overtimeaskSDate;
+    private Long afterSalary;
 
-    private Date overtimeaskEDate;
+    private Long salaryState;
 
-    private Long overtimeaskTotalDate;
-
-    private Long overtimeaskState;
+    private Date takeEffectDate;
 
     private Date updatedTime;
 
