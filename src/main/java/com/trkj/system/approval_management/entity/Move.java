@@ -1,6 +1,5 @@
 package com.trkj.system.approval_management.entity;
 
-
 import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -15,38 +14,35 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("OVERTIMEASK")
-@KeySequence(value = "OVERTIMEASK_ID",clazz = Integer.class)
-public class Workovertime {
+@TableName("TRANSFER")
+@KeySequence(value = "TRANSFER_ID",clazz = Integer.class)
+public class Move {
 
-    @TableId("OVERTIMEASK_ID")
-    private Long overtimeaskId;
-
-    private String overtimeaskType;
+    @TableId("TRANSFER_ID")
+    private Integer transferId;
 
     @ApiModelProperty(value = "审批编号")
     @TableField("AUDITFLOW_ID")
     private Integer auditflowId;
 
-    @ApiModelProperty(value = "员工名称")
-    @TableField("STAFF_NAME")
-    private String staffName;
+    @ApiModelProperty(value = "员工编号")
+    @TableField("STAFF_ID")
+    private Integer staffId;
 
-    @ApiModelProperty(value = "部门编号")
-    @TableField("DEPT_ID")
-    private Long deptId;
 
-    private String overtimeaskMatter;
+    private String transferType;
 
-    private String overtimeaskRemarks;
+    private String createdDeptName;
 
-    private Date overtimeaskSDate;
+    private Long transferState;
 
-    private Date overtimeaskEDate;
+    private String updatedDeptName;
 
-    private Long overtimeaskTotalDate;
+    private String transferRawpostName;
 
-    private Long overtimeaskState;
+    private String transferAfterpostName;
+
+    private Date takeEffectDate;
 
     private Date updatedTime;
 

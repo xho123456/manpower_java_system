@@ -30,6 +30,12 @@ public class SalaryincreaseEntity {
     private String staffName;
     /** 申请人名称 */
 
+    private Long fixedwageOfficialmoney;
+
+    private Integer staffId;
+
+    private Long deptId;
+
     private String staffName1;
     /** 当前审批人名称1 */
 
@@ -39,22 +45,24 @@ public class SalaryincreaseEntity {
     private String staffName3;
     /** 当前审批人名称3 */
 
-    private Long SALARYID;
+    private Integer salaryId;
 
-    private Long FRONTSALARY;
+    private Long frontSalary;
 
-    private Long AFTERSALARY;
+    private Long afterSalary;
 
-    private long SALARYSTATE;
+    private Long salaryState;
 
-    private Date TAKEEFFECTDATE;
+    private String salaryRemarks;
 
-    private Date UPDATEDTIME;
+    private Date takeEffectDate;
 
-    private Date CREATEDTIME;
+    private Date updatedTime;
 
-    private Long CurrentPage;
+    private Date createdTime;
 
-    private Long Pagesize;
+    private Long currentPage;
+
+    private Long pageSize;
 
 }
