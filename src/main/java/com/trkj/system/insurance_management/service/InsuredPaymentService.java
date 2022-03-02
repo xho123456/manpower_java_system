@@ -5,6 +5,8 @@ import com.trkj.system.insurance_management.entity.DefinsuredDefSchemeVo;
 import com.trkj.system.insurance_management.entity.InsuredDetail;
 import com.trkj.system.insurance_management.entity.InsuredPayment;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public interface InsuredPaymentService {
@@ -22,5 +24,10 @@ public interface InsuredPaymentService {
          * 更改方案
          */
         int deletescheme(InsuredPayment insuredPayment);
+
+        /**
+         * 参保方案批量删除
+         */
+        int deleteList(Map<String, Object> map);
 
 }
