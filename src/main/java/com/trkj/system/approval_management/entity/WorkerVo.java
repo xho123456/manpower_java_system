@@ -36,7 +36,7 @@ public class WorkerVo implements Serializable {
     @TableId("STAFF_NAME")
     private String staffName;
 
-    private Long staffId;
+    private Integer staffId;
 
     @ApiModelProperty(value = "申请状态")
     @TableId("AUDITFLOW_STATE")

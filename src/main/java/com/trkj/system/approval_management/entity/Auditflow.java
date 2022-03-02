@@ -37,6 +37,9 @@ public class Auditflow implements Serializable {
     @TableField("STAFF_NAME")
     private String staffName;
 
+    @TableField("STAFF_ID")
+    private Integer staffId;
+
     @ApiModelProperty(value = "申请状态")
     @TableField("AUDITFLOW_STATE")
     private Long auditFlowState;

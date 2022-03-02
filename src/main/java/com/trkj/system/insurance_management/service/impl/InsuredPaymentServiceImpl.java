@@ -62,13 +62,6 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
                 queryWrapper.like("a.STAFF_NAME",definsuredDefSchemeVo.getStaffName());
             }
 
-//        // 当前日期转格式
-//        Date now = new Date();
-//        LocalDate localDate = now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//        Date newDate = java.sql.Date.valueOf(localDate);
-////      再转成string型
-//        java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//        String date = formatter.format(newDate);
             //分页查询条件
             queryWrapper.ne(" STAFF_STATE",2);
 
@@ -460,7 +453,7 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
             InsuredPayment insuredPayment=new InsuredPayment();
             insuredPayment.setStaffId(staffID.getStaffId());
             insuredPayment.setDefInsuredId((long) defInsuredId);
-            insuredPayment.setInsDetailId(Long.parseLong(insuredDetail.getInsDetailId().toString()));
+                insuredPayment.setInsDetailId(Long.parseLong(insuredDetail.getInsDetailId().toString()));
             insuredPayment.setInsuredPaymentNumber((long) insured);
             insuredPayment.setInsuredPaymentFund((long) insuredPaymentNumber);
             insuredPayment.setInsuredPaymentInsuredMonth(new Date(insuredPaymentSalaryMonth+"/1 00:00:00"));

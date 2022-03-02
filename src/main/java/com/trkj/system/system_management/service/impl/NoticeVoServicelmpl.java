@@ -1,7 +1,10 @@
 package com.trkj.system.system_management.service.impl;
 
+import com.alibaba.druid.sql.dialect.ads.visitor.AdsOutputVisitor;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.trkj.system.insurance_management.entity.DefScheme;
 import com.trkj.system.system_management.entity.*;
 import com.trkj.system.system_management.mapper.*;
 import com.trkj.system.system_management.service.NoticeVoService;
@@ -13,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class NoticeVoServicelmpl implements NoticeVoService {
@@ -57,7 +61,6 @@ public class NoticeVoServicelmpl implements NoticeVoService {
             //公告类型查询
             queryWrapper.like("NOTICE_TYPE",noticeVo.getNoticeType());
         }
-
         //分页查询条件
         queryWrapper.eq("IS_DELETED",0);
         return noticeVoMapper.selectPaer(page,queryWrapper);
@@ -105,13 +108,11 @@ public class NoticeVoServicelmpl implements NoticeVoService {
                                             a=1;
                                         }
                                     }
-                                    }
                                 }
-                       }
+                            }
+                    }
                 }
-
            }
-
         }
         return a;
     }
@@ -238,53 +239,71 @@ public class NoticeVoServicelmpl implements NoticeVoService {
                 .eq("STAFF_PHONE",staffs.getStaffPhone())
                 .eq("STAFF_PASS",staffs.getStaffPass()));
     }
-
     /**
      * 公告新增
-     * @param notices
+     * @param
      * @return
      */
     @Override
-    public int insert(Notices notices) {
-        int a=0;
+    public int insert(Map<String, Object> map) {
+        int a = 0;
+        //员工id
+        int staffId = Integer.parseInt(map.get("staffId").toString());
+        //员工名字
+        String staffsName = map.get("noticePeople").toString();
+        //职位
+        int noticePost = Integer.parseInt(map.get("noticePost").toString());
+        //公告标题
+        String noticeTitle = map.get("noticeTitle").toString();
+        //公告状态
+        int noticeState = Integer.parseInt(map.get("noticeState").toString());
+        //公告类型
+        int noticeType = Integer.parseInt(map.get("noticeType").toString());
+        //公告类容
+        String noticeMatter = map.get("noticeMatter").toString();
+
+        //部门id
+        List<String> deptName = JSONObject.parseArray(JSONObject.toJSONString(map.get("deptName")), String.class);
+
+        Staffs staffs = staffsMapper.postName(new QueryWrapper<Staffs>().eq("DEPT_POST_ID", noticePost).eq("IS_DELETED", 0));
+
         //添加公告表数据
-        Notices notices1=new Notices();
-        notices1.setNoticeTitle(notices.getNoticeTitle());
-        notices1.setNoticeState(notices.getNoticeState());
-        notices1.setNoticeType(notices.getNoticeType());
-        notices1.setNoticeMatter(notices.getNoticeMatter());
-        notices1.setStaffId(notices.getStaffId());
-        notices1.setNoticePost(notices.getNoticePost());
-        notices1.setNoticePeople(notices.getNoticePeople());
+        Notices notices1 = new Notices();
+        notices1.setNoticeTitle(noticeTitle);
+        notices1.setNoticeState((long) noticeState);
+        notices1.setNoticeType((long) noticeType);
+        notices1.setNoticeMatter(noticeMatter);
+        notices1.setStaffId((long) staffId);
+        notices1.setNoticePost(staffs.getPostName());
+        notices1.setNoticePeople(staffsName);
+
         //判断
-        if(noticesMapper.insert(notices1)>0){
-            for(String name:notices.getDeptName()){
-                Depts depts= deptsMapper.selectDepts1(new QueryWrapper<Depts>().eq("DEPT_NAME",name).eq("IS_DELETED",0));
-                Notice notice=noticeMapper.selectNotice(new QueryWrapper<Notice>().eq("NOTICE_TITLE",notices.getNoticeTitle()).eq("IS_DELETED",0));
+        if (noticesMapper.insert(notices1) > 0) {
+
+            for (int i = 0; i < deptName.size(); i++) {
+                Depts deptId = deptsMapper.selectDepts1(new QueryWrapper<Depts>().eq("DEPT_NAME", deptName.get(i)).eq("IS_DELETED", 0));
                 //添加公告部门表数据
-                NoticeDept noticeDept=new NoticeDept();
-                noticeDept.setNoticeId(notice.getNoticeId());
-                noticeDept.setDeptId(Math.toIntExact(depts.getDeptId()));
-                if(noticeDeptMapper.insert(noticeDept)>0){
-                    Notice notice1=noticeMapper.selectNotice(new QueryWrapper<Notice>().eq("NOTICE_TITLE",notices.getNoticeTitle()).eq("IS_DELETED",0));
-                    //查询员工id
-                    List<Staffs> staffs=staffsMapper.selectStaffsID(new QueryWrapper<Staffs>().eq("DEPT_ID",depts.getDeptId()).eq("IS_DELETED",0));
-                    for(int i=0; i<staffs.size();i++){
+                NoticeDept noticeDept = new NoticeDept();
+                noticeDept.setNoticeId(Long.parseLong(notices1.getNoticeId().toString()));
+                noticeDept.setDeptId(Math.toIntExact(deptId.getDeptId()));
+
+                if (noticeDeptMapper.insert(noticeDept) > 0) {
+                    List<Staffs> staffid = staffsMapper.selectStaffsID(new QueryWrapper<Staffs>().eq("DEPT_ID", deptId.getDeptId()).eq("IS_DELETED", 0));
+                    for (int j = 0; j < staffid.size(); j++) {
                         //添加员工信息
-                        NoticeStaff noticeStaff= new NoticeStaff();
-                        noticeStaff.setNoticeId(notice1.getNoticeId());
-                        noticeStaff.setStaffId(staffs.get(i).getStaffId());
-                        if(noticeStaffMapper.insert(noticeStaff)>0){
-                            a=1;
+                        NoticeStaff noticeStaff = new NoticeStaff();
+                        noticeStaff.setNoticeId(Long.parseLong(notices1.getNoticeId().toString()));
+                        noticeStaff.setStaffId(staffid.get(j).getStaffId());
+                            if (noticeStaffMapper.insert(noticeStaff) > 0) {
+                                a = 1;
+                            }
                         }
                     }
-
                 }
             }
-
+            return a;
         }
-        return a;
     }
 
 
-}
+

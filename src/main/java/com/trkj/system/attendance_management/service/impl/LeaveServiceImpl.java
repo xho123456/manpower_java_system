@@ -9,9 +9,7 @@ import com.trkj.system.attendance_management.service.LeaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -91,6 +89,7 @@ public class LeaveServiceImpl implements LeaveService {
         return mapper.queryalljb(pagejb,wrapperjb);
     }
 
+    //  //统计加班次数
     @Override
     public int jabsnumber(Overtimeask overtimeask) {
         QueryWrapper<Overtimeask> wrapperjab = new QueryWrapper<>();
@@ -187,25 +186,37 @@ public class LeaveServiceImpl implements LeaveService {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH) + 1;
-        Calendar calendar = Calendar.getInstance();
-        //当天是星期几
-        int number = calendar.get(Calendar.DAY_OF_WEEK);//星期表示1-7，是从星期日开始，
-        String [] str = {"","星期日","星期一","星期二","星期三","星期四","星期五","星期六",};
-
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month - 1);
         cal.set(Calendar.DATE, 1);
         cal.roll(Calendar.DATE, -1);
         int maxDate = cal.get(Calendar.DATE);
-        // 获取当前年月
+        int year1 = new Date().getYear() + 1900;
+        int month1 = new Date().getMonth();
         List list1 = new ArrayList();
-        for (int p = 0; p < maxDate-1; p++) {
-            cal.add(Calendar.DATE, 1);//在第一天的基础上加1
-            int week = cal.get(Calendar.DAY_OF_WEEK);
-            if (week == Calendar.SATURDAY || week == Calendar.SUNDAY) {// 1代表周日，7代表周六 判断这是一个星期的第几天从而判断是否是周末
-                list1.add(month+"-"+cal.get(Calendar.DAY_OF_MONTH));// 得到当天是一个月的第几天
+
+        Calendar calendar = new GregorianCalendar(year1, month1, 1);
+        int i1 = 1;
+        while (calendar.get(Calendar.YEAR) < year1 + 1) {
+            calendar.set(Calendar.WEEK_OF_YEAR, i1++);
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+            if (calendar.get(Calendar.MONTH) == month1) {
+                list1.add(year + "-" + month + "-" + calendar.get(Calendar.DAY_OF_MONTH));
+            }
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+            if (calendar.get(Calendar.MONTH) == month1) {
+                list1.add(year + "-" + month + "-" + calendar.get(Calendar.DAY_OF_MONTH));
             }
         }
+//        for (int p = 0; p < maxDate-1; p++) {
+//            cal.add(Calendar.DATE, 1);//在第一天的基础上加1
+//            int week = cal.get(Calendar.DAY_OF_WEEK);
+//            if (week == Calendar.SATURDAY || week == Calendar.SUNDAY) {// 1代表周日，7代表周六 判断这是一个星期的第几天从而判断是否是周末
+//                list1.add(month+"-"+cal.get(Calendar.DAY_OF_MONTH));// 得到当天是一个月的第几天
+//            }
+//        }
+
+
         for (int j = 0; j < staffVoIPage.getRecords().size(); j++) {
             List<ClockRecords> list = new ArrayList<ClockRecords>();
             for (int i = 1; i <= maxDate; i++) {
@@ -262,5 +273,24 @@ public class LeaveServiceImpl implements LeaveService {
         return mapper.countquerys(wrappercount,clockRecord.getDates());
     }
 
+    //根据当前登录用户查询补打卡信息
+    @Override
+    public IPage<Card> selectBudk(Card card) {
+        Page<Card> pageBu = new Page<>(card.getCurrenPage(), card.getPagesize());
+        QueryWrapper<Card> wrapperBu = new QueryWrapper<>();
+        wrapperBu.eq("S.STAFF_ID",card.getStaffId());
+        wrapperBu.eq("C.IS_DELETED",0);
+        return mapper.queryBudk(pageBu,wrapperBu,card.getDates());
+    }
 
+
+    //统计漏签次数
+    @Override
+    public int selectbudkcounts(Card card) {
+        QueryWrapper<Card> wrappercountsb = new QueryWrapper();
+        //条件查询
+        wrappercountsb.eq("C.STAFF_ID",card.getStaffId());
+        wrappercountsb.eq("C.IS_DELETED",0);
+        return mapper.budkcounts(wrappercountsb,card.getDates());
+    }
 }

@@ -36,7 +36,7 @@ public interface StaffsMapper extends BaseMapper<Staffs> {
      * @param queryWrapper
      * @return
      */
-    @Select("select t1.*, t2.POST_NAME from staff t1 LEFT JOIN DEPT_POST t2 on t1.DEPT_POST_ID = t2.DEPT_POST_ID ${ew.customSqlSegment}")
+    @Select("select t1.*, t2.DEPT_NAME from staff t1 LEFT JOIN DEPT t2 on t1.DEPT_ID = t2.DEPT_ID ${ew.customSqlSegment}")
     Staffs selectStaffs(@Param(Constants.WRAPPER) QueryWrapper<Staffs> queryWrapper);
 
     /**
@@ -52,4 +52,7 @@ public interface StaffsMapper extends BaseMapper<Staffs> {
      */
     @Select("select STAFF_ID from staff ${ew.customSqlSegment}")
     List<Staffs> selectStaffsID(@Param(Constants.WRAPPER) QueryWrapper<Staffs> queryWrapper);
+
+    @Select("select POST_NAME from DEPT_POST ${ew.customSqlSegment}")
+    Staffs postName(@Param(Constants.WRAPPER) QueryWrapper<Staffs> queryWrapper);
 }

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public interface NoticeVoService{
@@ -70,5 +71,5 @@ public interface NoticeVoService{
     /**
      * 添加公告
      */
-    int insert(Notices notices);
+    int insert(Map<String, Object> map);
 }
