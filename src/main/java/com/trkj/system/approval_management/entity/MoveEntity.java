@@ -63,7 +63,7 @@ public class MoveEntity {
 
     private Date updatedTime;
 
-    private Date createdtime;
+    private Date createdTime;
 
     private Long currentPage;
 
