@@ -41,7 +41,7 @@ public class WorkovertimeEntity {
     private String staffName3;
     /** 当前审批人名称3 */
 
-    private Long overtimeaskId;
+    private Integer overtimeaskId;
 
     private String overtimeaskType;
 

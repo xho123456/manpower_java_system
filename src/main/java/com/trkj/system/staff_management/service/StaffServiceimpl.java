@@ -265,7 +265,7 @@ public class StaffServiceimpl implements StaffService {
     @Override
     public int addwhy(StaffGiveupInductionEntity resume) {
         UpdateWrapper<StaffGiveupInductionEntity> ew = new UpdateWrapper<>();
-        return mapper.addwhy(ew.set("waive_reason",resume.getWaivereason()).in("EMPLOYMENT_ID",resume.getEMPLOYMENTID()));
+        return mapper.addwhy(ew.set("waive_reason",resume.getWaivereason()).in("RESUME_ID",resume.getRESUMEID()));
     }
 
     @Override
@@ -283,6 +283,7 @@ public class StaffServiceimpl implements StaffService {
         staff1.setStaffRegistered(staff.getResumeResidence());
         staff1.setStaffEmail(staff.getResumeMailbox());
         staff1.setStaffPicture(staff.getResumePhoto());
+        staff1.setStaffPass("123456");
         staff1.setStaffHiredate(new Date());
         staff1.setCreatedTime(new Date());
         staff1.setUpdatedTime(new Date());

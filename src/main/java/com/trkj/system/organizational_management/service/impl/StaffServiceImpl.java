@@ -292,5 +292,19 @@ public class StaffServiceImpl  implements StaffService {
     public List<Map<String, Object>> selectyglz11() {
         return  mapper.selectyglz11();
     }
+
+    @Override
+    public List<Map<String, Object>> selectbysyyg() {
+        return  mapper.selectbysyyg();
+    }
+    @Override
+    public List<Map<String, Object>> selectbyzsyg() {
+        return  mapper.selectbyzsyg();
+    }
+
+    @Override
+    public List<Map<String, Object>> selectbytx() {
+        return  mapper.selectbytx();
+    }
 }
 

@@ -20,7 +20,7 @@ import java.util.Date;
 public class Workovertime {
 
     @TableId("OVERTIMEASK_ID")
-    private Long overtimeaskId;
+    private Integer overtimeaskId;
 
     private String overtimeaskType;
 

@@ -192,5 +192,15 @@ public interface StaffMapper extends BaseMapper<Staff> {
     @Select(" SELECT  D.DEPT_NAME, sum(FIXEDWAGE_OFFICIALMONEY) as rmb,count(s.STAFF_ID) as rs FROM  staff s, DEPT D ,STAFFWAG w ,FIXEDWAGE f WHERE w.STAFF_ID=s.STAFF_ID AND s.DEPT_ID=d.DEPT_ID   AND w.STAFF_ID=f.STAFF_ID GROUP BY  d.DEPT_NAME ORDER BY   rmb desc  ")
     List<Map<String, Object>> selectbmgzpj();
 
+    //查询本月试用员工
+    @Select("select to_char(CREATED_TIME,'yyyy-MM') year,count(STAFF_ID) as rs from STAFF where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm')  and  STAFF_STATE=0 group by to_char(CREATED_TIME,'yyyy-MM')  ORDER BY year ")
+    List<Map<String, Object>> selectbysyyg();
+
+    //查询本月正式员工
+    @Select("select to_char(CREATED_TIME,'yyyy-MM') year,count(STAFF_ID) as rs from STAFF where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm')  and  STAFF_STATE=1 group by to_char(CREATED_TIME,'yyyy-MM')  ORDER BY year ")
+    List<Map<String, Object>> selectbyzsyg();
+    //查询本月正式员工
+    @Select("select to_char(CREATED_TIME,'yyyy-MM') year,count(SALARY_ID) as rs from SALARY where to_char(CREATED_TIME,'yyyy-MM') = to_char(add_months(trunc(sysdate),0),'yyyy-mm')  and  SALARY_STATE=1 group by to_char(CREATED_TIME,'yyyy-MM')  ORDER BY year")
+    List<Map<String, Object>> selectbytx();
 
 }
