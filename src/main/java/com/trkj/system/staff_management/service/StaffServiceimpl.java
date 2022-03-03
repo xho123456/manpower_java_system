@@ -258,7 +258,7 @@ public class StaffServiceimpl implements StaffService {
 
     @Override
     public int updateResume(StaffGiveupInductionEntity resume) {
-        System.out.println("=======================================================");
+        System.out.println("=========================-==============================");
         return mapper.updateResume(new QueryWrapper<StaffGiveupInductionEntity>().eq("RESUME_ID",resume.getRESUMEID()));
     }
 
