@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class NoticeVoController {
@@ -176,8 +177,8 @@ public class NoticeVoController {
      * 公告新增
      */
     @PostMapping("/notices/insert")
-    public AjaxResponse inserts(@RequestBody Notices notices){
-        if(noticeVoService.insert(notices)>0){
+    public AjaxResponse inserts(@RequestBody Map<String, Object> map){
+        if(noticeVoService.insert(map)>0){
             return AjaxResponse.success("新增成功");
         }else {
             return AjaxResponse.success("新增失败");

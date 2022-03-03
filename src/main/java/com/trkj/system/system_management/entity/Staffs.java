@@ -73,9 +73,8 @@ public class Staffs implements Serializable {
     @TableField("DEPT_POST_ID")
     private Long deptPostId;
 
-    @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName;
+
+
 
     @ApiModelProperty(value = "密码")
     @TableField("STAFF_PASS")
@@ -159,6 +158,11 @@ public class Staffs implements Serializable {
     @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
     @TableField("IS_DELETED")
     private Long isDeleted;
+
+    @TableField(exist = false)
+    private String deptName;
+    @TableField(exist = false)
+    private String postName;
 
 
 }
