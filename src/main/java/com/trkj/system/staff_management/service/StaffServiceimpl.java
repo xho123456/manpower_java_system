@@ -265,7 +265,7 @@ public class StaffServiceimpl implements StaffService {
     @Override
     public int addwhy(StaffGiveupInductionEntity resume) {
         UpdateWrapper<StaffGiveupInductionEntity> ew = new UpdateWrapper<>();
-        return mapper.addwhy(ew.set("waive_reason",resume.getWaivereason()).in("EMPLOYMENT_ID",resume.getEMPLOYMENTID()));
+        return mapper.addwhy(ew.set("waive_reason",resume.getWaivereason()).in("RESUME_ID",resume.getRESUMEID()));
     }
 
     @Override
