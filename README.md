@@ -4,7 +4,7 @@
     staff_management——员工管理
     Insurance_management——社保管理
     system_management——系统管理
-    recruitment_management——招聘管理
+    recruit_modular——招聘管理
     statistic_analysis——统计分析
     organizational_management——组织管理
     approval_management——审批管理

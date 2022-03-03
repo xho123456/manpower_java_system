@@ -288,6 +288,7 @@ public class NoticeVoServicelmpl implements NoticeVoService {
                 noticeDept.setDeptId(Math.toIntExact(deptId.getDeptId()));
 
                 if (noticeDeptMapper.insert(noticeDept) > 0) {
+                    a=1;
                     List<Staffs> staffid = staffsMapper.selectStaffsID(new QueryWrapper<Staffs>().eq("DEPT_ID", deptId.getDeptId()).eq("IS_DELETED", 0));
                     for (int j = 0; j < staffid.size(); j++) {
                         //添加员工信息
