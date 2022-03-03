@@ -13,38 +13,56 @@ import java.util.Date;
 @Accessors(chain = true)  /** 链式写法 */
 public class SalaryincreaseEntity {
     //调薪
-    private Long AUDITFLOWID;
+    private Integer auditflowId;
 
-    private String AUDITFLOWTITLE;
+    private String auditflowTitle;
 
-    private Long AUDITFLOWSTATE;
+    private Long auditflowState;
 
-    private String AUDITFLOWTYPE;
+    private String auditflowType;
 
-    private Long AUDITFLOWDETAILID;
+    private Integer auditflowdetailId;
 
-    private Date AUDITFLOWDETAIDATE;
+    private Date auditflowdetaiDate;
 
-    private Long AUDITFLOWDETAISTATE;
+    private Long auditflowdetaiState;
 
-    private String STAFFNAME1;
+    private String staffName;
     /** 申请人名称 */
 
-    private String STAFFNAME2;
-    /** 当前审批人名称 */
+    private Long fixedwageOfficialmoney;
 
-    private Long SALARYID;
+    private Integer staffId;
 
-    private Long FRONTSALARY;
+    private Long deptId;
 
-    private Long AFTERSALARY;
+    private String staffName1;
+    /** 当前审批人名称1 */
 
-    private long SALARYSTATE;
+    private String staffName2;
+    /** 当前审批人名称2 */
 
-    private Date TAKEEFFECTDATE;
+    private String staffName3;
+    /** 当前审批人名称3 */
 
-    private Date UPDATEDTIME;
+    private Integer salaryId;
 
-    private Date CREATEDTIME;
+    private Long frontSalary;
+
+    private Long afterSalary;
+
+    private Long salaryState;
+
+    private String salaryRemarks;
+
+    private Date takeEffectDate;
+
+    private Date updatedTime;
+
+    private Date createdTime;
+
+    private Long currentPage;
+
+    private Long pageSize;
 
 }

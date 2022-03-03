@@ -53,9 +53,11 @@ public interface StaffService {
    int updateResume(StaffGiveupInductionEntity resume);
    int addwhy(StaffGiveupInductionEntity resume);
 
-   int addStaff(StaffTowEntity staff);
+   int addStaff(StaffInductionEntity staff);
 
-   List<StaffEntity> basicstaff(Long id);
+   List<StaffEntity> basicstaff(Integer id);
 
    int positive(StaffEntity staff);
+
+   StaffEntity postName (Integer id);
 }

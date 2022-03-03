@@ -36,11 +36,6 @@ public class StaffVo implements Serializable {
     @TableId("STAFF_ID")
     private Long staffId;
 
-//    @ApiModelProperty(value = "部门名称")
-//    @TableId("DEPT_NAME")
-//    private Long deptName;
-
-
     @TableId("DEPT_ID")
     private Long deptId;
 
@@ -69,8 +64,13 @@ public class StaffVo implements Serializable {
     @TableField("IS_DELETED")
     private Long isDeleted;
 
+    //打卡记录表对象
     @TableField(exist = false)
     private List<ClockRecords> clockRsList;
+
+    //打卡记录表对象
+    @TableField(exist = false)
+    private ClockRecords clockRs;
 
     //分页
     @TableField(exist = false)
@@ -78,9 +78,36 @@ public class StaffVo implements Serializable {
     @TableField(exist = false)
     private int pagesize;
 
+    //日期
     @TableField(exist = false)
     private String dates;
 
+    //部门
     @TableField(exist = false)
-    private Deptattent dept;
+    private Deptattent depts;
+
+    //考勤汇总明细表对象
+    @TableField(exist = false)
+    private Checkfiles checkfiles;
+
+    //打卡记录表日期
+    @TableField(exist = false)
+    private String years;
+
+    //部门名称
+    @TableField(exist = false)
+    private String deptName;
+
+    //请假表对象
+    @TableField(exist = false)
+    private Leave leaves;
+
+    //出差表对象
+    @TableField(exist = false)
+    private Travels travels;
+
+    //加班表对象
+    @TableField(exist = false)
+    private Overtimeask overtimeask;
+
 }

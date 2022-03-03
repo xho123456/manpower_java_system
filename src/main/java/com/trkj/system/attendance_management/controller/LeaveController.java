@@ -1,10 +1,7 @@
 package com.trkj.system.attendance_management.controller;
 
 
-import com.trkj.system.attendance_management.entity.ClockRecord;
-import com.trkj.system.attendance_management.entity.Leave;
-import com.trkj.system.attendance_management.entity.Overtimeask;
-import com.trkj.system.attendance_management.entity.StaffVo;
+import com.trkj.system.attendance_management.entity.*;
 import com.trkj.system.attendance_management.service.LeaveService;
 import com.trkj.system.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -97,11 +94,34 @@ public class LeaveController {
         return AjaxResponse.success(service.selkuangnumber(clockRecord));
     }
 
+    //统计加班次数
+    @PostMapping("/clock/queryjabnumbers")
+    public AjaxResponse queryjabnumbers(@RequestBody Overtimeask overtimeask){
+        return AjaxResponse.success(service.jabsnumber(overtimeask));
+    }
+
     //考勤月统计
     @PostMapping("/leave/queryallsmothday")
     public AjaxResponse queryallsmothday(@RequestBody StaffVo staffVo){
         return AjaxResponse.success(service.selectAllmothday(staffVo));
     }
 
+    //考勤月统计
+    @PostMapping("/leave/querydkcounts")
+    public AjaxResponse querydkcounts(@RequestBody ClockRecord clockRecord){
+        return AjaxResponse.success(service.countquerys(clockRecord));
+    }
+
+    //根据当前登录用户查询补打卡信息
+    @PostMapping("/clock/querybudk")
+    public AjaxResponse querybudk(@RequestBody Card card){
+        return AjaxResponse.success(service.selectBudk(card));
+    }
+
+    //根据当前登录用户查询补打卡数量
+    @PostMapping("/clock/querybudks")
+    public AjaxResponse querybudkcounts(@RequestBody Card card){
+        return AjaxResponse.success(service.selectbudkcounts(card));
+    }
 }
 

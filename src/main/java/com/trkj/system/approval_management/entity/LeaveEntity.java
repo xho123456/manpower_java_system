@@ -13,44 +13,58 @@ import java.util.Date;
 @Accessors(chain = true)  /** 链式写法 */
 public class LeaveEntity {
     //请假
-    private Long AUDITFLOWID;
+    private Integer auditflowId;
 
-    private String AUDITFLOWTITLE;
+    private String auditflowTitle;
 
-    private Long AUDITFLOWSTATE;
+    private Long auditflowState;
 
-    private String AUDITFLOWTYPE;
+    private String auditflowType;
 
-    private Long AUDITFLOWDETAILID;
+    private Integer auditflowdetailId;
 
-    private Date AUDITFLOWDETAIDATE;
+    private Date auditflowdetaiDate;
 
-    private Long AUDITFLOWDETAISTATE;
+    private Long auditflowdetaiState;
 
-    private String STAFFNAME1;
+    private String staffName;
     /** 申请人名称 */
 
-    private String STAFFNAME2;
-    /** 当前审批人名称 */
+    private Integer staffId;
 
-    private Long LEAVEID;
+    private String staffName1;
+    /** 当前审批人名称1 */
 
-    private String LEAVETYPE;
+    private String staffName2;
+    /** 当前审批人名称2 */
 
-    private String LEAVEMATTER;
+    private String staffName3;
+    /** 当前审批人名称3 */
 
-    private String LEAVEREMARKS;
+    private Integer leaveId;
 
-    private Date LEAVESDATE;
+    private Long deptId;
 
-    private Date LEAVEEDATE;
+    private String leaveType;
 
-    private Long LEAVETOTALDATE;
+    private String leaveMatter;
 
-    private Long LEAVESTATE;
+    private String leaveRemarks;
 
-    private Date UPDATEDTIME;
+    private Date leaveSDate;
 
-    private Date CREATEDTIME;
+    private Date leaveEDate;
+
+    private long leaveTotalDate;
+
+    private long leaveState;
+
+    private Date updatedTime;
+
+    private Date createdTime;
+
+    private long currentPage;
+
+    private long pageSize;
 
 }

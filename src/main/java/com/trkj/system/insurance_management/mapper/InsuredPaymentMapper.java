@@ -1,8 +1,15 @@
 package com.trkj.system.insurance_management.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.trkj.system.insurance_management.entity.DefinsuredDefSchemeVo;
 import com.trkj.system.insurance_management.entity.InsuredPayment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +21,17 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface InsuredPaymentMapper extends BaseMapper<InsuredPayment> {
+    /**
+     * 更改社保方案
+     * @param queryWrapper
+     * @return
+     */
+    @Select("select * from INSURED_PAYMENT ${ew.customSqlSegment}")
+    InsuredPayment deletescheme(@Param(Constants.WRAPPER) QueryWrapper<InsuredPayment> queryWrapper);
 
+    /**
+     * 批量删除社保
+     */
+    @Select("select INS_DETAIL_ID from INSURED_PAYMENT ${ew.customSqlSegment}")
+    InsuredPayment deleteList(@Param(Constants.WRAPPER) QueryWrapper<InsuredPayment> queryWrapper);
 }
