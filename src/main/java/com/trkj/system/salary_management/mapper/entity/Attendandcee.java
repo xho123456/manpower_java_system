@@ -1,4 +1,4 @@
-package com.trkj.system.salary_management.entity;
+package com.trkj.system.salary_management.mapper.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -12,33 +12,43 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class Businesss implements Serializable {
+@KeySequence(value = "ATTENDANDCE_ID" ,clazz = Integer.class)
+@TableName(value = "ATTENDANDCE")
+public class Attendandcee implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "出差方案编号")
-    @TableId( "BUSINESS_ID")
-    private Integer businessId;
+    @ApiModelProperty(value = "考勤扣款方案编号")
+    @TableId( "ATTENDANDCE_ID")
+    private Integer attendandceId;
 
 
-    @ApiModelProperty(value = "出差编号")
-    @TableField("TRAVEL_ID")
-    private Long travelId;
+    @ApiModelProperty(value = "迟到一次金额")
+    @TableField("ATTENDANDCE_LITEMONEY")
+    private Long attendandceLitemoney;
 
-    @ApiModelProperty(value = "出差方案名称")
-    @TableField("BUSINESS_NAME")
-    private String businessName;
+    @ApiModelProperty(value = "考勤扣款方案名称")
+    @TableField("ATTENDANDCE_NAME")
+    private String attendandceName;
 
-    @ApiModelProperty(value = "出差一天金额")
-    @TableField("BUSINESS_ONEMONEY")
-    private Long businessOnemoney;
+    @ApiModelProperty(value = "早退一次金额")
+    @TableField("ATTENDANDCE_LEAVEMONEY")
+    private Long attendandceLeavemoney;
+
+    @ApiModelProperty(value = "旷工一天金额")
+    @TableField("ATTENDANDCE_ABSCNTMONEY")
+    private Long attendandceAbscntmoney;
 
     @ApiModelProperty(value = "状态")
-    @TableField("BUSINESS_STATE")
-    private Long businessState;
+    @TableField("ATTENDANDCE_STATE")
+    private Long attendandceState;
+
+    @ApiModelProperty(value = "部门编号")
+    @TableField("DEPT_ID")
+    private Long deptId;
 
     @ApiModelProperty(value = "备注")
-    @TableField("BUSINESS_REMARK")
-    private String businessRemark;
+    @TableField("ATTENDANDCE_REMARK")
+    private String attendandceRemark;
 
 
     @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
@@ -61,6 +71,4 @@ public class Businesss implements Serializable {
     @TableField("IS_DELETED")
     private Long isDeleted;
 
-    private int currentPage;
-    private int pageSize;
 }

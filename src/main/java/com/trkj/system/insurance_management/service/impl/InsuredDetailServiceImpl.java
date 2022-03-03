@@ -40,13 +40,13 @@ public class InsuredDetailServiceImpl implements InsuredDetailService {
         QueryWrapper<DefinsuredDefSchemeVo> queryWrapper = new QueryWrapper<>();
         if(definsuredDefSchemeVo.getDeptId() != null && !definsuredDefSchemeVo.getDeptId().equals("")){
             //公告标题模糊查询
-            queryWrapper.like("t1.DEPT_ID",definsuredDefSchemeVo.getDeptId());
+            queryWrapper.eq("c.DEPT_ID",definsuredDefSchemeVo.getDeptId());
         }
         if(definsuredDefSchemeVo.getStaffName() != null && !definsuredDefSchemeVo.getStaffName().equals("")){
-            queryWrapper.like("t1.STAFF_NAME",definsuredDefSchemeVo.getStaffName());
+            queryWrapper.like("b.STAFF_NAME",definsuredDefSchemeVo.getStaffName());
         }
         if(definsuredDefSchemeVo.getStaffState()!= null  && !definsuredDefSchemeVo.getStaffState().equals("")){
-            queryWrapper.like("t1.STAFF_STATE",definsuredDefSchemeVo.getStaffState());
+            queryWrapper.eq("b.STAFF_STATE",definsuredDefSchemeVo.getStaffState());
         }
 
         // 当前日期转格式
@@ -59,9 +59,11 @@ public class InsuredDetailServiceImpl implements InsuredDetailService {
 
         //分页查询条件
 
-        queryWrapper.isNotNull("t5.INSURED_PAYMENT_ID");
-        queryWrapper.apply("TO_CHAR(t5.INSURED_PAYMENT_INSURED_MONTH,'yyyy-MM') like {0}", date);
+        queryWrapper.eq("b.IS_DELETED",0);
+        queryWrapper.eq("c.IS_DELETED",0);
 
+        queryWrapper.apply("TO_CHAR(a.INS_DETAIL_INSURED_MONTH,'yyyy-MM') like {0}", date);
+        queryWrapper.orderBy(Boolean.parseBoolean("a.INS_DETAIL_ID"),false);
         return definsuredDefSchemeVoMapper.selectPaer(page,queryWrapper);
 
     }

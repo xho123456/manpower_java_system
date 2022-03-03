@@ -22,19 +22,16 @@ public interface DefinsuredDefSchemeVoMapper extends BaseMapper<DefinsuredDefSch
      * @param queryWrapper
      * @return
      */
-    @Select(" select * from\n" +
-            "                        STAFF t1 LEFT JOIN DEPT t2\n" +
-            "                        on t1.DEPT_ID=t2.DEPT_ID\n" +
-            "            LEFT JOIN DEPT_POST t3\n" +
-            "                       on t1.DEPT_POST_ID=t3.DEPT_POST_ID\n" +
-            "                       LEFT JOIN WORKER t4\n" +
-            "                       on t1.STAFF_ID=t4.STAFF_ID\n" +
-            "                       LEFT JOIN INSURED_PAYMENT t5\n" +
-            "                       on t1.STAFF_ID= t5.STAFF_ID \n" +
-            "left JOIN (select * from INSURED_ARCHIVE where to_char(CREATED_TIME,'YYYY-MM') in to_char(sysdate,'YYYY-MM')) t6\n" +
-            "           on t1.STAFF_NAME !=t6.INS_ARCHIVE_STAFF_NAME\n" +
-            "            LEFT JOIN INSURED_DETAIL t7\n" +
-            "            on t5.INS_DETAIL_ID=t7.INS_DETAIL_ID ${ew.customSqlSegment}")
+    @Select(" select\n" +
+            "                *\n" +
+            "            from\n" +
+            "                INSURED_DETAIL a \n" +
+            "            inner join\n" +
+            "                STAFF b \n" +
+            "                    on a.INS_DETAIL_STAFF_NAME=b.STAFF_NAME \n" +
+            "            inner join\n" +
+            "                DEPT c \n" +
+            "                    on b.DEPT_ID=c.DEPT_ID  ${ew.customSqlSegment}")
     IPage<DefinsuredDefSchemeVo> selectPaer(Page<DefinsuredDefSchemeVo> defInsured, @Param(Constants.WRAPPER) QueryWrapper<DefinsuredDefSchemeVo> queryWrapper);
 
     /**

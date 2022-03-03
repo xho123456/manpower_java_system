@@ -1,8 +1,8 @@
 package com.trkj.system.salary_management.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.trkj.system.salary_management.entity.Workscheme;
-import com.trkj.system.salary_management.entity.Workschemee;
+import com.trkj.system.salary_management.mapper.entity.Workscheme;
+import com.trkj.system.salary_management.mapper.entity.Workschemee;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface WorkschemeService {

@@ -5,14 +5,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.system.salary_management.mapper.entity.FixedSalary;
+import com.trkj.system.salary_management.mapper.entity.Attendandce;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
-public interface FixedSalaryMapper  extends BaseMapper<FixedSalary> {
-    @Select("\tselect s.STAFF_STATE,d.DEPT_ID, s.STAFF_NAME,s.STAFF_HIREDATE,d.DEPT_NAME,f.* from FIXEDWAGE f LEFT JOIN STAFF s  on  f.STAFF_ID=s.STAFF_ID   LEFT JOIN  DEPT d on d.DEPT_ID= s.DEPT_ID   ${ew.customSqlSegment}")
-    IPage<FixedSalary>selectPaer2(Page<FixedSalary> fixedSalary, @Param(Constants.WRAPPER)QueryWrapper<FixedSalary>queryWrapper);
-
+public interface AttendandceMapper extends BaseMapper<Attendandce> {
+    @Select("select *from ATTENDANDCE  ${ew.customSqlSegment}")
+    IPage<Attendandce> selectPaer(Page<Attendandce> attendandce, @Param(Constants.WRAPPER) QueryWrapper<Attendandce> queryWrapper);
 }
