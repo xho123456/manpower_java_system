@@ -59,4 +59,7 @@ public interface StaffService {
         List<Map<String, Object>> selectbmgztop();
         List<Map<String, Object>> selectbmgzpj();
         List<Map<String, Object>>selectyglz11();
+        List<Map<String, Object>> selectbysyyg();
+        List<Map<String, Object>>selectbyzsyg();
+        List<Map<String, Object>>selectbytx();
 }

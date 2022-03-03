@@ -211,5 +211,20 @@ public class analysisController {
     public List<Map<String, Object>> selectCount35(){
         return staffService.selectyglz11();
     }
+    //本月试用员工人数
+    @GetMapping("/selectbysyyg")
+    public List<Map<String, Object>> selectbysyyg(){
+        return staffService.selectbysyyg();
+    }
+    //本月正式员工人数
+    @GetMapping("/selectbyzsyg")
+    public List<Map<String, Object>> selectbyzsyg(){
+        return staffService.selectbyzsyg();
+    }
+    //本月调薪
+    @GetMapping("/selectbytx")
+    public List<Map<String, Object>> selectbytx(){
+        return staffService.selectbytx();
+    }
 
 }

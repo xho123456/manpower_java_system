@@ -812,8 +812,6 @@ public class ApprovalServiceImpl implements ApprovalService {
                 fillclock1.setAuditflowId(auditflow1.getAuditFlowId());
                 // 补打卡表-员工名称
                 fillclock1.setStaffName(fillclock.getStaffName());
-                // 补打卡表-部门名称
-                fillclock1.setDeptId(fillclock.getDeptId());
                 // 补打卡表-补打卡类型
                 fillclock1.setCardType(fillclock.getCardType());
                 //补打卡表时间
