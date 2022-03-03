@@ -46,7 +46,7 @@ public interface StaffMapper extends BaseMapper<Staff> {
     @Select("select STAFF_SIGN,count(*) as rs from STAFF  GROUP BY STAFF_SIGN")
     List<Map<String, Object>> selectxz();
     //员工在职状态
-    @Select("SELECT case when  STAFF_STATE=0 then '未离职' when  STAFF_STATE=1 then '已离职' when  STAFF_STATE=2 then '正式员工' when  STAFF_STATE=3 then '试用员工'  end as zt,count(*) as rs  FROM STAFF GROUP BY  case when  STAFF_STATE=0 then '未离职'  when  STAFF_STATE=1 then '已离职' when  STAFF_STATE=2 then '正式员工' when  STAFF_STATE=3 then '试用员工' end")
+    @Select("SELECT case  when  IS_DELETED=1 then '已离职' when  STAFF_STATE=1 then '正式员工' when  STAFF_STATE=0 then '试用员工'  end as zt,count(*) as rs  FROM STAFF GROUP BY  case  when  IS_DELETED=1 then '已离职' when  STAFF_STATE=1 then '正式员工' when  STAFF_STATE=0 then '试用员工' end")
     List<Map<String, Object>> selectygzt();
 
     //员工年代分析

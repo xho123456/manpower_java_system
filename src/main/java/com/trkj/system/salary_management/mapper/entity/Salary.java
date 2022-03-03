@@ -1,4 +1,4 @@
-package com.trkj.system.salary_management.entity;
+package com.trkj.system.salary_management.mapper.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
