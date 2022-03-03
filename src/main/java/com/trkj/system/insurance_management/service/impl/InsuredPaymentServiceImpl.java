@@ -12,6 +12,8 @@ import com.trkj.system.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -51,19 +53,24 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
      * @return
      */
     @Override
+    @Transactional
     public IPage<DefinsuredDefSchemeVo> selectPaerss(DefinsuredDefSchemeVo definsuredDefSchemeVo) {
             Page<DefinsuredDefSchemeVo> page = new Page<>(definsuredDefSchemeVo.getCurrentPage(),definsuredDefSchemeVo.getPagesize());
             QueryWrapper<DefinsuredDefSchemeVo> queryWrapper = new QueryWrapper<>();
             if(definsuredDefSchemeVo.getDeptId() != null && !definsuredDefSchemeVo.getDeptId().equals("")){
                 //公告标题模糊查询
-                queryWrapper.eq("a.DEPT_ID",definsuredDefSchemeVo.getDeptId());
+                queryWrapper.eq("DEPT_ID",definsuredDefSchemeVo.getDeptId());
+            }else {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
             if(definsuredDefSchemeVo.getStaffName() != null && !definsuredDefSchemeVo.getStaffName().equals("")){
-                queryWrapper.like("a.STAFF_NAME",definsuredDefSchemeVo.getStaffName());
+                queryWrapper.like("STAFF_NAME",definsuredDefSchemeVo.getStaffName());
+            }else {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
 
             //分页查询条件
-            queryWrapper.ne(" STAFF_STATE",2);
+            queryWrapper.ne(" STAFF_STATE",2)   ;
 
             return definsuredDefSchemeVoMapper.selectPaerss(page,queryWrapper);
 
@@ -75,6 +82,7 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
      * 社保缴纳添加
      */
     @Override
+    @Transactional
     public int insertInsuredPaymentss(Map<String, Object> map) {
 
         int a=0;
@@ -467,7 +475,11 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
                 defInsureds1.setDefInsuredNumber((long) (defInsuredNumber+1));
                 if(defInsuredsMapper.updateById(defInsureds1)>0){
                     a=1;
+                }else {
+                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 }
+            }else {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
         }
         return a;
@@ -479,6 +491,7 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
      * @return
      */
     @Override
+    @Transactional
     public int deletescheme(InsuredPayment insuredPayment) {
         int a=0;
         InsuredPayment insuredPaymentId=insuredPaymentMapper.deletescheme(new QueryWrapper<InsuredPayment>()
@@ -494,8 +507,14 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
                defInsureds.setDefInsuredNumber(definsuredDefSchemeVo.getDefInsuredNumber()-1);
                if(defInsuredsMapper.updateById(defInsureds)>0){
                    a=1;
+               }else {
+                   TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                }
+            }else {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
+        }else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return a;
     }
@@ -505,6 +524,7 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
      * 参保方案批量删除
      */
     @Override
+    @Transactional
     public int deleteList(Map<String, Object> map) {
         int a=0;
         //员工id
@@ -519,7 +539,11 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
 
                      a=1;
 
+                }else {
+                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 }
+            }else {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
         }
 

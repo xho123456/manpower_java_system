@@ -561,7 +561,7 @@ public class InsuredArchiveServiceImpl implements InsuredArchiveService {
             queryWrapper.between("INS_ARCHIVE_INSURED_MONTH",insuredArchive.getStartTime(),insuredArchive.getEndTime());
         }
 
-        queryWrapper.eq("IS_DELETED",0);
+        queryWrapper.eq("IS_DELETED",0).orderByDesc("CREATED_TIME");
         queryWrapper.eq("INS_ARCHIVE_STAFF_NAME",insuredArchive.getInsArchiveStaffName());
         return insuredArchiveMapper.pageRecord(page,queryWrapper);
     }
@@ -578,8 +578,7 @@ public class InsuredArchiveServiceImpl implements InsuredArchiveService {
 
         QueryWrapper<InsuredArchive> queryWrapper = new QueryWrapper<>();
         IPage<InsuredArchive> insuredArchiveIPage = insuredArchiveMapper.monthlyReport(new Page<>(insuredArchive.getCurrentPage(), insuredArchive.getPagesize()), queryWrapper);
-        System.err.println("===================="+insuredArchiveIPage.getRecords());
-        //        queryWrapper.eq("IS_DELETED",0);
+
         return insuredArchiveMapper.monthlyReport(page,queryWrapper);
     }
 
@@ -620,7 +619,7 @@ public class InsuredArchiveServiceImpl implements InsuredArchiveService {
         Date parse = sdf.parse(insuredArchive.getTime());
         String format = sdf.format(parse);
         //分页查询条件
-        queryWrapper.eq("to_char(CREATED_TIME,'yyyy-MM')",format);
+        queryWrapper.eq("to_char(CREATED_TIME,'yyyy-MM')",format).orderByDesc("CREATED_TIME");
 
         return insuredArchiveMapper.pageInsuredArchive(page,queryWrapper);
     }
