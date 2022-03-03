@@ -188,7 +188,6 @@ public class ApprovalServiceImpl implements ApprovalService {
                 // 转正表-转正日期
                 worker.setWorkerDate(workerVo.getWorkerdate());
                 final val i4 = workerMapper.insert(worker);
-                System.out.println("service2worker:  "+worker);
                 if (i4 == 1) {
                     return 1111;
                 } else {
@@ -812,8 +811,6 @@ public class ApprovalServiceImpl implements ApprovalService {
                 fillclock1.setAuditflowId(auditflow1.getAuditFlowId());
                 // 补打卡表-员工名称
                 fillclock1.setStaffName(fillclock.getStaffName());
-                // 补打卡表-部门名称
-                fillclock1.setDeptId(fillclock.getDeptId());
                 // 补打卡表-补打卡类型
                 fillclock1.setCardType(fillclock.getCardType());
                 //补打卡表时间
@@ -1088,11 +1085,9 @@ public class ApprovalServiceImpl implements ApprovalService {
 
     @Override
     public int undo(Auditflow auditflow) {
-        Auditflow auditflow1 = new Auditflow();
-        auditflow1.setAuditFlowId(auditflow.getAuditFlowId());
-        auditflow1.setAuditFlowState(3L);
+        UpdateWrapper<Auditflow> au = new UpdateWrapper<>();
+        final val i = oneMapper.positive(au.set("AUDITFLOW_STATE",3).in("AUDITFLOW_ID",auditflow.getAuditFlowId()));
 
-        final val i =  oneMapper.updateById(auditflow);
         if (i == 1) {
             return 1111;
         } else {
