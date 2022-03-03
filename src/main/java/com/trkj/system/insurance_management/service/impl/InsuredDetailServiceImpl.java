@@ -8,6 +8,8 @@ import com.trkj.system.insurance_management.mapper.*;
 import com.trkj.system.insurance_management.service.InsuredDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -35,18 +37,27 @@ public class InsuredDetailServiceImpl implements InsuredDetailService {
      * 参保明细分页
      */
     @Override
+    @Transactional
     public IPage<DefinsuredDefSchemeVo> selectPaers(DefinsuredDefSchemeVo definsuredDefSchemeVo) {
         Page<DefinsuredDefSchemeVo> page = new Page<>(definsuredDefSchemeVo.getCurrentPage(),definsuredDefSchemeVo.getPagesize());
         QueryWrapper<DefinsuredDefSchemeVo> queryWrapper = new QueryWrapper<>();
         if(definsuredDefSchemeVo.getDeptId() != null && !definsuredDefSchemeVo.getDeptId().equals("")){
             //公告标题模糊查询
             queryWrapper.eq("c.DEPT_ID",definsuredDefSchemeVo.getDeptId());
+        }else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+
         if(definsuredDefSchemeVo.getStaffName() != null && !definsuredDefSchemeVo.getStaffName().equals("")){
             queryWrapper.like("b.STAFF_NAME",definsuredDefSchemeVo.getStaffName());
+        }else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+
         if(definsuredDefSchemeVo.getStaffState()!= null  && !definsuredDefSchemeVo.getStaffState().equals("")){
             queryWrapper.eq("b.STAFF_STATE",definsuredDefSchemeVo.getStaffState());
+        }else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 
         // 当前日期转格式
@@ -62,8 +73,8 @@ public class InsuredDetailServiceImpl implements InsuredDetailService {
         queryWrapper.eq("b.IS_DELETED",0);
         queryWrapper.eq("c.IS_DELETED",0);
 
-        queryWrapper.apply("TO_CHAR(a.INS_DETAIL_INSURED_MONTH,'yyyy-MM') like {0}", date);
-        queryWrapper.orderBy(Boolean.parseBoolean("a.INS_DETAIL_ID"),false);
+        queryWrapper.apply("TO_CHAR(a.INS_DETAIL_INSURED_MONTH,'yyyy-MM') like {0}", date).orderByDesc("a.CREATED_TIME");
+
         return definsuredDefSchemeVoMapper.selectPaer(page,queryWrapper);
 
     }

@@ -1,19 +1,14 @@
 package com.trkj.system.insurance_management.mapper;
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.system.insurance_management.entity.DefInsured;
 import com.trkj.system.insurance_management.entity.DefinsuredDefSchemeVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-
 import java.util.List;
-
 @Mapper
 public interface DefinsuredDefSchemeVoMapper extends BaseMapper<DefinsuredDefSchemeVo> {
     /**
@@ -23,15 +18,17 @@ public interface DefinsuredDefSchemeVoMapper extends BaseMapper<DefinsuredDefSch
      * @return
      */
     @Select(" select\n" +
-            "                *\n" +
-            "            from\n" +
-            "                INSURED_DETAIL a \n" +
-            "            inner join\n" +
-            "                STAFF b \n" +
-            "                    on a.INS_DETAIL_STAFF_NAME=b.STAFF_NAME \n" +
-            "            inner join\n" +
-            "                DEPT c \n" +
-            "                    on b.DEPT_ID=c.DEPT_ID  ${ew.customSqlSegment}")
+            "*\n" +
+            "from\n" +
+            "INSURED_DETAIL a \n" +
+            "inner join\n" +
+            "STAFF b \n" +
+            "on a.INS_DETAIL_STAFF_NAME=b.STAFF_NAME \n" +
+            "inner join\n" +
+            "DEPT c \n" +
+            "on b.DEPT_ID=c.DEPT_ID \n" +
+            "LEFT JOIN INSURED_PAYMENT d \n" +
+            "on a.INS_DETAIL_ID = d.INS_DETAIL_ID ${ew.customSqlSegment}")
     IPage<DefinsuredDefSchemeVo> selectPaer(Page<DefinsuredDefSchemeVo> defInsured, @Param(Constants.WRAPPER) QueryWrapper<DefinsuredDefSchemeVo> queryWrapper);
 
     /**
@@ -45,7 +42,7 @@ public interface DefinsuredDefSchemeVoMapper extends BaseMapper<DefinsuredDefSch
             "from ( \n" +
             "select *\n" +
             "from STAFF a \n" +
-            "left join WORKER f on a.STAFF_ID=f.STAFF_ID\t\t\n" +
+
             "left join DEPT b on a.DEPT_ID=b.DEPT_ID \n" +
             "left join DEPT_POST c on a.DEPT_POST_ID=c.DEPT_POST_ID \n" +
             "left join (SELECT STAFF_ID,INSURED_PAYMENT_ID, INSURED_PAYMENT_INSURED_MONTH, INSURED_PAYMENT_SALARY_MONTH \n" +
@@ -60,7 +57,7 @@ public interface DefinsuredDefSchemeVoMapper extends BaseMapper<DefinsuredDefSch
             "and e.INSURED_PAYMENT_ID is null\n" +
             "or d.INS_ARCHIVE_INSURED_MONTH is null \n" +
             "order by a.CREATED_TIME desc)\n" +
-            "WHERE to_char(INSURED_PAYMENT_SALARY_MONTH,'YYYY-MM') <> '2022-03' \n" +
+            "WHERE to_char(INSURED_PAYMENT_SALARY_MONTH,'YYYY-MM') = to_char(sysdate, 'YYYY-MM') \n" +
             "and STAFF_STATE != 2\n" +
             "OR INSURED_PAYMENT_SALARY_MONTH IS NULL )   ${ew.customSqlSegment}")
     IPage<DefinsuredDefSchemeVo> selectPaerss(Page<DefinsuredDefSchemeVo> defInsured, @Param(Constants.WRAPPER) QueryWrapper<DefinsuredDefSchemeVo> queryWrapper);
@@ -71,20 +68,19 @@ public interface DefinsuredDefSchemeVoMapper extends BaseMapper<DefinsuredDefSch
      * @param queryWrapper
      * @return
      */
-    @Select("\n" +
-            "select * from\n" +
-            "                        STAFF t1 LEFT JOIN DEPT t2\n" +
-            "                        on t1.DEPT_ID=t2.DEPT_ID\n" +
-            "            LEFT JOIN DEPT_POST t3\n" +
-            "                       on t1.DEPT_POST_ID=t3.DEPT_POST_ID\n" +
-            "                       LEFT JOIN WORKER t4\n" +
-            "                       on t1.STAFF_ID=t4.STAFF_ID\n" +
-            "                       LEFT JOIN INSURED_PAYMENT t5\n" +
-            "                       on t1.STAFF_ID= t5.STAFF_ID \n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\tleft JOIN (select * from INSURED_ARCHIVE where to_char(CREATED_TIME,'YYYY-MM') in to_char(sysdate,'YYYY-MM')) t6\n" +
-            "           on t1.STAFF_NAME !=t6.INS_ARCHIVE_STAFF_NAME\n" +
-            "            LEFT JOIN INSURED_DETAIL t7\n" +
-            "            on t5.INS_DETAIL_ID=t7.INS_DETAIL_ID ${ew.customSqlSegment}")
+    @Select("select * from\n" +
+            "STAFF t1 LEFT JOIN DEPT t2\n" +
+            "on t1.DEPT_ID=t2.DEPT_ID\n" +
+            "LEFT JOIN DEPT_POST t3\n" +
+            "on t1.DEPT_POST_ID=t3.DEPT_POST_ID\n" +
+            "LEFT JOIN WORKER t4\n" +
+            "on t1.STAFF_ID=t4.STAFF_ID\n" +
+            "LEFT JOIN INSURED_PAYMENT t5\n" +
+            "on t1.STAFF_ID= t5.STAFF_ID \n" +
+            "left JOIN (select * from INSURED_ARCHIVE where to_char(CREATED_TIME,'YYYY-MM') in to_char(sysdate,'YYYY-MM')) t6\n" +
+            "on t1.STAFF_NAME !=t6.INS_ARCHIVE_STAFF_NAME\n" +
+            "LEFT JOIN INSURED_DETAIL t7\n" +
+            "on t5.INS_DETAIL_ID=t7.INS_DETAIL_ID ${ew.customSqlSegment}")
     List<DefinsuredDefSchemeVo> selectPaerzsj( @Param(Constants.WRAPPER) QueryWrapper<DefinsuredDefSchemeVo> queryWrapper);
 
     /**
@@ -120,7 +116,7 @@ public interface DefinsuredDefSchemeVoMapper extends BaseMapper<DefinsuredDefSch
      * 修改默认方案的人数
      */
     @Select("select * from INSURED_PAYMENT t1 LEFT JOIN DEF_INSURED t2\n" +
-            "    on t1.DEF_INSURED_ID=t2.DEF_INSURED_ID ${ew.customSqlSegment}")
+            "on t1.DEF_INSURED_ID=t2.DEF_INSURED_ID ${ew.customSqlSegment}")
     DefinsuredDefSchemeVo selectquantity( @Param(Constants.WRAPPER) QueryWrapper<DefinsuredDefSchemeVo> queryWrapper);
 
     /**

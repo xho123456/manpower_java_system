@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,7 @@ public class DefInsuredServiceImpl implements DefInsuredService {
      * @return
      */
     @Override
+    @Transactional
     public IPage<DefInsured> selectPaer(DefInsured defInsured) {
         Page<DefInsured> page = new Page<>(defInsured.getCurrentPage(),defInsured.getPagesize());
         QueryWrapper<DefInsured> queryWrapper = new QueryWrapper<>();
@@ -43,8 +45,11 @@ public class DefInsuredServiceImpl implements DefInsuredService {
             //公告标题模糊查询
             queryWrapper.like("DEF_INSURED_STATE",defInsured.getDefInsuredState());
         }
+        else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
         //分页查询条件
-        queryWrapper.eq("IS_DELETED",0);
+        queryWrapper.eq("IS_DELETED",0).orderByDesc("DEF_INSURED_ID");
 
         return defInsuredMapper.selectPaer(page,queryWrapper);
     }
@@ -92,6 +97,7 @@ public class DefInsuredServiceImpl implements DefInsuredService {
                 defScheme1.setDefInsuredId(defInsureds2.getDefInsuredId());
                 int inserts = defSchemeMapper.insert(defScheme1);
             }
+
             for (int i = 0;i<accumulation_tableData.size();i++){
                 String defSchemeType=accumulation_tableData.get(i).getDefSchemeType();
                 int defSchemeFloor= Math.toIntExact(accumulation_tableData.get(i).getDefSchemeFloor());
@@ -114,9 +120,13 @@ public class DefInsuredServiceImpl implements DefInsuredService {
                 defScheme2.setDefInsuredId(defInsureds2.getDefInsuredId());
                 if(defSchemeMapper.insert(defScheme2)>0){
                     a=1;
+                }else {
+                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 }
              }
 
+        }else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 
         return a;
@@ -136,6 +146,7 @@ public class DefInsuredServiceImpl implements DefInsuredService {
      * 参保方案表数据
      */
     @Override
+    @Transactional
     public AjaxResponse selectDefInsuredname(DefInsured defInsured) {
 
         DefInsureds defInsureds=defInsuredsMapper.selectDefInsuredname(new QueryWrapper<DefInsureds>().eq("DEF_INSURED_ID",defInsured.getDefInsuredId())
@@ -147,7 +158,8 @@ public class DefInsuredServiceImpl implements DefInsuredService {
         defSchemeList.forEach(e->{
             if (defInsureds.getDefInsuredId()==e.getDefInsuredId()){
                 defInsureds.getDefSchemes().add(e);
-                System.out.println("+++++++++++"+ defInsureds.getDefSchemes());
+            }else {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
         });
         return AjaxResponse.success(defInsureds);
@@ -157,6 +169,7 @@ public class DefInsuredServiceImpl implements DefInsuredService {
      * 参保方案修改
      */
     @Override
+    @Transactional
     public int updateDefInsured(Map<String, Object> map) {
         int a=0;
         int defInsuredId = Integer.parseInt(map.get("defInsuredId").toString());
@@ -226,9 +239,13 @@ public class DefInsuredServiceImpl implements DefInsuredService {
                if(updatess>0){
                    a=1;
 
+               }else {
+                   TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                }
            }
 
+       }else {
+           TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
        }
         return a;
     }
@@ -237,6 +254,7 @@ public class DefInsuredServiceImpl implements DefInsuredService {
      * 默认参保方案删除
      */
     @Override
+    @Transactional
     public int deleteDefInsured(DefInsured defInsured) {
         int a=0;
         if(defInsuredMapper.deleteById(defInsured.getDefInsuredId())>0){
@@ -245,8 +263,12 @@ public class DefInsuredServiceImpl implements DefInsuredService {
                 int delete = defInsuredMapper.deleteById(list.get(i).getDefSchemeId());
                if(delete>0){
                    a=1;
+               }else {
+                   TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                }
             }
+        }else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return a;
     }
@@ -255,6 +277,7 @@ public class DefInsuredServiceImpl implements DefInsuredService {
      * 修改方案状态
      */
     @Override
+    @Transactional
     public int updatedefInsuredState(DefInsureds defInsured) {
         int a=0;
       DefInsureds defInsuredss=new DefInsureds();
@@ -263,6 +286,8 @@ public class DefInsuredServiceImpl implements DefInsuredService {
       final val updatedeID=defInsuredsMapper.updateById(defInsuredss);
       if(updatedeID>0){
           a=1;
+      }else {
+          TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
       }
       return a;
     }
@@ -280,9 +305,6 @@ public class DefInsuredServiceImpl implements DefInsuredService {
         queryWrapper.eq("DEF_INSURED_STATE",0).eq("IS_DELETED",0);
         List<DefInsureds> list = defInsuredsMapper.selectName(queryWrapper);
 
-//        for(int i=0;i< list.size();i++){
-//            System.out.println("++++++++"+list.get(i).getDefInsuredName());
-//        }
         return list;
     }
 

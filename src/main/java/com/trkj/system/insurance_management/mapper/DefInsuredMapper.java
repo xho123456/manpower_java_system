@@ -26,7 +26,7 @@ public interface DefInsuredMapper extends BaseMapper<DefInsured> {
      * @param queryWrapper
      * @return
      */
-    @Select("select * from DEF_INSURED ${ew.customSqlSegment}")
+    @Select("select * from DEF_INSURED  ${ew.customSqlSegment}")
     IPage<DefInsured> selectPaer(Page<DefInsured> defInsured, @Param(Constants.WRAPPER)QueryWrapper<DefInsured> queryWrapper);
 
     /**

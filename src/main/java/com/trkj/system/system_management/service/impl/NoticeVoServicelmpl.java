@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,23 +47,30 @@ public class NoticeVoServicelmpl implements NoticeVoService {
      * @return
      */
     @Override
+    @Transactional
     public IPage<NoticeVo> selectPaer(NoticeVo noticeVo) {
         Page<NoticeVo> page =new Page<>(noticeVo.getCurrentPage(),noticeVo.getPagesize());
         QueryWrapper<NoticeVo> queryWrapper=new QueryWrapper<>();
         if(noticeVo.getNoticeTitle() != null && !noticeVo.getNoticeTitle().equals("")){
             //公告标题模糊查询
             queryWrapper.like("NOTICE_TITLE",noticeVo.getNoticeTitle());
+        }else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         if(noticeVo.getNoticePeople() != null && !noticeVo.getNoticePeople().equals("")){
            //公告发布人查询
             queryWrapper.like("NOTICE_PEOPLE",noticeVo.getNoticePeople());
+        }else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         if(noticeVo.getNoticeType()!=null && !noticeVo.getNoticeType().equals("")){
             //公告类型查询
             queryWrapper.like("NOTICE_TYPE",noticeVo.getNoticeType());
+        }else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         //分页查询条件
-        queryWrapper.eq("IS_DELETED",0);
+        queryWrapper.eq("IS_DELETED",0).orderByDesc("NOTICE_ID");
         return noticeVoMapper.selectPaer(page,queryWrapper);
     }
 
@@ -106,10 +114,18 @@ public class NoticeVoServicelmpl implements NoticeVoService {
                                         noticeStaff.setNoticeState(0l);
                                         if (noticeStaffMapper.insert(noticeStaff) > 0) {
                                             a=1;
+                                        }else {
+                                            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                                         }
+                                    }else {
+                                        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                                     }
                                 }
-                            }
+                            }else {
+                                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                         }
+                    }else {
+                        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                     }
                 }
            }
@@ -130,7 +146,11 @@ public class NoticeVoServicelmpl implements NoticeVoService {
            int deletStaff=noticeStaffMapper.deleteNoticeStaff(new QueryWrapper<NoticeStaff>().eq("NOTICE_ID",id));
                if(deletStaff>0){
                    noticeMapper.deleteById(id);
+               }else {
+                   TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                }
+        }else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return delete;
     }
@@ -157,13 +177,13 @@ public class NoticeVoServicelmpl implements NoticeVoService {
                          if(notices>0){
                               notice=1;
                          }else {
-                             notice= -1;
+                             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                          }
                }else {
-                       notice= -1;
-                }
+                   TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+               }
             }else {
-                notice= -1;
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
         }
         return notice;
@@ -245,6 +265,7 @@ public class NoticeVoServicelmpl implements NoticeVoService {
      * @return
      */
     @Override
+    @Transactional
     public int insert(Map<String, Object> map) {
         int a = 0;
         //员工id
@@ -296,11 +317,17 @@ public class NoticeVoServicelmpl implements NoticeVoService {
                         noticeStaff.setStaffId(staffid.get(j).getStaffId());
                             if (noticeStaffMapper.insert(noticeStaff) > 0) {
                                 a = 1;
+                            }else {
+                                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                             }
                         }
-                    }
+                    }else {
+                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 }
-            }
+                }
+            }else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
             return a;
         }
     }

@@ -6,6 +6,8 @@ import com.trkj.system.system_management.mapper.DeptsMapper;
 import com.trkj.system.system_management.service.DeptsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ public class DeptsServiceImpl  implements DeptsService {
      * @return
      */
     @Override
+    @Transactional
     public List<Depts> selectDepts() {
         QueryWrapper<Depts> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("DEPT_STATE",0).eq("IS_DELETED",0);
@@ -37,6 +40,8 @@ public class DeptsServiceImpl  implements DeptsService {
         for ( Depts depts : listAll) {
             if (depts.getMenuPid()==0){
                 list1.add(depts);
+            }else {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
         }
         //遍历所有父部门
@@ -57,6 +62,8 @@ public class DeptsServiceImpl  implements DeptsService {
             //如果父级菜单为0 菜单类型为菜单 状态为启用
             if (nav.getMenuPid() == id) {
                 childList.add(nav);
+            }else {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
         }
         //递归
@@ -66,6 +73,8 @@ public class DeptsServiceImpl  implements DeptsService {
         //如果节点下没有子节点，返回一个空List（递归退出）
         if (childList.size() == 0) {
             return new ArrayList<Depts>();
+        }else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return childList;
     }
