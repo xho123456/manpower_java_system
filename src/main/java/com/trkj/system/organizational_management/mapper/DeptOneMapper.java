@@ -15,6 +15,6 @@ public interface DeptOneMapper extends BaseMapper<Dept> {
 
     /* @Insert("insert into DEPT(DEPT_ID,DEPT_STATE,DEPT_NAME,STAFF_ID,CREATED_TIME,UPDATED_TIME,REVISION,IS_DELETED)  VALUES(DEPT_ID.nextval,0,?,?,SYSDATE,SYSDATE,1,1)")
      int addDept(Dept dept);*/
-    @Select("select * from dept")
+    @Select("select * from dept where IS_DELETED = 0")
     List<Dept> selectList();
 }

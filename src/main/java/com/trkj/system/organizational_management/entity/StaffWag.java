@@ -48,6 +48,8 @@ public class StaffWag implements Serializable {
     @TableField("IS_DELETED")
     private Long isDeleted;
 
-
+    @ApiModelProperty(value = "工资归档编号")
+    @TableField( "MONEYPIGEONHOLE_ID")
+    private Long moneypigeonholeId  ;
 
 }

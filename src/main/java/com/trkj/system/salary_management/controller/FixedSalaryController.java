@@ -1,17 +1,22 @@
 package com.trkj.system.salary_management.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.trkj.system.organizational_management.entity.Dept;
-import com.trkj.system.salary_management.entity.*;
-import com.trkj.system.salary_management.service.BusinesssService;
-import com.trkj.system.salary_management.service.FixedSalaryService;
-import com.trkj.system.salary_management.service.WagenotfileddService;
-import com.trkj.system.salary_management.service.WorkschemeService;
+import com.trkj.system.organizational_management.entity.StaffWag;
+import com.trkj.system.organizational_management.mapper.StaffWagMapper;
+import com.trkj.system.salary_management.mapper.MoneypigeonholeMapper;
+import com.trkj.system.salary_management.mapper.entity.*;
+import com.trkj.system.salary_management.service.*;
 import com.trkj.system.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class FixedSalaryController {
@@ -23,6 +28,16 @@ public class FixedSalaryController {
     private BusinesssService businesssService;
     @Autowired
     private WagenotfileddService wagenotfileddService;
+    @Autowired
+    private AttendandceService attendandceService;
+    @Autowired
+    private  StaffSalaryService staffSalaryService;
+    @Autowired
+    private MoneypigeonholeService moneypigeonholeService;
+    @Autowired
+    private MoneypigeonholeMapper moneypigeonholeMapper;
+    @Autowired
+    private StaffWagMapper staffWagMapper;
     //查询员工 部门 固定工资 职位
       @PostMapping("FixedSalarySelect/DeptName")
     public AjaxResponse selectPage2(@RequestBody FixedSalary fixedSalary){
@@ -73,13 +88,12 @@ public class FixedSalaryController {
             return "失败";
         }
 
-
     }
     //加班工资方案查询
     @PostMapping("jbgz/a")
     public AjaxResponse selectPage1(@RequestBody Workscheme workscheme){
         return AjaxResponse.success(workschemeService.selectPaer1(workscheme));
-    }
+    }  //修改加班方案
     @PutMapping("/updateWorkscheme/Workscheme")
     public AjaxResponse updateWorkscheme(@RequestBody Workschemee workschemee){
 
@@ -106,11 +120,152 @@ public class FixedSalaryController {
     public AjaxResponse selectPage(@RequestBody Businesss businesss){
         return AjaxResponse.success(businesssService.selectPaer(businesss));
     }
+    //删除加班方案
+    @PostMapping("/deleteBusinessss/b")
+    //穿过来一个值时，需要封装
+    public AjaxResponse deleteBusinessss(@RequestBody ArrayList<Integer> id) {
+        for (int i=0;i<id.size();i++){
+            if (businesssService.deleteBusinessss(id.get(i)) > 0) {
+                return AjaxResponse.success("删除成功");
+            }
+        }
+        return AjaxResponse.success("删除失败");
+    }
 
+    //添加出差方案
+    @PostMapping("/addbusinesss")
+    public String addbusinesss(@RequestBody Businessss businessss) {
+        System.out.println(businessss);
+        try {
+            if (businesssService.addBusinesss(businessss) >= 1) {
+                return "成功";
+            } else {
+                return "失败";
+            }
+        } catch (Exception e) {
+            return "失败";
+        }
+
+    }
+    //修改出差方案
+    @PutMapping("/updateBusinessss/Businessss")
+    public AjaxResponse updateBusinessss(@RequestBody Businessss businessss){
+
+        if (businesssService.updatebusinessss(businessss)>0){
+            return  AjaxResponse.success("成功");
+        }else {
+            return AjaxResponse.success("失败");
+        }
+    }
+//////////////////
+    //以下为考勤
+
+    //考勤方案查询
+    @PostMapping("kqfan/select")
+    public AjaxResponse selectPage2(@RequestBody Attendandce attendandce){
+        return AjaxResponse.success(attendandceService.selectPaer(attendandce));
+    }
+    //添加出差方案
+    @PostMapping("/addAttendandce")
+    public String addAttendandce(@RequestBody Attendandcee attendandcee) {
+        System.out.println(attendandcee);
+        try {
+            if (attendandceService.addAttendandcee(attendandcee) >= 1) {
+                return "成功";
+            } else {
+                return "失败";
+            }
+        } catch (Exception e) {
+            return "失败";
+        }
+
+    }
+    //删除加班方案
+    @PostMapping("/deleteAttendandcee/delete")
+    //穿过来一个值时，需要封装
+    public AjaxResponse deleteAttendandcee(@RequestBody ArrayList<Integer> id) {
+        for (int i=0;i<id.size();i++){
+            if (attendandceService.deleteAttendandcee(id.get(i)) > 0) {
+                return AjaxResponse.success("删除成功");
+            }
+        }
+        return AjaxResponse.success("删除失败");
+    }
+
+    //修改考勤方案
+    @PutMapping("/updateAttendandcee/Attendandcee")
+    public AjaxResponse updateAttendandcee(@RequestBody Attendandcee attendandcee){
+
+        if (attendandceService.updateAttendandcee(attendandcee)>0){
+            return  AjaxResponse.success("成功");
+        }else {
+            return AjaxResponse.success("失败");
+        }
+    }
+
+////////////////////////////
+    //以下为工资部分
     //查询工资未归档
     @PostMapping("chagzweiguidan/a")
     public AjaxResponse selectPage11(@RequestBody Wagenotfiledd wagenotfiledd){
         return AjaxResponse.success(wagenotfileddService.selectPaer(wagenotfiledd));
     }
 
+    //查询员工工资详细信息
+    @PostMapping("StaffSalarySelect/Staff")
+    public AjaxResponse selectPage(@RequestBody StaffSalary staffSalary){
+        return AjaxResponse.success(staffSalaryService.selectPaer(staffSalary));
+    }
+    //查询工资表
+    @GetMapping(value = "/selectStaffSalary")
+    public List<StaffSalary> girlList11(){
+        return staffSalaryService.findAll11();
+    }
+
+    //工资表归档
+    @PostMapping("/guidanwag")
+    public String guidanwag(@RequestBody Moneypigeonhole moneypigeonhole) {
+        String format = new SimpleDateFormat("yyyy-MM").format(new Date());
+        try {
+         moneypigeonholeService.guidanwag(moneypigeonhole);
+            Long id = moneypigeonholeMapper.maxId();
+            List<StaffWag> staffWag = staffWagMapper.selectList(new QueryWrapper<StaffWag>().eq("TO_CHAR(CREATED_TIME,'yyyy-MM')", format));
+
+            if(staffWag.size()>0){
+                System.err.println("判断================="+staffWag);
+               staffWag.forEach(e->{
+                   e.setMoneypigeonholeId(id);
+                   staffWagMapper.updateById(e);
+               });
+           }
+           return "成功";
+
+        } catch (Exception e) {
+            throw new RuntimeException("错误："+e.getMessage());
+//            return "失败";
+        }
+
+    }
+    //查询本月工资表id
+    @GetMapping("/selectbyid")
+    public List<Map<String, Object>> selectbyid(){
+        return moneypigeonholeService.selectbyid();
+    }
+    //查询本月工资表是否有
+    @GetMapping("/selectbyyf")
+    public List<Map<String, Object>> selectbyyf(){
+        return moneypigeonholeService.selectbyyf();
+    }
+
+
+    //查工资归档表信息
+    @PostMapping("moneypigeonhole/select")
+    public AjaxResponse selectPage1(@RequestBody Moneypigeonhole moneypigeonhole){
+        return AjaxResponse.success(moneypigeonholeService.selectPaer(moneypigeonhole));
+    }
+    //根据归档编号查询id
+    @PostMapping("StaffSalarySelect1/Staff1")
+    public AjaxResponse selectPage12(@RequestBody StaffSalary staffSalary){
+        return AjaxResponse.success(staffSalaryService.selectPaer1(staffSalary));
+    }
 }

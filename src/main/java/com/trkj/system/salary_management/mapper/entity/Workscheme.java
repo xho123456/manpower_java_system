@@ -1,4 +1,4 @@
-package com.trkj.system.salary_management.entity;
+package com.trkj.system.salary_management.mapper.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -12,58 +12,40 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class SalaryList implements Serializable {
+public class Workscheme implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "调薪编号")
-    @TableId( "SALARY_ID")
-    private Integer salaryId;
-
-
-    @ApiModelProperty(value = "审批编号")
-    @TableField("AUDITFLOW_ID")
-    private Long auditflowId;
-
-    @ApiModelProperty(value = "员工编号")
-    @TableField("STAFF_ID")
-    private Long staffId;
-
-    @ApiModelProperty(value = "员工名称")
-    @TableField("STAFF_NAME")
-    private String staffName;
+    @ApiModelProperty(value = "加班方案编号")
+    @TableId( "WORKSCHEME_ID")
+    private Integer workschemeId;
 
     @ApiModelProperty(value = "部门编号")
     @TableField("DEPT_ID")
     private Long deptId;
-    @ApiModelProperty(value = "部门名称")
-    @TableField("DEPT_NAME")
-    private String deptName;
 
-    @ApiModelProperty(value = "调薪前基本工资")
-    @TableField("FRONT_SALARY")
-    private Long frontSalary;
+    @ApiModelProperty(value = "加班方案名称")
+    @TableField("WORKSCHEME_NAME")
+    private String workschemeName;
 
-    @ApiModelProperty(value = "调薪后基本工资")
-    @TableField("AFTER_SALARY")
-    private Long afterSalary;
+    @ApiModelProperty(value = "节假日加班工资")
+    @TableField("WORKSCHEME_HOLIDAYRATIO")
+    private Long workschemeHolidayratio;
 
-    @ApiModelProperty(value = "操作人")
-    @TableField("OPERATOR")
-    private String operator;
+    @ApiModelProperty(value = "休息日加班工资")
+    @TableField("WORKSCHEME_DAYOFFRATIO")
+    private Long workschemeDayoffratio;
+
+    @ApiModelProperty(value = "工作日加班工资")
+    @TableField("WORKSCHEME_WORKRATIO")
+    private Long workschemeWorkratio;
 
     @ApiModelProperty(value = "备注")
-    @TableField("SALARY_REMARKS")
-    private String salaryRemarks;
+    @TableField("WORKSCHEME_REMARK")
+    private String workschemeRemark;
 
     @ApiModelProperty(value = "状态")
-    @TableField("SALARY_STATE")
-    private Long salaryState;
-
-    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
-    @ApiModelProperty(value = "生效日期")
-    @TableField(value = "TAKE_EFFECT_DATE")
-    private Date takeEffectDate;
-
+    @TableField("WORKSCHEME_STATE")
+    private Long workschemeState;
     @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
     @ApiModelProperty(value = "创建时间 精确到秒")
     @TableField(value = "CREATED_TIME" , fill = FieldFill.INSERT)

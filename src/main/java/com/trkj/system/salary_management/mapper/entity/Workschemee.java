@@ -1,4 +1,4 @@
-package com.trkj.system.salary_management.entity;
+package com.trkj.system.salary_management.mapper.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -20,7 +20,9 @@ public class Workschemee implements Serializable {
     @ApiModelProperty(value = "加班方案编号")
     @TableId( "WORKSCHEME_ID")
     private Integer workschemeId;
-
+    @ApiModelProperty(value = "部门编号")
+    @TableField("DEPT_ID")
+    private Long deptId;
 
     @ApiModelProperty(value = "加班方案名称")
     @TableField("WORKSCHEME_NAME")

@@ -2,7 +2,10 @@ package com.trkj.system.salary_management.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.trkj.system.organizational_management.entity.Dept;
-import com.trkj.system.salary_management.entity.*;
+import com.trkj.system.salary_management.mapper.entity.FixedSalary;
+import com.trkj.system.salary_management.mapper.entity.Fixedwage;
+import com.trkj.system.salary_management.mapper.entity.Salary;
+import com.trkj.system.salary_management.mapper.entity.SalaryList;
 
 import java.util.List;
 

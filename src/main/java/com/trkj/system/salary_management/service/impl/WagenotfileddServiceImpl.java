@@ -3,9 +3,7 @@ package com.trkj.system.salary_management.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.system.salary_management.entity.Businesss;
-import com.trkj.system.salary_management.entity.Wagenotfiledd;
-import com.trkj.system.salary_management.mapper.BusinesssMapper;
+import com.trkj.system.salary_management.mapper.entity.Wagenotfiledd;
 
 import com.trkj.system.salary_management.mapper.WagenotfileddMapper;
 import com.trkj.system.salary_management.service.WagenotfileddService;

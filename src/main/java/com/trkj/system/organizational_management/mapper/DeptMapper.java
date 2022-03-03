@@ -26,7 +26,7 @@ public interface DeptMapper extends BaseMapper<DeptStaff> {
     @Select("select  d.*, s.STAFF_NAME from  DEPT d left join STAFF s on d.STAFF_ID= s.STAFF_ID ${ew.customSqlSegment}")
     IPage<DeptStaff>selectPaer(Page<DeptStaff> deptStaff, @Param(Constants.WRAPPER)QueryWrapper<DeptStaff> queryWrapper);
 
-    @Select("select * from dept")
+    @Select("select * from dept  where IS_DELETED=0")
     List<Dept> selectList();
 
 
