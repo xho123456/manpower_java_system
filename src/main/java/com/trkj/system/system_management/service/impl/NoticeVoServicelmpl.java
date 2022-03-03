@@ -240,7 +240,7 @@ public class NoticeVoServicelmpl implements NoticeVoService {
     }
 
     /**
-     * 公告新增134
+     * 公告新增134234
      * @param notices
      * @return
      */
