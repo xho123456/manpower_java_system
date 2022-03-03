@@ -7,11 +7,14 @@ import com.trkj.system.insurance_management.entity.InsuredPayment;
 import com.trkj.system.insurance_management.service.InsuredPaymentService;
 import com.trkj.system.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -63,6 +66,18 @@ public class InsuredPaymentController {
             return AjaxResponse.success("更改失败");
         }
 
+    }
+
+    /**
+     * 批量删除参保
+     */
+    @PostMapping ("/insuredPayment/delete")
+    public AjaxResponse deleteList(@RequestBody Map<String, Object> map){
+        if(insuredPaymentService.deleteList(map)>0){
+            return AjaxResponse.success("删除成功");
+        }else {
+            return AjaxResponse.success("删除失败");
+        }
     }
 
 }

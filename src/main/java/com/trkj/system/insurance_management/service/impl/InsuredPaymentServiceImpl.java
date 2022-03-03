@@ -8,17 +8,17 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.system.insurance_management.entity.*;
 import com.trkj.system.insurance_management.mapper.*;
 import com.trkj.system.insurance_management.service.InsuredPaymentService;
+import com.trkj.system.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -56,10 +56,10 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
             QueryWrapper<DefinsuredDefSchemeVo> queryWrapper = new QueryWrapper<>();
             if(definsuredDefSchemeVo.getDeptId() != null && !definsuredDefSchemeVo.getDeptId().equals("")){
                 //公告标题模糊查询
-                queryWrapper.eq("DEPT_ID",definsuredDefSchemeVo.getDeptId());
+                queryWrapper.eq("a.DEPT_ID",definsuredDefSchemeVo.getDeptId());
             }
             if(definsuredDefSchemeVo.getStaffName() != null && !definsuredDefSchemeVo.getStaffName().equals("")){
-                queryWrapper.like("STAFF_NAME",definsuredDefSchemeVo.getStaffName());
+                queryWrapper.like("a.STAFF_NAME",definsuredDefSchemeVo.getStaffName());
             }
 
 //        // 当前日期转格式
@@ -70,7 +70,7 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
 //        java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 //        String date = formatter.format(newDate);
             //分页查询条件
-//            queryWrapper.isNull("t5.INSURED_PAYMENT_ID");
+            queryWrapper.ne(" STAFF_STATE",2);
 
             return definsuredDefSchemeVoMapper.selectPaerss(page,queryWrapper);
 
@@ -504,6 +504,32 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
                }
             }
         }
+        return a;
+    }
+
+
+    /**
+     * 参保方案批量删除
+     */
+    @Override
+    public int deleteList(Map<String, Object> map) {
+        int a=0;
+        //员工id
+        List<String> staffsses= JSONObject.parseArray(JSONObject.toJSONString(map.get("insuredPaymentId")),String.class);
+        for(int i=0;i<staffsses.size();i++){
+            InsuredPayment insuredPayments=insuredPaymentMapper.deleteList(new QueryWrapper<InsuredPayment>()
+                    .eq("INSURED_PAYMENT_ID",staffsses.get(i)));
+            //删除缴纳表
+            if(insuredPaymentMapper.deleteById(staffsses.get(i))>0){
+                //删除明细表
+                if(insuredDetailMapper.deleteById(insuredPayments.getInsDetailId())>0){
+
+                     a=1;
+
+                }
+            }
+        }
+
         return a;
     }
 

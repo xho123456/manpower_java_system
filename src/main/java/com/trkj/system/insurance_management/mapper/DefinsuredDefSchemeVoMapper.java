@@ -22,8 +22,7 @@ public interface DefinsuredDefSchemeVoMapper extends BaseMapper<DefinsuredDefSch
      * @param queryWrapper
      * @return
      */
-    @Select("\n" +
-            "select * from\n" +
+    @Select(" select * from\n" +
             "                        STAFF t1 LEFT JOIN DEPT t2\n" +
             "                        on t1.DEPT_ID=t2.DEPT_ID\n" +
             "            LEFT JOIN DEPT_POST t3\n" +
@@ -44,47 +43,29 @@ public interface DefinsuredDefSchemeVoMapper extends BaseMapper<DefinsuredDefSch
      * @param queryWrapper
      * @return
      */
-    @Select("    select\n" +
-            "                       *"+
-            "                    from\n" +
-            "                        STAFF a \n" +
-            "                    left join\n" +
-            "                        DEPT b \n" +
-            "                            on a.DEPT_ID=b.DEPT_ID \n" +
-            "                    left join\n" +
-            "                        DEPT_POST c \n" +
-            "                            on a.DEPT_POST_ID=c.DEPT_POST_ID\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t left join\n" +
-            "                        WORKER f \n" +
-            "                            on a.STAFF_ID=f.STAFF_ID\t\n" +
-            "                    left join\n" +
-            "                        (\n" +
-            "                            SELECT\n" +
-            "                                STAFF_ID,\n" +
-            "                                INSURED_PAYMENT_INSURED_MONTH,\n" +
-            "                                INSURED_PAYMENT_SALARY_MONTH \n" +
-            "                            FROM\n" +
-            "                                INSURED_PAYMENT \n" +
-            "                            WHERE\n" +
-            "                                to_char(INSURED_PAYMENT_INSURED_MONTH, 'YYYY-MM') = to_char(sysdate, 'YYYY-MM') \n" +
-            "                        ) e \n" +
-            "                            on e.STAFF_ID=a.STAFF_ID \n" +
-            "                    left join\n" +
-            "                        (\n" +
-            "                            select\n" +
-            "                                * \n" +
-            "                            from\n" +
-            "                                INSURED_ARCHIVE \n" +
-            "                            WHERE\n" +
-            "                                to_char(INS_ARCHIVE_INSURED_MONTH, 'YYYY-MM') = to_char(sysdate, 'YYYY-MM') \n" +
-            "                        ) d \n" +
-            "                            ON d.INS_ARCHIVE_STAFF_NAME != a.STAFF_NAME \n" +
-            "                    where\n" +
-            "                        to_char(d.INS_ARCHIVE_INSURED_MONTH,'YYYY-MM') != to_char(sysdate, 'YYYY-MM') \n" +
-            "                        and a.IS_DELETED=0 \n" +
-            "                        or d.INS_ARCHIVE_INSURED_MONTH is null \n" +
-            "                    order by\n" +
-            "                        a.CREATED_TIME desc ${ew.customSqlSegment}")
+    @Select("select *  from( \n" +
+            "select * \n" +
+            "from ( \n" +
+            "select *\n" +
+            "from STAFF a \n" +
+            "left join WORKER f on a.STAFF_ID=f.STAFF_ID\t\t\n" +
+            "left join DEPT b on a.DEPT_ID=b.DEPT_ID \n" +
+            "left join DEPT_POST c on a.DEPT_POST_ID=c.DEPT_POST_ID \n" +
+            "left join (SELECT STAFF_ID,INSURED_PAYMENT_ID, INSURED_PAYMENT_INSURED_MONTH, INSURED_PAYMENT_SALARY_MONTH \n" +
+            "FROM INSURED_PAYMENT \n" +
+            "WHERE to_char(INSURED_PAYMENT_INSURED_MONTH, 'YYYY-MM') = to_char(sysdate, 'YYYY-MM') ) e on e.STAFF_ID=a.STAFF_ID \n" +
+            "left join (select * \n" +
+            "from INSURED_ARCHIVE \n" +
+            "WHERE to_char(INS_ARCHIVE_INSURED_MONTH, 'YYYY-MM') = to_char(sysdate, 'YYYY-MM') ) d ON d.INS_ARCHIVE_STAFF_NAME = a.STAFF_NAME \n" +
+            "where to_char(d.INS_ARCHIVE_INSURED_MONTH,'YYYY-MM') != to_char(sysdate, 'YYYY-MM') \n" +
+            "and a.STAFF_STATE !=2\n" +
+            "and a.IS_DELETED=0\n" +
+            "and e.INSURED_PAYMENT_ID is null\n" +
+            "or d.INS_ARCHIVE_INSURED_MONTH is null \n" +
+            "order by a.CREATED_TIME desc)\n" +
+            "WHERE to_char(INSURED_PAYMENT_SALARY_MONTH,'YYYY-MM') <> '2022-03' \n" +
+            "and STAFF_STATE != 2\n" +
+            "OR INSURED_PAYMENT_SALARY_MONTH IS NULL )   ${ew.customSqlSegment}")
     IPage<DefinsuredDefSchemeVo> selectPaerss(Page<DefinsuredDefSchemeVo> defInsured, @Param(Constants.WRAPPER) QueryWrapper<DefinsuredDefSchemeVo> queryWrapper);
 
     /**
