@@ -283,6 +283,7 @@ public class StaffServiceimpl implements StaffService {
         staff1.setStaffRegistered(staff.getResumeResidence());
         staff1.setStaffEmail(staff.getResumeMailbox());
         staff1.setStaffPicture(staff.getResumePhoto());
+        staff1.setStaffPass("123456");
         staff1.setStaffHiredate(new Date());
         staff1.setCreatedTime(new Date());
         staff1.setUpdatedTime(new Date());
