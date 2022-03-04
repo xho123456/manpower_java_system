@@ -92,7 +92,7 @@ public interface StaffMapper extends BaseMapper<Staff> {
 
 
     //员工新进律
-    @Select(" select MONEYPIGEONHOLE_ASKPERSON as rs,to_char(MONEYPIGEONHOLE_DATE,'yyyy-MM') year from MONEYPIGEONHOLE WHERE  to_char(MONEYPIGEONHOLE_DATE,'yyyy-MM') >=to_char(add_months(trunc(sysdate),-5),'yyyy-mm') ORDER BY year ")
+    @Select(" select MONEYPIGEONHOLE_ASKPERSON as rs,to_char(CREATED_TIME,'yyyy-MM') year from MONEYPIGEONHOLE WHERE  to_char(CREATED_TIME,'yyyy-MM') >=to_char(add_months(trunc(sysdate),-5),'yyyy-mm') ORDER BY year ")
     List<Map<String, Object>> selectygxj();
     //每月员工离职
     @Select(" select to_char(FORMAL_QUIT_DATE,'yyyy-MM') year,count(STAFF_ID) as rs from QUIT where to_char(FORMAL_QUIT_DATE,'yyyy-MM') <= TO_CHAR(SYSDATE,'yyyy-MM')  and to_char(FORMAL_QUIT_DATE,'yyyy-MM') >= to_char(add_months(trunc(sysdate),-6),'yyyy-mm') and QUIT_STATE=1 group by to_char(FORMAL_QUIT_DATE,'yyyy-MM') ORDER BY year ")

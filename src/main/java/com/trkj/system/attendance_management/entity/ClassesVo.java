@@ -1,9 +1,6 @@
 package com.trkj.system.attendance_management.entity;
 
-import com.baomidou.mybatisplus.annotation.KeySequence;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -80,6 +77,7 @@ public class ClassesVo implements Serializable {
 
     @ApiModelProperty(value = "逻辑删除")
     @TableField("IS_DELETED")
+    @TableLogic
     private Long isDeleted;
 
     @ApiModelProperty(value = "创建时间")
