@@ -46,6 +46,8 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
     private InsuredDetailMapper insuredDetailMapper;
     @Autowired
     private InsuredPaymentMapper insuredPaymentMapper;
+    @Autowired
+    private InsuredSchemeMapper insuredSchemeMapper;
 
     /**
      * 参保人员管理分页查询
@@ -60,13 +62,9 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
             if(definsuredDefSchemeVo.getDeptId() != null && !definsuredDefSchemeVo.getDeptId().equals("")){
                 //公告标题模糊查询
                 queryWrapper.eq("DEPT_ID",definsuredDefSchemeVo.getDeptId());
-            }else {
-                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
             if(definsuredDefSchemeVo.getStaffName() != null && !definsuredDefSchemeVo.getStaffName().equals("")){
                 queryWrapper.like("STAFF_NAME",definsuredDefSchemeVo.getStaffName());
-            }else {
-                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
 
             //分页查询条件
@@ -474,7 +472,13 @@ public class InsuredPaymentServiceImpl implements InsuredPaymentService {
                 defInsureds1.setDefInsuredName(defInsureds.getDefInsuredName());
                 defInsureds1.setDefInsuredNumber((long) (defInsuredNumber+1));
                 if(defInsuredsMapper.updateById(defInsureds1)>0){
-                    a=1;
+                   InsuredScheme insuredScheme=new InsuredScheme();
+                   insuredScheme.setDefInsuredId((long) defInsuredId);
+                   insuredScheme.setStaffId(staffID.getStaffId());
+                   if(insuredSchemeMapper.insert(insuredScheme)>0){
+                       a=1;
+                   }
+
                 }else {
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 }

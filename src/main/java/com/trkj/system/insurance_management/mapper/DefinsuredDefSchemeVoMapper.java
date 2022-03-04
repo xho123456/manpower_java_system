@@ -42,7 +42,6 @@ public interface DefinsuredDefSchemeVoMapper extends BaseMapper<DefinsuredDefSch
             "from ( \n" +
             "select *\n" +
             "from STAFF a \n" +
-
             "left join DEPT b on a.DEPT_ID=b.DEPT_ID \n" +
             "left join DEPT_POST c on a.DEPT_POST_ID=c.DEPT_POST_ID \n" +
             "left join (SELECT STAFF_ID,INSURED_PAYMENT_ID, INSURED_PAYMENT_INSURED_MONTH, INSURED_PAYMENT_SALARY_MONTH \n" +
@@ -57,9 +56,9 @@ public interface DefinsuredDefSchemeVoMapper extends BaseMapper<DefinsuredDefSch
             "and e.INSURED_PAYMENT_ID is null\n" +
             "or d.INS_ARCHIVE_INSURED_MONTH is null \n" +
             "order by a.CREATED_TIME desc)\n" +
-            "WHERE to_char(INSURED_PAYMENT_SALARY_MONTH,'YYYY-MM') = to_char(sysdate, 'YYYY-MM') \n" +
+            "WHERE to_char(INSURED_PAYMENT_SALARY_MONTH,'YYYY-MM') != to_char(sysdate, 'YYYY-MM') \n" +
             "and STAFF_STATE != 2\n" +
-            "OR INSURED_PAYMENT_SALARY_MONTH IS NULL )   ${ew.customSqlSegment}")
+            "OR INSURED_PAYMENT_SALARY_MONTH IS NULL )  ${ew.customSqlSegment}")
     IPage<DefinsuredDefSchemeVo> selectPaerss(Page<DefinsuredDefSchemeVo> defInsured, @Param(Constants.WRAPPER) QueryWrapper<DefinsuredDefSchemeVo> queryWrapper);
 
     /**
