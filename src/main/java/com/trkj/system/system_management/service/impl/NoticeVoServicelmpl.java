@@ -114,18 +114,10 @@ public class NoticeVoServicelmpl implements NoticeVoService {
                                         noticeStaff.setNoticeState(0l);
                                         if (noticeStaffMapper.insert(noticeStaff) > 0) {
                                             a=1;
-                                        }else {
-                                            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                                         }
-                                    }else {
-                                        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                                     }
                                 }
-                            }else {
-                                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                         }
-                    }else {
-                        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                            }
                     }
                 }
             }
