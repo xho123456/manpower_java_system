@@ -17,7 +17,7 @@ public class NoticeVo {
 
    @TableId
     @ApiModelProperty(value = "公告编号")
-    private Long noticeId;
+    private Integer noticeId;
 
    @TableId
     @ApiModelProperty(value = "公告部门编号")

@@ -87,28 +87,35 @@ public class NoticeVoController {
         ArrayList<Staffs> staffss = new ArrayList<>();
         //声明公告员工集合存放员工编号
         ArrayList<NoticeStaff> noticeStaffs= new ArrayList<>();
+
         List list =noticeVoService.selectNoticeDeptID(noticeDept);
+
         //循环出部门id
         for (int i = 0; i<list.size();i++){
             NoticeDept noticeDept1= (NoticeDept) list.get(i);
             int deptId =noticeDept1.getDeptId();
+
             //将员工id添加list集合
-            List<Staffs> Staffs =noticeVoService.selectStaffId((long) deptId);
+            List<Staffs> Staffs1 =noticeVoService.selectStaffId((long) deptId);
             //通过员工id循环出员工数据
-            for (Staffs one: Staffs) {
+            for (Staffs one: Staffs1) {
+
                 //将员工数据添加到 ArrayList<Staffs>
                 staffs.add( one);
             }
         }
         for(Staffs two : staffs){
             Long noticeStaffs1=two.getStaffId();
+
             List<NoticeStaff> listNoticeStaff=noticeVoService.selectNotice(noticeStaffs1);
             for(NoticeStaff three : listNoticeStaff){
+
                 noticeStaffs.add(three);
             }
         }
         for(NoticeStaff staff : noticeStaffs){
             Long staffs1=staff.getStaffId();
+
             List<Staffs> listStaff=noticeVoService.selectStaff(staffs1);
             for(Staffs six : listStaff){
                 staffss.add(six);

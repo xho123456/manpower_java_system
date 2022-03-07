@@ -56,4 +56,6 @@ public interface NoticeStaffMapper extends BaseMapper<NoticeStaff> {
     @Select("select * from NOTICE_STAFF  ${ew.customSqlSegment}")
     List<NoticeStaff> selectUnread (@Param(Constants.WRAPPER) QueryWrapper<NoticeStaff> queryWrapper);
 
+
+
 }

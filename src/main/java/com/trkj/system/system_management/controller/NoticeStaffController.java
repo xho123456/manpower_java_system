@@ -1,6 +1,7 @@
 package com.trkj.system.system_management.controller;
 
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class NoticeStaffController {
+
 
 }
 

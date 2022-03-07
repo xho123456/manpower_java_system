@@ -71,4 +71,11 @@ public interface NoticeVoService{
      * 添加公告
      */
     int insert(Map<String, Object> map);
+
+
+
+//    /**
+//     * 通过公告发布时间查看公告id
+//     */
+//    NoticeVo selectTime(NoticeVo noticeVo);
 }

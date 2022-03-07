@@ -24,5 +24,10 @@ public interface NoticeVoMapper extends BaseMapper<NoticeVo> {
     @Select("select * from NOTICE ${ew.customSqlSegment}")
     IPage<NoticeVo> selectPaer(Page<NoticeVo> noticeVo,@Param(Constants.WRAPPER) QueryWrapper<NoticeVo> queryWrapper);
 
+    /**
+     * 通过公告发布时间查看公告id
+     */
+    @Select("select * from NOTICE ${ew.customSqlSegment}")
+    NoticeVo selectTime(@Param(Constants.WRAPPER) QueryWrapper<NoticeVo> queryWrapper);
 
 }

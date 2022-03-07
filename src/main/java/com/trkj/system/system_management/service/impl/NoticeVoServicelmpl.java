@@ -14,10 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class NoticeVoServicelmpl implements NoticeVoService {
@@ -178,6 +176,7 @@ public class NoticeVoServicelmpl implements NoticeVoService {
     }
 
 
+
     /**
      * 根据公告id查询公告部门id
      * @return
@@ -189,6 +188,9 @@ public class NoticeVoServicelmpl implements NoticeVoService {
         wrapper.eq("IS_DELETED",0);
         return noticeDeptMapper.selectNoticeDeptID1(wrapper);
     }
+
+
+
     /**
      * 根据部门id查询部门名称
      * @param
@@ -200,6 +202,8 @@ public class NoticeVoServicelmpl implements NoticeVoService {
         wrapper.eq("IS_DELETED",0);
         return staffsMapper.selectStaffId(wrapper);
     }
+
+
     /**
      * 通过员工id查询公告员工表已读
      */
@@ -233,8 +237,15 @@ public class NoticeVoServicelmpl implements NoticeVoService {
         wrapper.eq("STAFF_ID",staffId);
         wrapper.eq("NOTICE_STATE",1);
         wrapper.eq("IS_DELETED",0);
-        return noticeStaffMapper.selectNotice(wrapper);
+        return noticeStaffMapper.selectUnread(wrapper);
     }
+
+
+
+
+
+
+
 
     /**
      * 登录
@@ -311,7 +322,9 @@ public class NoticeVoServicelmpl implements NoticeVoService {
             }
             return a;
         }
-    }
+
+
+}
 
 
 
